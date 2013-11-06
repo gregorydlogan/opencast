@@ -99,7 +99,7 @@ public class UserTrackingRestServiceTest {
     service.activate(null);
     //This is broken, the Response object generated in the REST service can't find the appropriate class :(
     HttpServletRequest request = getMockHttpSession();
-    Response r = service.addFootprint("test", "0", "10", "FOOTPRINT", "true", request);
+    Response r = service.addFootprint("test", "0", "10", "FOOTPRINT", "true", "false", "false", request);
     UserAction a = (UserAction) r.getEntity();
     Assert.assertEquals(0, a.getInpoint());
     Assert.assertEquals(10, a.getOutpoint());
@@ -112,7 +112,7 @@ public class UserTrackingRestServiceTest {
     Assert.assertEquals(MOCK_USER, a.getUserId());
 
     request = getMockHttpSessionWithProxy();
-    r = service.addFootprint("test", "20", "30", "FOOTPRINT", "true", request);
+    r = service.addFootprint("test", "20", "30", "FOOTPRINT", "true", "false", "false", request);
     a = (UserAction) r.getEntity();
     Assert.assertEquals(20, a.getInpoint());
     Assert.assertEquals(30, a.getOutpoint());

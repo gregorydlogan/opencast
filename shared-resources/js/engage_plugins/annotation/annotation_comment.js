@@ -312,7 +312,7 @@ Opencast.Annotation_Comment = (function ()
 						       '<input id="oc-comment-add-namebox" class="oc-comment-namebox" type="text" value="'+cm_username+'">'+
 						       '<div id="oc-comment-info-header-text-1" class="oc-comment-info-header-text"> at '+curTime+'</div>'+
 						       '<input id="oc-comment-private" type="checkbox" name="Private Annotation" title="Private Annotation">'+
-						       '<label id="oc-comment-private-label" for="oc-comment-private" style="color: white;">Private Comment</label>'+						       
+						       '<label id="oc-comment-private-label" for="oc-comment-private" style="color: white;">Private Comment</label>'+
 						       '</div>'+
 						       '<textarea id="oc-comment-add-textbox" class="oc-comment-textbox">Type Your Comment Here</textarea>'            
 					       );
@@ -675,12 +675,12 @@ Opencast.Annotation_Comment = (function ()
 		{
 		    curTime = parseInt(Opencast.Player.getCurrentPosition());
 		}
-		
+
 		var isPrivate = false;
 		if ($("#oc-comment-private").attr("checked") !== undefined) {
 			isPrivate = true;
-		}		
-		
+		}
+
 		//add scrubber comment
 		addComment(nameValue,curTime,commentValue,"scrubber",isPrivate);                
 	    }else if(type === "slide"){
@@ -771,10 +771,13 @@ Opencast.Annotation_Comment = (function ()
         }
         
         var data = "episode="+mediaPackageId+"&type="+annotationType+"&in="+timePos+"&value="+data+"&out="+curPosition;
+        if (Opencast.clipshow.core.getCurrentClipshow()) {
+          data = data + "&clipshowId=" + Opencast.clipshow.core.getCurrentClipshow();
+        }
         if (isPrivate) {
           data = data + "&isPrivate=true"
-        }        
-                
+        }
+
         $.ajax(
             {
 		type: 'PUT',
@@ -821,11 +824,15 @@ Opencast.Annotation_Comment = (function ()
 			Opencast.Player.addEvent("SHOW_SCRUBBER_COMMENTS");
             isOpening = true;
 
+            var data = "episode=" + mediaPackageId+"&type="+annotationType+"&limit=1000";
+            if (Opencast.clipshow.core.getCurrentClipshow()) {
+              data = data + "&clipshowId=" + Opencast.clipshow.core.getCurrentClipshow();
+            }
             // Request JSONP data
             $.ajax(
 		{
 		    url: Opencast.Watch.getAnnotationURL(),
-		    data: "episode=" + mediaPackageId+"&type="+annotationType+"&limit=1000",
+		    data: data,
 		    dataType: 'json',
 		    jsonp: 'jsonp',
 		    success: function (data)
@@ -1422,6 +1429,13 @@ Opencast.Annotation_Comment = (function ()
             {
 		type: 'DELETE',
 		url: "../../annotation/"+commentID,
+		success: function() {
+			hide();
+			show();
+			if (Opencast.Annotation_Comment_List.isShown()) {
+				Opencast.Annotation_Comment_List.reshow();
+			}
+		}/* GDL: I don't get what this is supposed to do, but it doesn't work...
 		complete: function ()
 		{
             	    $.log("Comment DELETE Ajax call: Request success");
@@ -1435,6 +1449,8 @@ Opencast.Annotation_Comment = (function ()
                     200: function() {
 			//$.log("Comment DELETE Ajax call: Request 200 success");
 			//del_local(commentID,type);
+                    	hide();
+                    	show();
    		    }
 		},
 		statusCode: {
@@ -1442,7 +1458,7 @@ Opencast.Annotation_Comment = (function ()
 			//$.log("Comment DELETE Ajax call: Request success but Comment not found");
 			//del_local(commentID,type);
                     }
-		}  
+		}  */
             });
     }    
     
@@ -1500,8 +1516,8 @@ Opencast.Annotation_Comment = (function ()
      * @param commentValue comment value
      */
     function hoverSlideComment(commentId, commentValue, userId, slideNr)
-    {          
-    	Opencast.Player.addEvent("HOVER_SLIDE_COMMENT_" + commentId);    
+    {
+    	Opencast.Player.addEvent("HOVER_SLIDE_COMMENT_" + commentId);
         if(addingAcomment === true){
     	    
     	}else if(clickedOnHoverBar === false & clickedOnComment === false){
@@ -1650,11 +1666,11 @@ Opencast.Annotation_Comment = (function ()
     {
         modus = m;
     }
-    
+
     function isShown()
     {
       return isOpen;
-    }    
+    }
     
     return {
         initialize: initialize,

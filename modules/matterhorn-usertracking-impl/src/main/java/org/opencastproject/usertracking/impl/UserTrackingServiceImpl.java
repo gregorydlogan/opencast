@@ -434,6 +434,46 @@ public class UserTrackingServiceImpl implements UserTrackingService, ManagedServ
     }
   }
   
+  /*@SuppressWarnings("unchecked")
+  public UserActionList getUserActionsByTypeAndDay(String type, String day, int offset, int limit) {
+    UserActionList result = new UserActionListImpl();
+
+    int year = Integer.parseInt(day.substring(0, 4));
+    int month = Integer.parseInt(day.substring(4, 6)) - 1;
+    int date = Integer.parseInt(day.substring(6, 8));
+
+    Calendar calBegin = new GregorianCalendar();
+    calBegin.set(year, month, date, 0, 0);
+    Calendar calEnd = new GregorianCalendar();
+    calEnd.set(year, month, date, 23, 59);
+
+    result.setTotal(getTotal(type, calBegin, calEnd));
+    result.setOffset(offset);
+    result.setLimit(limit);
+
+    EntityManager em = null;
+    try {
+      em = emf.createEntityManager();
+      em.createQuery(arg0);
+      Query q = em.createNamedQuery("findUserActionsByTypeAndIntervall");
+      q.setParameter("type", type);
+      q.setParameter("begin", calBegin, TemporalType.TIMESTAMP);
+      q.setParameter("end", calEnd, TemporalType.TIMESTAMP);
+      q.setFirstResult(offset);
+      q.setMaxResults(limit);
+      Collection<UserAction> userActions = q.getResultList();
+
+      for (UserAction a : userActions) {
+        result.add(a);
+      }
+      return result;
+    } finally {
+      if (em != null && em.isOpen()) {
+        em.close();
+      }
+    }
+  }*/
+  
   private int getTotal(String type, Calendar calBegin, Calendar calEnd) {
     EntityManager em = null;
     try {
@@ -508,6 +548,21 @@ public class UserTrackingServiceImpl implements UserTrackingService, ManagedServ
     try {
       em = emf.createEntityManager();
       Query q = em.createNamedQuery("findTotalByIntervall");
+      q.setParameter("begin", calBegin, TemporalType.TIMESTAMP);
+      q.setParameter("end", calEnd, TemporalType.TIMESTAMP);
+      return ((Long) q.getSingleResult()).intValue();
+    } finally {
+      if (em != null && em.isOpen()) {
+        em.close();
+      }
+    }
+  }
+
+  private int getDistinctEpisodeIdTotal(Calendar calBegin, Calendar calEnd) {
+    EntityManager em = null;
+    try {
+      em = emf.createEntityManager();
+      Query q = em.createNamedQuery("findDistinctEpisodeIdTotalByIntervall");
       q.setParameter("begin", calBegin, TemporalType.TIMESTAMP);
       q.setParameter("end", calEnd, TemporalType.TIMESTAMP);
       return ((Long) q.getSingleResult()).intValue();

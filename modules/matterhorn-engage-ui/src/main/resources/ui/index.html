@@ -104,6 +104,29 @@
                           $(this).html("n.a.");
                       }
                   });
+
+                  $('.clipshowCount').each(function ()
+                  {
+                    var element = $(this);
+                    element.hide()
+                    $.ajax({
+                      url: '/clipshow/search/none?mediapackageId=' + $(this).text(),
+                      type: 'GET',
+                      dataType: 'json',
+                      success: function(count) {
+                        var data = count.wrapper.data;
+                        if (data == undefined) {
+                          element.html("No Clipshows Found");
+                        } else if ($.isArray(data)) {
+                          element.html("Clipshows: " + data.length);
+                        } else {
+                          element.html("Clipshows: 1");
+                        }
+                        element.show()
+                      }
+                    });
+                  });
+
                   $(".thumb").each(function (index)
                   {
                       var src = $(this).attr("src");

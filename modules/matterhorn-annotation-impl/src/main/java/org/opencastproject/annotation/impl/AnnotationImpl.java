@@ -35,31 +35,41 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 /**
  * A JAXB-annotated implementation of {@link Annotation}
  */
 @Entity(name = "Annotation")
-@Table(name = "mh_annotation")
+@Table(name = "annotation")
 @NamedQueries({
-
-        @NamedQuery(name = "findAnnotations", query = "SELECT a FROM Annotation a WHERE (a.privateAnnotation = FALSE OR (a.userId = :userId AND a.privateAnnotation = TRUE))"),
-        @NamedQuery(name = "findAnnotationsByMediapackageId", query = "SELECT a FROM Annotation a WHERE a.mediapackageId = :mediapackageId AND (a.privateAnnotation = FALSE OR (a.userId = :userId AND a.privateAnnotation = TRUE))"),
-        @NamedQuery(name = "findAnnotationsByType", query = "SELECT a FROM Annotation a WHERE a.type = :type AND (a.privateAnnotation = FALSE OR (a.userId = :userId AND a.privateAnnotation = TRUE))"),
-        @NamedQuery(name = "findAnnotationsByTypeAndMediapackageId", query = "SELECT a FROM Annotation a WHERE a.mediapackageId = :mediapackageId AND a.type = :type AND (a.privateAnnotation = FALSE OR (a.userId = :userId AND a.privateAnnotation = TRUE))"),
-        @NamedQuery(name = "findAnnotationsByTypeAndMediapackageIdOrderByOutpointDESC", query = "SELECT a FROM Annotation a WHERE a.mediapackageId = :mediapackageId AND a.type = :type AND (a.privateAnnotation = FALSE OR (a.userId = :userId AND a.privateAnnotation = TRUE)) ORDER BY a.outpoint DESC"),
-        @NamedQuery(name = "findAnnotationsByIntervall", query = "SELECT a FROM Annotation a WHERE :begin <= a.created AND a.created <= :end AND (a.privateAnnotation = FALSE OR (a.userId = :userId AND a.privateAnnotation = TRUE))"),
-        @NamedQuery(name = "findAnnotationsByTypeAndIntervall", query = "SELECT a FROM Annotation a WHERE :begin <= a.created AND a.created <= :end AND a.type = :type AND (a.privateAnnotation = FALSE OR (a.userId = :userId AND a.privateAnnotation = TRUE))"),
-        @NamedQuery(name = "findTotal", query = "SELECT COUNT(a) FROM Annotation a WHERE (a.privateAnnotation = FALSE OR (a.userId = :userId AND a.privateAnnotation = TRUE))"),
-        @NamedQuery(name = "findTotalByMediapackageId", query = "SELECT COUNT(a) FROM Annotation a WHERE a.mediapackageId = :mediapackageId AND (a.privateAnnotation = FALSE OR (a.userId = :userId AND a.privateAnnotation = TRUE))"),
-        @NamedQuery(name = "findTotalByType", query = "SELECT COUNT(a) FROM Annotation a WHERE a.type = :type AND (a.privateAnnotation = FALSE OR (a.userId = :userId AND a.privateAnnotation = TRUE))"),
-        @NamedQuery(name = "findTotalByTypeAndMediapackageId", query = "SELECT COUNT(a) FROM Annotation a WHERE a.mediapackageId = :mediapackageId AND a.type = :type AND (a.privateAnnotation = FALSE OR (a.userId = :userId AND a.privateAnnotation = TRUE))"),
-        @NamedQuery(name = "findTotalByIntervall", query = "SELECT COUNT(a) FROM Annotation a WHERE :begin <= a.created AND a.created <= :end AND (a.privateAnnotation = FALSE OR (a.userId = :userId AND a.privateAnnotation = TRUE))"),
-        @NamedQuery(name = "findDistinctEpisodeIdTotalByIntervall", query = "SELECT COUNT(distinct a.mediapackageId) FROM Annotation a WHERE :begin <= a.created AND a.created <= :end AND (a.privateAnnotation = FALSE OR (a.userId = :userId AND a.privateAnnotation = TRUE))"),
-        @NamedQuery(name = "findTotalByTypeAndIntervall", query = "SELECT COUNT(a) FROM Annotation a WHERE :begin <= a.created AND a.created <= :end AND a.type = :type AND (a.privateAnnotation = FALSE OR (a.userId = :userId AND a.privateAnnotation = TRUE))"),
+        @NamedQuery(name = "findAnnotations", query = "SELECT a FROM Annotation a WHERE (a.privateAnnotation = FALSE OR (a.userId = :userId AND a.privateAnnotation = TRUE)) AND a.clipshowId IS NULL AND a.deleted = FALSE"),
+        @NamedQuery(name = "findAnnotationsForClipshow", query = "SELECT a FROM Annotation a WHERE (a.privateAnnotation = FALSE OR (a.userId = :userId AND a.privateAnnotation = TRUE)) AND (a.clipshowId = :clipshowId OR a.clipshowId IS NULL) AND a.deleted = FALSE"),
+        @NamedQuery(name = "findAnnotationsByMediapackageId", query = "SELECT a FROM Annotation a WHERE a.mediapackageId = :mediapackageId AND (a.privateAnnotation = FALSE OR (a.userId = :userId AND a.privateAnnotation = TRUE)) AND a.clipshowId IS NULL AND a.deleted = FALSE"),
+        @NamedQuery(name = "findAnnotationsByMediapackageIdForClipshow", query = "SELECT a FROM Annotation a WHERE a.mediapackageId = :mediapackageId AND (a.privateAnnotation = FALSE OR (a.userId = :userId AND a.privateAnnotation = TRUE)) AND (a.clipshowId = :clipshowId OR a.clipshowId IS NULL) AND a.deleted = FALSE"),
+        @NamedQuery(name = "findAnnotationsByType", query = "SELECT a FROM Annotation a WHERE a.type = :type AND (a.privateAnnotation = FALSE OR (a.userId = :userId AND a.privateAnnotation = TRUE)) AND a.clipshowId IS NULL AND a.deleted = FALSE"),
+        @NamedQuery(name = "findAnnotationsByTypeForClipshow", query = "SELECT a FROM Annotation a WHERE a.type = :type AND (a.privateAnnotation = FALSE OR (a.userId = :userId AND a.privateAnnotation = TRUE)) AND (a.clipshowId = :clipshowId OR a.clipshowId IS NULL) AND a.deleted = FALSE"),
+        @NamedQuery(name = "findAnnotationsByTypeAndMediapackageId", query = "SELECT a FROM Annotation a WHERE a.mediapackageId = :mediapackageId AND a.type = :type AND (a.privateAnnotation = FALSE OR (a.userId = :userId AND a.privateAnnotation = TRUE)) AND a.clipshowId IS NULL AND a.deleted = FALSE"),
+        @NamedQuery(name = "findAnnotationsByTypeAndMediapackageIdForClipshow", query = "SELECT a FROM Annotation a WHERE a.mediapackageId = :mediapackageId AND a.type = :type AND (a.privateAnnotation = FALSE OR (a.userId = :userId AND a.privateAnnotation = TRUE)) AND (a.clipshowId = :clipshowId OR a.clipshowId IS NULL) AND a.deleted = FALSE"),
+        @NamedQuery(name = "findAnnotationsByTypeAndMediapackageIdOrderByOutpointDESC", query = "SELECT a FROM Annotation a WHERE a.mediapackageId = :mediapackageId AND a.type = :type AND (a.privateAnnotation = FALSE OR (a.userId = :userId AND a.privateAnnotation = TRUE)) AND a.deleted = FALSE ORDER BY a.outpoint DESC"),
+        @NamedQuery(name = "findAnnotationsByIntervall", query = "SELECT a FROM Annotation a WHERE :begin <= a.created AND a.created <= :end AND (a.privateAnnotation = FALSE OR (a.userId = :userId AND a.privateAnnotation = TRUE)) AND a.clipshowId IS NULL AND a.deleted = FALSE"),
+        @NamedQuery(name = "findAnnotationsByIntervallForClipshow", query = "SELECT a FROM Annotation a WHERE :begin <= a.created AND a.created <= :end AND (a.privateAnnotation = FALSE OR (a.userId = :userId AND a.privateAnnotation = TRUE)) AND (a.clipshowId = :clipshowId OR a.clipshowId IS NULL) AND a.deleted = FALSE"),
+        @NamedQuery(name = "findAnnotationsByTypeAndIntervall", query = "SELECT a FROM Annotation a WHERE :begin <= a.created AND a.created <= :end AND a.type = :type AND (a.privateAnnotation = FALSE OR (a.userId = :userId AND a.privateAnnotation = TRUE)) AND a.clipshowId IS NULL AND a.deleted = FALSE"),
+        @NamedQuery(name = "findAnnotationsByTypeAndIntervallForClipshow", query = "SELECT a FROM Annotation a WHERE :begin <= a.created AND a.created <= :end AND a.type = :type AND (a.privateAnnotation = FALSE OR (a.userId = :userId AND a.privateAnnotation = TRUE)) AND (a.clipshowId = :clipshowId OR a.clipshowId IS NULL) AND a.deleted = FALSE"),
+        @NamedQuery(name = "findTotal", query = "SELECT COUNT(a) FROM Annotation a WHERE (a.privateAnnotation = FALSE OR (a.userId = :userId AND a.privateAnnotation = TRUE)) AND a.deleted = FALSE"),
+        @NamedQuery(name = "findTotalByMediapackageId", query = "SELECT COUNT(a) FROM Annotation a WHERE a.mediapackageId = :mediapackageId AND (a.privateAnnotation = FALSE OR (a.userId = :userId AND a.privateAnnotation = TRUE)) AND a.clipshowId IS NULL AND a.deleted = FALSE"),
+        @NamedQuery(name = "findTotalByMediapackageIdForClipshow", query = "SELECT COUNT(a) FROM Annotation a WHERE a.mediapackageId = :mediapackageId AND (a.privateAnnotation = FALSE OR (a.userId = :userId AND a.privateAnnotation = TRUE)) AND (a.clipshowId = :clipshowId OR a.clipshowId IS NULL) AND a.deleted = FALSE"),
+        @NamedQuery(name = "findTotalByType", query = "SELECT COUNT(a) FROM Annotation a WHERE a.type = :type AND (a.privateAnnotation = FALSE OR (a.userId = :userId AND a.privateAnnotation = TRUE)) AND a.clipshowId IS NULL AND a.deleted = FALSE"),
+        @NamedQuery(name = "findTotalByTypeForClipshow", query = "SELECT COUNT(a) FROM Annotation a WHERE a.type = :type AND (a.privateAnnotation = FALSE OR (a.userId = :userId AND a.privateAnnotation = TRUE)) AND (a.clipshowId = :clipshowId OR a.clipshowId IS NULL) AND a.deleted = FALSE"),
+        @NamedQuery(name = "findTotalByTypeAndMediapackageId", query = "SELECT COUNT(a) FROM Annotation a WHERE a.mediapackageId = :mediapackageId AND a.type = :type AND (a.privateAnnotation = FALSE OR (a.userId = :userId AND a.privateAnnotation = TRUE)) AND a.clipshowId IS NULL AND a.deleted = FALSE"),
+        @NamedQuery(name = "findTotalByTypeAndMediapackageIdForClipshow", query = "SELECT COUNT(a) FROM Annotation a WHERE a.mediapackageId = :mediapackageId AND a.type = :type AND (a.privateAnnotation = FALSE OR (a.userId = :userId AND a.privateAnnotation = TRUE)) AND (a.clipshowId = :clipshowId OR a.clipshowId IS NULL) AND a.deleted = FALSE"),
+        @NamedQuery(name = "findTotalByIntervall", query = "SELECT COUNT(a) FROM Annotation a WHERE :begin <= a.created AND a.created <= :end AND (a.privateAnnotation = FALSE OR (a.userId = :userId AND a.privateAnnotation = TRUE)) AND a.clipshowId IS NULL AND a.deleted = FALSE"),
+        @NamedQuery(name = "findTotalByIntervallForClipshow", query = "SELECT COUNT(a) FROM Annotation a WHERE :begin <= a.created AND a.created <= :end AND (a.privateAnnotation = FALSE OR (a.userId = :userId AND a.privateAnnotation = TRUE)) AND (a.clipshowId = :clipshowId OR a.clipshowId IS NULL) AND a.deleted = FALSE"),
+        @NamedQuery(name = "findDistinctEpisodeIdTotalByIntervall", query = "SELECT COUNT(distinct a.mediapackageId) FROM Annotation a WHERE :begin <= a.created AND a.created <= :end AND (a.privateAnnotation = FALSE OR (a.userId = :userId AND a.privateAnnotation = TRUE)) AND a.deleted = FALSE"),
+        @NamedQuery(name = "findTotalByTypeAndIntervall", query = "SELECT COUNT(a) FROM Annotation a WHERE :begin <= a.created AND a.created <= :end AND a.type = :type AND (a.privateAnnotation = FALSE OR (a.userId = :userId AND a.privateAnnotation = TRUE)) AND a.clipshowId IS NULL AND a.deleted = FALSE"),
+        @NamedQuery(name = "findTotalByTypeAndIntervallForClipshow", query = "SELECT COUNT(a) FROM Annotation a WHERE :begin <= a.created AND a.created <= :end AND a.type = :type AND (a.privateAnnotation = FALSE OR (a.userId = :userId AND a.privateAnnotation = TRUE)) AND (a.clipshowId = :clipshowId OR a.clipshowId IS NULL) AND a.deleted = FALSE"),
         @NamedQuery(name = "updateAnnotation", query = "UPDATE Annotation a SET a.value = :value WHERE a.annotationId = :annotationId") })
-
 @XmlType(name = "annotation", namespace = "http://annotation.opencastproject.org")
 @XmlRootElement(name = "annotation", namespace = "http://annotation.opencastproject.org")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -71,15 +81,22 @@ public class AnnotationImpl implements Annotation {
   @XmlElement(name = "annotationId")
   private Long annotationId;
 
-  @Column(name = "mediapackage", length = 128)
+  //@Index
+  @Column(name = "mediapackage_id", length = 255)
   @XmlElement(name = "mediapackageId")
   private String mediapackageId;
 
-  @Column(name = "user_id", length = 255)
+  @Column(name = "clipshow_id")
+  @XmlElement(name = "clipshowId")
+  private Long clipshowId;
+
+  @Lob
+  @Column(name = "user_id", length = 65535)
   @XmlElement(name = "userId")
   private String userId;
 
-  @Column(name = "session", length = 50)
+  @Lob
+  @Column(name = "session_id", length = 65535)
   @XmlElement(name = "sessionId")
   private String sessionId;
 
@@ -95,16 +112,17 @@ public class AnnotationImpl implements Annotation {
   @XmlElement(name = "length")
   private int length;
 
-  @Column(name = "type", length = 128)
+  @Lob
+  @Column(name = "annotation_type", length = 65535)
   @XmlElement(name = "type")
   private String type;
 
-  @Column(name = "private")
+  @Column(name = "private_annotation")
   @XmlElement(name = "isPrivate")
   private Boolean privateAnnotation = false;
 
   @Lob
-  @Column(name = "value", length = 65535)
+  @Column(name = "annotation_value", length = 65535)
   @XmlElement(name = "value")
   private String value;
 
@@ -113,6 +131,10 @@ public class AnnotationImpl implements Annotation {
   @Temporal(TemporalType.TIMESTAMP)
   @XmlElement(name = "created")
   private Date created = new Date();
+
+  @Column(name = "deleted")
+  @XmlTransient
+  private Boolean deleted = false;
 
   /**
    * A no-arg constructor needed by JAXB
@@ -202,12 +224,31 @@ public class AnnotationImpl implements Annotation {
     this.length = this.outpoint - this.inpoint;
   }
 
+  @Override
   public Boolean getPrivate() {
     return this.privateAnnotation;
   }
 
+  @Override
   public void setPrivate(Boolean isPrivate) {
     this.privateAnnotation = isPrivate;    
   }
 
+  @Override
+  public Long getClipshowId() {
+    return this.clipshowId;
+  }
+
+  @Override
+  public void setClipshowId(Long clipshowId) {
+    this.clipshowId = clipshowId;    
+  }
+
+  public Boolean getDeleted() {
+    return this.deleted;
+  }
+
+  public void setDeleted(Boolean isDeleted) {
+    this.deleted = isDeleted;
+  }
 }

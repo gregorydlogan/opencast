@@ -65,6 +65,37 @@
       <artifactId>matterhorn-search-service-api</artifactId>
       <version>${project.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.eclipse.persistence</groupId>
+      <artifactId>eclipselink</artifactId>
+      <version>2.4.0</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.persistence</groupId>
+      <artifactId>javax.persistence</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.opencastproject</groupId>
+      <artifactId>matterhorn-json</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>c3p0</groupId>
+      <artifactId>c3p0</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.easymock</groupId>
+      <artifactId>easymock</artifactId>
+      <version>2.5.1</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   <build>
   <plugins>
@@ -221,8 +252,23 @@
         <configuration>
           <instructions>
             <Bundle-SymbolicName> ${project.artifactId} </Bundle-SymbolicName>
-            <Import-Package> org.opencastproject.rest;version=${project.version}</Import-Package>
+            <Import-Package>
+              org.opencastproject.rest;version=${project.version},
+              javax.persistence,
+              *;resolution:=optional
+            </Import-Package>
             <Private-Package>ui.*</Private-Package>
+            <Export-Package>
+              org.opencastproject.clipshow.*;version=${project.version},
+              org.opencastproject.clipshow.impl.jaxb;version=${project.version}
+            </Export-Package>
+            <Service-Component>
+              OSGI-INF/clipshow-service.xml,
+              OSGI-INF/clipshow-service-rest.xml
+            </Service-Component>
+            <JPA-PersistenceUnits>
+              org.opencastproject.clipshow.impl.ClipshowServiceImpl
+            </JPA-PersistenceUnits>
             <Http-Alias>/engage/ui</Http-Alias>
             <Http-Classpath>/ui</Http-Classpath>
             <Http-Welcome>index.html</Http-Welcome>

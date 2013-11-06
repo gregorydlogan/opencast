@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0"
+  xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <persistence-unit name="org.opencastproject.clipshow.impl.ClipshowServiceImpl" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>org.opencastproject.clipshow.impl.ClipshowSeries</class>
+    <class>org.opencastproject.clipshow.impl.ClipshowUser</class>
+    <class>org.opencastproject.clipshow.impl.ClipshowVote</class>
+    <class>org.opencastproject.clipshow.impl.ClipshowTag</class>
+    <class>org.opencastproject.clipshow.impl.Clipshow</class>
+    <class>org.opencastproject.clipshow.impl.Clip</class>
+    <properties>
+      <property name="eclipselink.create-ddl-jdbc-file-name" value="create-matterhorn-clipshow-impl.jdbc"/>
+      <property name="eclipselink.drop-ddl-jdbc-file-name" value="drop-matterhorn-clipshow-impl.jdbc"/>
+    </properties>
+  </persistence-unit>
+</persistence>

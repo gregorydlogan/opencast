@@ -249,9 +249,12 @@ public class UserTrackingRestService {
           @RestParameter(name = "id", description = "The episode identifier", isRequired = true, type = Type.STRING),
           @RestParameter(name = "type", description = "The episode identifier", isRequired = true, type = Type.STRING),
           @RestParameter(name = "in", description = "The beginning of the time range", isRequired = false, type = Type.STRING),
-          @RestParameter(name = "out", description = "The end of the time range", isRequired = false, type = Type.STRING) }, reponses = { @RestResponse(responseCode = SC_CREATED, description = "An XML representation of the user action") })
+          @RestParameter(name = "out", description = "The end of the time range", isRequired = false, type = Type.STRING),
+          @RestParameter(name = "clipshowId", description = "The current clipshow id, if any", isRequired = false, type = Type.STRING),
+          @RestParameter(name = "seriesId", description = "The current series id, if any", isRequired = false, type = Type.STRING) }, reponses = { @RestResponse(responseCode = SC_CREATED, description = "An XML representation of the user action") })
   public Response addFootprint(@FormParam("id") String mediapackageId, @FormParam("in") String inString,
           @FormParam("out") String outString, @FormParam("type") String type, @FormParam("playing") String isPlaying,
+          @FormParam("clipshowId") String clipshowId, @FormParam("seriesId") String seriesId, 
           @Context HttpServletRequest request) {
 
     String sessionId = request.getSession().getId();
@@ -288,7 +291,19 @@ public class UserTrackingRestService {
     a.setOutpoint(out);
     a.setType(type);
     a.setIsPlaying(Boolean.valueOf(isPlaying));
-    
+
+    if (StringUtils.isNotEmpty(clipshowId)) {
+      try {
+        a.setClipshowId(Long.parseLong(StringUtils.trim(clipshowId)));
+      } catch (NumberFormatException e) { }
+    }
+
+    if (StringUtils.isNotEmpty(seriesId)) {
+      try {
+        a.setClipshowSeriesId(Long.parseLong(StringUtils.trim(seriesId)));
+      } catch (NumberFormatException e) { }
+    }
+
     //MH-8616 the connection might be via a proxy
     String clientIP = request.getHeader("X-FORWARDED-FOR");
     

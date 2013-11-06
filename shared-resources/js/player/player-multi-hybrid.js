@@ -82,7 +82,9 @@ Opencast.Player = (function ()
         curPosition = 0,
         INTERVAL_LENGTH = 5,
         detailedLogging = false,
-        lastValidTime = "Initializing";
+        lastValidTime = "Initializing",
+        currentClips = [],
+        currentClip = -1;
         
         
     /*************************************************************/
@@ -436,10 +438,33 @@ Opencast.Player = (function ()
      */
     function setPlayhead(newPosition)
     {
-        curPosition = newPosition;
-        var fullPosition = Math.round(newPosition);
+		/*if (false && currentClip != -1  && currentClips.length > 0) {
+			var sumOfClips = 0;
+			for (var i = 0; i < currentClip; i++) {
+				sumOfClips += currentClips[i]["stop"] - currentClips[i]["start"];
+			}
+			curPosition = newPosition - currentClips[currentClip]["start"] + sumOfClips;
+		} else {*/
+			curPosition = newPosition;
+		/*}*/
+		var fullPosition = Math.round(newPosition);
         if (inPosition <= fullPosition && fullPosition <= inPosition + INTERVAL_LENGTH)
         {
+            //Begin Clipshow jumping code
+            if (currentClip != -1 && currentClips.length > 0) {
+             if (currentClips[currentClip]["stop"] <= newPosition) {
+                currentClip++;
+                if (currentClip < currentClips.length) {
+                  doSeekToClip(currentClip);
+                  return;
+                } else {
+                  doPause();
+                  Opencast.clipshow.core.nextInSeries();
+                  return;
+                }
+              }
+            }
+            //End Clipshow jumping code
             outPosition = fullPosition;
             if (inPosition + INTERVAL_LENGTH === outPosition)
             {
@@ -558,9 +583,13 @@ Opencast.Player = (function ()
         var advancedUrl = $.getCleanURL();
 	var unfTime = $('#oc_current-time').val();
 	var time = $.getURLTimeFormat(unfTime);
+	var clipshowId = Opencast.clipshow.core.getCurrentClipshow();
 	if(time != 0)
 	{
 	    advancedUrl += "&t=" + time;
+	}
+	if (clipshowId != undefined && clipshowId != false) {
+	    advancedUrl += "&clipshowId=" + clipshowId;
 	}
 	$('#oc_share-time-text').html('Video at current time (' + unfTime + '):').show();
 	$('#oc_share-time-textfield').html(advancedUrl).show();
@@ -577,6 +606,14 @@ Opencast.Player = (function ()
 	{
 	    $('#oc_share-time-tip').hide();
 	}
+    }
+
+    function getClips() {
+      return currentClips;
+    }
+
+    function getCurrentClip() {
+      return currentClip;
     }
     
     /*************************************************************/
@@ -887,7 +924,26 @@ Opencast.Player = (function ()
      */
     function doSeek(ms)
     {
-        Videodisplay.seek(ms);
+        return Videodisplay.seek(ms);
+        //TODO:  Break out of clipshow mode here?
+    }
+
+
+    function doSeekToClip(clipIndex)
+    {
+      if (clipIndex < 0 || clipIndex >= currentClips.length) {
+      	$(".clipshow-component").text("");
+        return;
+      }
+      $(".clipshow-component").text("");
+      currentClip = clipIndex;
+      $("#clip" + currentClips[clipIndex]["id"]).text("Current");
+      if (clipIndex + 1 < currentClips.length) {
+        $("#clip" + currentClips[clipIndex + 1]["id"]).text("Next");
+      }
+      doPause();
+      doSeek(currentClips[clipIndex]["start"]);
+      setTimeout('Opencast.Player.doPlay()', 500);;
     }
 
     /*************************************************************/
@@ -954,6 +1010,31 @@ Opencast.Player = (function ()
         embedDialogDisplayed = true;
     }
 
+    function setClips(newClips) {
+      currentClips = newClips;
+      setTimeout('Opencast.Player.doSeekToClip(0)', 500);
+      return;
+      //Hypothetical code to display only the clipshow in the scrubber bar.  Flash component needs changes first.
+      /*if ($.isArray(newClips) && newClips.length > 0) {
+        var totalClipshowDuration = 0;
+        $.each(newClips, function() {
+          totalClipshowDuration += this.stop - this.start;
+        });
+        currentClips = newClips;
+        currentClip = 0;
+        doSeekToClip(0);
+        Opencast.Player.setDuration(totalClipshowDuration);
+        Opencast.Player.setCurrentTime($.formatSeconds(0));
+        Opencast.Player.setTotalTime($.formatSeconds(Opencast.Player.getDuration()));
+      } else {
+        currentClips = [];
+        currentClip = -1;
+        //TODO:  Get original duration back
+        //Opencast.Player.setDuration(totalClipshowDuration);
+        //Opencast.Player.setTotalTime($.formatSeconds(Opencast.Player.getDuration()));
+      }*/
+    }
+    
     /**
      * @memberOf Opencast.Player
      * @description Show the shared time dialog
@@ -1596,6 +1677,11 @@ Opencast.Player = (function ()
     /* non-public
     /*************************************************************/
 
+    function getPixelsPerSecond()
+    {
+       return $('#oc_seek-slider').width() / getDuration();
+    }
+
     /**
      * @memberOf Opencast.Player
      * @return true if video size control is visible
@@ -1828,19 +1914,22 @@ Opencast.Player = (function ()
     function addEvent(eventType)
     {
         //If the detailed logging is turned off (false), and the log type is not a footprint then return.
-	if (!Opencast.Player.detailedLogging && (eventType != Opencast.logging.FOOTPRINT || eventType.match(/.*AJAX-FAILED/i) != null)) {
+      	if (!Opencast.Player.detailedLogging && (eventType != Opencast.logging.FOOTPRINT || eventType.match(/.*AJAX-FAILED/i) != null)) {
           return;
         }
-	// Return if the in and out positions are NaN
-	if (isNaN(inPosition) || isNaN(outPosition)) {
+	      // Return if the in and out positions are NaN
+	      if (isNaN(inPosition) || isNaN(outPosition)) {
             return;
         }
-
+        var data = "id=" + mediaPackageId + "&in=" + inPosition + "&out=" + outPosition + "&type=" + eventType + "&playing=" + isPlaying();
+        if (Opencast.clipshow != undefined) {
+          data = data + "&clipshowId=" + Opencast.clipshow.core.getCurrentClipshow() + "&seriesId=" + Opencast.clipshow.core.getCurrentSeries();
+        }
         $.ajax(
         {
             type: 'GET',
             url: "../../usertracking/?_method=PUT",
-            data: "id=" + mediaPackageId + "&in=" + inPosition + "&out=" + outPosition + "&type=" + eventType + "&playing=" + isPlaying(),
+            data: data,
             dataType: 'xml',
             success: function (xml)
             {
@@ -1905,6 +1994,7 @@ Opencast.Player = (function ()
         doRewind: doRewind,
         doSkipForward: doSkipForward,
         doSeek: doSeek,
+        doSeekToClip: doSeekToClip,
         doToogleClosedCaptions: doToogleClosedCaptions,
         // show
         showShare: showShare,
@@ -1950,6 +2040,10 @@ Opencast.Player = (function ()
         currentTime: currentTime,
         flashVars: flashVars,
         addEvent: addEvent,
-        addFootprint: addFootprint
+        addFootprint: addFootprint,
+        getPixelsPerSecond: getPixelsPerSecond,
+        setClips: setClips,
+        getClips: getClips,
+        getCurrentClip: getCurrentClip
     };
 }());

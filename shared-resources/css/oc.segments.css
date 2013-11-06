@@ -57,6 +57,37 @@
     padding: 0;
 }
 
+.clipshow {
+    height: 25px;
+    position: absolute;
+    width: 100%;
+}
+
+.clipshow-editor {
+    height: 25px;
+    position: absolute;
+    width: 100%;
+}
+
+.clipshow-editor-component {
+    float: left;
+    height: 25px;
+    border: 1px solid #AAAAAA;
+    color: #000000;
+    background: orange;
+    opacity: 0.6;
+    text-align: center;
+}
+
+.clipshow-component {
+    float: left;
+    background: red;
+}
+
+.clipshow-padded {
+	  padding-bottom: 1em;
+}
+
 .oc-segments-preview {
   display: none;
 }

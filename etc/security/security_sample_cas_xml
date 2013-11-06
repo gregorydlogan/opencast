@@ -32,6 +32,7 @@
     <sec:intercept-url pattern="/series/**" method="GET" access="ROLE_ANONYMOUS" />
     <sec:intercept-url pattern="/annotation/**" method="GET" access="ROLE_ANONYMOUS" />
     <sec:intercept-url pattern="/annotation/**" method="PUT" access="ROLE_ANONYMOUS" />
+    <sec:intercept-url pattern='/clipshow/**' access='ROLE_USER' />
 
     <!-- Enable anonymous access to the OAI-PMH repository              -->
     <!-- The OAI-PMH specification demands boths GET and POST requests  -->

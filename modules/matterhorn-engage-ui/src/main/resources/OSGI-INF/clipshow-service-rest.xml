@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" activate="activate" deactivate="deactivate" name="org.opencastproject.clipshow.endpoint.ClipshowRestService">
+  <implementation class="org.opencastproject.clipshow.endpoint.ClipshowRestService" />
+  <property name="service.description" value="Clipshow REST Endpoint" />
+
+  <property name="opencast.service.type" value="org.opencastproject.clipshow" />
+  <property name="opencast.service.path" value="/clipshow" />
+
+  <service>
+    <provide interface="org.opencastproject.clipshow.endpoint.ClipshowRestService" />
+  </service>
+  <reference name="service-impl" interface="org.opencastproject.clipshow.impl.ClipshowServiceImpl"
+    cardinality="0..1" policy="dynamic" bind="setService" unbind="unsetService" />
+</scr:component>

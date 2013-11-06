@@ -79,6 +79,13 @@
     <script type="text/javascript" src="/engage/ui/js/engage_plugins/series-plugin.js"></script>
     <script type="text/javascript" src="/engage/ui/js/engage_plugins/series.js"></script>
     <script type="text/javascript" src="/engage/ui/js/engage_plugins/logging.js"></script>
+    <script type="text/javascript" src="/engage/ui/js/engage_plugins/clipshow_core.js"></script>
+    <script type="text/javascript" src="/engage/ui/js/engage_plugins/clipshow_ui.js"></script>
+    <script type="text/javascript" src="/engage/ui/js/engage_plugins/clipshow_editor_ui.js"></script>
+    <script type="text/javascript" src="/engage/ui/js/engage_plugins/clipshow_user_tab_core.js"></script>
+    <script type="text/javascript" src="/engage/ui/js/engage_plugins/clipshow_user_tab_ui.js"></script>
+    <script type="text/javascript" src="/engage/ui/js/engage_plugins/clipshow_series_tab_core.js"></script>
+    <script type="text/javascript" src="/engage/ui/js/engage_plugins/clipshow_series_tab_ui.js"></script>
     <script type="text/javascript" src="/engage/ui/js/player/player-multi-hybrid-initialize.js"></script>
     <script type="text/javascript" src="/engage/ui/js/ext/trimpath.js"></script>
     <script type="text/javascript" src="/engage/ui/js/player/watch.js"></script>
@@ -318,6 +325,12 @@
             </div>
           </button>
         </div>
+        <!--<button id="oc_clipshow-delete"/>-->
+        <div id="oc_votes">
+          <input id="oc_btn-vote-funny" class="handcursor clipshow_votes" type="checkbox" name="Funny" alt="Funny" title="Funny" value="Funny" /><label for="oc_btn-vote-funny">Funny</label>
+          <input id="oc_btn-vote-good" class="handcursor clipshow_votes" type="checkbox" name="Good" alt="Useful" title="Useful" value="Good" /><label for="oc_btn-vote-good">Useful</label>
+          <input id="oc_btn-vote-dislike" class="handcursor clipshow_votes" type="checkbox" name="Dislike" alt="Dislike" title="Dislike" value="Dislike" /><label for="oc_btn-vote-dislike">Dislike</label>
+        </div>
         <!-- END #oc_sound -->
         <div id="oc_video-size-controls">
           <span id="oc_video-size-dropdown">
@@ -366,7 +379,13 @@
           <span id="annotation" class="annotation">Annotation..</span>
           <!-- table class="segments" id="segmentstable1" -->
             <!-- data comes here -->
-          <!-- /table -->         
+          </table>         
+			    <div class="clipshow" id="clipshowtable" style="border: solid 1px;">
+			    		<!-- data comes here -->
+					</div>
+					<div class="clipshow-editor" id="clipshoweditor" style="border: solid 1px;">
+					    <!-- data comes here -->
+					</div>
         </div>
         <div id="segments_ui_slider_data1"></div>
         <div id="segments_ui_slider_data2"></div>
@@ -392,6 +411,15 @@
           </select>
         </span>
         &#160;
+        <strong id="oc_label-save">Save:</strong>
+        <button id="oc_button-clipshowSave">Save Clipshow</button>
+        &nbsp;
+        <strong id="oc_label-add">Add:</strong>
+        <button id="oc_button-clipshowEditorAdd">Add Clip</button>
+        &nbsp;
+        <strong id="oc_label-select">Select:</strong>
+        <select id="oc_select-clipshow"/>
+        &nbsp;
         <strong>View:</strong>
         <input id="oc_checkbox-annotation-comment" type="checkbox" name="show comments" title="show comments" />
         <label id="oc_label-annotation-comment" for="oc_checkbox-annotation-comment">
@@ -404,6 +432,14 @@
         <input id="oc_checkbox-statistics" type="checkbox" name="show Statistics" title="show Statistics" />
         <label id="oc_label-statistics" for="oc_checkbox-statistics">
           Viewing Statistics
+        </label>
+        <input id="oc_checkbox-clipshow" type="checkbox" name="show Clipshow" title="show Clipshow" />
+        <label id="oc_label-clipshow" for="oc_checkbox-clipshow">
+            Clipshow
+        </label>
+        <input id="oc_checkbox-clipshowEditor" type="checkbox" name="show Clipshow Editor" title="show Clipshow Editor" />
+        <label id="oc_label-clipshowEditor" for="oc_checkbox-clipshowEditor">
+            Clipshow Editor
         </label>
         &#160;
         <div class="clear"></div>
@@ -434,6 +470,16 @@
           <li>
             <a href="#oc_comments" id="oc_btn-comments" class="oc_btn-tabs handcursor" title="Comments" aria-role="button">
               Comments
+            </a>
+          </li>
+          <li>
+            <a href="#oc_clipshow-user" id="oc_btn-clipshow-user" class="oc_btn-tabs handcursor" title="Clipshow User" aria-role="button">
+              Clipshow User
+            </a>
+          </li>
+          <li>
+            <a href="#oc_clipshow-series" id="oc_btn-clipshow-series" class="oc_btn-tabs handcursor" title="Clipshow Series" aria-role="button">
+              Clipshow Series
             </a>
           </li>
           <li class="oc_lecturer-search-field-wrap ui-corner-top" id="search-textarea">
@@ -513,7 +559,15 @@
 	</div>
       </div>
       <!-- END #oc_comments-list-wrapper -->
-      
+
+      <div id="oc_clipshow-user" class="fl-fix">
+        <div id="clipshow-user-loading" class="loadingImage"></div>
+        <div id="oc-clipshow-user" style="overflow: hidden;"></div>
+      </div>
+      <div id="oc_clipshow-series" class="fl-fix">
+        <div id="clipshow-series-loading" class="loadingImage"></div>
+        <div id="oc-clipshow-series"></div>
+      </div>
     </div>
     <!-- END #oc_ui_tabs -->
     
@@ -645,6 +699,55 @@
       </div>
     </div>
     <!-- END #oc_share-time -->
+
+    <div id="oc_clipshow-dialog" title="Create a clipshow">
+      <p style="text-align: center;" class="validateTips">All form fields are required</p>
+      <form style="width: 100%; height: 80%;">
+      <fieldset>
+        <table style="width: 100%; height: 100%;">
+          <tr>
+            <td class="clipshow-padded"><label for="title">Title</label></td>
+            <td class="clipshow-padded"><input type="text" name="title" id="oc-input-clipshow-title" class="clipshow-input text ui-widget-content ui-corner-all" /></td>
+          </tr>
+          <tr>
+            <td class="clipshow-padded"><label for="series">Series</label></td>
+            <td class="clipshow-padded">
+              <input type="text" name="series-select" id="oc-input-series-name-select" class="clipshow-input text ui-widget-content ui-corner-all" />
+              <input type="hidden" name="series" id="oc-input-series-id" />
+            </td>
+          </tr>
+          <tr>
+            <td class="clipshow-padded"><label for="tags">Tags<br/>Comma Separated (tag1,tag2)</label></td>
+            <td class="clipshow-padded">
+              <input type="text" name="tags-select" id="oc-input-tags-select" class="clipshow-input text ui-widget-content ui-corner-all" />
+              <input type="hidden" name="tags" id="oc-input-tags" />
+            </td>
+          </tr>
+          <tr>
+            <td class="clipshow-padded"><label for="users">Allowed NSIDs<br/>Comma Separated<br/>Leave blank for public</label></td>
+            <td class="clipshow-padded">
+              <textarea rows="4" columns="11" name="users-select" id="oc-input-allowed-users-select" class="clipshow-input text ui-widget-content ui-corner-all" ></textarea>
+              <input type="hidden" name="users" id="oc-input-allowed-users" />
+            </td>
+          </tr>
+          
+        </table>
+ 				<label for="clipdOrder">Clip Ordering</label>
+				<input type="hidden" name="clipOrder" id="oc-input-clip-order" />
+        <div id="oc-clipshow-ordering-container" style="width:100%; height: 120px; border: 1px solid grey; padding: 1px;">
+          <p style="margin: 0px;">Source Order:</p>
+  				<div id="oc-clipshow-ordering-source" style="width: 100%; height: 25px; border: 1px solid;"></div>
+  				<p style="text-align: center; margin: 3px;">&dArr; Drag clips from above to below &dArr;</p>
+          <p style="margin: 0px;">Playback Order:</p>
+  				<div id="oc-clipshow-ordering-dest" style="width: 100%; height: 25px; border: 1px solid; float: right;"></div>
+	  		</div>
+      </fieldset>
+      </form>
+    </div>
+
+    <div id="oc_clipshow-series-confirm-dialog" title="Confirm">
+      <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>You are about to stop clipshow series playback, do you wish to continue?</p>
+    </div>
 
     <!-- Series dialog -->
     <div id="oc_series" class="ui-widget ui-widget-content ui-corner-all oc_popuplayer ui-state-hover" title="see more of this series" tabindex="-1" role="dialog" aria-hidden="true"></div>

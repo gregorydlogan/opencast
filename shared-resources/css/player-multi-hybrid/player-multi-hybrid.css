@@ -275,6 +275,13 @@ color: #000;
   text-align:               center;
 }
 
+#oc_votes
+{
+  margin-top:               5px;
+  float:                    left;
+  width:                    200px;
+}
+
 #oc_volume-menue
 {
   visibility:               hidden;

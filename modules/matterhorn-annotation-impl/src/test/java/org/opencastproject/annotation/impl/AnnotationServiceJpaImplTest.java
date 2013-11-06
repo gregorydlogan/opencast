@@ -182,8 +182,8 @@ public class AnnotationServiceJpaImplTest {
     a2.setSessionId("a different session");
     a2.setValue("More user generated content");
     annotationService.addAnnotation(a2);
-
-    AnnotationList annotations = annotationService.getAnnotationsByTypeAndMediapackageId(type, "mp", 0, 100);
+    
+    AnnotationList annotations = annotationService.getAnnotationsByTypeAndMediapackageId(type, "mp", 0, 100, null);
     Assert.assertEquals(1, annotations.getAnnotations().size());
   }
 
@@ -221,9 +221,28 @@ public class AnnotationServiceJpaImplTest {
     annotationService.addAnnotation(a3);
 
     // Test method
-    AnnotationList annotationResult = annotationService.getAnnotationsByMediapackageId("mp", 0, 200);
+    AnnotationList annotationResult = annotationService.getAnnotationsByMediapackageId("mp", 0, 200, null);
 
     Assert.assertEquals(2, annotationResult.getAnnotations().size());
+
+    AnnotationImpl a4 = new AnnotationImpl();
+    a4.setType("bookmark");
+    a4.setInpoint(999);
+    a4.setOutpoint(1005);
+    a4.setMediapackageId("mp");
+    a4.setSessionId("yet another session");
+    a4.setValue("Clipshow comment");
+    a4.setClipshowId(4L);
+    annotationService.addAnnotation(a4);
+
+    annotationResult = annotationService.getAnnotationsByMediapackageId("mp", 0, 200, null);
+
+    Assert.assertEquals(2, annotationResult.getAnnotations().size());
+
+    annotationResult = annotationService.getAnnotationsByMediapackageId("mp", 0, 200, 4L);
+
+    Assert.assertEquals(3, annotationResult.getAnnotations().size());
+
   }
 
   // TODO: Many more queries need to be tested

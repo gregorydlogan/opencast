@@ -122,30 +122,40 @@ public class AnnotationRestService {
           @RestParameter(name = "type", description = "The type of annotation", isRequired = false, type = Type.STRING),
           @RestParameter(name = "day", description = "The day of creation (format: YYYYMMDD)", isRequired = false, type = Type.STRING),
           @RestParameter(name = "limit", description = "The maximum number of items to return per page", isRequired = false, type = Type.INTEGER),
-          @RestParameter(name = "offset", description = "The page number", isRequired = false, type = Type.INTEGER) }, reponses = { @RestResponse(responseCode = SC_OK, description = "An XML representation of the user annotations") })
+          @RestParameter(name = "offset", description = "The page number", isRequired = false, type = Type.STRING),
+          @RestParameter(name = "clipshowId", description = "The clipshow ID, if any", isRequired = false, type = Type.STRING) }, reponses = { @RestResponse(responseCode = SC_OK, description = "An XML representation of the user annotations") })
   public Response getAnnotationsAsXml(@QueryParam("episode") String id, @QueryParam("type") String type,
-          @QueryParam("day") String day, @QueryParam("limit") int limit, @QueryParam("offset") int offset) {
+          @QueryParam("day") String day, @QueryParam("limit") int limit, @QueryParam("offset") int offset, @QueryParam("clipshowId") String clipshowId) {
 
     // Are the values of offset and limit valid?
     if (offset < 0 || limit < 0)
       return Response.status(Status.BAD_REQUEST).build();
+
+    Long clipshowLong = null;
+    if (clipshowId != null) {
+      try {
+        clipshowLong = Long.parseLong(clipshowId);
+      } catch (NumberFormatException e) {
+        return Response.status(Response.Status.BAD_REQUEST).build();
+      }
+    }
 
     // Set default value of limit (max result value)
     if (limit == 0)
       limit = 10;
 
     if (!StringUtils.isEmpty(id) && !StringUtils.isEmpty(type))
-      return Response.ok(annotationService.getAnnotationsByTypeAndMediapackageId(type, id, offset, limit)).build();
+      return Response.ok(annotationService.getAnnotationsByTypeAndMediapackageId(type, id, offset, limit, clipshowLong)).build();
     else if (!StringUtils.isEmpty(id))
-      return Response.ok(annotationService.getAnnotationsByMediapackageId(id, offset, limit)).build();
+      return Response.ok(annotationService.getAnnotationsByMediapackageId(id, offset, limit, clipshowLong)).build();
     else if (!StringUtils.isEmpty(type) && !StringUtils.isEmpty(day))
-      return Response.ok(annotationService.getAnnotationsByTypeAndDay(type, day, offset, limit)).build();
+      return Response.ok(annotationService.getAnnotationsByTypeAndDay(type, day, offset, limit, clipshowLong)).build();
     else if (!StringUtils.isEmpty(type))
-      return Response.ok(annotationService.getAnnotationsByType(type, offset, limit)).build();
+      return Response.ok(annotationService.getAnnotationsByType(type, offset, limit, clipshowLong)).build();
     else if (!StringUtils.isEmpty(day))
-      return Response.ok(annotationService.getAnnotationsByDay(day, offset, limit)).build();
+      return Response.ok(annotationService.getAnnotationsByDay(day, offset, limit, clipshowLong)).build();
     else
-      return Response.ok(annotationService.getAnnotations(offset, limit)).build();
+      return Response.ok(annotationService.getAnnotations(offset, limit, clipshowLong)).build();
   }
 
   /**
@@ -159,10 +169,12 @@ public class AnnotationRestService {
           @RestParameter(name = "type", description = "The type of annotation", isRequired = false, type = Type.STRING),
           @RestParameter(name = "day", description = "The day of creation (format: YYYYMMDD)", isRequired = false, type = Type.STRING),
           @RestParameter(name = "limit", description = "The maximum number of items to return per page", isRequired = false, type = Type.INTEGER),
-          @RestParameter(name = "offset", description = "The page number", isRequired = false, type = Type.INTEGER) }, reponses = { @RestResponse(responseCode = SC_OK, description = "A JSON representation of the user annotations") })
+          @RestParameter(name = "offset", description = "The page number", isRequired = false, type = Type.STRING),
+          @RestParameter(name = "clipshowId", description = "The clipshow ID, if any", isRequired = false, type = Type.STRING)
+    }, reponses = { @RestResponse(responseCode = SC_OK, description = "A JSON representation of the user annotations") })
   public Response getAnnotationsAsJson(@QueryParam("episode") String id, @QueryParam("type") String type,
-          @QueryParam("day") String day, @QueryParam("limit") int limit, @QueryParam("offset") int offset) {
-    return getAnnotationsAsXml(id, type, day, limit, offset); // same logic, different @Produces annotation
+          @QueryParam("day") String day, @QueryParam("limit") int limit, @QueryParam("offset") int offset, @QueryParam("clipshowId") String clipshowId) {
+    return getAnnotationsAsXml(id, type, day, limit, offset, clipshowId); // same logic, different @Produces annotation
   }
 
   @PUT
@@ -174,10 +186,11 @@ public class AnnotationRestService {
           @RestParameter(name = "value", description = "The value of the annotation", isRequired = true, type = Type.TEXT),
           @RestParameter(name = "in", description = "The time, or inpoint, of the annotation", isRequired = true, type = Type.STRING),
           @RestParameter(name = "out", description = "The optional outpoint of the annotation", isRequired = false, type = Type.STRING),
-          @RestParameter(name = "isPrivate", description = "True if the annotation is private", isRequired = false, type = Type.BOOLEAN) }, 
-        reponses = { @RestResponse(responseCode = SC_CREATED, description = "The URL to this annotation is returned in the Location header, and an XML representation of the annotation itelf is returned in the response body.") })
+          @RestParameter(name = "clipshowId", description = "The clipshow id, if any", isRequired = false, type = Type.STRING),
+          @RestParameter(name = "isPrivate", description = "True if the clipshow is privatae", isRequired = false, type = Type.STRING)
+    }, reponses = { @RestResponse(responseCode = SC_CREATED, description = "The URL to this annotation is returned in the Location header, and an XML representation of the annotation itelf is returned in the response body.") })
   public Response add(@FormParam("episode") String mediapackageId, @FormParam("in") int inpoint,
-          @FormParam("out") int outpoint, @FormParam("type") String type, @FormParam("value") String value, @FormParam("isPrivate") boolean isPrivate,
+          @FormParam("out") int outpoint, @FormParam("type") String type, @FormParam("value") String value, @FormParam("clipshowId") String clipshowId, @FormParam("isPrivate") String isPrivate,
           @Context HttpServletRequest request) {
     String sessionId = request.getSession().getId();
     Annotation a = new AnnotationImpl();
@@ -187,36 +200,16 @@ public class AnnotationRestService {
     a.setOutpoint(outpoint);
     a.setType(type);
     a.setValue(value);
-    a.setPrivate(isPrivate);
-    a = annotationService.addAnnotation(a);
-    URI uri;
     try {
-      uri = new URI(
-              UrlSupport.concat(new String[] { serverUrl, serviceUrl, Long.toString(a.getAnnotationId()), ".xml" }));
-    } catch (URISyntaxException e) {
-      throw new WebApplicationException(e);
-    }
-    return Response.created(uri).entity(a).build();
-  }
-
-  @PUT
-  @Path("{id}")
-  @Produces(MediaType.TEXT_XML)
-  @RestQuery(name = "change", description = "Changes the value of an annotation specified by its identifier ", returnDescription = "The user annotation.", 
-          pathParameters = {@RestParameter(name = "id", description = "The annotation identifier", isRequired = true, type = Type.STRING) },
-          restParameters = {@RestParameter(name = "value", description = "The value of the annotation", isRequired = true, type = Type.TEXT) },
-          reponses = { @RestResponse(responseCode = SC_CREATED, description = "The URL to this annotation is returned in the Location header, and an XML representation of the annotation itelf is returned in the response body.") })
-  public Response change(@PathParam("id") String idAsString, @FormParam("value") String value,
-          @Context HttpServletRequest request) throws NotFoundException {
-    Long id = null;
-    try {
-      id = Long.parseLong(idAsString);
+      a.setClipshowId(Long.parseLong(clipshowId));
     } catch (NumberFormatException e) {
-        return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+      //Swallow this, otherwise we can't create an annotation unless it's on a clipshow!
+      //TODO:  A better way of doing this?
     }
-    Annotation a = annotationService.getAnnotation(id);
-    a.setValue(value);
-    a = annotationService.changeAnnotation(a);
+    if (Boolean.valueOf(isPrivate)) {
+      a.setPrivate(true);
+    }
+    a = annotationService.addAnnotation(a);
     URI uri;
     try {
       uri = new URI(
@@ -251,8 +244,7 @@ public class AnnotationRestService {
 
   @DELETE
   @Path("{id}")
-  @RestQuery(name = "remove", description = "Remove an annotation", returnDescription = "Return status code", 
-  pathParameters = { @RestParameter(name = "id", description = "The annotation identifier", isRequired = false, type = Type.STRING) }, reponses = { @RestResponse(responseCode = SC_OK, description = "Annotation deleted."), @RestResponse(responseCode = SC_NO_CONTENT, description = "Annotation not found.") })
+  @RestQuery(name = "remove", description = "Remove an annotation", returnDescription = "Return status code", pathParameters = { @RestParameter(name = "id", description = "The annotation identifier", isRequired = false, type = Type.STRING) }, reponses = { @RestResponse(responseCode = SC_OK, description = "Annotation deleted."), @RestResponse(responseCode = SC_NO_CONTENT, description = "Annotation not found.") })
   public Response removeAnnotation(@PathParam("id") String idAsString) throws NotFoundException {
     Long id = null;
     Annotation a; 

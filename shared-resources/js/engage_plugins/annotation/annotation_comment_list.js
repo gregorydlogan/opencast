@@ -311,10 +311,13 @@ Opencast.Annotation_Comment_List = (function ()
         }
 
         var data = "episode="+mediaPackageId+"&type="+annotationType+"&in="+timePos+"&value="+data+"&out="+0;
+        if (Opencast.clipshow.core.getCurrentClipshow()) {
+          data = data + "&clipshowId=" + Opencast.clipshow.core.getCurrentClipshow();
+        }
         if (isPrivate) {
             data = data + "&isPrivate=true"
-        }        
-        
+        }
+
         $.ajax(
         {
             type: 'PUT',
@@ -378,11 +381,16 @@ Opencast.Annotation_Comment_List = (function ()
             $('#oc-comments-list').hide();
             $('#oc-comments-list-add-form').hide();
             
+            var data = "episode=" + mediaPackageId+"&type="+annotationType+"&limit=1000";
+            if (Opencast.clipshow.core.getCurrentClipshow()) {
+              data = data + "&clipshowId=" + Opencast.clipshow.core.getCurrentClipshow();
+            }
+
             // Request JSONP data
             $.ajax(
 		{
 		    url: Opencast.Watch.getAnnotationURL(),
-		    data: "episode=" + mediaPackageId+"&type="+annotationType+"&limit=1000",
+		    data: data,
 		    dataType: 'json',
 		    jsonp: 'jsonp',
 		    success: function (data)
@@ -965,7 +973,7 @@ Opencast.Annotation_Comment_List = (function ()
     {
     	return cm_username;
     }
-    
+
     function isShown()
     {
       return isOpen;
@@ -976,7 +984,7 @@ Opencast.Annotation_Comment_List = (function ()
 		isOpen = false;
 	    isOpening = false;
 	    show();
-    }    
+    }
     
     return {
         initialize: initialize,

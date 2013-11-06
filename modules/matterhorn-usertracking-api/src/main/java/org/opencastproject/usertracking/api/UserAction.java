@@ -62,4 +62,12 @@ public interface UserAction {
   void setIsPlaying(boolean isPlaying);
 
   Date getCreated();
+
+  Long getClipshowId();
+
+  void setClipshowId(Long newId);
+
+  Long getClipshowSeriesId();
+
+  void setClipshowSeriesId(Long newId);
 }

@@ -121,6 +121,14 @@ public class UserActionImpl implements UserAction {
   @XmlElement(name = "created")
   private Date created = new Date();
 
+  @Column(name = "clipshow_id")
+  @XmlElement(name = "clipshowId")
+  private Long clipshowId;
+  
+  @Column(name = "clipshow_series_id")
+  @XmlElement(name = "clipshowSeriesId")
+  private Long clipshowSeriesId;
+
   /**
    * A no-arg constructor needed by JAXB
    */
@@ -215,5 +223,21 @@ public class UserActionImpl implements UserAction {
 
   private void updateLength() {
     this.length = this.outpoint - this.inpoint;
+  }
+
+  public Long getClipshowId() {
+    return clipshowId;
+  }
+
+  public void setClipshowId(Long newId) {
+    clipshowId = newId;
+  }
+
+  public Long getClipshowSeriesId() {
+    return clipshowSeriesId;
+  }
+
+  public void setClipshowSeriesId(Long newId) {
+    clipshowSeriesId = newId;
   }
 }

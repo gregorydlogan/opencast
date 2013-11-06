@@ -21,12 +21,15 @@ import org.opencastproject.annotation.api.AnnotationService;
 import org.opencastproject.security.api.SecurityService;
 import org.opencastproject.util.NotFoundException;
 
+import org.osgi.service.cm.ConfigurationException;
+import org.osgi.service.cm.ManagedService;
 import org.osgi.service.component.ComponentContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Dictionary;
 import java.util.GregorianCalendar;
 import java.util.Map;
 
@@ -40,16 +43,19 @@ import javax.persistence.spi.PersistenceProvider;
 /**
  * JPA-based implementation of the {@link AnnotationService}
  */
-public class AnnotationServiceJpaImpl implements AnnotationService {
+public class AnnotationServiceJpaImpl implements AnnotationService, ManagedService {
 
   /** The logger */
-  private static final Logger logger = LoggerFactory.getLogger(AnnotationRestService.class);
+  private static final Logger logger = LoggerFactory.getLogger(AnnotationServiceJpaImpl.class);
 
   /** The persistence unit properties */
   protected Map<String, Object> persistenceProperties;
 
   /** The factory used to generate the entity manager */
   protected EntityManagerFactory emf = null;
+
+  /** The configuration item which configures whether to actually delete, or keep annotations.  Set this to true to simply hide deleted annotations for later research> **/
+  private boolean researchMode = false;
 
   /**
    * The JPA provider
@@ -101,6 +107,19 @@ public class AnnotationServiceJpaImpl implements AnnotationService {
     }
   }
 
+  @Override
+  public void updated(Dictionary props) throws ConfigurationException {
+    if (props == null) {
+      logger.debug("Null properties in annotation service, research mode disabled.");
+      return;
+    }
+
+    Object val = props.get("org.opencastproject.annotation.researchMode");
+    if (val != null && String.class.isInstance(val)) {
+      researchMode = Boolean.valueOf((String) val);
+    }
+  }
+
   private int getTotal() {
     EntityManager em = null;
     try {
@@ -143,7 +162,11 @@ public class AnnotationServiceJpaImpl implements AnnotationService {
       tx = em.getTransaction();
       tx.begin();
       //first merge then remove element
-      em.remove(em.merge(a));
+      if (!researchMode) {
+        em.remove(em.merge(a));
+      } else {
+        a.setDeleted(true);
+      }
       tx.commit();
       return true;
     } catch (Exception e) {
@@ -199,7 +222,7 @@ public class AnnotationServiceJpaImpl implements AnnotationService {
   }
 
   @SuppressWarnings("unchecked")
-  public AnnotationList getAnnotations(int offset, int limit) {
+  public AnnotationList getAnnotations(int offset, int limit, Long clipshowId) {
     AnnotationListImpl result = new AnnotationListImpl();
 
     result.setTotal(getTotal());
@@ -209,7 +232,13 @@ public class AnnotationServiceJpaImpl implements AnnotationService {
     EntityManager em = null;
     try {
       em = emf.createEntityManager();
-      Query q = em.createNamedQuery("findAnnotations");
+      Query q = null;
+      if (clipshowId == null) {
+        q = em.createNamedQuery("findAnnotations");
+      } else {
+        q = em.createNamedQuery("findAnnotationsForClipshow");
+        q.setParameter("clipshowId", clipshowId);
+      }
       q.setParameter("userId", securityService.getUser().getUserName());
       q.setFirstResult(offset);
       q.setMaxResults(limit);
@@ -224,17 +253,23 @@ public class AnnotationServiceJpaImpl implements AnnotationService {
     }
   }
 
-  public AnnotationList getAnnotationsByTypeAndMediapackageId(String type, String mediapackageId, int offset, int limit) {
+  public AnnotationList getAnnotationsByTypeAndMediapackageId(String type, String mediapackageId, int offset, int limit, Long clipshowId) {
     AnnotationListImpl result = new AnnotationListImpl();
 
     EntityManager em = null;
     try {
       em = emf.createEntityManager();
-      result.setTotal(getTotal(type, mediapackageId, em));
+      result.setTotal(getTotal(type, mediapackageId, clipshowId, em));
       result.setOffset(offset);
       result.setLimit(limit);
 
-      Query q = em.createNamedQuery("findAnnotationsByTypeAndMediapackageId");
+      Query q = null;
+      if (clipshowId == null) {
+        q = em.createNamedQuery("findAnnotationsByTypeAndMediapackageId");
+      } else {
+        q = em.createNamedQuery("findAnnotationsByTypeAndMediapackageIdForClipshow");
+        q.setParameter("clipshowId", clipshowId);
+      }
       q.setParameter("userId", securityService.getUser().getUserName());
       q.setParameter("type", type);
       q.setParameter("mediapackageId", mediapackageId);
@@ -254,17 +289,23 @@ public class AnnotationServiceJpaImpl implements AnnotationService {
     }
   }
 
-  public AnnotationList getAnnotationsByMediapackageId(String mediapackageId, int offset, int limit) {
+  public AnnotationList getAnnotationsByMediapackageId(String mediapackageId, int offset, int limit, Long clipshowId) {
     AnnotationListImpl result = new AnnotationListImpl();
 
     EntityManager em = null;
     try {
       em = emf.createEntityManager();
-      result.setTotal(getTotalByMediapackageID(mediapackageId, em));
+      result.setTotal(getTotalByMediapackageID(mediapackageId, clipshowId, em));
       result.setOffset(offset);
       result.setLimit(limit);
 
-      Query q = em.createNamedQuery("findAnnotationsByMediapackageId");
+      Query q = null;
+      if (clipshowId == null) {
+        q = em.createNamedQuery("findAnnotationsByMediapackageId");
+      } else {
+        q = em.createNamedQuery("findAnnotationsByMediapackageIdForClipshow");
+        q.setParameter("clipshowId", clipshowId);
+      }
       q.setParameter("userId", securityService.getUser().getUserName());
       q.setParameter("mediapackageId", mediapackageId);
       q.setFirstResult(offset);
@@ -283,7 +324,7 @@ public class AnnotationServiceJpaImpl implements AnnotationService {
   }
 
   @SuppressWarnings("unchecked")
-  public AnnotationList getAnnotationsByTypeAndDay(String type, String day, int offset, int limit) {
+  public AnnotationList getAnnotationsByTypeAndDay(String type, String day, int offset, int limit, Long clipshowId) {
     int year = Integer.parseInt(day.substring(0, 4));
     int month = Integer.parseInt(day.substring(4, 6)) - 1;
     int date = Integer.parseInt(day.substring(6, 8));
@@ -297,11 +338,17 @@ public class AnnotationServiceJpaImpl implements AnnotationService {
     EntityManager em = null;
     try {
       em = emf.createEntityManager();
-      result.setTotal(getTotal(type, calBegin, calEnd, em));
+      result.setTotal(getTotal(type, calBegin, calEnd, clipshowId, em));
       result.setOffset(offset);
       result.setLimit(limit);
 
-      Query q = em.createNamedQuery("findAnnotationsByTypeAndIntervall");
+      Query q = null;
+      if (clipshowId == null) {
+        q = em.createNamedQuery("findAnnotationsByTypeAndIntervall");
+      } else {
+        q = em.createNamedQuery("findAnnotationsByTypeAndIntervallForClipshow");
+        q.setParameter("clipshowId", clipshowId);
+      }
       q.setParameter("userId", securityService.getUser().getUserName());
       q.setParameter("type", type);
       q.setParameter("begin", calBegin, TemporalType.TIMESTAMP);
@@ -321,7 +368,7 @@ public class AnnotationServiceJpaImpl implements AnnotationService {
   }
 
   @SuppressWarnings("unchecked")
-  public AnnotationList getAnnotationsByDay(String day, int offset, int limit) {
+  public AnnotationList getAnnotationsByDay(String day, int offset, int limit, Long clipshowId) {
     AnnotationListImpl result = new AnnotationListImpl();
 
     int year = Integer.parseInt(day.substring(0, 4));
@@ -336,11 +383,17 @@ public class AnnotationServiceJpaImpl implements AnnotationService {
     EntityManager em = null;
     try {
       em = emf.createEntityManager();
-      result.setTotal(getTotal(calBegin, calEnd, em));
+      result.setTotal(getTotal(calBegin, calEnd, clipshowId, em));
       result.setOffset(offset);
       result.setLimit(limit);
 
-      Query q = em.createNamedQuery("findAnnotationsByIntervall");
+      Query q = null;
+      if (clipshowId == null) {
+        q = em.createNamedQuery("findAnnotationsByIntervall");
+      } else {
+        q = em.createNamedQuery("findAnnotationsByIntervallForClipshow");
+        q.setParameter("clipshowId", clipshowId);
+      }
       q.setParameter("userId", securityService.getUser().getUserName());
       q.setParameter("begin", calBegin, TemporalType.TIMESTAMP);
       q.setParameter("end", calEnd, TemporalType.TIMESTAMP);
@@ -358,7 +411,7 @@ public class AnnotationServiceJpaImpl implements AnnotationService {
   }
 
   @SuppressWarnings("unchecked")
-  public AnnotationList getAnnotationsByType(String type, int offset, int limit) {
+  public AnnotationList getAnnotationsByType(String type, int offset, int limit, Long clipshowId) {
     AnnotationListImpl result = new AnnotationListImpl();
 
     result.setOffset(offset);
@@ -367,8 +420,14 @@ public class AnnotationServiceJpaImpl implements AnnotationService {
     EntityManager em = null;
     try {
       em = emf.createEntityManager();
-      result.setTotal(getTotal(type, em));
-      Query q = em.createNamedQuery("findAnnotationsByType");
+      result.setTotal(getTotal(type, clipshowId, em));
+      Query q = null;
+      if (clipshowId == null) {
+        q = em.createNamedQuery("findAnnotationsByType");
+      } else {
+        q = em.createNamedQuery("findAnnotationsByTypeForClipshow");
+        q.setParameter("clipshowId", clipshowId);
+      }
       q.setParameter("userId", securityService.getUser().getUserName());
       q.setParameter("type", type);
       q.setFirstResult(offset);
@@ -384,30 +443,54 @@ public class AnnotationServiceJpaImpl implements AnnotationService {
     }
   }
 
-  private int getTotal(String type, EntityManager em) {
-    Query q = em.createNamedQuery("findTotalByType");
+  private int getTotal(String type, Long clipshowId, EntityManager em) {
+    Query q = null;
+    if (clipshowId == null) {
+      q = em.createNamedQuery("findTotalByType");
+    } else {
+      q = em.createNamedQuery("findTotalByTypeForClipshow");
+      q.setParameter("clipshowId", clipshowId);
+    }
     q.setParameter("userId", securityService.getUser().getUserName());
     q.setParameter("type", type);
     return ((Long) q.getSingleResult()).intValue();
   }
 
-  private int getTotal(String type, String mediapackageId, EntityManager em) {
-    Query q = em.createNamedQuery("findTotalByTypeAndMediapackageId");
+  private int getTotal(String type, String mediapackageId, Long clipshowId, EntityManager em) {
+    Query q = null;
+    if (clipshowId == null) {
+      q = em.createNamedQuery("findTotalByTypeAndMediapackageId");
+    } else {
+      q = em.createNamedQuery("findTotalByTypeAndMediapackageIdForClipshow");
+      q.setParameter("clipshowId", clipshowId);
+    }
     q.setParameter("userId", securityService.getUser().getUserName());
     q.setParameter("type", type);
     q.setParameter("mediapackageId", mediapackageId);
     return ((Long) q.getSingleResult()).intValue();
   }
 
-  private int getTotalByMediapackageID(String mediapackageId, EntityManager em) {
-    Query q = em.createNamedQuery("findTotalByMediapackageId");
+  private int getTotalByMediapackageID(String mediapackageId, Long clipshowId, EntityManager em) {
+    Query q = null;
+    if (clipshowId == null) {
+      q = em.createNamedQuery("findTotalByMediapackageId");
+    } else {
+      q = em.createNamedQuery("findTotalByMediapackageIdForClipshow");
+      q.setParameter("clipshowId", clipshowId);
+    }
     q.setParameter("userId", securityService.getUser().getUserName());
     q.setParameter("mediapackageId", mediapackageId);
     return ((Long) q.getSingleResult()).intValue();
   }
 
-  private int getTotal(String type, Calendar calBegin, Calendar calEnd, EntityManager em) {
-    Query q = em.createNamedQuery("findTotalByTypeAndIntervall");
+  private int getTotal(String type, Calendar calBegin, Calendar calEnd, Long clipshowId, EntityManager em) {
+    Query q = null;
+    if (clipshowId == null) {
+      q = em.createNamedQuery("findTotalByTypeAndIntervall");
+    } else {
+      q = em.createNamedQuery("findTotalByTypeAndIntervallForClipshow");
+      q.setParameter("clipshowId", clipshowId);
+    }
     q.setParameter("userId", securityService.getUser().getUserName());
     q.setParameter("type", type);
     q.setParameter("begin", calBegin, TemporalType.TIMESTAMP);
@@ -415,8 +498,14 @@ public class AnnotationServiceJpaImpl implements AnnotationService {
     return ((Long) q.getSingleResult()).intValue();
   }
 
-  private int getTotal(Calendar calBegin, Calendar calEnd, EntityManager em) {
-    Query q = em.createNamedQuery("findTotalByIntervall");
+  private int getTotal(Calendar calBegin, Calendar calEnd, Long clipshowId, EntityManager em) {
+    Query q = null;
+    if (clipshowId == null) {
+      q = em.createNamedQuery("findTotalByIntervall");
+    } else {
+      q = em.createNamedQuery("findTotalByIntervallForClipshow");
+      q.setParameter("clipshowId", clipshowId);
+    }
     q.setParameter("userId", securityService.getUser().getUserName());
     q.setParameter("begin", calBegin, TemporalType.TIMESTAMP);
     q.setParameter("end", calEnd, TemporalType.TIMESTAMP);

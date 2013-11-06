@@ -66,4 +66,11 @@ public interface Annotation {
 
   void setPrivate(Boolean isPrivate);
 
+  Long getClipshowId();
+
+  void setClipshowId(Long clipshowId);
+
+  Boolean getDeleted();
+
+  void setDeleted(Boolean isDeleted);
 }
