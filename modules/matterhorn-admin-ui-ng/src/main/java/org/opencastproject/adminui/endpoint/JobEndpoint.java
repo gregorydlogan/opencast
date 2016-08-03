@@ -354,6 +354,15 @@ public class JobEndpoint {
         started = DateTimeSupport.toUTC(dateStarted.getTime());
       String creator = job.getCreator();
       String processingHost = job.getProcessingHost();
+      Long root = job.getRootJobId();
+      Long parent = job.getParentJobId();
+      Long blockingJob = job.getBlockingJobId();
+      List<Long> blockedJobs = job.getBlockedJobIds();
+
+      List<JValue> blockedJobsAsJson = new ArrayList<JValue>();
+      for (Long jobId : blockedJobs) {
+        blockedJobsAsJson.add(v(jobId));
+      }
 
       jsonList.add(j(f("id", v(id)),
               f("type", v(jobType)),
@@ -362,7 +371,11 @@ public class JobEndpoint {
               f("submitted", vN(created)),
               f("started", vN(started)),
               f("creator", vN(creator)),
-              f("processingHost", vN(processingHost))));
+              f("processingHost", vN(processingHost)),
+              f("root", vN(root)),
+              f("parent", vN(parent)),
+              f("blockingJob", vN(blockingJob)),
+              f("blockedJobs", a(blockedJobsAsJson))));
     }
 
     return jsonList;

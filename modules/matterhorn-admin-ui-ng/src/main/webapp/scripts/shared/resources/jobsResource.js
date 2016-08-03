@@ -15,6 +15,13 @@ angular.module('adminNg.resources')
                 row.started = Language.formatDateTime('short', r.started);
                 row.creator = r.creator;
                 row.processingHost = r.processingHost;
+                row.parent = r.parent;
+                row.root = r.root;
+                row.blockingJob = r.blockingJob;
+                row.blockedJobs = []
+                for (j = 0; j < r.blockedJobs.length; j++) {
+                    row.blockedJobs.push(r.blockedJobs[j]);
+                }
                 return row;
             };
 

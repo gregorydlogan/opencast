@@ -7,40 +7,64 @@
             "creator": "testuser1",
             "id": 1,
             "operation": "test",
+            "root": "",
             "processingHost": "host1",
             "started": "2014-06-05T09:10:00Z",
             "status": "RUNNING",
+            "blockedJobs": [
+                
+            ],
             "submitted": "2014-06-05T09:10:00Z",
+            "blockingJob": "",
+            "parent": "",
             "type": "org.opencastproject.composer"
         },
         {
             "creator": "testuser2",
             "id": 3,
             "operation": "RESUME",
+            "root": "",
             "processingHost": "host3",
             "started": "2014-06-05T09:11:11Z",
             "status": "RUNNING",
+            "blockedJobs": [
+                
+            ],
             "submitted": "2014-06-05T09:11:11Z",
+            "blockingJob": "",
+            "parent": "",
             "type": "org.opencastproject.workflow"
         },
         {
             "creator": "testuser1",
             "id": 4,
             "operation": "Inspect",
+            "root": "",
             "processingHost": "host2",
             "started": "2014-06-05T09:16:00Z",
             "status": "RUNNING",
+            "blockedJobs": [
+                
+            ],
             "submitted": "2014-06-05T09:16:00Z",
+            "blockingJob": "",
+            "parent": "",
             "type": "org.opencastproject.inspection"
         },
         {
             "creator": "testuser3",
             "id": 5,
             "operation": "Encode",
+            "root": "",
             "processingHost": "host1",
             "started": "2014-06-05T09:05:00Z",
             "status": "RUNNING",
+            "blockedJobs": [
+                
+            ],
             "submitted": "2014-06-05T09:05:00Z",
+            "blockingJob": "",
+            "parent": "",
             "type": "org.opencastproject.composer"
         }
     ],

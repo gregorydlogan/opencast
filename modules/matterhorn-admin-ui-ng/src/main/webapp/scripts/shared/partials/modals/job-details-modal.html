@@ -19,11 +19,16 @@
     <div class="modal-content" data-modal-tab-content="general">
         <div class="full-col">
             <div class="obj tbl-list">
-                <header class="no-expand">Workflow Instance Details</header>
+                <header class="no-expand" translate="SYSTEMS.JOBS.DETAILS.WORKFLOW.INFO.DETAILS"</header>>Workflow Instance Details</header>
                 <div class="obj-container">
-                    <p class="desc">Instructions on how to use this functionality goes here in this header space. Instructions on how to use this functionality goes here in this header space.</p>
+                    <!--<p class="desc">Instructions on how to use this functionality goes here in this header space. Instructions on how to use this functionality goes here in this header space.</p>-->
                     <table class="main-tbl">
-                        <tr>
+						<tr ng-repeat="row in ???">
+                                <td translate="{{ row.label }}"></td>
+                                <td>{{ row.value }}</td>
+						</tr>
+					</table>
+<!--                        <tr>
                             <td>ID</td>
                             <td>917-38u23-45827423-57834yvbn472-23</td>
                         </tr>
@@ -55,12 +60,12 @@
                             <td>Duration</td>
                             <td>1:30:00</td>
                         </tr>
-                    </table>
+                    </table>-->
                 </div>
             </div>
 
             <div class="obj tbl-list">
-                <header class="no-expand">Workflow Instance Configuration</header>
+                <header class="no-expand" translate="SYSTEMS.JOBS.DETAILS.WORKFLOW.INFO.CONFIG">Workflow Instance Configuration</header>
                 <div class="obj-container">
                     <p class="desc">Instructions on how to use this functionality goes here in this header space. Instructions on how to use this functionality goes here in this header space.</p>
                     <table class="main-tbl">

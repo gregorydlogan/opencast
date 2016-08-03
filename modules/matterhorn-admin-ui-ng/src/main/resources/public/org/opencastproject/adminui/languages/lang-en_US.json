@@ -1417,6 +1417,12 @@
            "GENERAL":    "General",
            "OPERATIONS": "Operations",
            "INCIDENTS":  "Incidents"
+         },
+         "WORKFLOW": {
+           "INFO": {
+             "DETAILS": "Workflow Instance Details",
+             "CONFIG": "Workflow Instance Configuration"
+           }
          }
        }
      },
