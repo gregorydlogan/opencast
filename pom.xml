@@ -301,8 +301,8 @@
         </dependencies>
         <configuration>
           <skip>${checkstyle.skip}</skip>
-          <configLocation>${opencast.basedir}/docs/checkstyle/matterhorn-checkstyle.xml</configLocation>
-          <headerLocation>${opencast.basedir}/docs/checkstyle/matterhorn-header.txt</headerLocation>
+          <configLocation>${opencast.basedir}/docs/checkstyle/opencast-checkstyle.xml</configLocation>
+          <headerLocation>${opencast.basedir}/docs/checkstyle/opencast-header.txt</headerLocation>
           <includeTestSourceDirectory>true</includeTestSourceDirectory>
           <consoleOutput>true</consoleOutput>
           <logViolationsToConsole>true</logViolationsToConsole>
@@ -1456,11 +1456,11 @@
   </contributors>
   <mailingLists>
     <mailingList>
-      <name>Matterhorn Mailing List</name>
-      <subscribe>https://groups.google.com/a/opencast.org/forum/#!forum/matterhorn</subscribe>
-      <unsubscribe>https://groups.google.com/a/opencast.org/forum/#!forum/matterhorn</unsubscribe>
-      <post>matterhorn@opencast.org</post>
-      <archive>https://groups.google.com/a/opencast.org/forum/#!forum/matterhorn</archive>
+      <name>Opencast Mailing List</name>
+      <subscribe>https://groups.google.com/a/opencast.org/forum/#!forum/dev</subscribe>
+      <unsubscribe>https://groups.google.com/a/opencast.org/forum/#!forum/dev</unsubscribe>
+      <post>dev@opencast.org</post>
+      <archive>https://groups.google.com/a/opencast.org/forum/#!forum/dev</archive>
     </mailingList>
   </mailingLists>
   <licenses>
@@ -1470,8 +1470,8 @@
     </license>
   </licenses>
   <scm>
-    <connection>scm:git:https://bitbucket.org/opencast-community/matterhorn.git</connection>
-    <developerConnection>scm:git:git@bitbucket.org:opencast-community/matterhorn.git</developerConnection>
+    <connection>scm:git:https://bitbucket.org/opencast-community/opencast.git</connection>
+    <developerConnection>scm:git:git@bitbucket.org:opencast-community/opencast.git</developerConnection>
     <url>https://bitbucket.org/opencast-community</url>
   </scm>
   <issueManagement>
