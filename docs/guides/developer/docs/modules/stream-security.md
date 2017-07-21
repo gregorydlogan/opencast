@@ -74,9 +74,9 @@ If the third party system is based on Java, the existing URL Signing bundles/JAR
 
 These bundles are required:
 
-* matterhorn-urlsigning-common
-* matterhorn-urlsigning-service-api
-* matterhorn-urlsigning-service-impl
+* opencast-urlsigning-common
+* opencast-urlsigning-service-api
+* opencast-urlsigning-service-impl
 
 Code example:
 ```java

@@ -19,12 +19,12 @@
   <dependencies>
     <dependency>
       <groupId>org.opencastproject</groupId>
-      <artifactId>matterhorn-common</artifactId>
+      <artifactId>opencast-common</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.opencastproject</groupId>
-      <artifactId>matterhorn-engage-theodul-api</artifactId>
+      <artifactId>opencast-engage-theodul-api</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>

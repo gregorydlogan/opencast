@@ -6,17 +6,17 @@ Modules
 
 The scheduler service consists of the following modules:
 
-- `matterhorn-scheduler-api`
+- `opencast-scheduler-api`
 An API module defining the core scheduler functions and properties.
-- `matterhorn-scheduler-impl`
+- `opencast-scheduler-impl`
 The default implementation of the scheduler service as an OSGi service using the AssetManager as it's backend storage.
-- `matterhorn-scheduler-remote`
+- `opencast-scheduler-remote`
 The remote implementation of the scheduler service as an OSGi service.
-- `matterhorn-scheduler-conflict-handler`
+- `opencast-scheduler-conflict-handler`
 The default implementation of a conflict handler strategy.
-- `matterhorn-scheduler-conflict-notifier-comment`
+- `opencast-scheduler-conflict-notifier-comment`
 A conflict notifier implementation adding comments on the conflicting events.
-- `matterhorn-scheduler-conflict-notifier-email`
+- `opencast-scheduler-conflict-notifier-email`
 A conflict notifier implementation sending an email including all conflicting events.
 
 

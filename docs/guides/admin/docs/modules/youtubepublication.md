@@ -1,6 +1,6 @@
 # YouTube Publication Configuration
 
-This page documents the configuration for Opencast module **matterhorn-publication-service-youtube-v3**.
+This page documents the configuration for Opencast module **opencast-publication-service-youtube-v3**.
 
 ## Before you start
 

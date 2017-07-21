@@ -5,15 +5,15 @@ Modules
 -------
 The AssetManager consists of the following modules:
 
-- `matterhorn-asset-manager-api`  
+- `opencast-asset-manager-api`  
 An API module defining the core AssetManager functions, properties and the query language.
-- `matterhorn-asset-manager-impl`  
+- `opencast-asset-manager-impl`  
 The default implementation of the AssetManager as an OSGi service, containing the storage API for pluggable asset stores.
-- `matterhorn-asset-manager-storage-fs`  
-The default  implementation of the AssetStore. Depends on matterhorn-asset-manager-impl.
-- `matterhorn-asset-manager-util`  
+- `opencast-asset-manager-storage-fs`  
+The default  implementation of the AssetStore. Depends on opencast-asset-manager-impl.
+- `opencast-asset-manager-util`  
 Additional functionality for the AssetManager providing utilities such as starting workflows on archived snapshots, etc.
-- `matterhorn-asset-manager-workflowoperation`  
+- `opencast-asset-manager-workflowoperation`  
 A workflow operation handler to take media package snapshots of a media package from inside a running workflow.
 
 High Level View

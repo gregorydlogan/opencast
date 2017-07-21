@@ -128,7 +128,7 @@ Opencast 3.0
 - [[MH-12148]](https://opencast.jira.com/browse/MH-12148) - Undocumented Archive WOH Requirements
 - [[MH-12149]](https://opencast.jira.com/browse/MH-12149) - Upgrade Elastic Search to 1.7.6
 - [[MH-12153]](https://opencast.jira.com/browse/MH-12153) - Reduce Database Space usage
-- [[MH-12156]](https://opencast.jira.com/browse/MH-12156) - Fix version of matterhorn-engage-theodul-plugin-custom-piwik
+- [[MH-12156]](https://opencast.jira.com/browse/MH-12156) - Fix version of opencast-engage-theodul-plugin-custom-piwik
 - [[MH-12167]](https://opencast.jira.com/browse/MH-12167) - As a user, I need to be able to search for values offered by the filters, so that I actually find the value I am looking for
 - [[MH-12169]](https://opencast.jira.com/browse/MH-12169) - As a user, I expect search strings to match non-word boundaries in searchable dropdown lists
 - [[MH-12170]](https://opencast.jira.com/browse/MH-12170) - Safari does not display metadata once entered
@@ -582,7 +582,7 @@ Opencast 2.2.0
 - [[MH-11590]](https://opencast.jira.com/browse/MH-11590) - The WorkflowServiceImpl constructor sets the "waitForResources" argument incorrectly
 - [[MH-11594]](https://opencast.jira.com/browse/MH-11594) - Add language support for Galician
 - [[MH-11595]](https://opencast.jira.com/browse/MH-11595) - Fix admin ui unit tests for tableService
-- [[MH-11597]](https://opencast.jira.com/browse/MH-11597) - Building matterhorn-engage-theodul-plugin-video-videojs reports a lot of code style issues
+- [[MH-11597]](https://opencast.jira.com/browse/MH-11597) - Building opencast-engage-theodul-plugin-video-videojs reports a lot of code style issues
 - [[MH-11600]](https://opencast.jira.com/browse/MH-11600) - Failed test: i18n (gen-int-01)
 - [[MH-11601]](https://opencast.jira.com/browse/MH-11601) - current language can have undefined state
 - [[MH-11604]](https://opencast.jira.com/browse/MH-11604) - Date picker for setting up the schedule is always french
@@ -883,7 +883,7 @@ Opencast 2.0.0
 - [[MH-10816]](https://opencast.jira.com/browse/MH-10816) - Move Message Broker Configuration to Global Config
 - [[MH-10821]](https://opencast.jira.com/browse/MH-10821) - Severe Issue with Scheduled Events
 - [[MH-10829]](https://opencast.jira.com/browse/MH-10829) - Unchecking "Remember me" checkbox has no effect when logged out. Pressing the browsers back button you're still logged in an d can use all functions.
-- [[MH-10836]](https://opencast.jira.com/browse/MH-10836) - Issues with matterhorn-engage-theodul-plugin-archetype
+- [[MH-10836]](https://opencast.jira.com/browse/MH-10836) - Issues with opencast-engage-theodul-plugin-archetype
 - [[MH-10837]](https://opencast.jira.com/browse/MH-10837) - Bulk deletion of events doesn't work correctly
 - [[MH-10843]](https://opencast.jira.com/browse/MH-10843) - different video qualities are not filtered correctly.
 - [[MH-10845]](https://opencast.jira.com/browse/MH-10845) - Summary of "Add Events" and "Add Series" shows irrelevant data
