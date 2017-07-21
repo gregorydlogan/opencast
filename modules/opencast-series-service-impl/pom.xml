@@ -5,7 +5,7 @@
   <name>opencast-series-service-impl</name>
   <packaging>bundle</packaging>
   <parent>
-    <groupId>org.opencastproject</groupId>
+    <groupId>org.opencast</groupId>
     <artifactId>base</artifactId>
     <version>4.0-SNAPSHOT</version>
     <relativePath>../../pom.xml</relativePath>
@@ -16,27 +16,27 @@
   </properties>
   <dependencies>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-series-service-api</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-common</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-dublincore</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-solr</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-message-broker-api</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -152,10 +152,10 @@
             <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
             <Build-Number>${buildNumber}</Build-Number>
             <Export-Package>
-              org.opencastproject.series.impl.solr;version=${project.version},
-              org.opencastproject.series.impl.persistence;version=${project.version},
-              org.opencastproject.series.impl;version=${project.version},
-              org.opencastproject.series.endpoint;version=${project.version}
+              org.opencast.series.impl.solr;version=${project.version},
+              org.opencast.series.impl.persistence;version=${project.version},
+              org.opencast.series.impl;version=${project.version},
+              org.opencast.series.endpoint;version=${project.version}
             </Export-Package>
             <Service-Component>
               OSGI-INF/series-service-index.xml,

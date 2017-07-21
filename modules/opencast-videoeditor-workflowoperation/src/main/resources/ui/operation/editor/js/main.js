@@ -359,7 +359,7 @@ function updateDCMetadata() {
 }
 
 // Update the MediaPackage instances metadata fields
-// See org.opencastproject.mediapackage.MediaPackageImpl
+// See org.opencast.mediapackage.MediaPackageImpl
 function updateMediapackageMetadata() {
     updateMetadataField('title', 'title');
     updateMetadataField('created', 'start');
@@ -382,8 +382,8 @@ function updateMediapackageMetadata() {
 }
 
 function createSeriesFromText() {
-    var dcDoc = '<dublincore xmlns="http://www.opencastproject.org/xsd/1.0/dublincore/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:oc="http://www.opencastproject.org/matterhorn"><dcterms:title xmlns="">' + $('#series').val() + '</dcterms:title><dcterms:creator xmlns=""></dcterms:creator><dcterms:contributor xmlns=""></dcterms:contributor><dcterms:subject xmlns=""></dcterms:subject><dcterms:language xmlns=""></dcterms:language><dcterms:license xmlns=""></dcterms:license><dcterms:description xmlns=""></dcterms:description></dublincore>';
-    var acl = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><ns2:acl xmlns:ns2="org.opencastproject.security"></ns2:acl>';
+    var dcDoc = '<dublincore xmlns="http://www.opencast.org/xsd/1.0/dublincore/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:oc="http://www.opencast.org/matterhorn"><dcterms:title xmlns="">' + $('#series').val() + '</dcterms:title><dcterms:creator xmlns=""></dcterms:creator><dcterms:contributor xmlns=""></dcterms:contributor><dcterms:subject xmlns=""></dcterms:subject><dcterms:language xmlns=""></dcterms:language><dcterms:license xmlns=""></dcterms:license><dcterms:description xmlns=""></dcterms:description></dublincore>';
+    var acl = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><ns2:acl xmlns:ns2="org.opencast.security"></ns2:acl>';
     $.ajax({
         type: 'POST',
         url: '/series/',
@@ -767,7 +767,7 @@ function getWorkflowInstanceData() {
         success: function(data) {
             // clone mediapackage for editing
             mediapackage = ocUtils.createDoc('mediapackage', '');
-            $.xmlns["mp"] = "http://mediapackage.opencastproject.org";
+            $.xmlns["mp"] = "http://mediapackage.opencast.org";
             $(data).find('mediapackage').clone();
             var clone = $(data).find('mediapackage').clone();
             $(clone).children().appendTo($(mediapackage.documentElement));

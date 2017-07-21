@@ -299,7 +299,7 @@ Opencast 2.3.0
 - [[MH-11839]](https://opencast.jira.com/browse/MH-11839) - typo in Event Details: Comments
 - [[MH-11841]](https://opencast.jira.com/browse/MH-11841) - Wait for NFS shares before start Opencast service
 - [[MH-11842]](https://opencast.jira.com/browse/MH-11842) - Revert accidental downgrade of grunt version
-- [[MH-11851]](https://opencast.jira.com/browse/MH-11851) - org.opencastproject.security.admin/pass can't be changed
+- [[MH-11851]](https://opencast.jira.com/browse/MH-11851) - org.opencast.security.admin/pass can't be changed
 - [[MH-11857]](https://opencast.jira.com/browse/MH-11857) - Fix log output "Unable to delete non existing object %s/%s"
 - [[MH-11862]](https://opencast.jira.com/browse/MH-11862) - Search API handles roles wrong
 - [[MH-11863]](https://opencast.jira.com/browse/MH-11863) - WOH analyze-tracks & WOH failing cause exceptions when shutting down Opencast
@@ -349,7 +349,7 @@ Opencast 2.2.4
 *Released on October 13, 2016*
 
 - [[MH-11831]](https://opencast.jira.com/browse/MH-11831) - As a service provider, I want to configure whether Opencast creates an admin user automatically
-- [[MH-11851]](https://opencast.jira.com/browse/MH-11851) - org.opencastproject.security.admin/pass can't be changed
+- [[MH-11851]](https://opencast.jira.com/browse/MH-11851) - org.opencast.security.admin/pass can't be changed
 - [[MH-11862]](https://opencast.jira.com/browse/MH-11862) - Search API handles roles wrong
 - [[MH-11875]](https://opencast.jira.com/browse/MH-11875) - ActiveMQ should not listen to all hosts by default
 

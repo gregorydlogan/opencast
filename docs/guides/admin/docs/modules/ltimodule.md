@@ -34,7 +34,7 @@ To enable LTI authentication in Opencast, edit `OPENCAST/etc/security/mh_default
     <!-- This is required for LTI. If you are using LTI and have enabled the oauthProtectedResourceFilter  -->
     <!-- in the list of authenticationFilters above, set custom values for CONSUMERKEY and CONSUMERSECRET. -->
 
-    <bean name="oAuthConsumerDetailsService" class="org.opencastproject.kernel.security.OAuthSingleConsumerDetailsService">
+    <bean name="oAuthConsumerDetailsService" class="org.opencast.kernel.security.OAuthSingleConsumerDetailsService">
     <constructor-arg index="0" ref="userDetailsService" />
     <constructor-arg index="1" value="CONSUMERKEY" />
     <constructor-arg index="2" value="CONSUMERSECRET" />

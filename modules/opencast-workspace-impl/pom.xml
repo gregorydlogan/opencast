@@ -5,7 +5,7 @@
   <name>opencast-workspace-impl</name>
   <packaging>bundle</packaging>
   <parent>
-    <groupId>org.opencastproject</groupId>
+    <groupId>org.opencast</groupId>
     <artifactId>base</artifactId>
     <version>4.0-SNAPSHOT</version>
     <relativePath>../../pom.xml</relativePath>
@@ -16,17 +16,17 @@
   </properties>
   <dependencies>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-workspace-api</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-working-file-repository-service-api</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-common</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -97,8 +97,8 @@
               *;resolution:=optional
             </Import-Package>
             <Private-Package>
-              org.opencastproject.workspace.impl;version=${project.version},
-              org.opencastproject.workspace.impl.jmx;version=${project.version}
+              org.opencast.workspace.impl;version=${project.version},
+              org.opencast.workspace.impl.jmx;version=${project.version}
             </Private-Package>
             <Service-Component>
               OSGI-INF/workspace.xml

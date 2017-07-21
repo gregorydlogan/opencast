@@ -5,7 +5,7 @@
   <packaging>bundle</packaging>
   <name>opencast-urlsigning-verifier-service-impl</name>
   <parent>
-    <groupId>org.opencastproject</groupId>
+    <groupId>org.opencast</groupId>
     <artifactId>base</artifactId>
     <version>4.0-SNAPSHOT</version>
     <relativePath>../../pom.xml</relativePath>
@@ -26,22 +26,22 @@
     </dependency>
     <!-- Opencast -->
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-common</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-urlsigning-common</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-urlsigning-service-api</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-urlsigning-verifier-service-api</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -83,8 +83,8 @@
             <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
             <Build-Number>${buildNumber}</Build-Number>
             <Export-Package>
-              org.opencastproject.security.urlsigning.filter,
-              org.opencastproject.security.urlsigning.verifier.impl
+              org.opencast.security.urlsigning.filter,
+              org.opencast.security.urlsigning.verifier.impl
             </Export-Package>
             <Service-Component>
               OSGI-INF/signing-verifier.xml,

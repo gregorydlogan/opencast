@@ -29,12 +29,12 @@ element will use the following default values:
 
 |Field        |Default Value                                                                                        |
 |-------------|-----------------------------------------------------------------------------------------------------|
-|url          | prop.org.opencastproject.oaipmh.server.hosturl + org.opencastproject.oaipmh.mountpoint + repository |
+|url          | prop.org.opencast.oaipmh.server.hosturl + org.opencast.oaipmh.mountpoint + repository |
 |mime type    | "text/xml"                                                                                          |
 |channel name | "oaipmh-" + repository                                                                              |
 
-Note that `org.opencastproject.oaipmh.server.hosturl` is defined in
-`etc/org.opencastproject.organization-mh_default_org.cfg` and `org.opencastproject.oaipmh.mountpoint` is defined in
+Note that `org.opencast.oaipmh.server.hosturl` is defined in
+`etc/org.opencast.organization-mh_default_org.cfg` and `org.opencast.oaipmh.mountpoint` is defined in
 `custom.properties` and defaults to `/oaipmh`.
 
 Example:

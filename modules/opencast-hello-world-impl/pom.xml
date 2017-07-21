@@ -5,7 +5,7 @@
   <packaging>bundle</packaging>
   <name>opencast-hello-world-impl</name>
   <parent>
-    <groupId>org.opencastproject</groupId>
+    <groupId>org.opencast</groupId>
     <artifactId>base</artifactId>
     <version>4.0-SNAPSHOT</version>
     <relativePath>../../pom.xml</relativePath>
@@ -17,12 +17,12 @@
   <dependencies>
     <!-- Matterhorn dependencies -->
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-hello-world-api</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-common</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -48,8 +48,8 @@
           <instructions>
             <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
             <Export-Package>
-              org.opencastproject.helloworld.impl;version=${project.version},
-              org.opencastproject.helloworld.impl.endpoint;version=${project.version}
+              org.opencast.helloworld.impl;version=${project.version},
+              org.opencast.helloworld.impl.endpoint;version=${project.version}
             </Export-Package>
             <Service-Component>
               OSGI-INF/helloworld.xml

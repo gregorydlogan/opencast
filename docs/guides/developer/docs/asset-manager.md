@@ -81,10 +81,10 @@ with am referring to the AssetManager and mp the media package id of type String
     AssetManager am = …;
     String mp = …; // a media package id
     am.setProperty(Property.mk(PropertyId.mk(
-      mp, "org.opencastproject.approval", "approval"),
+      mp, "org.opencast.approval", "approval"),
       Value.mk(true)));
       
-It is recommended to use namespace names after the service's package name, in the example: `org.opencastproject.approval`.
+It is recommended to use namespace names after the service's package name, in the example: `org.opencast.approval`.
 This code looks overly verbose. Also you need to deal with namespace names and property names directly. 
 That's cumbersome and error prone even though you might intoduce constants for them. 
 To help remedy this situation a little helper class class `PropertySchema` exists. 
@@ -92,7 +92,7 @@ It is strongly recommended to make use of it. Here's how it goes.
 
     static class ApprovalPops extends PropertySchema {
      public ApprovalProps(AQueryBuilder q) {
-       super(q, "org.opencastproject.approval");
+       super(q, "org.opencast.approval");
      }
     
      public PropertyField<Boolean> approved() {
@@ -140,7 +140,7 @@ Now, let's assume other services make heavy use of properties too.
 This may cause serious database IO if we always select all properties like we did using the q.properties() target. 
 Let's do better.
 
-    q.select(q.snapshot(), q.propertiesOf("org.opencastproject.approval"))
+    q.select(q.snapshot(), q.propertiesOf("org.opencast.approval"))
       .where(p.approved().eq(true).and(q.version().isLatest())
       .run(); 
 
@@ -215,7 +215,7 @@ All `handle*` parameters are functions of type `Fn` taking the raw value as inpu
       System.out.println(f);
     }
 
-The class `org.opencastproject.assetmanager.api.fn.Properties` contains various utility functions to help extracting values from properties.
+The class `org.opencast.assetmanager.api.fn.Properties` contains various utility functions to help extracting values from properties.
 
 ### Using PropertySchema
 You've already seen that a property is constructed from a media package id, a namespace, a property name and a value. 

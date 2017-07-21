@@ -102,7 +102,7 @@ during authentication and in single-machine environments.
 
     <constructor-arg>
       <!-- Get the authorities (roles) according to a certain attribute in the authenticated user -->
-      <bean class="org.opencastproject.kernel.userdirectory.LdapAttributeAuthoritiesPopulator">
+      <bean class="org.opencast.kernel.userdirectory.LdapAttributeAuthoritiesPopulator">
         <constructor-arg>
           <!-- List of attribute names in the user from which roles will be created -->
           <!-- The specified attributes must meet few requirements:
@@ -155,9 +155,9 @@ list. The roles will be processed in the same way as the roles obtained from the
 
 > *This step is only necessary in Opencast deployments along multiple machines.*
 
-Make a copy of the file `etc/org.opencastproject.userdirectory.ldap.cfg.template` in the same directory and name it as:
+Make a copy of the file `etc/org.opencast.userdirectory.ldap.cfg.template` in the same directory and name it as:
 
-    org.opencastproject.userdirectory.ldap-<ID>.cfg
+    org.opencast.userdirectory.ldap-<ID>.cfg
 
 , where `<ID>` is a unique indentifier for each LDAP connection. Edit the parameters in the file with the same
 information as in the `security.xml` file. The contents should be self-explanatory.
@@ -229,7 +229,7 @@ at the bottom of the file. Please see the example below:
       <!-- Defines how the user attributes are converted to authorities (roles) -->
       <constructor-arg>
         <!-- Get the authorities (roles) according to a certain attribute in the authenticated user -->
-        <bean class="org.opencastproject.kernel.userdirectory.LdapAttributeAuthoritiesPopulator">
+        <bean class="org.opencast.kernel.userdirectory.LdapAttributeAuthoritiesPopulator">
           <constructor-arg>
             <!-- List of attribute names in the user from which roles will be created -->
             <!-- The specified attributes must meet few requirements:
@@ -297,7 +297,7 @@ at the bottom of the file. Please see the example below:
          </bean>
       </constructor-arg>
       <constructor-arg>
-        <bean class="org.opencastproject.kernel.userdirectory.LdapAttributeAuthoritiesPopulator">
+        <bean class="org.opencast.kernel.userdirectory.LdapAttributeAuthoritiesPopulator">
           <constructor-arg>
             <list>
               <value>otherAttributeName1</value>

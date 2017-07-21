@@ -5,7 +5,7 @@
   <packaging>bundle</packaging>
   <name>opencast-cover-image-workflowoperation</name>
   <parent>
-    <groupId>org.opencastproject</groupId>
+    <groupId>org.opencast</groupId>
     <artifactId>base</artifactId>
     <version>4.0-SNAPSHOT</version>
     <relativePath>../../pom.xml</relativePath>
@@ -16,22 +16,22 @@
   </properties>
   <dependencies>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-common</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-workflow-service-api</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-cover-image-api</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-dublincore</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -57,7 +57,7 @@
             <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
             <Build-Number>${buildNumber}</Build-Number>
             <Export-Package>
-              org.opencastproject.workflow.handler.coverimage;version=${project.version}
+              org.opencast.workflow.handler.coverimage;version=${project.version}
             </Export-Package>
             <Service-Component>
               OSGI-INF/operations/cover-image.xml

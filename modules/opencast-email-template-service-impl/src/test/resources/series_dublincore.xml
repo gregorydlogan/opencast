@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dublincore xmlns="http://www.opencastproject.org/xsd/1.0/dublincore/"
-	xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oc="http://www.opencastproject.org/matterhorn/">
+<dublincore xmlns="http://www.opencast.org/xsd/1.0/dublincore/"
+	xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oc="http://www.opencast.org/matterhorn/">
 	<dcterms:creator>Harvard Extension School</dcterms:creator>
 	<dcterms:contributor>Bill Robinson</dcterms:contributor>
 	<dcterms:description>http://extension.harvard.edu</dcterms:description>

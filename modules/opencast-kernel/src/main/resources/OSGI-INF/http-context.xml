@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0"
- name="org.opencastproject.kernel.http.SharedHttpContext" immediate="true" activate="activate" deactivate="deactivate">
-  <implementation class="org.opencastproject.kernel.http.SharedHttpContext" />
+ name="org.opencast.kernel.http.SharedHttpContext" immediate="true" activate="activate" deactivate="deactivate">
+  <implementation class="org.opencast.kernel.http.SharedHttpContext" />
   <property name="service.description" value="Opencast HttpContent" />
   <property name="httpContext.id" value="opencast.httpcontext" />
   <property name="httpContext.shared" value="true" />

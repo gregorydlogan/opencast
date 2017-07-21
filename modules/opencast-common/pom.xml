@@ -5,7 +5,7 @@
   <name>opencast-common</name>
   <packaging>bundle</packaging>
   <parent>
-    <groupId>org.opencastproject</groupId>
+    <groupId>org.opencast</groupId>
     <artifactId>base</artifactId>
     <version>4.0-SNAPSHOT</version>
     <relativePath>../../pom.xml</relativePath>
@@ -17,7 +17,7 @@
   <dependencies>
     <!-- Matterhorn -->
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-urlsigning-service-api</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -255,14 +255,14 @@
         <version>0.31</version>
         <configuration>
           <targetClasses>
-            <param>org.opencastproject.util*</param>
-            <param>org.opencastproject.security*</param>
-            <!--<param>org.opencastproject.mediapackage*</param>-->
+            <param>org.opencast.util*</param>
+            <param>org.opencast.security*</param>
+            <!--<param>org.opencast.mediapackage*</param>-->
           </targetClasses>
           <targetTests>
-            <param>org.opencastproject.util*Test</param>
-            <param>org.opencastproject.security*Test</param>
-            <!--<param>org.opencastproject.mediapackage*Test</param>-->
+            <param>org.opencast.util*Test</param>
+            <param>org.opencast.security*Test</param>
+            <!--<param>org.opencast.mediapackage*Test</param>-->
           </targetTests>
         </configuration>
       </plugin>
@@ -315,24 +315,24 @@
               net.fortuna.ical4j.util
             </_exportcontents>
             <Export-Package>
-              org.opencastproject.util.*;version=${project.version};-split-package:=merge-first,
-              org.opencastproject.capture;version=${project.version},
-              org.opencastproject.index;version=${project.version},
-              org.opencastproject.mediapackage;version=${project.version},
-              org.opencastproject.mediapackage.attachment;version=${project.version},
-              org.opencastproject.mediapackage.track;version=${project.version},
-              org.opencastproject.mediapackage.identifier;version=${project.version},
-              org.opencastproject.mediapackage.elementbuilder;version=${project.version},
-              org.opencastproject.mediapackage.selector;version=${project.version},
-              org.opencastproject.fun;version=${project.version},
-              org.opencastproject.fun.juc;version=${project.version},
-              org.opencastproject.job.api;version=${project.version},
-              org.opencastproject.rest;version=${project.version},
-              org.opencastproject.serviceregistry.api;version=${project.version},
-              org.opencastproject.security.api;version=${project.version},
-              org.opencastproject.storage;version=${project.version},
-              org.opencastproject.systems;version=${project.version},
-              org.opencastproject.security.util;version=${project.version}
+              org.opencast.util.*;version=${project.version};-split-package:=merge-first,
+              org.opencast.capture;version=${project.version},
+              org.opencast.index;version=${project.version},
+              org.opencast.mediapackage;version=${project.version},
+              org.opencast.mediapackage.attachment;version=${project.version},
+              org.opencast.mediapackage.track;version=${project.version},
+              org.opencast.mediapackage.identifier;version=${project.version},
+              org.opencast.mediapackage.elementbuilder;version=${project.version},
+              org.opencast.mediapackage.selector;version=${project.version},
+              org.opencast.fun;version=${project.version},
+              org.opencast.fun.juc;version=${project.version},
+              org.opencast.job.api;version=${project.version},
+              org.opencast.rest;version=${project.version},
+              org.opencast.serviceregistry.api;version=${project.version},
+              org.opencast.security.api;version=${project.version},
+              org.opencast.storage;version=${project.version},
+              org.opencast.systems;version=${project.version},
+              org.opencast.security.util;version=${project.version}
             </Export-Package>
             <Service-Component>
               OSGI-INF/chaining-mp-serializer.xml

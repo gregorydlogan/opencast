@@ -5,7 +5,7 @@
   <name>opencast-authorization-xacml</name>
   <packaging>bundle</packaging>
   <parent>
-    <groupId>org.opencastproject</groupId>
+    <groupId>org.opencast</groupId>
     <artifactId>base</artifactId>
     <version>4.0-SNAPSHOT</version>
     <relativePath>../../pom.xml</relativePath>
@@ -16,17 +16,17 @@
   </properties>
   <dependencies>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-common</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-workspace-api</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-series-service-api</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -140,7 +140,7 @@
               org.jboss.security.xacml.sunxacml.finder.impl
             </Private-Package>
             <Export-Package>
-              org.opencastproject.authorization.xacml;version=${project.version},
+              org.opencast.authorization.xacml;version=${project.version},
             </Export-Package>
             <Service-Component>
               OSGI-INF/authorization-service.xml

@@ -5,7 +5,7 @@
   <packaging>bundle</packaging>
   <name>opencast-message-broker-api</name>
   <parent>
-    <groupId>org.opencastproject</groupId>
+    <groupId>org.opencast</groupId>
     <artifactId>base</artifactId>
     <version>4.0-SNAPSHOT</version>
     <relativePath>../../pom.xml</relativePath>
@@ -16,28 +16,28 @@
   </properties>
   <dependencies>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-common</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-dublincore</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-asset-manager-api</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-workflow-service-api</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-scheduler-api</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -67,16 +67,16 @@
             <Private-Package>
             </Private-Package>
             <Export-Package>
-              org.opencastproject.message.broker.api;version=${project.version},
-              org.opencastproject.message.broker.api.acl;version=${project.version},
-              org.opencastproject.message.broker.api.assetmanager;version=${project.version},
-              org.opencastproject.message.broker.api.comments;version=${project.version},
-              org.opencastproject.message.broker.api.group;version=${project.version},
-              org.opencastproject.message.broker.api.index;version=${project.version},
-              org.opencastproject.message.broker.api.scheduler;version=${project.version},
-              org.opencastproject.message.broker.api.series;version=${project.version},
-              org.opencastproject.message.broker.api.theme;version=${project.version},
-              org.opencastproject.message.broker.api.workflow;version=${project.version}
+              org.opencast.message.broker.api;version=${project.version},
+              org.opencast.message.broker.api.acl;version=${project.version},
+              org.opencast.message.broker.api.assetmanager;version=${project.version},
+              org.opencast.message.broker.api.comments;version=${project.version},
+              org.opencast.message.broker.api.group;version=${project.version},
+              org.opencast.message.broker.api.index;version=${project.version},
+              org.opencast.message.broker.api.scheduler;version=${project.version},
+              org.opencast.message.broker.api.series;version=${project.version},
+              org.opencast.message.broker.api.theme;version=${project.version},
+              org.opencast.message.broker.api.workflow;version=${project.version}
             </Export-Package>
             <Service-Component>
             </Service-Component>

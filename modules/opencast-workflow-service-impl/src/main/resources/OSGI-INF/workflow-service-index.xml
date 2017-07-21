@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0"
- name="org.opencastproject.workflow.impl.WorkflowServiceSolrIndex" immediate="true" activate="activate" deactivate="deactivate">
-  <implementation class="org.opencastproject.workflow.impl.WorkflowServiceSolrIndex" />
+ name="org.opencast.workflow.impl.WorkflowServiceSolrIndex" immediate="true" activate="activate" deactivate="deactivate">
+  <implementation class="org.opencast.workflow.impl.WorkflowServiceSolrIndex" />
   <property name="service.description" value="Workflow Service Index" />
   <property name="synchronousIndexing" value="false" />
   <service>
-    <provide interface="org.opencastproject.workflow.impl.WorkflowServiceIndex" />
+    <provide interface="org.opencast.workflow.impl.WorkflowServiceIndex" />
   </service>
-  <reference name="serviceregistry" interface="org.opencastproject.serviceregistry.api.ServiceRegistry"
+  <reference name="serviceregistry" interface="org.opencast.serviceregistry.api.ServiceRegistry"
     cardinality="1..1" policy="static" bind="setServiceRegistry" />
-  <reference name="authorization" interface="org.opencastproject.security.api.AuthorizationService"
+  <reference name="authorization" interface="org.opencast.security.api.AuthorizationService"
     cardinality="1..1" policy="static" bind="setAuthorizationService" />
-  <reference name="security" interface="org.opencastproject.security.api.SecurityService"
+  <reference name="security" interface="org.opencast.security.api.SecurityService"
     cardinality="1..1" policy="static" bind="setSecurityService" />
-  <reference name="orgDirectory" interface="org.opencastproject.security.api.OrganizationDirectoryService"
+  <reference name="orgDirectory" interface="org.opencast.security.api.OrganizationDirectoryService"
     cardinality="1..1" policy="static" bind="setOrgDirectory" />
 </scr:component>

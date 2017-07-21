@@ -5,7 +5,7 @@
   <packaging>bundle</packaging>
   <name>opencast-lti</name>
   <parent>
-    <groupId>org.opencastproject</groupId>
+    <groupId>org.opencast</groupId>
     <artifactId>base</artifactId>
     <version>4.0-SNAPSHOT</version>
     <relativePath>../../pom.xml</relativePath>
@@ -244,7 +244,7 @@
             <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
             <Build-Number>${buildNumber}</Build-Number>
             <Export-Package>
-              org.opencastproject.lti;version=${project.version}
+              org.opencast.lti;version=${project.version}
             </Export-Package>
             <Service-Component>
               OSGI-INF/opencast-lti.xml

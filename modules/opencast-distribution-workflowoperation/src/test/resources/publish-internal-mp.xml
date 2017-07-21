@@ -1,4 +1,4 @@
-<mediapackage xmlns="http://mediapackage.opencastproject.org" id="781ED8AC-A300-11E4-A6E1-602B95DB5880" start="2007-12-05T13:40:00" duration="1004400000">
+<mediapackage xmlns="http://mediapackage.opencast.org" id="781ED8AC-A300-11E4-A6E1-602B95DB5880" start="2007-12-05T13:40:00" duration="1004400000">
 	<media>
 		<track id="track" type="presentation/preview">
 			<mimetype>video/mp4</mimetype>

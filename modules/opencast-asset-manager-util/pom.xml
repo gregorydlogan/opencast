@@ -19,7 +19,7 @@
   <name>opencast-asset-manager-util</name>
   <packaging>bundle</packaging>
   <parent>
-    <groupId>org.opencastproject</groupId>
+    <groupId>org.opencast</groupId>
     <artifactId>base</artifactId>
     <version>4.0-SNAPSHOT</version>
     <relativePath>../../pom.xml</relativePath>
@@ -30,22 +30,22 @@
   </properties>
   <dependencies>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-asset-manager-api</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-common</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-workflow-service-api</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-workspace-api</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -114,10 +114,10 @@
         <version>1.1.5</version>
         <configuration>
           <targetClasses>
-            <param>org.opencastproject.assetmanager.util*</param>
+            <param>org.opencast.assetmanager.util*</param>
           </targetClasses>
           <targetTests>
-            <param>org.opencastproject.assetmanager.util*Test</param>
+            <param>org.opencast.assetmanager.util*Test</param>
           </targetTests>
         </configuration>
       </plugin>
@@ -130,7 +130,7 @@
             <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
             <Build-Number>${buildNumber}</Build-Number>
             <Export-Package> 
-              org.opencastproject.assetmanager.util;version=${project.version}
+              org.opencast.assetmanager.util;version=${project.version}
             </Export-Package>
           </instructions>
         </configuration>

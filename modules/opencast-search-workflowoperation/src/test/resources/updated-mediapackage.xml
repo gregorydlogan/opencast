@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <oc:mediapackage start=""
 	id="597d0b42-5af6-450e-ac0b-c2cb619fc2bc" duration="14546"
-	xmlns:oc="http://mediapackage.opencastproject.org">
+	xmlns:oc="http://mediapackage.opencast.org">
 	<oc:media>
 		<oc:track id="track-1" type="presentation/source">
 			<oc:mimetype>video/quicktime</oc:mimetype>

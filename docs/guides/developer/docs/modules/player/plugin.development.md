@@ -24,26 +24,26 @@ After successful build and installation the archetype is available in your syste
 
 To generate a new plugin project simply go to the modules directory inside the Opencast source directory and type:
 
-    > mvn archetype:generate -DarchetypeGroupId=org.opencastproject -DarchetypeArtifactId=matterhorn-theodul-plugin
+    > mvn archetype:generate -DarchetypeGroupId=org.opencast -DarchetypeArtifactId=matterhorn-theodul-plugin
 
 Provided the archetype is installed maven will now ask you for the properties configuration for the new project:
 
     [INFO] Generating project in Interactive mode
-    [INFO] Archetype [org.opencastproject:matterhorn-theodul-plugin:1.5-SNAPSHOT] found in catalog local
-    Define value for property 'groupId': : org.opencastproject
+    [INFO] Archetype [org.opencast:matterhorn-theodul-plugin:1.5-SNAPSHOT] found in catalog local
+    Define value for property 'groupId': : org.opencast
     Define value for property 'artifactId': : matterhorn-engage-theodul-plugin-test
     Define value for property 'version': 1.0-SNAPSHOT: : 1.5-SNAPSHOT
-    Define value for property 'package': org.opencastproject: : org.opencastproject.engage.theodul.plugin.custom.test
+    Define value for property 'package': org.opencast: : org.opencast.engage.theodul.plugin.custom.test
     Define value for property 'plugin_description': : A test plugin
     Define value for property 'plugin_name': : testName 
     Define value for property 'plugin_type': : custom
     Define value for property 'plugin_version': : 0.1
     Define value for property 'plugin_rest': : false
     Confirm properties configuration:
-    groupId: org.opencastproject
+    groupId: org.opencast
     artifactId: matterhorn-engage-theodul-plugin-test
     version: 1.5-SNAPSHOT
-    package: org.opencastproject.engage.theodul.plugin.test
+    package: org.opencast.engage.theodul.plugin.test
     plugin_description: A test plugin
     plugin_name: test
     plugin_rest: true
@@ -51,16 +51,16 @@ Provided the archetype is installed maven will now ask you for the properties co
     [INFO] ----------------------------------------------------------------------------
     [INFO] Using following parameters for creating project from Archetype: matterhorn-theodul-plugin:1.5-SNAPSHOT
     [INFO] ----------------------------------------------------------------------------
-    [INFO] Parameter: groupId, Value: org.opencastproject
+    [INFO] Parameter: groupId, Value: org.opencast
     [INFO] Parameter: artifactId, Value: matterhorn-engage-theodul-plugin-test
     [INFO] Parameter: version, Value: 1.5-SNAPSHOT
-    [INFO] Parameter: package, Value: org.opencastproject.engage.theodul.plugin.test
-    [INFO] Parameter: packageInPathFormat, Value: org/opencastproject/engage/theodul/plugin/test
-    [INFO] Parameter: package, Value: org.opencastproject.engage.theodul.plugin.test
+    [INFO] Parameter: package, Value: org.opencast.engage.theodul.plugin.test
+    [INFO] Parameter: packageInPathFormat, Value: org/opencast/engage/theodul/plugin/test
+    [INFO] Parameter: package, Value: org.opencast.engage.theodul.plugin.test
     [INFO] Parameter: version, Value: 1.5-SNAPSHOT
     [INFO] Parameter: plugin_description, Value: A test plugin
     [INFO] Parameter: plugin_name, Value: test
-    [INFO] Parameter: groupId, Value: org.opencastproject
+    [INFO] Parameter: groupId, Value: org.opencast
     [INFO] Parameter: plugin_rest, Value: true
     [INFO] Parameter: artifactId, Value: matterhorn-engage-theodul-plugin-test
     [INFO] project created from Archetype in dir: /home/wulff/code/UOS/plugin-archetype/test/matterhorn-engage-theodul-plugin-test
@@ -84,7 +84,7 @@ project with the Theodul Plugin Archetype:
 
 Maven group ID. For the Opencast developers this is
 
-    org.opencastproject
+    org.opencast
 
 #### artifactId
 
@@ -104,7 +104,7 @@ on.
 The Java package in which the source for the back end part of your plugin will live. The following scheme is used by the
 Theodul developers:
 
-    org.opencastproject.engage.theodul.plugin.<plugin type>.<plugin name>
+    org.opencast.engage.theodul.plugin.<plugin type>.<plugin name>
 
 #### plugin_version
 

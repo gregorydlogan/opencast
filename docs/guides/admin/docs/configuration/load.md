@@ -46,7 +46,7 @@ Step 2: Setting the load values for system jobs
 -----------------------------------------------
 
 Each Opencast instance has its own maximum load.  By default this is set to the number of CPU cores present in the 
-system.  If you wish to change this, set the `org.opencastproject.server.maxload` key in config.properties to the 
+system.  If you wish to change this, set the `org.opencast.server.maxload` key in config.properties to the 
 maximum load you want this node to accept.  Keep in mind that exceeding the number of CPU cores present in the system is
 not recommended.
 
@@ -57,21 +57,21 @@ is running.  The current files with relevant configuration keys are:
 
 | File                                                                                     | Controls                           |
 |------------------------------------------------------------------------------------------|------------------------------------|
-| org.opencastproject.caption.impl.CaptionServiceImpl.cfg                                  | Caption convertion services        |
-| org.opencastproject.composer.impl.ComposerServiceImpl.cfg                                | Caption embedding services         |
-| org.opencastproject.distribution.acl.AclDistributionService.cfg                          | ACL file distribution              |
-| org.opencastproject.distribution.distribution.streaming.StreamingDistributionService.cfg | Streaming distribution             |
-| org.opencastproject.distribution.download.DownloadDistributionServiceImpl.cfg            | Download distribution              |
-| org.opencastproject.ingest.impl.IngestServiceImpl.cfg                                    | Ingest services                    |
-| org.opencastproject.inspection.ffmpeg.MediaInspectionServiceImpl.cfg                     | Media inspection using ffmpeg      |
-| org.opencastproject.inspection.impl.MediaInspectionServiceImpl.cfg                       | Media inspection using mediainfo   |
-| org.opencastproject.publication.youtube.YouTubePublicationServiceImpl.cfg                | Youtube distribution               |
-| org.opencastproject.publication.youtube.YouTubeV3PublicationServiceImpl.cfg              | Youtube distribution               |
-| org.opencastproject.search.impl.SearchServiceImpl.cfg                                    | Matterhorn engage index jobs       |
-| org.opencastproject.silencedetection.impl.SilenceDetectionServiceImpl.cfg                | Silence detection                  |
-| org.opencastproject.textanalyzer.impl.TextAnalyzerServiceImpl.cfg                        | Text analysis, including slide OCR |
-| org.opencastproject.videoeditor.impl.VideoEditorServiceImpl.cfg                          | Video editor                       |
-| org.opencastproject.videosegmenter.ffmpeg.VideoSegmenterServiceImpl.cfg                  | Video segmentation                 |
+| org.opencast.caption.impl.CaptionServiceImpl.cfg                                  | Caption convertion services        |
+| org.opencast.composer.impl.ComposerServiceImpl.cfg                                | Caption embedding services         |
+| org.opencast.distribution.acl.AclDistributionService.cfg                          | ACL file distribution              |
+| org.opencast.distribution.distribution.streaming.StreamingDistributionService.cfg | Streaming distribution             |
+| org.opencast.distribution.download.DownloadDistributionServiceImpl.cfg            | Download distribution              |
+| org.opencast.ingest.impl.IngestServiceImpl.cfg                                    | Ingest services                    |
+| org.opencast.inspection.ffmpeg.MediaInspectionServiceImpl.cfg                     | Media inspection using ffmpeg      |
+| org.opencast.inspection.impl.MediaInspectionServiceImpl.cfg                       | Media inspection using mediainfo   |
+| org.opencast.publication.youtube.YouTubePublicationServiceImpl.cfg                | Youtube distribution               |
+| org.opencast.publication.youtube.YouTubeV3PublicationServiceImpl.cfg              | Youtube distribution               |
+| org.opencast.search.impl.SearchServiceImpl.cfg                                    | Matterhorn engage index jobs       |
+| org.opencast.silencedetection.impl.SilenceDetectionServiceImpl.cfg                | Silence detection                  |
+| org.opencast.textanalyzer.impl.TextAnalyzerServiceImpl.cfg                        | Text analysis, including slide OCR |
+| org.opencast.videoeditor.impl.VideoEditorServiceImpl.cfg                          | Video editor                       |
+| org.opencast.videosegmenter.ffmpeg.VideoSegmenterServiceImpl.cfg                  | Video segmentation                 |
 
 Note: Ingest jobs are a special case in Opencast.  Because of their immediate nature there is no way to limit the 
 number of running jobs.  However, these jobs will block other jobs from running on the ingest/admin nodes if enough 

@@ -15,7 +15,7 @@ $(document).ready(function() {
                     var player = data.org.properties.player ? data.org.properties.player : defaultPlayerURL;
                     if (player.charAt(0) != "/")
                         player = "/" + player;
-                    var server = data.org.properties["org.opencastproject.engage.ui.url"] ? data.org.properties["org.opencastproject.engage.ui.url"] : "";
+                    var server = data.org.properties["org.opencast.engage.ui.url"] ? data.org.properties["org.opencast.engage.ui.url"] : "";
                     redirect(server + player);
                 } 
             }

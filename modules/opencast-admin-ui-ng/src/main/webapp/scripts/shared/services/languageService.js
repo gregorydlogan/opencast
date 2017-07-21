@@ -327,7 +327,7 @@ angular.module('adminNg.services.language')
         this.loadLanguageFromServer = function (language, deferred) {
             var translationPromise = $http({
                     method: 'GET',
-                    url: 'public/org/opencastproject/adminui/languages/lang-' + language + '.json',
+                    url: 'public/org/opencast/adminui/languages/lang-' + language + '.json',
                     language: language
                 });
             translationPromise.success(function (data, status, headers, config) {

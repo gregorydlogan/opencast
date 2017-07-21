@@ -5,7 +5,7 @@
   <packaging>bundle</packaging>
   <name>opencast-distribution-service-download</name>
   <parent>
-    <groupId>org.opencastproject</groupId>
+    <groupId>org.opencast</groupId>
     <artifactId>base</artifactId>
     <version>4.0-SNAPSHOT</version>
     <relativePath>../../pom.xml</relativePath>
@@ -16,12 +16,12 @@
   </properties>
   <dependencies>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-distribution-service-api</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-workspace-api</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -88,7 +88,7 @@
           <instructions>
             <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
             <Build-Number>${buildNumber}</Build-Number>
-            <Export-Package> org.opencastproject.distribution.download;version=${project.version} </Export-Package>
+            <Export-Package> org.opencast.distribution.download;version=${project.version} </Export-Package>
             <Service-Component>
               OSGI-INF/distribution-service-download.xml
             </Service-Component>

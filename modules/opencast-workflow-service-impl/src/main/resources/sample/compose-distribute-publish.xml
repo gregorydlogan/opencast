@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definition xmlns="http://workflow.opencastproject.org">
+<definition xmlns="http://workflow.opencast.org">
 
   <id>full</id>
   <title>Encode, Analyze, and Distribute</title>
@@ -74,32 +74,32 @@
       captionHold.click(checkVideoPreview);
       
       ocWorkflowPanel.registerComponents = function(components){
-        /* components with keys that begin with 'org.opencastproject.workflow.config' will be passed
+        /* components with keys that begin with 'org.opencast.workflow.config' will be passed
          * into the workflow. The new ocAdmin.Component key must match the components array key.
          *
-         * Example:'org.opencastproject.workflow.config.myProperty' will be availible at ${my.property}
+         * Example:'org.opencast.workflow.config.myProperty' will be availible at ${my.property}
          */
-        components['org.opencastproject.workflow.config.trimHold'] = new ocAdmin.Component(
+        components['org.opencast.workflow.config.trimHold'] = new ocAdmin.Component(
           ['trimHold'],
-          {key: 'org.opencastproject.workflow.config.trimHold'},
+          {key: 'org.opencast.workflow.config.trimHold'},
           {getValue: function(){ return this.fields.trimHold.is(":checked"); }
           });
           
-        components['org.opencastproject.workflow.config.archiveOp'] = new ocAdmin.Component(
+        components['org.opencast.workflow.config.archiveOp'] = new ocAdmin.Component(
           ['archiveOp'],
-          {key: 'org.opencastproject.workflow.config.archiveOp'},
+          {key: 'org.opencast.workflow.config.archiveOp'},
           {getValue: function(){ return this.fields.archiveOp.is(":checked");}
           });
           
-        components['org.opencastproject.workflow.config.captionHold'] = new ocAdmin.Component(
+        components['org.opencast.workflow.config.captionHold'] = new ocAdmin.Component(
           ['captionHold'],
-          {key: 'org.opencastproject.workflow.config.captionHold'},
+          {key: 'org.opencast.workflow.config.captionHold'},
           {getValue: function(){ return this.fields.captionHold.is(":checked");}
           });
           
-        components['org.opencastproject.workflow.config.videoPreview'] = new ocAdmin.Component(
+        components['org.opencast.workflow.config.videoPreview'] = new ocAdmin.Component(
           ['videoPreview'],
-          {key: 'org.opencastproject.workflow.config.videoPreview'},
+          {key: 'org.opencast.workflow.config.videoPreview'},
           {getValue: function(){ return this.fields.videoPreview.is(":checked");}
           });
           
@@ -111,10 +111,10 @@
           //etc...
       }
       ocWorkflowPanel.setComponentValues = function(values, components){
-        components['org.opencastproject.workflow.config.captionHold'].setValue(values['org.opencastproject.workflow.config.captionHold']);
-        components['org.opencastproject.workflow.config.trimHold'].setValue(values['org.opencastproject.workflow.config.trimHold']);
-        components['org.opencastproject.workflow.config.videoPreview'].setValue(values['org.opencastproject.workflow.config.videoPreview']);
-        components['org.opencastproject.workflow.config.archiveOp'].setValue(values['org.opencastproject.workflow.config.archiveOp']);
+        components['org.opencast.workflow.config.captionHold'].setValue(values['org.opencast.workflow.config.captionHold']);
+        components['org.opencast.workflow.config.trimHold'].setValue(values['org.opencast.workflow.config.trimHold']);
+        components['org.opencast.workflow.config.videoPreview'].setValue(values['org.opencast.workflow.config.videoPreview']);
+        components['org.opencast.workflow.config.archiveOp'].setValue(values['org.opencast.workflow.config.archiveOp']);
         components['license'].setValue(values['license']);
       }
     </script>

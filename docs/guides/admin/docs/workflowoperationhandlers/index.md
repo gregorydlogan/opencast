@@ -5,7 +5,7 @@
 Workflows are the central element to define how a media package is being processed by the Opencast services. Their
 definitions consist of a list of workflow operations, which basically map a piece of configuration to Opencast code:
 
-    <definition xmlns="http://workflow.opencastproject.org">
+    <definition xmlns="http://workflow.opencast.org">
         ....
         <operation
           id="tag"

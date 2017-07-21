@@ -5,7 +5,7 @@
   <packaging>bundle</packaging>
   <name>opencast-waveform-ffmpeg</name>
   <parent>
-    <groupId>org.opencastproject</groupId>
+    <groupId>org.opencast</groupId>
     <artifactId>base</artifactId>
     <version>4.0-SNAPSHOT</version>
     <relativePath>../../pom.xml</relativePath>
@@ -16,12 +16,12 @@
   </properties>
   <dependencies>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-waveform-api</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-workspace-api</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -66,8 +66,8 @@
             <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
             <Build-Number>${buildNumber}</Build-Number>
             <Export-Package>
-              org.opencastproject.waveform.ffmpeg;version=${project.version},
-              org.opencastproject.waveform.endpoint;version=${project.version}
+              org.opencast.waveform.ffmpeg;version=${project.version},
+              org.opencast.waveform.endpoint;version=${project.version}
             </Export-Package>
             <Service-Component>
               OSGI-INF/waveform.xml

@@ -5,7 +5,7 @@
   <packaging>bundle</packaging>
   <name>opencast-videosegmenter-ffmpeg</name>
   <parent>
-    <groupId>org.opencastproject</groupId>
+    <groupId>org.opencast</groupId>
     <artifactId>base</artifactId>
     <version>4.0-SNAPSHOT</version>
     <relativePath>../../pom.xml</relativePath>
@@ -17,12 +17,12 @@
   <dependencies>
     <!-- Matterhorn dependencies -->
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-videosegmenter-api</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-workspace-api</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -84,8 +84,8 @@
             <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
             <Build-Number>${buildNumber}</Build-Number>
             <Export-Package>
-              org.opencastproject.videosegmenter.ffmpeg;version=${project.version},
-              org.opencastproject.videosegmenter.ffmpeg.endpoint;version=${project.version}
+              org.opencast.videosegmenter.ffmpeg;version=${project.version},
+              org.opencast.videosegmenter.ffmpeg.endpoint;version=${project.version}
             </Export-Package>
             <Service-Component>
               OSGI-INF/segmenter.xml

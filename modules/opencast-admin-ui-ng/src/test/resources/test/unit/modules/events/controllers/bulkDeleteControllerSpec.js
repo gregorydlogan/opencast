@@ -66,7 +66,7 @@ describe('Bulk Delete controller', function () {
         jasmine.getJSONFixtures().fixturesPath = 'base/app/GET';
         $httpBackend.whenGET('/i18n/languages.json').respond(getJSONFixture('i18n/languages.json'));
         $httpBackend.whenGET('/admin-ng/event/new/processing?tags=delete-ng').respond(getJSONFixture('admin-ng/event/new/processing'));
-        $httpBackend.whenGET('public/org/opencastproject/adminui/languages/lang-en_US.json').respond({});
+        $httpBackend.whenGET('public/org/opencast/adminui/languages/lang-en_US.json').respond({});
         $httpBackend.whenPOST('/admin-ng/tasks/new').respond(201);
     });
 

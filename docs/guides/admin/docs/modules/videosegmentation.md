@@ -55,7 +55,7 @@ Configuration
 
 The value for the frame difference as well as the minimum length for a segment, the preferred number of segments, the
 maximum error and the maximum number of cycles can be configured in
-`etc/org.opencastproject.videosegmenter.ffmpeg.VideoSegmenterServiceImpl.cfg`.
+`etc/org.opencast.videosegmenter.ffmpeg.VideoSegmenterServiceImpl.cfg`.
 
 The options that can be set are the minimum length of a segment (defaults to 60 sec).
 

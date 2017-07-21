@@ -27,7 +27,7 @@ Example:
 ```bash
 cd modules/opencast-admin-ui-ng
 mvn install
-cp ./target/opencast-admin-ui-ng-2.2-SNAPSHOT.jar ../../build/opencast-dist-allinone-2.2-SNAPSHOT/system/org/opencastproject/opencast-admin-ui-ng/2.2-SNAPSHOT/opencast-admin-ui-ng-2.2-SNAPSHOT.jar
+cp ./target/opencast-admin-ui-ng-2.2-SNAPSHOT.jar ../../build/opencast-dist-allinone-2.2-SNAPSHOT/system/org/opencast/opencast-admin-ui-ng/2.2-SNAPSHOT/opencast-admin-ui-ng-2.2-SNAPSHOT.jar
 ```
 
 *Note: Before you run `mvn install` from a module's root directory,

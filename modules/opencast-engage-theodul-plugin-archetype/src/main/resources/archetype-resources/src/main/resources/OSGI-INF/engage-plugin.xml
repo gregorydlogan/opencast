@@ -3,7 +3,7 @@
 #set( $symbol_escape = '\' )
 <?xml version="1.0" encoding="UTF-8"?>
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0"
- name="org.opencastproject.engage.theodul.plugin.${plugin_name}" 
+ name="org.opencast.engage.theodul.plugin.${plugin_name}" 
  immediate="true"
  activate="activate">
   <implementation class="${package}.EngagePluginImpl" />
@@ -14,11 +14,11 @@
   <property name="opencast.engage.plugin.rest" value="${plugin_rest}" />
   
   <service>
-    <provide interface="org.opencastproject.engage.theodul.api.EngagePlugin" />
+    <provide interface="org.opencast.engage.theodul.api.EngagePlugin" />
   </service>
   
   <!-- Referencing the PluginManager so that SCR will only activate all the 
        plugins when the Engage Plugin infrastructure is happy and running. --> 
-  <reference name="PluginManager" interface="org.opencastproject.engage.theodul.api.EngagePluginManager"
+  <reference name="PluginManager" interface="org.opencast.engage.theodul.api.EngagePluginManager"
     cardinality="1..1" policy="static" bind="setPluginManager" />
 </scr:component>

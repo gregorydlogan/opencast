@@ -5,7 +5,7 @@
   <packaging>bundle</packaging>
   <name>opencast-fileupload</name>
   <parent>
-    <groupId>org.opencastproject</groupId>
+    <groupId>org.opencast</groupId>
     <artifactId>base</artifactId>
     <version>4.0-SNAPSHOT</version>
     <relativePath>../../pom.xml</relativePath>
@@ -16,12 +16,12 @@
   </properties>
   <dependencies>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-common</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-ingest-service-api</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -65,7 +65,7 @@
       <artifactId>commons-fileupload</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-workspace-api</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -81,10 +81,10 @@
             <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
             <Build-Number>${buildNumber}</Build-Number>
             <Export-Package> 
-              org.opencastproject.fileupload.api;version=${project.version},
-              org.opencastproject.fileupload.api.exception;version=${project.version},
-              org.opencastproject.fileupload.api.job;version=${project.version},
-              org.opencastproject.fileupload.service;version=${project.version} 
+              org.opencast.fileupload.api;version=${project.version},
+              org.opencast.fileupload.api.exception;version=${project.version},
+              org.opencast.fileupload.api.job;version=${project.version},
+              org.opencast.fileupload.service;version=${project.version} 
             </Export-Package>
             <Service-Component>
               OSGI-INF/fileupload-service.xml,

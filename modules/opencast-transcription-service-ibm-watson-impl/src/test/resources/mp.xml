@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<mediapackage xmlns="http://mediapackage.opencastproject.org" start="2016-09-19T18:15:00Z"
+<mediapackage xmlns="http://mediapackage.opencast.org" start="2016-09-19T18:15:00Z"
     id="mpId1" duration="10501">
     <title>Audio-only 2</title>
     <license>Creative Commons 3.0: Attribution-NonCommercial-NoDerivs</license>

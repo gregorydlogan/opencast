@@ -38,7 +38,7 @@ rules. Assume that the new tenant is called `tenant1` and should be mapped to `t
 
 ### Tenant Configuration
 
-Create a file called org.opencastproject.organization-tenant1.cfg in the `etc/` directory of your Opencast
+Create a file called org.opencast.organization-tenant1.cfg in the `etc/` directory of your Opencast
 installation:
 
     id=tenant1
@@ -49,8 +49,8 @@ installation:
     anonymous_role=ROLE_ANONYMOUS
 
     # Admin and Presentation Server Urls
-    prop.org.opencastproject.admin.ui.url=https://tenant1_admin.myuniversity.edu
-    prop.org.opencastproject.engage.ui.url=https://tenant1_presentation.myuniversity.edu
+    prop.org.opencast.admin.ui.url=https://tenant1_admin.myuniversity.edu
+    prop.org.opencast.engage.ui.url=https://tenant1_presentation.myuniversity.edu
 
     # Default properties for the user interface
     prop.logo_mediamodule=/engage/ui/img/logo/opencast-icon.svg

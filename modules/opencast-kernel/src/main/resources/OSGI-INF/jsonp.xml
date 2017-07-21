@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scr:components xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0">
 
-  <scr:component name="org.opencastproject.kernel.rest.JsonpFilter" immediate="true">
-    <implementation class="org.opencastproject.kernel.rest.JsonpFilter" />
+  <scr:component name="org.opencast.kernel.rest.JsonpFilter" immediate="true">
+    <implementation class="org.opencast.kernel.rest.JsonpFilter" />
     <property name="service.description" value="JSONP Filter" />
     <property name="httpContext.id" value="opencast.httpcontext" />
     <property name="httpContext.shared" value="true" />

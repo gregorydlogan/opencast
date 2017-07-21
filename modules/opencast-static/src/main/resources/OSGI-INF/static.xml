@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0"
- name="org.opencastproject.fsresources.StaticResourceServlet" immediate="true" activate="activate">
-  <implementation class="org.opencastproject.fsresources.StaticResourceServlet" />
+ name="org.opencast.fsresources.StaticResourceServlet" immediate="true" activate="activate">
+  <implementation class="org.opencast.fsresources.StaticResourceServlet" />
   <property name="service.description" value="Opencast Download Resources" />
   <property name="alias" value="/static" />
   <property name="httpContext.id" value="opencast.httpcontext" />

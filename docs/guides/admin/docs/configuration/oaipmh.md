@@ -16,16 +16,16 @@ Step 1: Configure the URL of the OAI-PMH server
 -----------------------------------------------
 
 The property to configure the OAI-PMH server URL can be found in
-`etc/org.opencastproject.organization-mh_default_org.cfg`:
+`etc/org.opencast.organization-mh_default_org.cfg`:
 
-    prop.org.opencastproject.oaipmh.server.hosturl=http://localhost:8080
+    prop.org.opencast.oaipmh.server.hosturl=http://localhost:8080
 
 Step 2: Configure the OAI-PMH mount point
 -----------------------------------------
 
 The property to configure the OAI-PMH mount point can be found in `etc/custom.properties`:
 
-    org.opencastproject.oaipmh.mountpoint=/oaipmh
+    org.opencast.oaipmh.mountpoint=/oaipmh
 
 Step 3: Configure the OAI-PMH default repository
 ------------------------------------------------
@@ -33,7 +33,7 @@ Step 3: Configure the OAI-PMH default repository
 In case the repository is not included in the URL, the OAI-PMH default repository will be selected.
 
 The property to configure the OAI-PMH default repository can be found in 
-`etc/org.opencastproject.oaipmh.server.OaiPmhServer.cfg`
+`etc/org.opencast.oaipmh.server.OaiPmhServer.cfg`
 
     default-repository=default
 

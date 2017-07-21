@@ -75,7 +75,7 @@ angular.module('adminNg', [
 }])
 .config(['$translateProvider', function ($translateProvider) {
     var options = {
-        'prefix': 'org/opencastproject/adminui/languages/lang-',
+        'prefix': 'org/opencast/adminui/languages/lang-',
         'suffix': '.json'
     };
     $translateProvider.useLoader('customLanguageLoader', options);

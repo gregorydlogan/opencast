@@ -1,4 +1,4 @@
-<track xmlns="http://mediapackage.opencastproject.org" id="track-1" type="presentation/source">
+<track xmlns="http://mediapackage.opencast.org" id="track-1" type="presentation/source">
   <mimetype>video/quicktime</mimetype>
   <url>http://localhost:8080/workflow/samples/camera.mpg</url>
   <checksum type="md5">43b7d843b02c4a429b2f547a4f230d31</checksum>

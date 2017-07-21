@@ -6,7 +6,7 @@
   <packaging>bundle</packaging>
   <name>${artifactId}</name>
   <parent>
-    <groupId>org.opencastproject</groupId>
+    <groupId>org.opencast</groupId>
     <artifactId>base</artifactId>
     <version>4.0-SNAPSHOT</version>
     <relativePath>../../pom.xml</relativePath>
@@ -18,12 +18,12 @@
   <version>${version}</version>
   <dependencies>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-common</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-engage-theodul-api</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -70,7 +70,7 @@
             <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
             <Build-Number>${buildNumber}</Build-Number>
             <Export-Package>${package};version=${project.version}</Export-Package>
-            <Import-Package>org.opencastproject.engage.theodul.api;version=${project.version},
+            <Import-Package>org.opencast.engage.theodul.api;version=${project.version},
               *</Import-Package>
             <Service-Component>OSGI-INF/engage-plugin.xml</Service-Component>
           </instructions>

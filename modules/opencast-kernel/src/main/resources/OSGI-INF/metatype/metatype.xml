@@ -2,7 +2,7 @@
 
 <metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.0.0" localization="OSGI-INF/metatype/metatype">
 
-  <OCD id="org.opencastproject.organization" name="org.opencastproject.organization" description="Organizations">
+  <OCD id="org.opencast.organization" name="org.opencast.organization" description="Organizations">
     <AD id="id" type="String" default="" name="id" description="Organization ID" />
     <AD id="name" type="String" default="" name="name" description="Organization Name" />
     <AD id="server" type="String" default="" name="server" description="Server URL" />
@@ -11,8 +11,8 @@
     <AD id="anonymous_role" type="String" default="ROLE_ANONYMOUS" name="anonymous_role" description="Anonymous Role" />
   </OCD>
 
-  <Designate pid="org.opencastproject.organization">
-    <Object ocdref="org.opencastproject.organization" />
+  <Designate pid="org.opencast.organization">
+    <Object ocdref="org.opencast.organization" />
   </Designate>
 
 </metatype:MetaData>

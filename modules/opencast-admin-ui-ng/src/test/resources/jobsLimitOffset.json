@@ -11,7 +11,7 @@
             "started": "2014-06-05T09:10:00Z",
             "status": "RUNNING",
             "submitted": "2014-06-05T09:10:00Z",
-            "type": "org.opencastproject.composer"
+            "type": "org.opencast.composer"
         }
     ],
     "offset": 1

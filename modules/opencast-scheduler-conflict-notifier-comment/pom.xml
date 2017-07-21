@@ -5,7 +5,7 @@
   <name>opencast-scheduler-conflict-notifier-comment</name>
   <packaging>bundle</packaging>
   <parent>
-    <groupId>org.opencastproject</groupId>
+    <groupId>org.opencast</groupId>
     <artifactId>base</artifactId>
     <version>4.0-SNAPSHOT</version>
     <relativePath>../../pom.xml</relativePath>
@@ -16,17 +16,17 @@
   </properties>
   <dependencies>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-scheduler-api</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-scheduler-impl</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-event-comment</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -78,7 +78,7 @@
             <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
             <Build-Number>${buildNumber}</Build-Number>
             <Export-Package>
-              org.opencastproject.scheduler.conflict.notifier.comment;version=${project.version}
+              org.opencast.scheduler.conflict.notifier.comment;version=${project.version}
             </Export-Package>
             <Service-Component>
               OSGI-INF/scheduler-conflict-notifier.xml

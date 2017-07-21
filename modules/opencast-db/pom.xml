@@ -5,7 +5,7 @@
   <packaging>bundle</packaging>
   <name>opencast-db</name>
   <parent>
-    <groupId>org.opencastproject</groupId>
+    <groupId>org.opencast</groupId>
     <artifactId>base</artifactId>
     <version>4.0-SNAPSHOT</version>
     <relativePath>../../pom.xml</relativePath>
@@ -85,7 +85,7 @@
           <instructions>
             <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
             <Build-Number>${buildNumber}</Build-Number>
-            <Bundle-Activator>org.opencastproject.db.Activator</Bundle-Activator>
+            <Bundle-Activator>org.opencast.db.Activator</Bundle-Activator>
             <Import-Package>
               !com.vividsolutions.jts.*,
               !org.apache.lucene.*,
@@ -103,7 +103,7 @@
               postgresql;inline=true
             </Embed-Dependency>
             <Export-Package>
-              org.opencastproject.db;version=${project.version}
+              org.opencast.db;version=${project.version}
             </Export-Package>
             <_exportcontents>
               com.mchange.*

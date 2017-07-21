@@ -25,7 +25,7 @@ Step 1: Configuration of the AAI Login handler
 -----------------------------------------------------
 
 Opencast ships with a configurable AAI Login handler that needs to be adjusted to your environment.
-The configuration can be found in `etc/org.opencastproject.security.aai.ConfigurableLoginHandler.cfg`.
+The configuration can be found in `etc/org.opencast.security.aai.ConfigurableLoginHandler.cfg`.
 
 First off all, enable the AAI login handler:
 
@@ -95,7 +95,7 @@ respective name of the Shibboleth attribute you use in your Shibboleth Federatio
 
     <!-- General Shibboleth header extration filter -->
     <bean id="shibbolethHeaderFilter"
-          class="org.opencastproject.security.shibboleth.ShibbolethRequestHeaderAuthenticationFilter">
+          class="org.opencast.security.shibboleth.ShibbolethRequestHeaderAuthenticationFilter">
       <property name="principalRequestHeader" value="<Shibboleth attribute name>"/>
       <property name="authenticationManager" ref="authenticationManager" />
       <property name="userDetailsService" ref="userDetailsService" />
@@ -105,7 +105,7 @@ respective name of the Shibboleth attribute you use in your Shibboleth Federatio
     </bean>
 
     <!-- AAI specific header extractor and user generator -->
-    <bean id="configurableLoginHandler" class="org.opencastproject.security.aai.ConfigurableLoginHandler">
+    <bean id="configurableLoginHandler" class="org.opencast.security.aai.ConfigurableLoginHandler">
       <property name="securityService" ref="securityService" />
       <property name="userReferenceProvider" ref="userReferenceProvider" />
     </bean>
@@ -123,7 +123,7 @@ respective name of the Shibboleth attribute you use in your Shibboleth Federatio
 Finally be sure to enable the user reference provider to enable support for externally provided users:
 
     <osgi:reference id="userReferenceProvider" cardinality="1..1"
-                  interface="org.opencastproject.userdirectory.api.UserReferenceProvider" />
+                  interface="org.opencast.userdirectory.api.UserReferenceProvider" />
 
 Since the Opencast login page is not used when Shibboleth authentication is in place, there is no point in redirecting
 unauthenticated requests to the Opencast login form. You can redirect them directly to the administrative user

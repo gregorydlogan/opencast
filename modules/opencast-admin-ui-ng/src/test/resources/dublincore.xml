@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<dublincore xmlns="http://www.opencastproject.org/xsd/1.0/dublincore/"
+<dublincore xmlns="http://www.opencast.org/xsd/1.0/dublincore/"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.opencastproject.org http://www.opencastproject.org/schema.xsd"
+        xsi:schemaLocation="http://www.opencast.org http://www.opencast.org/schema.xsd"
         xmlns:dcterms="http://purl.org/dc/terms/">
 
   <dcterms:title>

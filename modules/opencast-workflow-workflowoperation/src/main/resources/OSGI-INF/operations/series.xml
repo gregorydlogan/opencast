@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0"
- name="org.opencastproject.workflow.handler.workflow.SeriesWorkflowOperationHandler" immediate="true">
-  <implementation class="org.opencastproject.workflow.handler.workflow.SeriesWorkflowOperationHandler" />
+ name="org.opencast.workflow.handler.workflow.SeriesWorkflowOperationHandler" immediate="true">
+  <implementation class="org.opencast.workflow.handler.workflow.SeriesWorkflowOperationHandler" />
   <property name="service.description" value="Apply Series to Recording Workflow Operation Handler" />
   <property name="workflow.operation" value="series" />
   <service>
-    <provide interface="org.opencastproject.workflow.api.WorkflowOperationHandler" />
+    <provide interface="org.opencast.workflow.api.WorkflowOperationHandler" />
   </service>
-  <reference name="series" interface="org.opencastproject.series.api.SeriesService"
+  <reference name="series" interface="org.opencast.series.api.SeriesService"
     cardinality="1..1" policy="static" bind="setSeriesService" />
-  <reference name="authorization" interface="org.opencastproject.security.api.AuthorizationService"
+  <reference name="authorization" interface="org.opencast.security.api.AuthorizationService"
     cardinality="1..1" policy="static" bind="setAuthorizationService" />
-  <reference name="ServiceRegistry" interface="org.opencastproject.serviceregistry.api.ServiceRegistry"
+  <reference name="ServiceRegistry" interface="org.opencast.serviceregistry.api.ServiceRegistry"
     cardinality="1..1" policy="static" bind="setServiceRegistry" />
-  <reference name="Workspace" interface="org.opencastproject.workspace.api.Workspace"
+  <reference name="Workspace" interface="org.opencast.workspace.api.Workspace"
     cardinality="1..1" policy="static" bind="setWorkspace" />
-  <reference name="SeriesCatalogUIAdapter" interface="org.opencastproject.metadata.dublincore.SeriesCatalogUIAdapter"
+  <reference name="SeriesCatalogUIAdapter" interface="org.opencast.metadata.dublincore.SeriesCatalogUIAdapter"
     cardinality="0..n" policy="dynamic" bind="addCatalogUIAdapter" unbind="removeCatalogUIAdapter" />
-  <reference name="SecurityService" interface="org.opencastproject.security.api.SecurityService"
+  <reference name="SecurityService" interface="org.opencast.security.api.SecurityService"
     cardinality="1..1" policy="static" bind="setSecurityService" />
 </scr:component>

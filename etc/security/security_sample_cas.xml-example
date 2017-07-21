@@ -115,7 +115,7 @@
   <!-- # Custom Anonymous Filter Definition   # -->
   <!-- ######################################## -->
 
-  <bean id="anonymousFilter" class="org.opencastproject.kernel.security.TrustedAnonymousAuthenticationFilter">
+  <bean id="anonymousFilter" class="org.opencast.kernel.security.TrustedAnonymousAuthenticationFilter">
     <property name="userAttribute" ref="anonymousUserAttributes" />
     <property name="key" value="anonymousKey" />
   </bean>
@@ -130,7 +130,7 @@
   <!-- ######################################## -->
 
   <!-- Differentiates between "normal" user requests and those requesting digest auth -->
-  <bean id="matterhornEntryPoint" class="org.opencastproject.kernel.security.DelegatingAuthenticationEntryPoint">
+  <bean id="matterhornEntryPoint" class="org.opencast.kernel.security.DelegatingAuthenticationEntryPoint">
     <property name="userEntryPoint" ref="casEntryPoint" />
     <property name="digestAuthenticationEntryPoint" ref="digestEntryPoint" />
   </bean>
@@ -142,7 +142,7 @@
     <property name="nonceValiditySeconds" value="10" />
   </bean>
 
-  <bean id="authSuccessHandler" class="org.opencastproject.kernel.security.AuthenticationSuccessHandler">
+  <bean id="authSuccessHandler" class="org.opencast.kernel.security.AuthenticationSuccessHandler">
     <property name="securityService" ref="securityService" />
     <property name="welcomePages">
       <map>
@@ -172,14 +172,14 @@
   <!-- # OAuth (LTI) Support # -->
   <!-- ####################### -->
 
-  <bean name="oAuthConsumerDetailsService" class="org.opencastproject.kernel.security.OAuthSingleConsumerDetailsService">
+  <bean name="oAuthConsumerDetailsService" class="org.opencast.kernel.security.OAuthSingleConsumerDetailsService">
     <constructor-arg index="0" ref="userDetailsService" />
     <constructor-arg index="1" value="consumerkey" />
     <constructor-arg index="2" value="consumersecret" />
     <constructor-arg index="3" value="constructorName" />
   </bean>
 
-  <bean name="oauthProtectedResourceFilter" class="org.opencastproject.kernel.security.LtiProcessingFilter">
+  <bean name="oauthProtectedResourceFilter" class="org.opencast.kernel.security.LtiProcessingFilter">
     <property name="consumerDetailsService" ref="oAuthConsumerDetailsService" />
     <property name="tokenServices">
       <bean class="org.springframework.security.oauth.provider.token.InMemoryProviderTokenServices" />
@@ -188,7 +188,7 @@
       <bean class="org.springframework.security.oauth.provider.nonce.InMemoryNonceServices" />
     </property>
     <property name="authHandler">
-      <bean class="org.opencastproject.kernel.security.LtiLaunchAuthenticationHandler">
+      <bean class="org.opencast.kernel.security.LtiLaunchAuthenticationHandler">
         <constructor-arg index="0" ref="userDetailsService" />
 	      <!-- Uncomment to allow the included keys to be trusted to provide known user details
 	      <constructor-arg index="1">
@@ -264,7 +264,7 @@
   <osgi:reference id="userDetailsService" cardinality="1..1"
     interface="org.springframework.security.core.userdetails.UserDetailsService" />
 
-  <osgi:reference id="securityService" cardinality="1..1" interface="org.opencastproject.security.api.SecurityService" />
+  <osgi:reference id="securityService" cardinality="1..1" interface="org.opencast.security.api.SecurityService" />
 
 
   <!-- ############################# -->

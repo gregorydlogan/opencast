@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!-- modified order of namespace declarations -->
-<dublincore xmlns="http://www.opencastproject.org/xsd/1.0/dublincore/"
-  xmlns:oc="http://www.opencastproject.org/matterhorn/"
+<dublincore xmlns="http://www.opencast.org/xsd/1.0/dublincore/"
+  xmlns:oc="http://www.opencast.org/matterhorn/"
   xmlns:dcterms="http://purl.org/dc/terms/"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <dcterms:title>Land and Vegetation: Key players on the Climate Scene</dcterms:title>

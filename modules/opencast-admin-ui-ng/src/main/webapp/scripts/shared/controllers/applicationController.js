@@ -9,10 +9,10 @@ angular.module('adminNg.controllers')
             angular.element('[old-admin-ng-dropdown]').removeClass('active');
         };
 
-        var FEEDBACK_URL_PROPERTY = 'org.opencastproject.admin.feedback.url',
-            DOCUMENTATION_URL_PROPERTY = 'org.opencastproject.admin.help.documentation.url',
-            RESTDOCS_URL_PROPERTY = 'org.opencastproject.admin.help.restdocs.url',
-            MEDIA_MODULE_URL_PROPERTY = 'org.opencastproject.admin.mediamodule.url';
+        var FEEDBACK_URL_PROPERTY = 'org.opencast.admin.feedback.url',
+            DOCUMENTATION_URL_PROPERTY = 'org.opencast.admin.help.documentation.url',
+            RESTDOCS_URL_PROPERTY = 'org.opencast.admin.help.restdocs.url',
+            MEDIA_MODULE_URL_PROPERTY = 'org.opencast.admin.mediamodule.url';
 
         $scope.currentUser  = null;
         $scope.feedbackUrl = undefined;

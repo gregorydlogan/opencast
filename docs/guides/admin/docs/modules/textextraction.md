@@ -56,7 +56,7 @@ For example, if you want OCR for German content, you want to run something like 
 
 In Opencast, you can modify this options in the `custom.properties` file by setting the following option:
 
-    org.opencastproject.textanalyzer.tesseract.options=-l deu -psm 3
+    org.opencast.textanalyzer.tesseract.options=-l deu -psm 3
 
 It is highly recommended to configure Tesseract to use your local language. It will improve the recognition a lot and
 only this will enable the recognition of special characters specific to your local language.
@@ -120,7 +120,7 @@ through, but will block all other characters. For the German language, for examp
 characters would be blocked as well. So you want to configure Opencast to let them pass as well.
 
 You can do that by modifying the `pattern` in
-`etc/org.opencastproject.dictionary.regexp.DictionaryServiceImpl.cfg`:
+`etc/org.opencast.dictionary.regexp.DictionaryServiceImpl.cfg`:
 
 For German, a suitable pattern could be:
 
@@ -148,13 +148,13 @@ By default, Opencast will just call `hunspell` without an absolute path. This wi
 systems path which should be the case unless you have built and installed it manually. In that case, the binary can be
 configured using the following option in the `custom.properties` file:
 
-    org.opencastproject.dictionary.hunspell.binary=/usr/bin/hunspell
+    org.opencast.dictionary.hunspell.binary=/usr/bin/hunspell
 
 While most people will not need the binary path configuration, most people will need the filtering option which can be
 used for setting the languages. Configuration for this can be done using the following key in the `custom.properties`
 file:
 
-    org.opencastproject.dictionary.hunspell.command=-d de_DE,en_GB,en_US -G
+    org.opencast.dictionary.hunspell.command=-d de_DE,en_GB,en_US -G
 
 Note that equivalent to the Tesseract configuration, again the necessary languages have to be installed in the system.
 On RedHat based systems, for German, you would install the `hunspell-de` package from the system repositories.

@@ -110,7 +110,7 @@ editor.mediapackageParser = null;
 editor.smilParser = null;
 editor.smilResponseParser = null;
 
-// in etc/load/org.opencastproject.organization-mh_default_org.cfg
+// in etc/load/org.opencast.organization-mh_default_org.cfg
 var prePostRoll = 2;
 var minSegmentLength = 2;
 

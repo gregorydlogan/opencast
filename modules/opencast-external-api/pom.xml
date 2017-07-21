@@ -5,7 +5,7 @@
   <packaging>bundle</packaging>
   <name>opencast-external-api</name>
   <parent>
-    <groupId>org.opencastproject</groupId>
+    <groupId>org.opencast</groupId>
     <artifactId>base</artifactId>
     <version>4.0-SNAPSHOT</version>
     <relativePath>../../pom.xml</relativePath>
@@ -26,81 +26,81 @@
     </dependency>
     <!-- matterhorn -->
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-message-broker-api</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-common</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-dublincore</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-index-service</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-ingest-service-api</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-metadata-api</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-series-service-api</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-userdirectory</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-scheduler-api</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-authorization-manager</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-workflow-service-api</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-search-api</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-search</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-urlsigning-service-api</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -144,13 +144,13 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-series-service-impl</artifactId>
       <version>${project.version}</version>
       <scope>test</scope>
       <exclusions>
         <exclusion>
-          <groupId>org.opencastproject</groupId>
+          <groupId>org.opencast</groupId>
           <artifactId>opencast-solr</artifactId>
         </exclusion>
       </exclusions>
@@ -222,13 +222,13 @@
             <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
             <Build-Number>${buildNumber}</Build-Number>
             <Import-Package>
-              org.opencastproject.matterhorn.search.impl;version=${project.version},
-              org.opencastproject.rest;version=${project.version},
-              org.opencastproject.index.service.message,
-              org.opencastproject.metadata.dublincore;version=${project.version},
-              org.opencastproject.security.api,
-              org.opencastproject.util.doc.rest,
-              org.opencastproject.util,
+              org.opencast.matterhorn.search.impl;version=${project.version},
+              org.opencast.rest;version=${project.version},
+              org.opencast.index.service.message,
+              org.opencast.metadata.dublincore;version=${project.version},
+              org.opencast.security.api,
+              org.opencast.util.doc.rest,
+              org.opencast.util,
               javax.servlet,
               javax.servlet.http,
               javax.ws.rs,
@@ -241,16 +241,16 @@
               *
             </Import-Package>
             <Private-Package>
-              org.opencastproject.external.exception,
-              org.opencastproject.external.util
+              org.opencast.external.exception,
+              org.opencast.external.util
             </Private-Package>
             <Export-Package>
-              org.opencastproject.external.api,
-              org.opencastproject.external.common,
-              org.opencastproject.external.endpoint,
-              org.opencastproject.external.impl,
-              org.opencastproject.external.impl.index,
-              org.opencastproject.external.userdirectory
+              org.opencast.external.api,
+              org.opencast.external.common,
+              org.opencast.external.endpoint,
+              org.opencast.external.impl,
+              org.opencast.external.impl.index,
+              org.opencast.external.userdirectory
             </Export-Package>
             <Service-Component>
               OSGI-INF/external-base-endpoint.xml,

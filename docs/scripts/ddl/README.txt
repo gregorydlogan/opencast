@@ -23,7 +23,7 @@ Generating new DDL scripts
 The recommended method of obtaining DDLs is to run Opencast to automatically
 generate tables by setting the following property in config.properties:
 
-	org.opencastproject.db.ddl.generation=true
+	org.opencast.db.ddl.generation=true
 
 This way Opencast will create the database structure automatically which then
 can be exported and edited for performance tuning.

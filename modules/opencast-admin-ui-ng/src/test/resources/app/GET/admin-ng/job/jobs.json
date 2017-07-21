@@ -10,7 +10,7 @@
     "started": "2014-06-05T09:10:00Z",
     "status": "RUNNING",
     "submitted": "2014-06-05T09:10:00Z",
-    "type": "org.opencastproject.workflow"
+    "type": "org.opencast.workflow"
   }, {
     "creator": "testuser2",
     "id": 1,
@@ -19,7 +19,7 @@
     "started": "2014-06-05T09:10:00Z",
     "status": "RUNNING",
     "submitted": "2014-06-05T09:10:00Z",
-    "type": "org.opencastproject.workflow"
+    "type": "org.opencast.workflow"
   }],
   "total": 2
 }

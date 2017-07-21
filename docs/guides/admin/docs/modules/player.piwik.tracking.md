@@ -12,7 +12,7 @@ This plugin uses a Piwik javascript library that is loaded from the remote Piwik
 Tested Piwik version: 3.0.2
 
 The configurations for the piwik player plugin are done for each tenant. So the configuration keys are located in
-`.../etc/org.opencastproject.organization-mh_default_org.cfg`.
+`.../etc/org.opencast.organization-mh_default_org.cfg`.
 
 To activate the plugin set:
 

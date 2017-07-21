@@ -183,7 +183,7 @@ The PartialImportWorkflowOperation uses a number of encoding profiles to perform
 |encoding profile|description|
 |----------------|-----------|
 |import.preview  |Extract the first frame of a given partial track|
-|import.image-frame|Extract the last frame of a given partial track. Note that this profile is used to extract the *exactly* last frame of a partial track - not just a frame close to the last one. To make this work for video files with headers that don't contain the exact frame count, set *accurate\_frame\_count* to *true* in  etc/org.opencastproject.inspection.ffmpeg.MediaInspectionServiceImpl.cfg|
+|import.image-frame|Extract the last frame of a given partial track. Note that this profile is used to extract the *exactly* last frame of a partial track - not just a frame close to the last one. To make this work for video files with headers that don't contain the exact frame count, set *accurate\_frame\_count* to *true* in  etc/org.opencast.inspection.ffmpeg.MediaInspectionServiceImpl.cfg|
 |image-movie.work|Generate video partial tracks based on extracted images used to fill video gaps|
 |import.silent|Generate silent audio tracks used to fill audio gaps|
 

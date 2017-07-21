@@ -103,7 +103,7 @@ The following listing shows the directory structure of a plugin module:
     |---main
     |-----java
     |-------org
-    |---------opencastproject
+    |---------opencast
     |-----------engage
     |-------------theodul
     |---------------plugin

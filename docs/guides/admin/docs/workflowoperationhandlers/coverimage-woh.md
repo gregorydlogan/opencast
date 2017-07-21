@@ -79,13 +79,13 @@ For commonly used tasks it is simpler, however, to make use of available XSLT Ex
 
 #### Opencast Extensions
 
-The package org.opencastproject.coverimage.impl.xsl provides classes supposed to be used within XSL stylesheets.
+The package org.opencast.coverimage.impl.xsl provides classes supposed to be used within XSL stylesheets.
 
 To make use of those classes, you need to reference the package from your XSL stylesheet:
 
     <?xml version="1.0" encoding="UTF-8" standalone="no"?>
     <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-      xmlns:opencast="xalan://org.opencastproject.coverimage.impl.xsl" exclude-result-prefixes="opencast"
+      xmlns:opencast="xalan://org.opencast.coverimage.impl.xsl" exclude-result-prefixes="opencast"
       extension-element-prefixes="opencast">
     </xsl:stylesheet>
 
@@ -98,7 +98,7 @@ Later on, you can use methods of those classes as shown in the following example
 Note: In XSLT, use `true()` and `false()` for boolean literals (`true` and `false` won't work since those are not 
 keywords in XSLT)
 
-The following classes are provided by the org.opencastproject.coverimage.impl.xsl package:
+The following classes are provided by the org.opencast.coverimage.impl.xsl package:
 
 **class XsltHelper**
 
@@ -136,7 +136,7 @@ Please find an example of how to use EXSLT extensions below:
     <xsl:stylesheet version="1.0"
       xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:dcterms="http://purl.org/dc/terms/"
       xmlns:date="http://exslt.org/dates-and-times"
-      xmlns:opencast="xalan://org.opencastproject.coverimage.impl.xsl" exclude-result-prefixes="date"
+      xmlns:opencast="xalan://org.opencast.coverimage.impl.xsl" exclude-result-prefixes="date"
       extension-element-prefixes="date">
 
       <!-- [...] -->

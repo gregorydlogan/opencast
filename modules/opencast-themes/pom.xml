@@ -5,7 +5,7 @@
   <name>opencast-themes</name>
   <packaging>bundle</packaging>
   <parent>
-    <groupId>org.opencastproject</groupId>
+    <groupId>org.opencast</groupId>
     <artifactId>base</artifactId>
     <version>4.0-SNAPSHOT</version>
     <relativePath>../../pom.xml</relativePath>
@@ -16,12 +16,12 @@
   </properties>
   <dependencies>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-common</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-message-broker-api</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -125,8 +125,8 @@
             <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
             <Build-Number>${buildNumber}</Build-Number>
             <Export-Package>
-              org.opencastproject.themes;version=${project.version},
-              org.opencastproject.themes.persistence;version=${project.version}
+              org.opencast.themes;version=${project.version},
+              org.opencast.themes.persistence;version=${project.version}
             </Export-Package>
             <Service-Component>
               OSGI-INF/themes-service-persistence.xml

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<definition xmlns="http://workflow.opencastproject.org">
+<definition xmlns="http://workflow.opencast.org">
 
   <id>ng-publish-after-cutting</id>
   <title>Publish</title>

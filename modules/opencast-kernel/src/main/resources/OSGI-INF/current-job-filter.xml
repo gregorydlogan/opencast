@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scr:components xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0">
 
-  <scr:component name="org.opencastproject.kernel.rest.CurrentJobFilter" immediate="true">
-    <implementation class="org.opencastproject.kernel.rest.CurrentJobFilter" />
+  <scr:component name="org.opencast.kernel.rest.CurrentJobFilter" immediate="true">
+    <implementation class="org.opencast.kernel.rest.CurrentJobFilter" />
     <property name="service.description" value="Current Job Filter" />
     <property name="httpContext.id" value="opencast.httpcontext" />
     <property name="httpContext.shared" value="true" />
@@ -12,7 +12,7 @@
     <service>
       <provide interface="javax.servlet.Filter" />
     </service>
-    <reference name="serviceRegistry" interface="org.opencastproject.serviceregistry.api.ServiceRegistry"
+    <reference name="serviceRegistry" interface="org.opencast.serviceregistry.api.ServiceRegistry"
       cardinality="1..1" policy="static" bind="setServiceRegistry" />
   </scr:component>
 

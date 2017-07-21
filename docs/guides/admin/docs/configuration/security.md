@@ -39,8 +39,8 @@ service registry.
 You can use this simple provider as is, loading users into the `mh_user` and `mh_role` database tables, and specifying
 an administrative username and password in `custom.properties`:
 
-    org.opencastproject.security.digest.user=opencast_system_account
-    org.opencastproject.security.digest.pass=CHANGE_ME
+    org.opencast.security.digest.user=opencast_system_account
+    org.opencast.security.digest.pass=CHANGE_ME
 
 ## User and Role Providers
 

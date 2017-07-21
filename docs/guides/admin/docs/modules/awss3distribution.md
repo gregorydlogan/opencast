@@ -41,18 +41,18 @@ Opencast Service Configuration
 ------------------------------
 
 The Opencast AWS S3 Distribution service has five configuration keys, which can be found in the
-`org.opencastproject.distribution.aws.s3.AwsS3DistributionServiceImpl.cfg` configuration file.
+`org.opencast.distribution.aws.s3.AwsS3DistributionServiceImpl.cfg` configuration file.
 
 |Key name|Value|Example|
 |--------|-----|-------|
-|org.opencastproject.distribution.aws.s3.distribution.enable|True to enable S3 distribution, false otherwise|true|
-|org.opencastproject.distribution.aws.s3.region|The AWS region to set|us-west-2|
-|org.opencastproject.distribution.aws.s3.bucket|The S3 bucket name|example-org-dist|
-|org.opencastproject.distribution.aws.s3.distribution.base|Where the S3 files are available from.  This value can be derived from the bucket and region values, or is set by CloudFront.|http://s3-us-west-2.amazonaws.com/example-org-dist, or DOMAIN_NAME.cloudfront.net|
-|org.opencastproject.distribution.aws.s3.access.id|Your access ID|20 alphanumeric characters|
-|org.opencastproject.distribution.aws.s3.secret.key|Your secret key|40 characters|
+|org.opencast.distribution.aws.s3.distribution.enable|True to enable S3 distribution, false otherwise|true|
+|org.opencast.distribution.aws.s3.region|The AWS region to set|us-west-2|
+|org.opencast.distribution.aws.s3.bucket|The S3 bucket name|example-org-dist|
+|org.opencast.distribution.aws.s3.distribution.base|Where the S3 files are available from.  This value can be derived from the bucket and region values, or is set by CloudFront.|http://s3-us-west-2.amazonaws.com/example-org-dist, or DOMAIN_NAME.cloudfront.net|
+|org.opencast.distribution.aws.s3.access.id|Your access ID|20 alphanumeric characters|
+|org.opencast.distribution.aws.s3.secret.key|Your secret key|40 characters|
 
-If *org.opencastproject.distribution.aws.s3.access.id* and *org.opencastproject.distribution.aws.s3.secret.key* are
+If *org.opencast.distribution.aws.s3.access.id* and *org.opencast.distribution.aws.s3.secret.key* are
  not *explicitly* provided, search for credentials will be performed in the order specified by the
  [Default Credentials Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html).
 

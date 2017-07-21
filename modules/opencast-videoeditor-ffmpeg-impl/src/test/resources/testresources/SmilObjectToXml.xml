@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <smil version="3.0" baseProfile="Language" xml:id="s-ec404c2a-5092-4cd4-8717-7b7bbc244656"
-  xmlns="http://www.w3.org/ns/SMIL" xmlns:oc="http://smil.opencastproject.org">
+  xmlns="http://www.w3.org/ns/SMIL" xmlns:oc="http://smil.opencast.org">
   <head xml:id="h-89e42a27-bcd1-47ca-9119-ddd9a4007e98">
     <meta content="217650ms" name="track-duration"
       xml:id="meta-8fe18ea9-9fae-4ec3-9683-dfcd437533fe"/>

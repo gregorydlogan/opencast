@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.opencastproject</groupId>
+  <groupId>org.opencast</groupId>
   <artifactId>opencast-silencedetection-impl</artifactId>
   <packaging>bundle</packaging>
   <name>opencast-silencedetection-impl</name>
   <parent>
-    <groupId>org.opencastproject</groupId>
+    <groupId>org.opencast</groupId>
     <artifactId>base</artifactId>
     <version>4.0-SNAPSHOT</version>
     <relativePath>../../pom.xml</relativePath>
@@ -26,9 +26,9 @@
             <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
             <Build-Number>${buildNumber}</Build-Number>
             <Export-Package>
-              org.opencastproject.silencedetection.impl.*;version=${project.version},
-              org.opencastproject.silencedetection.endpoint.*;version=${project.version},
-              org.opencastproject.silencedetection.ffmpeg.*;version=${project.version},
+              org.opencast.silencedetection.impl.*;version=${project.version},
+              org.opencast.silencedetection.endpoint.*;version=${project.version},
+              org.opencast.silencedetection.ffmpeg.*;version=${project.version},
             </Export-Package>
             <Service-Component>
               OSGI-INF/silence-detection-service.xml,
@@ -40,22 +40,22 @@
   </build>
   <dependencies>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-silencedetection-api</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-smil-api</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-common</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-workspace-api</artifactId>
       <version>${project.version}</version>
     </dependency>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mediapackage start="" id="597d0b42-5af6-450e-ac0b-c2cb619fc2bc" duration="14546"
-              xmlns="http://mediapackage.opencastproject.org">
+              xmlns="http://mediapackage.opencast.org">
   <media>
     <track id="track-1-published" type="presentation/delivery">
       <mimetype>video/quicktime</mimetype>

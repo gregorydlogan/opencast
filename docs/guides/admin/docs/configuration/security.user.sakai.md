@@ -24,8 +24,8 @@ account on the Sakai instance.
 ### Step 1
 
 To enable the Sakai User Provider, copy and rename the bundled configuration template from 
-`OPENCAST/etc/org.opencastproject.userdirectory.sakai-default.cfg.template` to 
-`OPENCAST/etc/org.opencastproject.userdirectory.sakai-default.cfg`
+`OPENCAST/etc/org.opencast.userdirectory.sakai-default.cfg.template` to 
+`OPENCAST/etc/org.opencast.userdirectory.sakai-default.cfg`
 
 Edit the configuration file to set your Sakai URL, and the username and password of
 the admin user on the Sakai system:
@@ -42,7 +42,7 @@ Verify that the Sakai User Provider starts up with the correct Sakai URL by look
 for a log entry like this:
 
 ```
-(SakaiUserProviderInstance:154) - Creating new SakaiUserProviderInstance(pid=org.opencastproject.userdirectory.sakai.f1fad141-8cc8-41ee-b514-8dad00984af6, url=https://mysakai.my.domain, cacheSize=1000, cacheExpiration=60)
+(SakaiUserProviderInstance:154) - Creating new SakaiUserProviderInstance(pid=org.opencast.userdirectory.sakai.f1fad141-8cc8-41ee-b514-8dad00984af6, url=https://mysakai.my.domain, cacheSize=1000, cacheExpiration=60)
 ```
 
 Then login to Opencast using a username which also exists in your Sakai system.
@@ -53,7 +53,7 @@ If necessary, you can increase the logging detail from the Sakai user provider b
 adding an entry to `OPENCAST/etc/org.ops4j.pax.logging.cfg`:
 
 ```
-log4j.logger.org.opencastproject.userdirectory.sakai=DEBUG
+log4j.logger.org.opencast.userdirectory.sakai=DEBUG
 ```
 
 ### Step 3

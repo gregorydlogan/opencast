@@ -9,12 +9,12 @@ the footprint feature of the player and for the optional analytics component.
 
 The settings for logging user data can be found in:
 
-    .../etc/org.opencastproject.usertracking.impl.UserTrackingServiceImpl.cfg
+    .../etc/org.opencast.usertracking.impl.UserTrackingServiceImpl.cfg
 
 Logging of user data can be controlled on two levels. First, logging can be generally activated or deactivated. Second,
 if it is activated, the data being logged can be defined.
 
-`org.opencastproject.usertracking.detailedtrack` defines if the user tracking JavaScript code is loaded and data about
+`org.opencast.usertracking.detailedtrack` defines if the user tracking JavaScript code is loaded and data about
 user actions are being sent to and stored by Opencast. Deactivating this will effectively stop all logging. This may
 effect features like the footprints in the Opencast player.  Default: `true`.
 
@@ -23,9 +23,9 @@ have no effect if logging is turned off.
 
 Key                                           | Data to be logged    | Default value
 ----------------------------------------------|----------------------|--------------
-`org.opencastproject.usertracking.log.ip`     | IP addresses         | `true`
-`org.opencastproject.usertracking.log.user`   | login names of users | `true`
-`org.opencastproject.usertracking.log.session`| Browser session-IDs  | `true`
+`org.opencast.usertracking.log.ip`     | IP addresses         | `true`
+`org.opencast.usertracking.log.user`   | login names of users | `true`
+`org.opencast.usertracking.log.session`| Browser session-IDs  | `true`
 
 If you want to use the footprint feature but do not want to store any user specific data you can turn the logging of IP
 addresses, usernames and session-IDs off.

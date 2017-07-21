@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0"
- name="org.opencastproject.workflow.handler.videoeditor.VideoEditorWorkflowOperationHandler" immediate="true"
+ name="org.opencast.workflow.handler.videoeditor.VideoEditorWorkflowOperationHandler" immediate="true"
   activate="activate" deactivate="deactivate">
-  <implementation class="org.opencastproject.workflow.handler.videoeditor.VideoEditorWorkflowOperationHandler" />
+  <implementation class="org.opencast.workflow.handler.videoeditor.VideoEditorWorkflowOperationHandler" />
   <property name="service.description" value="Video Editor Workflow Operation Handler" />
   <property name="workflow.operation" value="editor" />
   <service>
-    <provide interface="org.opencastproject.workflow.api.WorkflowOperationHandler" />
+    <provide interface="org.opencast.workflow.api.WorkflowOperationHandler" />
   </service>
-  <reference name="ServiceRegistry" cardinality="1..1" interface="org.opencastproject.serviceregistry.api.ServiceRegistry"
+  <reference name="ServiceRegistry" cardinality="1..1" interface="org.opencast.serviceregistry.api.ServiceRegistry"
     policy="static" bind="setServiceRegistry" />
-  <reference name="smil-service" cardinality="1..1" interface="org.opencastproject.smil.api.SmilService"
+  <reference name="smil-service" cardinality="1..1" interface="org.opencast.smil.api.SmilService"
     policy="static" bind="setSmilService" />
-  <reference name="videoeditor-service" interface="org.opencastproject.videoeditor.api.VideoEditorService"
+  <reference name="videoeditor-service" interface="org.opencast.videoeditor.api.VideoEditorService"
     cardinality="1..1" policy="static" bind="setVideoEditorService" />
-  <reference name="workspace" interface="org.opencastproject.workspace.api.Workspace"
+  <reference name="workspace" interface="org.opencast.workspace.api.Workspace"
     cardinality="1..1" policy="static" bind="setWorkspace" />
 </scr:component>

@@ -1,4 +1,4 @@
-<definition xmlns="http://workflow.opencastproject.org">
+<definition xmlns="http://workflow.opencast.org">
   <id>definition-4</id>
   <description>Unit testing workflow</description>
   <operations>

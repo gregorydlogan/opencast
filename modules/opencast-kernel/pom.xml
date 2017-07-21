@@ -5,7 +5,7 @@
   <name>opencast-kernel</name>
   <packaging>bundle</packaging>
   <parent>
-    <groupId>org.opencastproject</groupId>
+    <groupId>org.opencast</groupId>
     <artifactId>base</artifactId>
     <version>4.0-SNAPSHOT</version>
     <relativePath>../../pom.xml</relativePath>
@@ -16,17 +16,17 @@
   </properties>
   <dependencies>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-common</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-common-jpa-impl</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-urlsigning-service-api</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -288,7 +288,7 @@
               javax.xml.parsers;version=0.0.0,
               javax.xml.validation;version=0.0.0,
               org.apache.cxf.*,
-              org.opencastproject.fsresources,
+              org.opencast.fsresources,
               org.springframework.security.access,
               org.springframework.security.access.hierarchicalroles,
               org.springframework.security.access.vote,
@@ -301,19 +301,19 @@
               *
             </Import-Package>
             <Export-Package>
-              org.opencastproject.kernel.http;version=${project.version},
-              org.opencastproject.kernel.http.api;version=${project.version},
-              org.opencastproject.kernel.http.impl;version=${project.version},
-              org.opencastproject.kernel.filter.https;version=${project.version},
-              org.opencastproject.kernel.filter.proxy;version=${project.version},
-              org.opencastproject.kernel.mail;version=${project.version},
-              org.opencastproject.kernel.pingback;version=${project.version},
-              org.opencastproject.kernel.rest;version=${project.version},
-              org.opencastproject.kernel.scanner;version=${project.version},
-              org.opencastproject.kernel.security;version=${project.version},
-              org.opencastproject.kernel.security.persistence;version=${project.version},
-              org.opencastproject.kernel.userdirectory;version=${project.version},
-              org.opencastproject.kernel.bundleinfo;version=${project.version},
+              org.opencast.kernel.http;version=${project.version},
+              org.opencast.kernel.http.api;version=${project.version},
+              org.opencast.kernel.http.impl;version=${project.version},
+              org.opencast.kernel.filter.https;version=${project.version},
+              org.opencast.kernel.filter.proxy;version=${project.version},
+              org.opencast.kernel.mail;version=${project.version},
+              org.opencast.kernel.pingback;version=${project.version},
+              org.opencast.kernel.rest;version=${project.version},
+              org.opencast.kernel.scanner;version=${project.version},
+              org.opencast.kernel.security;version=${project.version},
+              org.opencast.kernel.security.persistence;version=${project.version},
+              org.opencast.kernel.userdirectory;version=${project.version},
+              org.opencast.kernel.bundleinfo;version=${project.version},
             </Export-Package>
             <_exportcontents>
               org.springframework.security.oauth.*

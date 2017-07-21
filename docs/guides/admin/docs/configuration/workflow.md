@@ -18,7 +18,7 @@ values allows workflows to dynamically adapt to a given input or user decision.
 
 Opencast workflows are defined in XML.  The structure of a Opencast workflow looks like this:
 
-    <definition xmlns="http://workflow.opencastproject.org">
+    <definition xmlns="http://workflow.opencast.org">
 
       <!-- Description -->
       <id></id>
@@ -50,7 +50,7 @@ thumbnail images for the videos.
 
 Start by naming the workflow and giving it a meaningful description:
 
-    <definition xmlns="http://workflow.opencastproject.org">
+    <definition xmlns="http://workflow.opencast.org">
 
       <!-- Description -->
       <id>example</id>
@@ -85,7 +85,7 @@ Start by naming the workflow and giving it a meaningful description:
 
 The first operation will be to inspect the media for technical metadata, such as format and length:
 
-    <definition xmlns="http://workflow.opencastproject.org">
+    <definition xmlns="http://workflow.opencast.org">
 
       <!-- Description -->
       ...
@@ -112,7 +112,7 @@ exception-handler-workflow or simply proceed with the remaining operations.
 
 The next operations will encode the media to the Mp4 format:
 
-    <definition xmlns="http://workflow.opencastproject.org">
+    <definition xmlns="http://workflow.opencast.org">
 
       <!-- Description -->
       ...
@@ -164,7 +164,7 @@ The next operations will encode the media to the Mp4 format:
 
 The next operations will create thumbnails from the media:
 
-    <definition xmlns="http://workflow.opencastproject.org">
+    <definition xmlns="http://workflow.opencast.org">
       ...
       <operations>
         ...
@@ -209,7 +209,7 @@ The next operations will create thumbnails from the media:
 
 The next operation copies the encoded media to the Opencast distribution channel:
 
-    <definition xmlns="http://workflow.opencastproject.org">
+    <definition xmlns="http://workflow.opencast.org">
       ...
       <operations>
 

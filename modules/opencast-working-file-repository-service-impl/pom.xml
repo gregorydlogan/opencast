@@ -5,7 +5,7 @@
   <name>opencast-working-file-repository-service-impl</name>
   <packaging>bundle</packaging>
   <parent>
-    <groupId>org.opencastproject</groupId>
+    <groupId>org.opencast</groupId>
     <artifactId>base</artifactId>
     <version>4.0-SNAPSHOT</version>
     <relativePath>../../pom.xml</relativePath>
@@ -16,12 +16,12 @@
   </properties>
   <dependencies>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-working-file-repository-service-api</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-common</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -108,7 +108,7 @@
             <Import-Package>
               *;resolution:=optional
             </Import-Package>
-            <Export-Package> org.opencastproject.workingfilerepository.impl;version=${project.version} </Export-Package>
+            <Export-Package> org.opencast.workingfilerepository.impl;version=${project.version} </Export-Package>
             <Service-Component>
               OSGI-INF/working-file-repo.xml
             </Service-Component>

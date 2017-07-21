@@ -36,7 +36,7 @@ Configuration
 
 ### Step 2: Configure IBMWatsonTranscriptionService
 
-Edit  _etc/org.opencastproject.transcription.ibmwatson.IBMWatsonTranscriptionService.cfg_:
+Edit  _etc/org.opencast.transcription.ibmwatson.IBMWatsonTranscriptionService.cfg_:
 
 - Set _enabled_=true
 - Use service credentials obtained above to set _ibm.watson.user_ and _ibm.watson.psw_
@@ -44,8 +44,8 @@ Edit  _etc/org.opencastproject.transcription.ibmwatson.IBMWatsonTranscriptionSer
 - In _workflow_, enter the workflow definition id of the workflow to be used to attach the generated 
 transcripts/captions
 - Enter a _notification.email_ to get job failure notifications. If not entered, the email in 
-etc/custom.properties (org.opencastproject.admin.email) will be used. Configure the SmtpService.
-If no email address specified in either _notification.email_ or _org.opencastproject.admin.email_,
+etc/custom.properties (org.opencast.admin.email) will be used. Configure the SmtpService.
+If no email address specified in either _notification.email_ or _org.opencast.admin.email_,
 email notifications will be disabled. 
 
 ```
@@ -86,7 +86,7 @@ ibm.watson.password=<SERVICE_PSW>
 #cleanup.results.days=7
 
 # Email to send notifications of errors. If not entered, the value from
-# org.opencastproject.admin.email in custom.properties will be used.
+# org.opencast.admin.email in custom.properties will be used.
 #notification.email=
 ```
 

@@ -17,10 +17,10 @@ Step 1: Setting the Server URL
 By default, only connections from the local machine are accepted by Opencast.  You want to change this if the system
 should be accessible within a network.
 
-First, find the property `org.opencastproject.server.url` in your `custom.properties` configuration file and set it to
+First, find the property `org.opencast.server.url` in your `custom.properties` configuration file and set it to
 your own domain name:
 
-    org.opencastproject.server.url=http://example.com:8080
+    org.opencast.server.url=http://example.com:8080
 
 *Note:* This value will be written to all generated mediapackages and thus cannot be changed easily for already
 processed media. At least not without an extra amount of work involving modifications to the database. That is why you
@@ -38,14 +38,14 @@ Step 2: Setting the Login Details
 There are two authentication methods for Opencast. HTTP Digest authentication and form-based authentication. Both
 methods need a username and a password. Change the password for both! The important keys for this are:
 
- - `org.opencastproject.security.admin.user`
+ - `org.opencast.security.admin.user`
     - The user for the administrative account. This is set to `admin` by default.
- - `org.opencastproject.security.admin.pass`
+ - `org.opencast.security.admin.pass`
     - The password for the administrative account. This is set to `opencast` by default.
- - `org.opencastproject.security.digest.user`
+ - `org.opencast.security.digest.user`
     - The user for the communication between Opencast nodes, as well as for capture agents. This is set to
       `opencast_system_account` by default.
- - `org.opencastproject.security.digest.pass`
+ - `org.opencast.security.digest.pass`
     - The password for the communication between Opencast nodes and capture agents. This is set to `CHANGE_ME` by
       default.
 
@@ -90,9 +90,9 @@ Step 6: Setting the Storage Directory (optional)
 
 Even though it is not important for all systems – on test setups you can probably omit this – you will often want to set
 the storage directory. This directory is used to store all media, metadata, … Often, an NFS mount is used for this. You
-can set the directory by changing `org.opencastproject.storage.dir` like:
+can set the directory by changing `org.opencast.storage.dir` like:
 
-    org.opencastproject.storage.dir=/media/mhdatamount
+    org.opencast.storage.dir=/media/mhdatamount
 
 Please keep in mind that the user running Opencast must have read/write permissions to the storage directory.
 

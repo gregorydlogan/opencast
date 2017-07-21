@@ -5,7 +5,7 @@
   <packaging>bundle</packaging>
   <name>opencast-composer-service-api</name>
   <parent>
-    <groupId>org.opencastproject</groupId>
+    <groupId>org.opencast</groupId>
     <artifactId>base</artifactId>
     <version>4.0-SNAPSHOT</version>
     <relativePath>../../pom.xml</relativePath>
@@ -24,7 +24,7 @@
       <artifactId>jsr311-api</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-common</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -49,8 +49,8 @@
             <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
             <Build-Number>${buildNumber}</Build-Number>
             <Export-Package>
-              org.opencastproject.composer.api;version=${project.version},
-              org.opencastproject.composer.layout;version=${project.version}
+              org.opencast.composer.api;version=${project.version},
+              org.opencast.composer.layout;version=${project.version}
             </Export-Package>
           </instructions>
         </configuration>

@@ -165,29 +165,29 @@ set the login credentials etc. After that continue with the following steps:
 Set the server URL to the public url of each server (admin URL on admin, worker URL on worker, engage URL on engage, …).
 This may either be this nodes IP address or preferable its domain name:
 
-    org.opencastproject.server.url=http://<URL>:8080
+    org.opencast.server.url=http://<URL>:8080
 
 Set the location of the shared storage directory:
 
-    org.opencastproject.storage.dir=/srv/opencast
+    org.opencast.storage.dir=/srv/opencast
 
-### org.opencastproject.organization-mh_default_org.cfg
+### org.opencast.organization-mh_default_org.cfg
 
 Set the base URL of the server hosting the administrative tools. Again use a domain name instead of an IP address if
 possible:
 
-    prop.org.opencastproject.admin.ui.url=http://<ADMIN-URL>:8080
+    prop.org.opencast.admin.ui.url=http://<ADMIN-URL>:8080
 
 Set the base URL of the server hosting the engage tools:
 
-    prop.org.opencastproject.engage.ui.url=http://<ENGAGE-URL>:8080
+    prop.org.opencast.engage.ui.url=http://<ENGAGE-URL>:8080
 
 Set the base URL of the file server. When using a shared filesystem between servers,
 set all servers to use the same URL (e.g. URL of the admin node).
 
-    prop.org.opencastproject.file.repo.url=http://<ADMIN-URL>:8080
+    prop.org.opencast.file.repo.url=http://<ADMIN-URL>:8080
 
-### org.opencastproject.serviceregistry.impl.ServiceRegistryJpaImpl.cfg
+### org.opencast.serviceregistry.impl.ServiceRegistryJpaImpl.cfg
 
 To ensure that jobs are not dispatched by non-admin nodes you may also want to set:
 

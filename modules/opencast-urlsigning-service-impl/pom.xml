@@ -5,7 +5,7 @@
   <packaging>bundle</packaging>
   <name>opencast-urlsigning-service-impl</name>
   <parent>
-    <groupId>org.opencastproject</groupId>
+    <groupId>org.opencast</groupId>
     <artifactId>base</artifactId>
     <version>4.0-SNAPSHOT</version>
     <relativePath>../../pom.xml</relativePath>
@@ -26,17 +26,17 @@
     </dependency>
     <!-- Opencast -->
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-common</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-urlsigning-common</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-urlsigning-service-api</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -78,9 +78,9 @@
             <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
             <Build-Number>${buildNumber}</Build-Number>
             <Export-Package>
-              org.opencastproject.security.urlsigning,
-              org.opencastproject.security.urlsigning.provider.impl,
-              org.opencastproject.security.urlsigning.service.impl
+              org.opencast.security.urlsigning,
+              org.opencast.security.urlsigning.provider.impl,
+              org.opencast.security.urlsigning.service.impl
             </Export-Package>
             <Service-Component>
               OSGI-INF/generic-signing-provider.xml,

@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="org.opencastproject.workflow.impl.WorkflowServiceImpl"
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="org.opencast.workflow.impl.WorkflowServiceImpl"
   immediate="true" activate="activate" deactivate="deactivate">
-  <implementation class="org.opencastproject.workflow.impl.WorkflowServiceImpl" />
+  <implementation class="org.opencast.workflow.impl.WorkflowServiceImpl" />
   <property name="service.description" value="Workflow Service" />
-  <property name="service.pid" value="org.opencastproject.workflow.impl.WorkflowServiceImpl" />
+  <property name="service.pid" value="org.opencast.workflow.impl.WorkflowServiceImpl" />
   <service>
-    <provide interface="org.opencastproject.workflow.api.WorkflowService" />
-    <provide interface="org.opencastproject.workflow.impl.WorkflowServiceImpl" />
+    <provide interface="org.opencast.workflow.api.WorkflowService" />
+    <provide interface="org.opencast.workflow.impl.WorkflowServiceImpl" />
   </service>
-  <reference name="index" interface="org.opencastproject.workflow.impl.WorkflowServiceIndex" cardinality="1..1"
+  <reference name="index" interface="org.opencast.workflow.impl.WorkflowServiceIndex" cardinality="1..1"
     policy="static" bind="setDao" />
-  <reference name="workspace" interface="org.opencastproject.workspace.api.Workspace"
+  <reference name="workspace" interface="org.opencast.workspace.api.Workspace"
     cardinality="1..1" policy="static" bind="setWorkspace" />
-  <reference name="metadata" interface="org.opencastproject.metadata.api.MediaPackageMetadataService"
+  <reference name="metadata" interface="org.opencast.metadata.api.MediaPackageMetadataService"
     cardinality="1..n" policy="dynamic" bind="addMetadataService" unbind="removeMetadataService" />
-  <reference name="serviceRegistry" interface="org.opencastproject.serviceregistry.api.ServiceRegistry"
+  <reference name="serviceRegistry" interface="org.opencast.serviceregistry.api.ServiceRegistry"
     cardinality="1..1" policy="static" bind="setServiceRegistry" />
-  <reference name="security-service" interface="org.opencastproject.security.api.SecurityService"
+  <reference name="security-service" interface="org.opencast.security.api.SecurityService"
     cardinality="1..1" policy="static" bind="setSecurityService" />
-  <reference name="user-directory" interface="org.opencastproject.security.api.UserDirectoryService"
+  <reference name="user-directory" interface="org.opencast.security.api.UserDirectoryService"
     cardinality="1..1" policy="static" bind="setUserDirectoryService" />
-  <reference name="security" interface="org.opencastproject.security.api.SecurityService"
+  <reference name="security" interface="org.opencast.security.api.SecurityService"
     cardinality="1..1" policy="static" bind="setSecurityService" />
-  <reference name="authorization" interface="org.opencastproject.security.api.AuthorizationService"
+  <reference name="authorization" interface="org.opencast.security.api.AuthorizationService"
     cardinality="1..1" policy="static" bind="setAuthorizationService" />
-  <reference name="series" interface="org.opencastproject.series.api.SeriesService"
+  <reference name="series" interface="org.opencast.series.api.SeriesService"
     cardinality="1..1" policy="static" bind="setSeriesService" />
-  <reference name="orgDirectory" interface="org.opencastproject.security.api.OrganizationDirectoryService"
+  <reference name="orgDirectory" interface="org.opencast.security.api.OrganizationDirectoryService"
     cardinality="1..1" policy="static" bind="setOrganizationDirectoryService" />
-  <reference name="scanner" interface="org.opencastproject.workflow.impl.WorkflowDefinitionScanner"
+  <reference name="scanner" interface="org.opencast.workflow.impl.WorkflowDefinitionScanner"
     cardinality="1..1" policy="static" bind="addWorkflowDefinitionScanner" />
   <reference name="profilesReadyIndicator" policy="static" cardinality="1..1"
-      interface="org.opencastproject.util.ReadinessIndicator" target="(artifact=workflowdefinition)" />
-  <reference name="message-broker-receiver" interface="org.opencastproject.message.broker.api.MessageReceiver"
+      interface="org.opencast.util.ReadinessIndicator" target="(artifact=workflowdefinition)" />
+  <reference name="message-broker-receiver" interface="org.opencast.message.broker.api.MessageReceiver"
     cardinality="1..1" policy="static" bind="setMessageReceiver" />
-  <reference name="message-broker-sender" interface="org.opencastproject.message.broker.api.MessageSender"
+  <reference name="message-broker-sender" interface="org.opencast.message.broker.api.MessageSender"
     cardinality="1..1" policy="static" bind="setMessageSender" />
 </scr:component>

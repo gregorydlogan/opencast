@@ -11,7 +11,7 @@
             "started": "2014-06-05T09:10:00Z",
             "status": "RUNNING",
             "submitted": "2014-06-05T09:10:00Z",
-            "type": "org.opencastproject.composer"
+            "type": "org.opencast.composer"
         },
         {
             "creator": "testuser2",
@@ -21,7 +21,7 @@
             "started": "2014-06-05T09:11:11Z",
             "status": "RUNNING",
             "submitted": "2014-06-05T09:11:11Z",
-            "type": "org.opencastproject.workflow"
+            "type": "org.opencast.workflow"
         },
         {
             "creator": "testuser1",
@@ -31,7 +31,7 @@
             "started": "2014-06-05T09:16:00Z",
             "status": "RUNNING",
             "submitted": "2014-06-05T09:16:00Z",
-            "type": "org.opencastproject.inspection"
+            "type": "org.opencast.inspection"
         },
         {
             "creator": "testuser3",
@@ -41,7 +41,7 @@
             "started": "2014-06-05T09:05:00Z",
             "status": "RUNNING",
             "submitted": "2014-06-05T09:05:00Z",
-            "type": "org.opencastproject.composer"
+            "type": "org.opencast.composer"
         }
     ],
     "total": 5

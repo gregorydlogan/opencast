@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<mediapackage xmlns="http://mediapackage.opencastproject.org"
+<mediapackage xmlns="http://mediapackage.opencast.org"
 	start="2015-07-27T20:50:00Z" id="efd6e4df-63b6-49af-be5f-15f598778877"
 	duration="14226">
 	<title>Test Recording</title>

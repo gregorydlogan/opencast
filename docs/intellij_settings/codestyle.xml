@@ -20,7 +20,7 @@
     <value>
       <package name="" withSubpackages="true" static="true" />
       <emptyLine />
-      <package name="org.opencastproject" withSubpackages="true" static="false" />
+      <package name="org.opencast" withSubpackages="true" static="false" />
       <emptyLine />
       <package name="com" withSubpackages="true" static="false" />
       <emptyLine />

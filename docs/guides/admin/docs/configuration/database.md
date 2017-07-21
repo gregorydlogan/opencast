@@ -138,7 +138,7 @@ installation).
 
 2. Change the following configuration key (uncomment if necessary):
 
-        org.opencastproject.db.ddl.generation=false
+        org.opencast.db.ddl.generation=false
 
     If set to true, the database structure will be generated automatically. It works, but without all the database
     optimizations implemented in the DDL scripts used in the step 2. While convenient for development, you should never
@@ -146,20 +146,20 @@ installation).
 
 3. Configure Opencast to use MariaDB/MySQL:
 
-        org.opencastproject.db.vendor=MySQL
+        org.opencast.db.vendor=MySQL
 
 4. Configure Opencast to use the JDBC driver for MariaDB/MySQL:
 
-        org.opencastproject.db.jdbc.driver=com.mysql.jdbc.Driver
+        org.opencast.db.jdbc.driver=com.mysql.jdbc.Driver
 
 5. Configure the host where Opencast should find the database (`localhost`) and the database name (`opencast`). Adjust
 the names in this example to match your configuration:
 
-        org.opencastproject.db.jdbc.url=jdbc:mysql://localhost/opencast
+        org.opencast.db.jdbc.url=jdbc:mysql://localhost/opencast
 
 6. Configure the username and password which Opencast should use to access the database:
 
-        org.opencastproject.db.jdbc.user=opencast
-        org.opencastproject.db.jdbc.pass=opencast_password
+        org.opencast.db.jdbc.user=opencast
+        org.opencast.db.jdbc.pass=opencast_password
 
     **Notice:** The user specified here must have the necessary rights to the database, as explained in the Step 1.

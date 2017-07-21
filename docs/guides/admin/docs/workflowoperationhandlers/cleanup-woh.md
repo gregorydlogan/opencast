@@ -21,7 +21,7 @@ Notes:
 * If *delete-external* is set to true, the externally referenced media package elements will be removed from its source
   where the value of *preserve-flavors* does not match
 * If you have an shared working file repository
-  (see [Opencast Configuration on Multiple Servers Setup](../installation/multiple-servers/#orgopencastprojectorganization-mh_default_orgcfg))
+  (see [Opencast Configuration on Multiple Servers Setup](../installation/multiple-servers/#orgopencastorganization-mh_default_orgcfg))
   set *delete-external* to false to speedup the process
 
 ##Operation Example

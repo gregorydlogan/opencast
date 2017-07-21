@@ -20,7 +20,7 @@ flavors are treated by Opencast as standard metadata in means of Opencast expect
 Opencast assumes specific metadata fields to be present in the standard metadata in means of defining hard-coded
 filters, table columns and search indices.
 
-To adjust the standard metadata to your specific needs, you can configure them in `/opt/opencast/etc/org.opencastproject.ui.metadata.CatalogUIAdapterFactory-episode-common.cfg` and `/opt/opencast/etc/org.opencastproject.ui.metadata.CatalogUIAdapterFactory-series-common.cfg`.
+To adjust the standard metadata to your specific needs, you can configure them in `/opt/opencast/etc/org.opencast.ui.metadata.CatalogUIAdapterFactory-episode-common.cfg` and `/opt/opencast/etc/org.opencast.ui.metadata.CatalogUIAdapterFactory-series-common.cfg`.
 
 For details on how to configure metadata catalogs, see section Configuring Metadata Catalogs.
 
@@ -32,7 +32,7 @@ described in the next section.
 
 For both events and series, Opencast support an arbitrary number of customized metadata catalogs. 
 
-To add extended metadata catalogs, create a configuration file with a valid filename of the form `org.opencastproject.ui.metadata.CatalogUIAdapterFactory-<name>.cfg` in `/opt/opencast/etc.` on the admin node.
+To add extended metadata catalogs, create a configuration file with a valid filename of the form `org.opencast.ui.metadata.CatalogUIAdapterFactory-<name>.cfg` in `/opt/opencast/etc.` on the admin node.
 
 For details on how to configure metadata catalogs, see section Configuring Metadata Catalogs.
 

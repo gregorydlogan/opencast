@@ -5,7 +5,7 @@
   <name>opencast-cover-image-impl</name>
   <packaging>bundle</packaging>
   <parent>
-    <groupId>org.opencastproject</groupId>
+    <groupId>org.opencast</groupId>
     <artifactId>base</artifactId>
     <version>4.0-SNAPSHOT</version>
     <relativePath>../../pom.xml</relativePath>
@@ -16,17 +16,17 @@
   </properties>
   <dependencies>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-common</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-workspace-api</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-cover-image-api</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -185,7 +185,7 @@
               *
             </Import-Package>
             <Export-Package>
-              org.opencastproject.coverimage.impl;version=${project.version}
+              org.opencast.coverimage.impl;version=${project.version}
             </Export-Package>
             <Service-Component>
               OSGI-INF/cover-image-service.xml,

@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0"
-               name="org.opencastproject.workflow.handler.distribution.RepublishOaiPmhWorkflowOperationHandler"
+               name="org.opencast.workflow.handler.distribution.RepublishOaiPmhWorkflowOperationHandler"
                immediate="true"
                activate="activate">
-  <implementation class="org.opencastproject.workflow.handler.distribution.RepublishOaiPmhWorkflowOperationHandler" />
+  <implementation class="org.opencast.workflow.handler.distribution.RepublishOaiPmhWorkflowOperationHandler" />
   <property name="service.description" value="Republish OAI-PMH Workflow Operation Handler" />
   <property name="workflow.operation" value="republish-oaipmh" />
   <service>
-    <provide interface="org.opencastproject.workflow.api.WorkflowOperationHandler" />
+    <provide interface="org.opencast.workflow.api.WorkflowOperationHandler" />
   </service>
   <reference name="oaiPmhDatabase"
-             interface="org.opencastproject.oaipmh.persistence.OaiPmhDatabase"
+             interface="org.opencast.oaipmh.persistence.OaiPmhDatabase"
              cardinality="1..1"
              policy="static"
              bind="setOaiPmhDatabase" />
   <reference name="distributionService"
-             interface="org.opencastproject.distribution.api.DownloadDistributionService"
+             interface="org.opencast.distribution.api.DownloadDistributionService"
              cardinality="1..1"
              policy="static"
              bind="setDistributionService" />
   <reference name="serviceRegistry"
-             interface="org.opencastproject.serviceregistry.api.ServiceRegistry"
+             interface="org.opencast.serviceregistry.api.ServiceRegistry"
              cardinality="1..1"
              policy="static"
              bind="setServiceRegistry" />

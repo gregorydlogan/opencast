@@ -2,7 +2,7 @@
 
 
 <xsl:stylesheet version="1.0"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns2="http://search.opencastproject.org" xmlns:mp="http://mediapackage.opencastproject.org">
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns2="http://search.opencast.org" xmlns:mp="http://mediapackage.opencast.org">
     <xsl:template match="/">
       <table cellspacing="0" width="100%">
         <xsl:for-each select="ns2:search-results/ns2:result">

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
-<track xmlns="http://mediapackage.opencastproject.org" type="presentation/source" id="f1fc0fc4-a926-4ba9-96d9-2fafbcc30d2a">
+<track xmlns="http://mediapackage.opencast.org" type="presentation/source" id="f1fc0fc4-a926-4ba9-96d9-2fafbcc30d2a">
   <mimetype>video/mpeg</mimetype>
   <url>video.mp4</url>
   <video>

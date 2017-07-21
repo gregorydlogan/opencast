@@ -5,7 +5,7 @@
   <packaging>bundle</packaging>
   <name>opencast-index-service</name>
   <parent>
-    <groupId>org.opencastproject</groupId>
+    <groupId>org.opencast</groupId>
     <artifactId>base</artifactId>
     <version>4.0-SNAPSHOT</version>
     <relativePath>../../pom.xml</relativePath>
@@ -26,49 +26,49 @@
     </dependency>
     <!-- Opencast -->
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-authorization-manager</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-capture-admin-service-api</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-common</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-event-comment</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-messages</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-search</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-ingest-service-api</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-userdirectory</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
@@ -153,23 +153,23 @@
               *
             </Import-Package>
             <Export-Package>
-              org.opencastproject.index.service.api,
-              org.opencastproject.index.service.catalog.adapter,
-              org.opencastproject.index.service.catalog.adapter.events,
-              org.opencastproject.index.service.catalog.adapter.series,
-              org.opencastproject.index.service.exception,
-              org.opencastproject.index.service.impl,
-              org.opencastproject.index.service.impl.index,
-              org.opencastproject.index.service.impl.index.event,
-              org.opencastproject.index.service.impl.index.group,
-              org.opencastproject.index.service.impl.index.series,
-              org.opencastproject.index.service.impl.index.theme,
-              org.opencastproject.index.service.message,
-              org.opencastproject.index.service.resources.list.api,
-              org.opencastproject.index.service.resources.list.impl,
-              org.opencastproject.index.service.resources.list.provider,
-              org.opencastproject.index.service.resources.list.query,
-              org.opencastproject.index.service.util
+              org.opencast.index.service.api,
+              org.opencast.index.service.catalog.adapter,
+              org.opencast.index.service.catalog.adapter.events,
+              org.opencast.index.service.catalog.adapter.series,
+              org.opencast.index.service.exception,
+              org.opencast.index.service.impl,
+              org.opencast.index.service.impl.index,
+              org.opencast.index.service.impl.index.event,
+              org.opencast.index.service.impl.index.group,
+              org.opencast.index.service.impl.index.series,
+              org.opencast.index.service.impl.index.theme,
+              org.opencast.index.service.message,
+              org.opencast.index.service.resources.list.api,
+              org.opencast.index.service.resources.list.impl,
+              org.opencast.index.service.resources.list.provider,
+              org.opencast.index.service.resources.list.query,
+              org.opencast.index.service.util
             </Export-Package>
             <Service-Component>
               OSGI-INF/catalog-ui-adapter-factory.xml,
@@ -196,7 +196,7 @@
               OSGI-INF/list-providers/workflows.xml
             </Service-Component>
             <JPA-PersistenceUnits>
-              org.opencastproject.index.service
+              org.opencast.index.service
             </JPA-PersistenceUnits>
           </instructions>
         </configuration>

@@ -80,9 +80,9 @@ __Response__
 
 ```
 {
-  "org.opencastproject.feed.url": "http://feeds.opencast.org",
-  "org.opencastproject.admin.documentation.url": "http://documentation.opencast.org",
-  "org.opencastproject.external.api.url": "http://api.opencast.org"
+  "org.opencast.feed.url": "http://feeds.opencast.org",
+  "org.opencast.admin.documentation.url": "http://documentation.opencast.org",
+  "org.opencast.external.api.url": "http://api.opencast.org"
 }
 ```
 

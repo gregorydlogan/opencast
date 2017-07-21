@@ -7,7 +7,7 @@ These waveform images are then shown in the Admin-UI video editor.
 Service Configuration
 ---------------------
 
-The Waveform service configuration file `etc/org.opencastproject.waveform.ffmpeg.WaveformServiceImpl.cfg` provides the
+The Waveform service configuration file `etc/org.opencast.waveform.ffmpeg.WaveformServiceImpl.cfg` provides the
 following options:
 
     job.load.waveform = 0.5

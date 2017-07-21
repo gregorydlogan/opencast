@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ns2:mediapackage start="2010-05-12T18:29:20"
 	id="971180f2-66bc-4b3c-a484-f65d664e15fd" duration="0"
-	xmlns:ns2="http://mediapackage.opencastproject.org">
+	xmlns:ns2="http://mediapackage.opencast.org">
 	<ns2:title>inspect-workflow-operation-handler-3</ns2:title>
 	<ns2:media>
 		<ns2:track type="presentation/source" id="6b574c7b-bf85-4023-bc41-c3145fa189d6">

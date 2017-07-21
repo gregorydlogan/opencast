@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<track id="7f9cbfd5-e2c2-4e07-8376-4b44652e20ee" type="presenter/delivery" ref="track:28be3165-7335-4323-ba12-e8dac8203058" xmlns="http://mediapackage.opencastproject.org">
+<track id="7f9cbfd5-e2c2-4e07-8376-4b44652e20ee" type="presenter/delivery" ref="track:28be3165-7335-4323-ba12-e8dac8203058" xmlns="http://mediapackage.opencast.org">
   <mimetype>video/mp4</mimetype>
   <url>http://localhost:8080/files/mediapackage/6f988a67-45f9-4fd8-acdc-7b1a9cbf47f1/df6bb84f-ba8f-47d3-b0b2-e358ad50b64c/sintel_720p_stereo_30sec.mp4</url>
   <checksum type="md5">98e96c6ad1a839d2e7c9b7d4b0684775</checksum>

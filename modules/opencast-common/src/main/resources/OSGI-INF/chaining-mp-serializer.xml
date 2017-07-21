@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="org.opencastproject.mediapackage.ChainingMediaPackageSerializer" immediate="true">
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="org.opencast.mediapackage.ChainingMediaPackageSerializer" immediate="true">
 	
   <service>
-    <provide interface="org.opencastproject.mediapackage.MediaPackageSerializer" />
+    <provide interface="org.opencast.mediapackage.MediaPackageSerializer" />
   </service>
-  <property name="service.pid" value="org.opencastproject.mediapackage.ChainingMediaPackageSerializer" />
+  <property name="service.pid" value="org.opencast.mediapackage.ChainingMediaPackageSerializer" />
   <property name="service.ranking" value="1000" />
-  <implementation class="org.opencastproject.mediapackage.ChainingMediaPackageSerializer" />
+  <implementation class="org.opencast.mediapackage.ChainingMediaPackageSerializer" />
 
   <reference bind="addMediaPackageSerializer"
              unbind="removeMediaPackageSerializer"  
              cardinality="0..n"
-             interface="org.opencastproject.mediapackage.MediaPackageSerializer"
-             target="(!(service.pid=org.opencastproject.mediapackage.ChainingMediaPackageSerializer))"
+             interface="org.opencast.mediapackage.MediaPackageSerializer"
+             target="(!(service.pid=org.opencast.mediapackage.ChainingMediaPackageSerializer))"
              name="mpSerializers"
              policy="dynamic" />
 </scr:component>

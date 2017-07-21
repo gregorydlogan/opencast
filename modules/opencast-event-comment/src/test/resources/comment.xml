@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<comment xmlns="http://comment.opencastproject.org" id="2" eventId="123abc" organization="mh_default_org" resolved="true">
+<comment xmlns="http://comment.opencast.org" id="2" eventId="123abc" organization="mh_default_org" resolved="true">
 	<author>
 		<username>test</username>
 		<email />

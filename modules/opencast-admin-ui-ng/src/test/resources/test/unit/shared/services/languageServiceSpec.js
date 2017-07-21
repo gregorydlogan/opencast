@@ -39,7 +39,7 @@ describe('adminNg.services.language', function () {
         jasmine.getJSONFixtures().fixturesPath = 'base/app/GET';
 
         $httpBackend.expectGET('/i18n/languages.json').respond(getJSONFixture('i18n/languages.json'));
-        $httpBackend.whenGET('public/org/opencastproject/adminui/languages/lang-en_US.json').respond('');
+        $httpBackend.whenGET('public/org/opencast/adminui/languages/lang-en_US.json').respond('');
         $httpBackend.flush();
     });
 
@@ -321,7 +321,7 @@ describe('adminNg.services.language', function () {
         it('rejects on errors', function () {
             var deferred = $q.defer();
             spyOn(deferred, 'reject');
-            $httpBackend.whenGET('public/org/opencastproject/adminui/languages/lang-ja_JP.json').respond(404);
+            $httpBackend.whenGET('public/org/opencast/adminui/languages/lang-ja_JP.json').respond(404);
             Language.loadLanguageFromServer('ja_JP', deferred);
             $httpBackend.flush();
             expect(deferred.reject).toHaveBeenCalled();
@@ -338,7 +338,7 @@ describe('adminNg.services.language', function () {
         });
 
         it('requests the given language from the server', function () {
-            $httpBackend.whenGET('public/org/opencastproject/adminui/languages/lang-de_DE.json').respond('');
+            $httpBackend.whenGET('public/org/opencast/adminui/languages/lang-de_DE.json').respond('');
             Language.changeLanguage('de_DE');
             $httpBackend.flush(1);
             expect(Language.getLanguage().code).toEqual('de_DE');
@@ -352,7 +352,7 @@ describe('adminNg.services.language', function () {
             beforeEach(function () {
                 $httpBackend.expectGET('/i18n/languages.json')
                     .respond(getJSONFixture('i18n/languages.json'));
-                $httpBackend.expectGET('public/org/opencastproject/adminui/languages/lang-en_US.json');
+                $httpBackend.expectGET('public/org/opencast/adminui/languages/lang-en_US.json');
             });
 
             it('fetches the languages from the server', function () {

@@ -5,7 +5,7 @@
   <name>opencast-static-file-service-impl</name>
   <packaging>bundle</packaging>
   <parent>
-    <groupId>org.opencastproject</groupId>
+    <groupId>org.opencast</groupId>
     <artifactId>base</artifactId>
     <version>4.0-SNAPSHOT</version>
     <relativePath>../../pom.xml</relativePath>
@@ -16,22 +16,22 @@
   </properties>
   <dependencies>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-static-file-service-api</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-common</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-composer-service-api</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-inspection-service-api</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -110,8 +110,8 @@
             <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
             <Build-Number>${buildNumber}</Build-Number>
             <Private-Package>
-              org.opencastproject.staticfiles.impl;version=${project.version},
-              org.opencastproject.staticfiles.jmx;version=${project.version}
+              org.opencast.staticfiles.impl;version=${project.version},
+              org.opencast.staticfiles.jmx;version=${project.version}
             </Private-Package>
             <Service-Component>
               OSGI-INF/static-file-service.xml

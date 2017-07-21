@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<metadata xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:replay="http://ethz.ch/replay" xmlns:dcterms="http://purl.org/dc/terms/" xmlns="http://www.opencastproject.org/xsd/1.0/dublincore/">
+<metadata xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:replay="http://ethz.ch/replay" xmlns:dcterms="http://purl.org/dc/terms/" xmlns="http://www.opencast.org/xsd/1.0/dublincore/">
     <dcterms:creator xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:replay="http://ethz.ch/replay" xmlns:dcterms="http://purl.org/dc/terms/" xmlns="http://www.replay.ethz.ch/xsd/1.0/dublincore/">M. Gross, M. Pollefeys</dcterms:creator>
     <dcterms:contributor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:replay="http://ethz.ch/replay" xmlns:dcterms="http://purl.org/dc/terms/" xmlns="http://www.replay.ethz.ch/xsd/1.0/dublincore/">Departement Informatik</dcterms:contributor>
     <dcterms:type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:replay="http://ethz.ch/replay" xmlns:dcterms="http://purl.org/dc/terms/" xmlns="http://www.replay.ethz.ch/xsd/1.0/dublincore/">Moving Image/Lecture Recording</dcterms:type>

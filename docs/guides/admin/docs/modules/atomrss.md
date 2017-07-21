@@ -22,21 +22,21 @@ The catalog contains the following default feeds:
 
 ### Latest
 
-    http://demo.opencastproject.org/feeds/[atom|rss|*]/<version_number>/latest
+    http://demo.opencast.org/feeds/[atom|rss|*]/<version_number>/latest
 
-Need an example? Visit http://demo.opencastproject.org/feeds/atom/1.0/latest
+Need an example? Visit http://demo.opencast.org/feeds/atom/1.0/latest
 
 ### Series
 
-    http://demo.opencastproject.org/feeds/[atom|rss|*]/<version_number>/series/<series_id>
+    http://demo.opencast.org/feeds/[atom|rss|*]/<version_number>/series/<series_id>
 
 ### Aggregation (of a set of series)
 
-    http://demo.opencastproject.org/feeds/[atom|rss|*]/<version_number>/aggregated/<name_of_configured_aggregation>
+    http://demo.opencast.org/feeds/[atom|rss|*]/<version_number>/aggregated/<name_of_configured_aggregation>
 
 ### Custom
 
-    http://demo.opencastproject.org/feeds/[atom|rss|*]/<version_number>/custom/<query>
+    http://demo.opencast.org/feeds/[atom|rss|*]/<version_number>/custom/<query>
 
 Aggregation
 -----------
@@ -63,7 +63,7 @@ The Opencast feed specifications are located in:
 
 Below is custom.properties, the default specification for an example custom feed of published episodes:
 
-    feed.class=org.opencastproject.feed.impl.CustomFeedService
+    feed.class=org.opencast.feed.impl.CustomFeedService
     feed.uri=custom
     feed.size=20
     feed.query=dc_title-sum:{0}
@@ -92,7 +92,7 @@ The following properties are common to all feed specifications:
 |feed.name        |Feed title|
 |feed.description |Feed description|
 |feed.copyright   |Feed copyright notice|
-|feed.home        |Feed catalog homepage, e.g. http://www.opencastproject.org.|
+|feed.home        |Feed catalog homepage, e.g. http://www.opencast.org.|
 |feed.entry       |The route pattern used to generate links to individual enclosures, e.g. /engage/ui/embed.html?id={0}.|
 |feed.cover       |Feed image|
 |feed.rssflavors  |The RSS enclosure route pattern, e.g. presenter/delivery, selected according to their appearance.|

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0"
- name="org.opencastproject.workflow.handler.composer.ConcatWorkflowOperationHandler" immediate="true">
-  <implementation class="org.opencastproject.workflow.handler.composer.ConcatWorkflowOperationHandler" />
+ name="org.opencast.workflow.handler.composer.ConcatWorkflowOperationHandler" immediate="true">
+  <implementation class="org.opencast.workflow.handler.composer.ConcatWorkflowOperationHandler" />
   <property name="service.description" value="Concat Workflow Operation Handler" />
   <property name="workflow.operation" value="concat" />
   <service>
-    <provide interface="org.opencastproject.workflow.api.WorkflowOperationHandler" />
+    <provide interface="org.opencast.workflow.api.WorkflowOperationHandler" />
   </service>
-  <reference name="ComposerService" interface="org.opencastproject.composer.api.ComposerService"
+  <reference name="ComposerService" interface="org.opencast.composer.api.ComposerService"
     policy="static" cardinality="1..1" bind="setComposerService"  />
-  <reference name="Workspace"  interface="org.opencastproject.workspace.api.Workspace" 
+  <reference name="Workspace"  interface="org.opencast.workspace.api.Workspace" 
     policy="static" cardinality="1..1" bind="setWorkspace" />
-  <reference name="ServiceRegistry" interface="org.opencastproject.serviceregistry.api.ServiceRegistry"
+  <reference name="ServiceRegistry" interface="org.opencast.serviceregistry.api.ServiceRegistry"
     policy="static" cardinality="1..1" bind="setServiceRegistry" />
 </scr:component>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dublincore xmlns="http://www.opencastproject.org/xsd/1.0/dublincore/"
-	xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oc="http://www.opencastproject.org/matterhorn/">
+<dublincore xmlns="http://www.opencast.org/xsd/1.0/dublincore/"
+	xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oc="http://www.opencast.org/matterhorn/">
 	<dcterms:creator>Presenter 1, Presenter 2, Presenter 3</dcterms:creator>
 	<dcterms:isPartOf>e7892b98-a0a7-4cc4-915a-61748ab70908</dcterms:isPartOf>
 	<dcterms:license>Creative Commons 3.0:Attribution-NonCommercial-NoDerivs</dcterms:license>

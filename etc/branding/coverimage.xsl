@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:date="http://exslt.org/dates-and-times"
-    xmlns:opencast="xalan://org.opencastproject.coverimage.impl.xsl" exclude-result-prefixes="date opencast"
+    xmlns:opencast="xalan://org.opencast.coverimage.impl.xsl" exclude-result-prefixes="date opencast"
     extension-element-prefixes="date opencast">
 
   <xsl:param name="width" />

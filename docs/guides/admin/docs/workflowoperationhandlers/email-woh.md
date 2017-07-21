@@ -173,15 +173,15 @@ Workflow Configuration Panel:
              
       // Register email configuration property     
       ocWorkflowPanel.registerComponents = function(components){
-        /* components with keys that begin with 'org.opencastproject.workflow.config' will be passed
+        /* components with keys that begin with 'org.opencast.workflow.config' will be passed
          * into the workflow. The component's nodeKey must match the components array key.
          *
-         * Example:'org.opencastproject.workflow.config.myProperty' will be availible at ${my.property}
+         * Example:'org.opencast.workflow.config.myProperty' will be availible at ${my.property}
          */
         // After the other components (Hold, Archive, etc), add:
-        components['org.opencastproject.workflow.config.emailAddress'] = new ocAdmin.Component(
+        components['org.opencast.workflow.config.emailAddress'] = new ocAdmin.Component(
           ['emailAddress'],
-          {key: 'org.opencastproject.workflow.config.emailAddress'},
+          {key: 'org.opencast.workflow.config.emailAddress'},
           {getValue: function(){ return this.fields.emailAddress.value;}
           });
                      
@@ -189,8 +189,8 @@ Workflow Configuration Panel:
       }
       ocWorkflowPanel.setComponentValues = function(values, components){
         // After the other components (Hold, Archive, etc), add:
-        components['org.opencastproject.workflow.config.emailAddress'].setValue(
-          values['org.opencastproject.workflow.config.emailAddress']);
+        components['org.opencast.workflow.config.emailAddress'].setValue(
+          values['org.opencast.workflow.config.emailAddress']);
       }
     </script>
 ]]>

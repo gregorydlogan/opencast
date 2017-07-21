@@ -38,7 +38,7 @@ describe('Login Controller', function () {
     beforeEach(function () {
         $httpBackend.whenGET('/i18n/languages.json')
             .respond('{"fallbackLanguage":{"code":"en_US"},"bestLanguage":{"code":"en_US"}}');
-        $httpBackend.whenGET('public/org/opencastproject/adminui/languages/lang-en_US.json')
+        $httpBackend.whenGET('public/org/opencast/adminui/languages/lang-en_US.json')
             .respond('');
     });
 

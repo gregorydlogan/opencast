@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dublincore xmlns="http://www.opencastproject.org/xsd/1.0/dublincore/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oc="http://www.opencastproject.org/matterhorn/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<dublincore xmlns="http://www.opencast.org/xsd/1.0/dublincore/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oc="http://www.opencast.org/matterhorn/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
    <dcterms:creator>Org Admin</dcterms:creator>
    <dcterms:creator>Admin User</dcterms:creator>
    <dcterms:license>Creative Commons 3.0: Attribution-NonCommercial-NoDerivs</dcterms:license>

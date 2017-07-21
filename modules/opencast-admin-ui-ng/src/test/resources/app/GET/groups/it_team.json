@@ -67,7 +67,7 @@
             "$": "false"
           },
           {
-            "key": "org.opencastproject.engage.ui.url",
+            "key": "org.opencast.engage.ui.url",
             "$": "http:\/\/mhallinone-sbox.ethz.ch"
           },
           {
@@ -87,7 +87,7 @@
             "$": "false"
           },
           {
-            "key": "org.opencastproject.oaipmh.server.hosturl",
+            "key": "org.opencast.oaipmh.server.hosturl",
             "$": "http:\/\/mhallinone-sbox.ethz.ch"
           },
           {
@@ -107,7 +107,7 @@
             "$": "v"
           },
           {
-            "key": "org.opencastproject.admin.ui.url",
+            "key": "org.opencast.admin.ui.url",
             "$": "http:\/\/mhallinone-sbox.ethz.ch"
           },
           {
@@ -213,7 +213,7 @@
                   "$": "false"
                 },
                 {
-                  "key": "org.opencastproject.engage.ui.url",
+                  "key": "org.opencast.engage.ui.url",
                   "$": "http:\/\/mhallinone-sbox.ethz.ch"
                 },
                 {
@@ -233,7 +233,7 @@
                   "$": "false"
                 },
                 {
-                  "key": "org.opencastproject.oaipmh.server.hosturl",
+                  "key": "org.opencast.oaipmh.server.hosturl",
                   "$": "http:\/\/mhallinone-sbox.ethz.ch"
                 },
                 {
@@ -253,7 +253,7 @@
                   "$": "v"
                 },
                 {
-                  "key": "org.opencastproject.admin.ui.url",
+                  "key": "org.opencast.admin.ui.url",
                   "$": "http:\/\/mhallinone-sbox.ethz.ch"
                 },
                 {
@@ -352,7 +352,7 @@
                   "$": "false"
                 },
                 {
-                  "key": "org.opencastproject.engage.ui.url",
+                  "key": "org.opencast.engage.ui.url",
                   "$": "http:\/\/mhallinone-sbox.ethz.ch"
                 },
                 {
@@ -372,7 +372,7 @@
                   "$": "false"
                 },
                 {
-                  "key": "org.opencastproject.oaipmh.server.hosturl",
+                  "key": "org.opencast.oaipmh.server.hosturl",
                   "$": "http:\/\/mhallinone-sbox.ethz.ch"
                 },
                 {
@@ -392,7 +392,7 @@
                   "$": "v"
                 },
                 {
-                  "key": "org.opencastproject.admin.ui.url",
+                  "key": "org.opencast.admin.ui.url",
                   "$": "http:\/\/mhallinone-sbox.ethz.ch"
                 },
                 {

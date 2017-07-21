@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XML-instance" xsi:Location="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.opencastproject</groupId>
+  <groupId>org.opencast</groupId>
   <artifactId>base</artifactId>
   <version>4.0-SNAPSHOT</version>
   <packaging>pom</packaging>
@@ -452,8 +452,8 @@
           <inherited>true</inherited>
           <configuration>
             <instructions>
-              <Bundle-Category>opencastproject</Bundle-Category>
-              <Bundle-DocURL>http://opencastproject.org/</Bundle-DocURL>
+              <Bundle-Category>opencast</Bundle-Category>
+              <Bundle-DocURL>http://opencast.org/</Bundle-DocURL>
               <Bundle-Vendor>The Opencast Project</Bundle-Vendor>
               <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
             </instructions>
@@ -1121,7 +1121,7 @@
   <!-- All non-build related project data below here -->
   <organization>
     <name>Opencast Project</name>
-    <url>http://www.opencastproject.org/</url>
+    <url>http://www.opencast.org/</url>
   </organization>
   <!-- Active contributors to Opencast -->
   <developers>

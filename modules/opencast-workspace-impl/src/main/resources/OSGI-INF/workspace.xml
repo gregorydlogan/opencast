@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0"
-  name="org.opencastproject.workspace.impl.WorkspaceImpl" immediate="true" activate="activate" deactivate="deactivate">
-  <implementation class="org.opencastproject.workspace.impl.WorkspaceImpl" />
+  name="org.opencast.workspace.impl.WorkspaceImpl" immediate="true" activate="activate" deactivate="deactivate">
+  <implementation class="org.opencast.workspace.impl.WorkspaceImpl" />
   <property name="service.description" value="Workspace" />
   <service>
-    <provide interface="org.opencastproject.workspace.api.Workspace" />
+    <provide interface="org.opencast.workspace.api.Workspace" />
   </service>
-  <reference name="REPO" interface="org.opencastproject.workingfilerepository.api.WorkingFileRepository"
+  <reference name="REPO" interface="org.opencast.workingfilerepository.api.WorkingFileRepository"
     cardinality="1..1" policy="static" bind="setRepository" />
-  <reference name="trustedHttpClient" interface="org.opencastproject.security.api.TrustedHttpClient"
+  <reference name="trustedHttpClient" interface="org.opencast.security.api.TrustedHttpClient"
     cardinality="1..1" policy="static" bind="setTrustedHttpClient" />
 </scr:component>

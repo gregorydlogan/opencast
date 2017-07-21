@@ -29,7 +29,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 #end
-import org.opencastproject.engage.theodul.api.AbstractEngagePlugin;
+import org.opencast.engage.theodul.api.AbstractEngagePlugin;
 import org.osgi.service.component.ComponentContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

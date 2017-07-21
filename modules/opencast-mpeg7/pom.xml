@@ -5,7 +5,7 @@
   <name>opencast-mpeg7</name>
   <packaging>bundle</packaging>
   <parent>
-    <groupId>org.opencastproject</groupId>
+    <groupId>org.opencast</groupId>
     <artifactId>base</artifactId>
     <version>4.0-SNAPSHOT</version>
     <relativePath>../../pom.xml</relativePath>
@@ -16,7 +16,7 @@
   </properties>
   <dependencies>
     <dependency>
-      <groupId>org.opencastproject</groupId>
+      <groupId>org.opencast</groupId>
       <artifactId>opencast-metadata-api</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -51,7 +51,7 @@
             <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
             <Build-Number>${buildNumber}</Build-Number>
             <Export-Package>
-              org.opencastproject.metadata.mpeg7;version=${project.version}
+              org.opencast.metadata.mpeg7;version=${project.version}
             </Export-Package>
             <Service-Component>
               OSGI-INF/mpeg7-service.xml

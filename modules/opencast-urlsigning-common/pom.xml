@@ -5,7 +5,7 @@
   <packaging>bundle</packaging>
   <name>opencast-urlsigning-common</name>
   <parent>
-    <groupId>org.opencastproject</groupId>
+    <groupId>org.opencast</groupId>
     <artifactId>base</artifactId>
     <version>4.0-SNAPSHOT</version>
     <relativePath>../../pom.xml</relativePath>
@@ -69,8 +69,8 @@
             <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
             <Build-Number>${buildNumber}</Build-Number>
             <Export-Package>
-              org.opencastproject.urlsigning.common;version=${project.version},
-              org.opencastproject.urlsigning.utils;version=${project.version}
+              org.opencast.urlsigning.common;version=${project.version},
+              org.opencast.urlsigning.utils;version=${project.version}
             </Export-Package>
           </instructions>
         </configuration>

@@ -26,11 +26,11 @@
     </fieldType>
     <fieldType name="caseInsensitiveString" class="solr.TextField" sortMissingLast="true" omitNorms="true">
       <analyzer type="index">
-        <tokenizer class="org.opencastproject.solr.NonTokenizingFactory" />
+        <tokenizer class="org.opencast.solr.NonTokenizingFactory" />
         <filter class="solr.LowerCaseFilterFactory" />
       </analyzer>
       <analyzer type="query">
-        <tokenizer class="org.opencastproject.solr.NonTokenizingFactory" />
+        <tokenizer class="org.opencast.solr.NonTokenizingFactory" />
         <filter class="solr.LowerCaseFilterFactory" />
       </analyzer>
     </fieldType>

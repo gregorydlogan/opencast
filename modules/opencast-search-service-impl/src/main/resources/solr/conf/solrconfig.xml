@@ -481,7 +481,7 @@
   </requestDispatcher>
 
   <!-- Modified version of the regular SolrQueryParser that allows for full wildcard queries -->
-  <queryParser name="wildcardqueryparser" class="org.opencastproject.solr.WildcardQueryParserPlugin"/>
+  <queryParser name="wildcardqueryparser" class="org.opencast.solr.WildcardQueryParserPlugin"/>
 
   <!-- requestHandler plugins... incoming queries will be dispatched to the
      correct handler based on the path or the qt (query type) param.

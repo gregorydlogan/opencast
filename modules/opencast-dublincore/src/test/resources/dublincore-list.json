@@ -2,7 +2,7 @@
   "totalCount": "2",
   "catalogs": [
     {
-      "http:\/\/www.opencastproject.org\/matterhorn\/": {"promoted": [{"value": "true"}]},
+      "http:\/\/www.opencast.org\/matterhorn\/": {"promoted": [{"value": "true"}]},
       "http:\/\/purl.org\/dc\/terms\/": {
         "title": [
           {"value": "Land 1"},
@@ -38,7 +38,7 @@
       }
     },
     {
-      "http:\/\/www.opencastproject.org\/matterhorn\/": {"promoted": [{"value": "true"}]},
+      "http:\/\/www.opencast.org\/matterhorn\/": {"promoted": [{"value": "true"}]},
       "http:\/\/purl.org\/dc\/terms\/": {
         "title": [
           {"value": "Land 2"},

@@ -5,12 +5,12 @@ File System Based Asset Store
 -----------------------------
 Configure the file system based asset store in custom.properties.
 
-- `org.opencastproject.episode.rootdir`  
+- `org.opencast.episode.rootdir`  
    The path where the file system based asset store of the default implementation stores the assets. This key is optional.
-- `org.opencastproject.storage.dir`  
+- `org.opencast.storage.dir`  
   This is Opencast’s general config key to configure the base path of everything storage related. 
   If no storage directory is configured explicitely, the file system based asset store will use 
-  `${org.opencastproject.storage.dir}/archive` as its base path.
+  `${org.opencast.storage.dir}/archive` as its base path.
 
 Deployment
 ==========

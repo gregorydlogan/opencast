@@ -81,11 +81,11 @@ Opencast data from outside Opencast itself.
 ## Configure Opencast
 Set the URL to this solr server in Opencast's custom.properties file:
 
-    org.opencastproject.search.solr.url=http://your.solr.server.edu:8080/solr/
+    org.opencast.search.solr.url=http://your.solr.server.edu:8080/solr/
 
 If this solr server is supporting clustered workflow services:
 
-    org.opencastproject.workflow.solr.url==http://your.solr.server.edu:8080/solr/
+    org.opencast.workflow.solr.url==http://your.solr.server.edu:8080/solr/
 
 *It is important to understand that a solr server provides exactly one schema, and one schema only. If you want to
 cluster both the workflow service and the search service, you will need two separate solr servers. These solr servers

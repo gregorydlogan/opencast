@@ -2,7 +2,7 @@ Opencast Player - Configuration
 ===============================
 
 The configurations for the player are done for each tenant. So the configuration keys are located in
-`.../etc/org.opencastproject.organization-mh_default_org.cfg`.
+`.../etc/org.opencast.organization-mh_default_org.cfg`.
 
 Select the Opencast Player
 ------------------------------

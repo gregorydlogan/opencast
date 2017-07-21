@@ -5,7 +5,7 @@ Silence Detection Configuration
 -------------------------------
 
 The settings regarding the sensitivity of the silence detection can be changed in
-`etc/org.opencastproject.silencedetection.impl.SilenceDetectionServiceImpl.cfg`.
+`etc/org.opencast.silencedetection.impl.SilenceDetectionServiceImpl.cfg`.
 
 1. silence.pre.length
     - Duration of silence that should be included at the beginning of  a new voice segment. This is to avoid that a cut
@@ -25,5 +25,5 @@ Video Editor Configuration
 --------------------------
 
 The FFmpeg properties for the Video Editor can be modified in
-`etc/org.opencastproject.videoeditor.impl.VideoEditorServiceImpl.cfg`. Usually there should be no reason to touch this
+`etc/org.opencast.videoeditor.impl.VideoEditorServiceImpl.cfg`. Usually there should be no reason to touch this
 file.

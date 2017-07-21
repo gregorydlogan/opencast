@@ -49,9 +49,9 @@ Opencast 4.0 has following configuration changes:
 
 1. The Working File Repository URL can be set per tenant.
 
-The Configuration key `org.opencastproject.file.repo.url` was moved from `etc/custom.properties` to
-`etc/org.opencastproject.organization-mh_default_org.cfg` as `prop.org.opencastproject.file.repo.url`.
-The fallback value is same as before (set to `${org.opencastproject.server.url}`).
+The Configuration key `org.opencast.file.repo.url` was moved from `etc/custom.properties` to
+`etc/org.opencast.organization-mh_default_org.cfg` as `prop.org.opencast.file.repo.url`.
+The fallback value is same as before (set to `${org.opencast.server.url}`).
 On a multiple server setup the value should be same on all nodes.
 For more information read the [Configure Opencast](installation/multiple-servers/#step-5-configure-opencast) section.
 
