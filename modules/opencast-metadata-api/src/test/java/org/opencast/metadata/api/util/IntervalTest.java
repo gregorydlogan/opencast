@@ -29,8 +29,6 @@ import static org.opencast.metadata.api.util.Interval.boundedInterval;
 import static org.opencast.metadata.api.util.Interval.leftBoundedInterval;
 import static org.opencast.metadata.api.util.Interval.rightBoundedInterval;
 
-import org.opencast.metadata.api.util.Interval;
-
 import org.junit.Test;
 
 import java.util.Date;
