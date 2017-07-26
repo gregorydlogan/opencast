@@ -128,7 +128,7 @@
     <dependency>
       <groupId>org.opencast</groupId>
       <artifactId>opencast-distribution-service-download</artifactId>
-      <version>1.4.3</version>
+      <version>${project.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
