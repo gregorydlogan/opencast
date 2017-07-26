@@ -18,18 +18,18 @@ You can get the Opencast source code by either downloading a tarball of the sour
 
 Cloning the Git repository:
 
-    git clone https://bitbucket.org/opencast-community/matterhorn.git
-    cd matterhorn
+    git clone https://bitbucket.org/opencast-community/opencast.git
+    cd opencast
     git tag   <-  List all available versions
     git checkout TAG   <-  Switch to desired version
 
 Using the tarball:
 
 Select the tarball for the version you want to install from the [BitBucket downloads section
-](https://bitbucket.org/opencast-community/matterhorn/downloads) under the "Tags" tab and download it directly from there or with the curl command specified below.
+](https://bitbucket.org/opencast-community/opencast/downloads) under the "Tags" tab and download it directly from there or with the curl command specified below.
 
     # Download desired tarball, replace [...] with the desired version
-    curl -O https://bitbucket.org/opencast-community/matterhorn/get/[...].tar.gz
+    curl -O https://bitbucket.org/opencast-community/opencast/get/[...].tar.gz
     tar xf [...].tar.gz
 
 
@@ -89,7 +89,7 @@ Pre-built versions of most dependencies can be downloaded from the respective pr
 Building Opencast
 -----------------
 
-Switch to the opencast folder. If you downloaded the tarball, this is the folder you just unpacked (called something like `opencast-community-matterhorn-[...]`). If you chose to download via git, use `cd matterhorn`. You can proceed by building opencast (depending on the folder permissions, you might need to start the command with `sudo`):
+Switch to the opencast folder. If you downloaded the tarball, this is the folder you just unpacked (called something like `opencast-community-opencast-[...]`). If you chose to download via git, use `cd opencast`. You can proceed by building opencast (depending on the folder permissions, you might need to start the command with `sudo`):
        
     mvn clean install
 

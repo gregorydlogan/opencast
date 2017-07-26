@@ -88,7 +88,7 @@ Create the Branch:
 
 At this point, the developer community should then be notified. Consider using the following as a template email:
 
-    To: matterhorn@opencast.org
+    To: dev@opencast.org
     Subject: Release Branch for Opencast <VERSION> Cut
 
     Hi everyone,
@@ -118,7 +118,7 @@ Have a look at [Inclusion and Exclusion of Languages](localization.md) for the c
 
 Please create a single post on the Opencast Users list:
 
-    To: matterhorn@opencast.org
+    To: dev@opencast.org
     Subject: Opencast <VERSION>: Language translation status
 
     Hi everyone,
@@ -139,7 +139,7 @@ Please create a single post on the Opencast Users list:
 In case endangered languages have been identified, this needs to be communicated immediately to the Opencast community.
 Please create a post for each endangered translation on the Opencast Users list:
 
-    To: matterhorn@opencast.org
+    To: dev@opencast.org
     Subject: Opencast <VERSION>: <LANGUAGE> translation is endangered! [HELP NEEDED!]
 
     Hi everyone,
@@ -254,7 +254,7 @@ For a release candidate, instead of `A.B-betaX` the tag should be named `A.B-rcX
 
 At this point the developer community should then be notified. Consider using the following email template:
 
-    To: matterhorn@opencast.org
+    To: dev@opencast.org
     Subject: <VERSION> Available for testing!
 
     Hi everyone,
@@ -272,7 +272,7 @@ At this point the developer community should then be notified. Consider using th
     Please test this release as thoroughly as
     possible.
 
-    [1] https://bitbucket.org/opencast-community/matterhorn/downloads
+    [1] https://bitbucket.org/opencast-community/opencast/downloads
 
 If the version is a release candidate, you probably want to highlight that there are no *Blockers* left at the moment
 and *#propose* this to become the final release.
@@ -331,7 +331,7 @@ assume the final release should be based on `3.0-rc2`.
 
 Finally, send a release notice to list. You may use the following template:
 
-    To: matterhorn@opencast.org
+    To: dev@opencast.org
     Subject: Opencast <VERSION> Released
     Hi all,
     it is my pleasure to announce that Opencast <VERSION> has been released and
@@ -350,7 +350,7 @@ Finally, send a release notice to list. You may use the following template:
     This could not have happened without you and I am glad we were able to work
     together and get this release out.
 
-    [1] https://bitbucket.org/opencast-community/matterhorn/downloads
+    [1] https://bitbucket.org/opencast-community/opencast/downloads
 
 
 ### Appointment of Next Release Manager
@@ -363,7 +363,7 @@ job of release manager for the next release.
 
 For that, this email template may be used:
 
-    To: matterhorn@opencast.org
+    To: dev@opencast.org
     Subject: Opencast <NEXT_RELEASE_VERSION> release manager wanted
 
     Hi everyone,

@@ -9,11 +9,6 @@ Test Servers
 
 Institution                | Hostname                      | Admin (Software) | Admin (Hardware) | Notes
 ---------------------------|-------------------------------|------------------|------------------|-----------------
-University of Saskatchewan | testallinone.usask.ca         | Greg Logan       | Greg Logan       |
-University of Saskatchewan | testadmin.usask.ca            | Greg Logan       | Greg Logan       |
-University of Saskatchewan | testengage.usask.ca           | Greg Logan       | Greg Logan       |
-University of Saskatchewan | testworker1.usask.ca          | Greg Logan       | Greg Logan       |
-University of Saskatchewan | testworker2.usask.ca          | Greg Logan       | Greg Logan       |
 University of Osnabrück    | octestallinone.virtuos.uos.de | Greg Logan       | Lars Kiesow      |
 SWITCH                     | admin.oc-test.switch.ch       | Greg Logan       | Lars Kiesow      | SWITCH cluster may be unavailable after 2017-07
 SWITCH                     | player.oc-test.switch.ch      | Greg Logan       | Lars Kiesow      |
@@ -37,11 +32,10 @@ ETH Zurich                 | opencast-nexus.ethz.ch        | Greg Logan       | 
 Harvard DCE                | nexus.dcex.harvard.edu        | Greg Logan       | DCE Devel group     | Amazon Cloud
 University of Osnabrück    | nexus.virtuos.uos.de          | Greg Logan       | Lars Kiesow         |
 University of Osnabrück    | nexus.opencast.org            | Greg Logan       | Lars Kiesow         | GeoIP Redirect
-University of Saskatchewan | oc-cache.usask.ca             | Greg Logan       | Greg Logan          |
 
 Nexus administration:
 
-- Greg Logan (usask)
+- Greg Logan (QA)
 - Lars Kiesow (uos, eth, dce)
 - Michael Stypa (uos, eth, dce)
 
@@ -64,7 +58,7 @@ Account Management
     - Alexander Bias
     - Greg Logan
     - Lars Kiesow
-    - Andy Wasklewicz (Contact to Atlassian)
+    - Olaf Schulte (contact to Atlassian)
 - bitbucket.org/opencast-community
     - Greg Logan
     - Lars Kiesow

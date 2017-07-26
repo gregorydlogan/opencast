@@ -8,7 +8,7 @@ The ConfigurablePublishWorkflowOperationHandler will distribute the given elemen
 
 ## Parameter Table
 
-These are the keys that are configured through the workflow definition (The files located in /opt/matterhorn/etc/workflows used to process files). At least one mediapackage element must match the supplied source-flavors or source-tags or else the operation won't know what to publish. The channel-id and url-pattern are also mandatory.
+These are the keys that are configured through the workflow definition (The files located in /opt/opencast/etc/workflows used to process files). At least one mediapackage element must match the supplied source-flavors or source-tags or else the operation won't know what to publish. The channel-id and url-pattern are also mandatory.
 
 |Configuration Key       |Description                                                                                             |Example                                        |
 |------------------------|--------------------------------------------------------------------------------------------------------|-----------------------------------------------|

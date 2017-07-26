@@ -24,14 +24,14 @@ After successful build and installation the archetype is available in your syste
 
 To generate a new plugin project simply go to the modules directory inside the Opencast source directory and type:
 
-    > mvn archetype:generate -DarchetypeGroupId=org.opencast -DarchetypeArtifactId=matterhorn-theodul-plugin
+    > mvn archetype:generate -DarchetypeGroupId=org.opencast -DarchetypeArtifactId=opencast-theodul-plugin
 
 Provided the archetype is installed maven will now ask you for the properties configuration for the new project:
 
     [INFO] Generating project in Interactive mode
-    [INFO] Archetype [org.opencast:matterhorn-theodul-plugin:1.5-SNAPSHOT] found in catalog local
+    [INFO] Archetype [org.opencast:opencast-theodul-plugin:1.5-SNAPSHOT] found in catalog local
     Define value for property 'groupId': : org.opencast
-    Define value for property 'artifactId': : matterhorn-engage-theodul-plugin-test
+    Define value for property 'artifactId': : opencast-engage-theodul-plugin-test
     Define value for property 'version': 1.0-SNAPSHOT: : 1.5-SNAPSHOT
     Define value for property 'package': org.opencast: : org.opencast.engage.theodul.plugin.custom.test
     Define value for property 'plugin_description': : A test plugin
@@ -41,7 +41,7 @@ Provided the archetype is installed maven will now ask you for the properties co
     Define value for property 'plugin_rest': : false
     Confirm properties configuration:
     groupId: org.opencast
-    artifactId: matterhorn-engage-theodul-plugin-test
+    artifactId: opencast-engage-theodul-plugin-test
     version: 1.5-SNAPSHOT
     package: org.opencast.engage.theodul.plugin.test
     plugin_description: A test plugin
@@ -49,10 +49,10 @@ Provided the archetype is installed maven will now ask you for the properties co
     plugin_rest: true
      Y: : y
     [INFO] ----------------------------------------------------------------------------
-    [INFO] Using following parameters for creating project from Archetype: matterhorn-theodul-plugin:1.5-SNAPSHOT
+    [INFO] Using following parameters for creating project from Archetype: opencast-theodul-plugin:1.5-SNAPSHOT
     [INFO] ----------------------------------------------------------------------------
     [INFO] Parameter: groupId, Value: org.opencast
-    [INFO] Parameter: artifactId, Value: matterhorn-engage-theodul-plugin-test
+    [INFO] Parameter: artifactId, Value: opencast-engage-theodul-plugin-test
     [INFO] Parameter: version, Value: 1.5-SNAPSHOT
     [INFO] Parameter: package, Value: org.opencast.engage.theodul.plugin.test
     [INFO] Parameter: packageInPathFormat, Value: org/opencast/engage/theodul/plugin/test
@@ -62,8 +62,8 @@ Provided the archetype is installed maven will now ask you for the properties co
     [INFO] Parameter: plugin_name, Value: test
     [INFO] Parameter: groupId, Value: org.opencast
     [INFO] Parameter: plugin_rest, Value: true
-    [INFO] Parameter: artifactId, Value: matterhorn-engage-theodul-plugin-test
-    [INFO] project created from Archetype in dir: /home/wulff/code/UOS/plugin-archetype/test/matterhorn-engage-theodul-plugin-test
+    [INFO] Parameter: artifactId, Value: opencast-engage-theodul-plugin-test
+    [INFO] project created from Archetype in dir: /home/wulff/code/UOS/plugin-archetype/test/opencast-engage-theodul-plugin-test
     [INFO] ------------------------------------------------------------------------
     [INFO] BUILD SUCCESS
     [INFO] ------------------------------------------------------------------------
@@ -92,7 +92,7 @@ Maven artifact ID. Name by which your project is identified as an artifact by ma
 will also be used as the name for your projects root directory. During the course of the Theodul project the following
 naming scheme came up:
 
-    matterhorn-engage-theodul-plugin-<plugin type>-<plugin name>
+    opencast-engage-theodul-plugin-<plugin type>-<plugin name>
 
 #### version
 

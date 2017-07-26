@@ -67,7 +67,7 @@ is running.  The current files with relevant configuration keys are:
 | org.opencast.inspection.impl.MediaInspectionServiceImpl.cfg                       | Media inspection using mediainfo   |
 | org.opencast.publication.youtube.YouTubePublicationServiceImpl.cfg                | Youtube distribution               |
 | org.opencast.publication.youtube.YouTubeV3PublicationServiceImpl.cfg              | Youtube distribution               |
-| org.opencast.search.impl.SearchServiceImpl.cfg                                    | Matterhorn engage index jobs       |
+| org.opencast.search.impl.SearchServiceImpl.cfg                                    | Opencast engage index jobs       |
 | org.opencast.silencedetection.impl.SilenceDetectionServiceImpl.cfg                | Silence detection                  |
 | org.opencast.textanalyzer.impl.TextAnalyzerServiceImpl.cfg                        | Text analysis, including slide OCR |
 | org.opencast.videoeditor.impl.VideoEditorServiceImpl.cfg                          | Video editor                       |
@@ -105,10 +105,10 @@ the job ID, follow these steps:
 
  * Stop Opencast
  * Log into your database
- * Make sure you are using the right schema.  Currently the default is called `matterhorn`
+ * Make sure you are using the right schema.  Currently the default is called `opencast`
  * Update the job's load
   * This will look something like `UPDATE mh_job SET job\_load=0.0 WHERE id=$jobid`
  * Log out of your database
  * Change the load specified in the configuration file to an appropriate value
   * This may need to happen across all nodes!
- * Restart matterhorn
+ * Restart Opencast
