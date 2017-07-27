@@ -1,6 +1,6 @@
 {
    "service":{
-      "type":"org.opencast.analytics",
+      "type":"org.opencastproject.analytics",
       "host":"http://localhost:8080",
       "path":"/analytics-rest",
       "active":true,

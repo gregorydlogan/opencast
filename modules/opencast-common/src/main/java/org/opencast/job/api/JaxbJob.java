@@ -43,8 +43,8 @@ import javax.xml.bind.annotation.XmlType;
 
 /** 1:1 serialization of a {@link Job}. */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "job", namespace = "http://job.opencast.org")
-@XmlRootElement(name = "job", namespace = "http://job.opencast.org")
+@XmlType(name = "job", namespace = "http://job.opencastproject.org")
+@XmlRootElement(name = "job", namespace = "http://job.opencastproject.org")
 public class JaxbJob {
 
   @XmlAttribute

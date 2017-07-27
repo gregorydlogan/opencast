@@ -38,8 +38,8 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlType(name = "publication", namespace = "http://mediapackage.opencast.org")
-@XmlRootElement(name = "publication", namespace = "http://mediapackage.opencast.org")
+@XmlType(name = "publication", namespace = "http://mediapackage.opencastproject.org")
+@XmlRootElement(name = "publication", namespace = "http://mediapackage.opencastproject.org")
 public class PublicationImpl extends AbstractMediaPackageElement implements Publication {
   /** Serial version UID */
   private static final long serialVersionUID = 11151970L;

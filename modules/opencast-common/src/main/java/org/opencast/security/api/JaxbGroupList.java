@@ -35,8 +35,8 @@ import javax.xml.bind.annotation.XmlType;
  * A wrapper for group collections.
  */
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlType(name = "groups", namespace = "http://org.opencast.security")
-@XmlRootElement(name = "groups", namespace = "http://org.opencast.security")
+@XmlType(name = "groups", namespace = "http://org.opencastproject.security")
+@XmlRootElement(name = "groups", namespace = "http://org.opencastproject.security")
 public class JaxbGroupList {
 
   /** A list of groups. */

@@ -35,8 +35,8 @@ import javax.xml.bind.annotation.XmlType;
  * A wrapper for role collections.
  */
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlType(name = "roles", namespace = "http://org.opencast.security")
-@XmlRootElement(name = "roles", namespace = "http://org.opencast.security")
+@XmlType(name = "roles", namespace = "http://org.opencastproject.security")
+@XmlRootElement(name = "roles", namespace = "http://org.opencastproject.security")
 public class JaxbRoleList {
 
   /** A list of roles. */

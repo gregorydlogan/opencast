@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<acl xmlns="http://org.opencast.security">
+<acl xmlns="http://org.opencastproject.security">
   <ace>
     <role>SERIES_2_STUDENT</role>
     <action>read</action>

@@ -35,8 +35,8 @@ import javax.xml.bind.annotation.XmlType;
  * A wrapper for user collections.
  */
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlType(name = "users", namespace = "http://org.opencast.security")
-@XmlRootElement(name = "users", namespace = "http://org.opencast.security")
+@XmlType(name = "users", namespace = "http://org.opencastproject.security")
+@XmlRootElement(name = "users", namespace = "http://org.opencastproject.security")
 public class JaxbUserList {
 
   /** A list of users. */

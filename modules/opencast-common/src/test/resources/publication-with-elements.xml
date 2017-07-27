@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<publication xmlns="http://mediapackage.opencast.org" id="p-1" channel="test">
+<publication xmlns="http://mediapackage.opencastproject.org" id="p-1" channel="test">
   <mimetype>text/html</mimetype>
   <tags/>
   <url>http://publications.com/videos/1/index.html</url>

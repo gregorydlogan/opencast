@@ -38,8 +38,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "incidentDigestTree", namespace = "http://job.opencast.org")
-@XmlRootElement(name = "incidentDigestTree", namespace = "http://job.opencast.org")
+@XmlType(name = "incidentDigestTree", namespace = "http://job.opencastproject.org")
+@XmlRootElement(name = "incidentDigestTree", namespace = "http://job.opencastproject.org")
 public final class JaxbIncidentDigestTree {
   @XmlElement(name = JaxbIncidentUtil.ELEM_NESTED_INCIDENT)
   private List<JaxbIncidentDigest> incidents;

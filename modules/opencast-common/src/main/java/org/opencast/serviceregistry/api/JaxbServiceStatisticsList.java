@@ -35,8 +35,8 @@ import javax.xml.bind.annotation.XmlType;
  * A wrapper for service statistics.
  */
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlType(name = "statistics", namespace = "http://serviceregistry.opencast.org")
-@XmlRootElement(name = "statistics", namespace = "http://serviceregistry.opencast.org")
+@XmlType(name = "statistics", namespace = "http://serviceregistry.opencastproject.org")
+@XmlRootElement(name = "statistics", namespace = "http://serviceregistry.opencastproject.org")
 public class JaxbServiceStatisticsList {
   /** A list of search items. */
   @XmlElement(name = "service")

@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<dublincore xmlns="http://www.opencast.org/xsd/1.0/dublincore/"
+<dublincore xmlns="http://www.opencastproject.org/xsd/1.0/dublincore/"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns:dcterms="http://purl.org/dc/terms/"
-  xmlns:oc="http://www.opencast.org/matterhorn/">
+  xmlns:oc="http://www.opencastproject.org/matterhorn/">
   <dcterms:subject>climate, land, vegetation</dcterms:subject>
   <dcterms:description xml:lang="en">
     Introduction lecture from the Institute for Atmospheric and Climate Science.

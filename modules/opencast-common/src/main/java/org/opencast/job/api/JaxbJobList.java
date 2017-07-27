@@ -37,8 +37,8 @@ import javax.xml.bind.annotation.XmlType;
  * A wrapper for job collections.
  */
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlType(name = "jobs", namespace = "http://job.opencast.org")
-@XmlRootElement(name = "jobs", namespace = "http://job.opencast.org")
+@XmlType(name = "jobs", namespace = "http://job.opencastproject.org")
+@XmlRootElement(name = "jobs", namespace = "http://job.opencastproject.org")
 public class JaxbJobList {
   /** A list of jobs */
   @XmlElement(name = "job")

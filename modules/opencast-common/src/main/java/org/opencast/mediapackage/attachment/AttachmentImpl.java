@@ -38,8 +38,8 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 /**
  * Basic implementation of an attachment.
  */
-@XmlType(name = "attachment", namespace = "http://mediapackage.opencast.org")
-@XmlRootElement(name = "attachment", namespace = "http://mediapackage.opencast.org")
+@XmlType(name = "attachment", namespace = "http://mediapackage.opencastproject.org")
+@XmlRootElement(name = "attachment", namespace = "http://mediapackage.opencastproject.org")
 public class AttachmentImpl extends AbstractMediaPackageElement implements Attachment {
 
   /** Serial version UID */

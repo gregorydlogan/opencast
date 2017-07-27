@@ -33,8 +33,8 @@ import javax.xml.bind.annotation.XmlType;
  * A record of a service that creates and manages receipts.
  */
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlType(name = "service", namespace = "http://serviceregistry.opencast.org")
-@XmlRootElement(name = "service", namespace = "http://serviceregistry.opencast.org")
+@XmlType(name = "service", namespace = "http://serviceregistry.opencastproject.org")
+@XmlRootElement(name = "service", namespace = "http://serviceregistry.opencastproject.org")
 public class JaxbServiceRegistration implements ServiceRegistration {
 
   @XmlElement(name = "type")

@@ -31,8 +31,8 @@ import javax.xml.bind.annotation.XmlType;
  * A record of a host.
  */
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlType(name = "host", namespace = "http://serviceregistry.opencast.org")
-@XmlRootElement(name = "host", namespace = "http://serviceregistry.opencast.org")
+@XmlType(name = "host", namespace = "http://serviceregistry.opencastproject.org")
+@XmlRootElement(name = "host", namespace = "http://serviceregistry.opencastproject.org")
 public class JaxbHostRegistration implements HostRegistration {
 
   /**

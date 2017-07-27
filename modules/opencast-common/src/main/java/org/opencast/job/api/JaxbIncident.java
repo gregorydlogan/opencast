@@ -47,8 +47,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /** 1:1 serialization of a {@link Incident}. */
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlType(name = "incident", namespace = "http://job.opencast.org")
-@XmlRootElement(name = "incident", namespace = "http://job.opencast.org")
+@XmlType(name = "incident", namespace = "http://job.opencastproject.org")
+@XmlRootElement(name = "incident", namespace = "http://job.opencastproject.org")
 public final class JaxbIncident {
   @XmlElement(name = "id")
   private long id;
@@ -127,7 +127,7 @@ public final class JaxbIncident {
    * An description parameter. To read about why this class is necessary, see http://java.net/jira/browse/JAXB-223
    */
   @XmlAccessorType(XmlAccessType.FIELD)
-  @XmlType(name = "param", namespace = "http://job.opencast.org")
+  @XmlType(name = "param", namespace = "http://job.opencastproject.org")
   public static final class Param {
     @XmlAttribute(name = "name")
     private String name;

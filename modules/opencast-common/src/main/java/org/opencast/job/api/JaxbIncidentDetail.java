@@ -38,7 +38,7 @@ import javax.xml.bind.annotation.XmlValue;
  * To read about why this class is necessary, see http://java.net/jira/browse/JAXB-223
  */
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlType(name = "detail", namespace = "http://job.opencast.org")
+@XmlType(name = "detail", namespace = "http://job.opencastproject.org")
 public final class JaxbIncidentDetail {
   @XmlAttribute(name = "title")
   private String title;

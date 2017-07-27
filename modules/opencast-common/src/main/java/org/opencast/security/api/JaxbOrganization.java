@@ -43,8 +43,8 @@ import javax.xml.bind.annotation.XmlValue;
  * An organization that is hosted on this Matterhorn instance.
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "organization", namespace = "http://org.opencast.security")
-@XmlRootElement(name = "organization", namespace = "http://org.opencast.security")
+@XmlType(name = "organization", namespace = "http://org.opencastproject.security")
+@XmlRootElement(name = "organization", namespace = "http://org.opencastproject.security")
 public class JaxbOrganization implements Organization {
 
   /** The organizational identifier */

@@ -44,7 +44,7 @@ import javax.xml.xpath.XPathException;
  * Implementation of {@link org.opencast.mediapackage.AudioStream}.
  */
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlType(name = "audio", namespace = "http://mediapackage.opencast.org")
+@XmlType(name = "audio", namespace = "http://mediapackage.opencastproject.org")
 public class AudioStreamImpl extends AbstractStreamImpl implements AudioStream {
 
   @XmlElement(name = "bitdepth")

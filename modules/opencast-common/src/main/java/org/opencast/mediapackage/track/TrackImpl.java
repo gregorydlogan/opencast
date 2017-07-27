@@ -53,8 +53,8 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
  * the speaker video or the slide presentation movie.
  */
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlType(name = "track", namespace = "http://mediapackage.opencast.org")
-@XmlRootElement(name = "track", namespace = "http://mediapackage.opencast.org")
+@XmlType(name = "track", namespace = "http://mediapackage.opencastproject.org")
+@XmlRootElement(name = "track", namespace = "http://mediapackage.opencastproject.org")
 public class TrackImpl extends AbstractMediaPackageElement implements Track {
 
   /** Serial version UID */

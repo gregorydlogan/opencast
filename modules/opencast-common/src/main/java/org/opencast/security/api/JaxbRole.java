@@ -33,8 +33,8 @@ import javax.xml.bind.annotation.XmlType;
  * A simple user model.
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "role", namespace = "http://org.opencast.security")
-@XmlRootElement(name = "role", namespace = "http://org.opencast.security")
+@XmlType(name = "role", namespace = "http://org.opencastproject.security")
+@XmlRootElement(name = "role", namespace = "http://org.opencastproject.security")
 public final class JaxbRole implements Role {
 
   /** The role name */

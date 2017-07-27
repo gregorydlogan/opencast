@@ -35,8 +35,8 @@ import javax.xml.bind.annotation.XmlType;
  * A wrapper for service registration collections.
  */
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlType(name = "services", namespace = "http://serviceregistry.opencast.org")
-@XmlRootElement(name = "services", namespace = "http://serviceregistry.opencast.org")
+@XmlType(name = "services", namespace = "http://serviceregistry.opencastproject.org")
+@XmlRootElement(name = "services", namespace = "http://serviceregistry.opencastproject.org")
 public class JaxbServiceRegistrationList {
   /** A list of search items. */
   @XmlElement(name = "service")

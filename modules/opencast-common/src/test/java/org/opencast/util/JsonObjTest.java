@@ -42,7 +42,7 @@ public class JsonObjTest {
   @Test
   public void testParse() {
     final JsonObj json = JsonObj.jsonObj(jsonString);
-    assertEquals("org.opencast.analytics", json.getObj("service").get(String.class, "type"));
+    assertEquals("org.opencastproject.analytics", json.getObj("service").get(String.class, "type"));
     assertEquals(true, json.obj("service").get(Boolean.class, "active"));
     assertEquals(true, json.obj("service").val("active").as(asBoolean));
     assertEquals("http://localhost:8080", json.obj("service").val("host").as(asString));

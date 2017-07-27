@@ -38,8 +38,8 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 /**
  * This is a basic implementation for handling simple catalogs of metadata.
  */
-@XmlRootElement(name = "catalog", namespace = "http://mediapackage.opencast.org")
-@XmlType(name = "catalog", namespace = "http://mediapackage.opencast.org")
+@XmlRootElement(name = "catalog", namespace = "http://mediapackage.opencastproject.org")
+@XmlType(name = "catalog", namespace = "http://mediapackage.opencastproject.org")
 @XmlAccessorType(XmlAccessType.NONE)
 public class CatalogImpl extends AbstractMediaPackageElement implements Catalog {
 

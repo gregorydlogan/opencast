@@ -38,8 +38,8 @@ import javax.xml.bind.annotation.XmlType;
 
 /** 1:1 serialization of a {@link IncidentTreeImpl}. */
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlType(name = "incidentTree", namespace = "http://job.opencast.org")
-@XmlRootElement(name = "incidentTree", namespace = "http://job.opencast.org")
+@XmlType(name = "incidentTree", namespace = "http://job.opencastproject.org")
+@XmlRootElement(name = "incidentTree", namespace = "http://job.opencastproject.org")
 public final class JaxbIncidentTree {
   @XmlElement(name = JaxbIncidentUtil.ELEM_NESTED_INCIDENT)
   private List<JaxbIncident> incidents;

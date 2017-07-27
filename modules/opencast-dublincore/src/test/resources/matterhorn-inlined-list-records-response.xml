@@ -17,8 +17,8 @@
         <datestamp>2011-05-01</datestamp>
       </header>
       <metadata>
-        <inlined xmlns="http://www.opencast.org/oai/matterhorn-inlined">
-          <mediapackage xmlns="http://mediapackage.opencast.org"
+        <inlined xmlns="http://www.opencastproject.org/oai/matterhorn-inlined">
+          <mediapackage xmlns="http://mediapackage.opencastproject.org"
             duration="1004400000"
             id="10.0000/5820"
             start="2007-12-05T13:40:00">
@@ -42,8 +42,8 @@
             </metadata>
           </mediapackage>
           <episode-dc>
-            <dublincore xmlns="http://www.opencast.org/xsd/1.0/dublincore/"
-              xmlns:oc="http://www.opencast.org/matterhorn/"
+            <dublincore xmlns="http://www.opencastproject.org/xsd/1.0/dublincore/"
+              xmlns:oc="http://www.opencastproject.org/matterhorn/"
               xmlns:dcterms="http://purl.org/dc/terms/">
               <dcterms:identifier>
                 10.0000/5820
@@ -77,7 +77,7 @@
             </dublincore>
           </episode-dc>
           <series-dc>
-            <dublincore xmlns="http://www.opencast.org/xsd/1.0/dublincore/"
+            <dublincore xmlns="http://www.opencastproject.org/xsd/1.0/dublincore/"
               xmlns:dcterms="http://purl.org/dc/terms/">
               <dcterms:title>
                 Land and Vegetation: Key players on the Climate Scene

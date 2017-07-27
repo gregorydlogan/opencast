@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!-- test case for CERV-482 -->
 <!-- setting the default namespace to nothing must not throw an exception -->
-<dublincore xmlns="http://www.opencast.org/xsd/1.0/dublincore/" xmlns:dcterms="http://purl.org/dc/terms/">
+<dublincore xmlns="http://www.opencastproject.org/xsd/1.0/dublincore/" xmlns:dcterms="http://purl.org/dc/terms/">
   <dcterms:title xmlns="">Cutting Test 1</dcterms:title>
   <dcterms:creator xmlns=""></dcterms:creator>
   <dcterms:isPartOf xmlns=""></dcterms:isPartOf>

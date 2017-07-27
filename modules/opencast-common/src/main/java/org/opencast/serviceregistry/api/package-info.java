@@ -1,7 +1,7 @@
 /**
  * Service implementation classes
  */
-@XmlSchema(elementFormDefault = XmlNsForm.QUALIFIED, attributeFormDefault = XmlNsForm.UNQUALIFIED, namespace = "http://serviceregistry.opencast.org")
+@XmlSchema(elementFormDefault = XmlNsForm.QUALIFIED, attributeFormDefault = XmlNsForm.UNQUALIFIED, namespace = "http://serviceregistry.opencastproject.org")
 package org.opencast.serviceregistry.api;
 
 import javax.xml.bind.annotation.XmlNsForm;

@@ -4,7 +4,7 @@
 <metadata xmlns="http://institution.org/metadata"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xmlns:dcterms="http://purl.org/dc/terms/"
-          xmlns:oc="http://www.opencast.org/matterhorn/"
+          xmlns:oc="http://www.opencastproject.org/matterhorn/"
           xmlns:foo="http://foo.org/metadata"
           xmlns:lib="http://lib.org/metadata-enc">
   <dcterms:description xml:lang="en">Introduction lecture from the Institute for Atmospheric and Climate Science.

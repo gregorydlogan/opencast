@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<incident xmlns="http://job.opencast.org">
+<incident xmlns="http://job.opencastproject.org">
   <id>1</id>
   <jobId>2</jobId>
   <serviceType>service</serviceType>

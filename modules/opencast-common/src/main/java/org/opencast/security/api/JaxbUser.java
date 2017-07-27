@@ -43,9 +43,9 @@ import javax.xml.bind.annotation.XmlType;
  * A simple user model.
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "user", namespace = "http://org.opencast.security", propOrder = { "userName", "name", "email",
+@XmlType(name = "user", namespace = "http://org.opencastproject.security", propOrder = { "userName", "name", "email",
         "provider", "isManageable", "roles", "organization" })
-@XmlRootElement(name = "user", namespace = "http://org.opencast.security")
+@XmlRootElement(name = "user", namespace = "http://org.opencastproject.security")
 public final class JaxbUser implements User {
 
   /** The user name */

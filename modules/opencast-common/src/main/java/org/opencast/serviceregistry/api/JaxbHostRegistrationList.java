@@ -35,8 +35,8 @@ import javax.xml.bind.annotation.XmlType;
  * A wrapper for host registration collections.
  */
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlType(name = "hosts", namespace = "http://serviceregistry.opencast.org")
-@XmlRootElement(name = "hosts", namespace = "http://serviceregistry.opencast.org")
+@XmlType(name = "hosts", namespace = "http://serviceregistry.opencastproject.org")
+@XmlRootElement(name = "hosts", namespace = "http://serviceregistry.opencastproject.org")
 public class JaxbHostRegistrationList {
 
   /** A list of search items. */

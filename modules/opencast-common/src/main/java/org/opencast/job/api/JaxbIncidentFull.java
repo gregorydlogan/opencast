@@ -39,8 +39,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "incidentFull", namespace = "http://job.opencast.org")
-@XmlRootElement(name = "incidentFull", namespace = "http://job.opencast.org")
+@XmlType(name = "incidentFull", namespace = "http://job.opencastproject.org")
+@XmlRootElement(name = "incidentFull", namespace = "http://job.opencastproject.org")
 public final class JaxbIncidentFull {
   @XmlElement(name = "id")
   private long id;

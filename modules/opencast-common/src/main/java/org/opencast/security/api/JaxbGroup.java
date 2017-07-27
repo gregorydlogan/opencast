@@ -37,8 +37,8 @@ import javax.xml.bind.annotation.XmlType;
  * A simple user model.
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "group", namespace = "http://org.opencast.security")
-@XmlRootElement(name = "group", namespace = "http://org.opencast.security")
+@XmlType(name = "group", namespace = "http://org.opencastproject.security")
+@XmlRootElement(name = "group", namespace = "http://org.opencastproject.security")
 public final class JaxbGroup implements Group {
 
   @XmlElement(name = "id")

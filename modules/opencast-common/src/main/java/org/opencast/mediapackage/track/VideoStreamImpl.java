@@ -45,7 +45,7 @@ import javax.xml.xpath.XPathException;
  * Implementation of {@link org.opencast.mediapackage.VideoStream}.
  */
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlType(name = "video", namespace = "http://mediapackage.opencast.org")
+@XmlType(name = "video", namespace = "http://mediapackage.opencastproject.org")
 public class VideoStreamImpl extends AbstractStreamImpl implements VideoStream {
 
   @XmlElement(name = "bitrate")

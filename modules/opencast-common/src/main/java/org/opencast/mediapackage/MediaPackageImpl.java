@@ -74,10 +74,10 @@ import javax.xml.transform.stream.StreamSource;
 /**
  * Default implementation for a media media package.
  */
-@XmlType(name = "mediapackage", namespace = "http://mediapackage.opencast.org", propOrder = { "title", "series",
+@XmlType(name = "mediapackage", namespace = "http://mediapackage.opencastproject.org", propOrder = { "title", "series",
         "seriesTitle", "creators", "contributors", "subjects", "license", "language", "tracks", "catalogs",
         "attachments", "publications" })
-@XmlRootElement(name = "mediapackage", namespace = "http://mediapackage.opencast.org")
+@XmlRootElement(name = "mediapackage", namespace = "http://mediapackage.opencastproject.org")
 @XmlAccessorType(XmlAccessType.NONE)
 public final class MediaPackageImpl implements MediaPackage {
 
@@ -155,7 +155,7 @@ public final class MediaPackageImpl implements MediaPackage {
 
   static {
     try {
-      context = JAXBContext.newInstance("org.opencast.mediapackage", MediaPackageImpl.class.getClassLoader());
+      context = JAXBContext.newInstance("org.opencastproject.mediapackage", MediaPackageImpl.class.getClassLoader());
     } catch (JAXBException e) {
       throw new RuntimeException(e);
     }

@@ -35,8 +35,8 @@ import javax.xml.bind.annotation.XmlType;
  * JAXB annotated implementation of the job context.
  */
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlType(name = "jobcontext", namespace = "http://job.opencast.org")
-@XmlRootElement(name = "jobcontext", namespace = "http://job.opencast.org")
+@XmlType(name = "jobcontext", namespace = "http://job.opencastproject.org")
+@XmlRootElement(name = "jobcontext", namespace = "http://job.opencastproject.org")
 public class JaxbJobContext implements JobContext {
 
   /** The context identifier, which is equal to the root job identifier */

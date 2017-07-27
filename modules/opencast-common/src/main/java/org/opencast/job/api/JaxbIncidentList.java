@@ -36,8 +36,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "incidentList", namespace = "http://job.opencast.org")
-@XmlRootElement(name = "incidentList", namespace = "http://job.opencast.org")
+@XmlType(name = "incidentList", namespace = "http://job.opencastproject.org")
+@XmlRootElement(name = "incidentList", namespace = "http://job.opencastproject.org")
 public final class JaxbIncidentList {
   @XmlElement(name = JaxbIncidentUtil.ELEM_NESTED_INCIDENT)
   private List<JaxbIncident> incidents;
