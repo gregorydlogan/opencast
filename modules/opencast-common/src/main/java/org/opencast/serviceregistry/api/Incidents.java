@@ -49,9 +49,9 @@ public final class Incidents {
   /**
    * System error codes
    */
-  private static final String SYSTEM_UNHANDLED_EXCEPTION = "org.opencast.system.unhandled-exception";
-  private static final String SYSTEM_JOB_CREATION_EXCEPTION = "org.opencast.system.job-creation-exception";
-  private static final String SYSTEM_MIGRATED_ERROR = "org.opencast.system.migrated-error";
+  private static final String SYSTEM_UNHANDLED_EXCEPTION = "org.opencastproject.system.unhandled-exception";
+  private static final String SYSTEM_JOB_CREATION_EXCEPTION = "org.opencastproject.system.job-creation-exception";
+  private static final String SYSTEM_MIGRATED_ERROR = "org.opencastproject.system.migrated-error";
 
   public static final Map<String, String> NO_PARAMS = Immutables.emtpyMap();
   public static final List<Tuple<String, String>> NO_DETAILS = Immutables.nil();
@@ -70,7 +70,7 @@ public final class Incidents {
    *
    * @param code
    *          A code number. This incident factory method enforces an incident code schema of <code>job_type.code</code>
-   *          , e.g. <code>org.opencast.service.1511</code> . So instead of aligning
+   *          , e.g. <code>org.opencastproject.service.1511</code> . So instead of aligning
    *          <code>job.getJobType()</code> and the incident's code prefix manually this is done automatically for you
    *          by this method. See {@link org.opencast.job.api.Incident#getCode()}.
    * @see org.opencast.job.api.Incident

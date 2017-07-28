@@ -68,7 +68,7 @@ public abstract class AbstractJobProducer implements JobProducer {
   /**
    * The key to look for in the service configuration file to override the {@link DEFAULT_ACCEPT_JOB_LOADS_EXCEEDING}
    */
-  public static final String ACCEPT_JOB_LOADS_EXCEEDING_PROPERTY = "org.opencast.job.load.acceptexceeding";
+  public static final String ACCEPT_JOB_LOADS_EXCEEDING_PROPERTY = "org.opencastproject.job.load.acceptexceeding";
 
   /** Whether to accept a job whose load exceeds the host’s max load */
   protected boolean acceptJobLoadsExeedingMaxLoad = DEFAULT_ACCEPT_JOB_LOADS_EXCEEDING;

@@ -54,7 +54,7 @@ public final class SecurityUtil {
   }
 
   /** The name of the key used to store the name of the system user in the global config. */
-  public static final String PROPERTY_KEY_SYS_USER = "org.opencast.security.digest.user";
+  public static final String PROPERTY_KEY_SYS_USER = "org.opencastproject.security.digest.user";
 
   /**
    * Run function <code>f</code> in the context described by the given organization and user.

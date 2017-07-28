@@ -29,17 +29,17 @@ import static org.opencast.util.data.Tuple.tuple;
 import static org.opencast.util.data.functions.Strings.split;
 import static org.opencast.util.data.functions.Strings.trimToNil;
 
+import org.apache.commons.lang3.StringUtils;
 import org.opencast.job.api.JaxbJob;
 import org.opencast.job.api.Job;
 import org.opencast.rest.ErrorCodeException;
 import org.opencast.rest.RestConstants;
+import org.opencast.systems.MatterhornConstants;
 import org.opencast.util.Jsons.Obj;
 import org.opencast.util.data.Function;
 import org.opencast.util.data.Monadics;
 import org.opencast.util.data.Option;
 import org.opencast.util.data.Tuple;
-
-import org.apache.commons.lang3.StringUtils;
 import org.osgi.service.component.ComponentContext;
 
 import java.io.File;
@@ -66,7 +66,7 @@ public final class RestUtil {
    *           if the service path is not configured for this component
    */
   public static Tuple<String, String> getEndpointUrl(ComponentContext cc) {
-    final String serverUrl = option(cc.getBundleContext().getProperty("org.opencast.server.url")).getOrElse(
+    final String serverUrl = option(cc.getBundleContext().getProperty(MatterhornConstants.SERVER_URL_PROPERTY)).getOrElse(
             UrlSupport.DEFAULT_BASE_URL);
     final String servicePath = option((String) cc.getProperties().get(RestConstants.SERVICE_PATH_PROPERTY)).getOrElse(
             Option.<String> error(RestConstants.SERVICE_PATH_PROPERTY + " property not configured"));

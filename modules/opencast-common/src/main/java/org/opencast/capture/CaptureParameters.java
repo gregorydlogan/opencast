@@ -39,7 +39,7 @@ public interface CaptureParameters {
   long DEFAULT_STATE_PUSH_TIME = 10 * SECONDS * MILLISECONDS;
 
   /** Matterhorn Core URL */
-  String CAPTURE_CORE_URL = "org.opencast.capture.core.url";
+  String CAPTURE_CORE_URL = "org.opencastproject.capture.core.url";
 
   /**
    * Settings which control the configuration service
@@ -97,7 +97,7 @@ public interface CaptureParameters {
   String AGENT_CAPABILITIES_REMOTE_POLLING_INTERVAL = "capture.agent.capabilities.remote.polling.interval";
 
   /** Agent configuration property indicating how the agent was registered */
-  String AGENT_REGISTRATION_TYPE = "org.opencast.registration.type";
+  String AGENT_REGISTRATION_TYPE = "org.opencastproject.registration.type";
 
   /** Agent configuration value indicating ad-hoc registration */
   String AGENT_REGISTRATION_TYPE_ADHOC = "ad-hoc";
@@ -126,7 +126,7 @@ public interface CaptureParameters {
 
   /** The recording's properties */
   // TODO: I shouldn't live here, but where should I live?
-  String RECORDING_PROPERTIES = "org.opencast.capture.agent.properties";
+  String RECORDING_PROPERTIES = "org.opencastproject.capture.agent.properties";
 
   /**
    * Settings which control the ingest jobs
@@ -145,7 +145,7 @@ public interface CaptureParameters {
   String INGEST_PAUSE_TIME = "capture.ingest.pause.time";
 
   /** The key for the workflow definition, if any, in the capture properties attached to the iCal event */
-  String INGEST_WORKFLOW_DEFINITION = "org.opencast.workflow.definition";
+  String INGEST_WORKFLOW_DEFINITION = "org.opencastproject.workflow.definition";
 
   /**
    * Settings which control the capture hardware and outputs

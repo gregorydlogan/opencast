@@ -35,9 +35,9 @@ import javax.management.ObjectName;
  */
 public final class JmxUtil {
 
-  public static final String MATTERHORN_UPDATE_NOTIFICATION = "org.opencast.matterhorn.update";
+  public static final String MATTERHORN_UPDATE_NOTIFICATION = "org.opencast.update";
 
-  private static final String MATTERORN_JMX_DOMAIN = "org.opencast.matterhorn";
+  private static final String MATTERORN_JMX_DOMAIN = "org.opencast";
   private static final Logger logger = LoggerFactory.getLogger(JmxUtil.class);
 
   private JmxUtil() {
