@@ -45,7 +45,7 @@ public final class SystemLoadParser {
   /** Static initializer to setup the jaxb context */
   static {
     try {
-      jaxbContext = JAXBContext.newInstance("org.opencast.serviceregistry.api",
+      jaxbContext = JAXBContext.newInstance("org.opencastproject.serviceregistry.api",
               SystemLoadParser.class.getClassLoader());
     } catch (JAXBException e) {
       throw new IllegalStateException(e);

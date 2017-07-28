@@ -228,7 +228,7 @@ public class JaxbOrganization implements Organization {
    * An organization property. To read about why this class is necessary, see http://java.net/jira/browse/JAXB-223
    */
   @XmlAccessorType(XmlAccessType.FIELD)
-  @XmlType(name = "server", namespace = "http://org.opencast.security")
+  @XmlType(name = "server", namespace = "http://org.opencastproject.security")
   public static class OrgServer {
 
     /** The server name */
@@ -277,7 +277,7 @@ public class JaxbOrganization implements Organization {
    * An organization property. To read about why this class is necessary, see http://java.net/jira/browse/JAXB-223
    */
   @XmlAccessorType(XmlAccessType.FIELD)
-  @XmlType(name = "property", namespace = "http://org.opencast.security")
+  @XmlType(name = "property", namespace = "http://org.opencastproject.security")
   public static class OrgProperty {
 
     /** The property key */

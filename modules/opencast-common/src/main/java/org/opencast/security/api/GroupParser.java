@@ -30,7 +30,7 @@ import java.io.IOException;
 public final class GroupParser extends JaxbParser {
 
   /** Instance of GroupParser */
-  public static final GroupParser I = new GroupParser("org.opencast.security.api");
+  public static final GroupParser I = new GroupParser("org.opencastproject.security.api");
 
   private GroupParser(String contextPath) {
     super(contextPath);

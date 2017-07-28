@@ -40,7 +40,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * Checksum type represents the method used to generate a checksum.
  */
 @XmlJavaTypeAdapter(ChecksumType.Adapter.class)
-@XmlType(name = "checksumtype", namespace = "http://mediapackage.opencast.org")
+@XmlType(name = "checksumtype", namespace = "http://mediapackage.opencastproject.org")
 public final class ChecksumType implements Serializable {
 
   private static final Logger logger = LoggerFactory.getLogger(ChecksumType.class);

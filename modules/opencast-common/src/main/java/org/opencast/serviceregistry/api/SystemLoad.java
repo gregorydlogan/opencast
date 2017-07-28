@@ -36,8 +36,8 @@ import javax.xml.bind.annotation.XmlType;
 /**
  * Mappings between the registered hosts and their load factors.
  */
-@XmlType(name = "load", namespace = "http://serviceregistry.opencast.org")
-@XmlRootElement(name = "load", namespace = "http://serviceregistry.opencast.org")
+@XmlType(name = "load", namespace = "http://serviceregistry.opencastproject.org")
+@XmlRootElement(name = "load", namespace = "http://serviceregistry.opencastproject.org")
 @XmlAccessorType(XmlAccessType.NONE)
 public class SystemLoad {
 
@@ -108,8 +108,8 @@ public class SystemLoad {
   }
 
   /** A record of a node in the cluster and its load factor */
-  @XmlType(name = "nodetype", namespace = "http://serviceregistry.opencast.org")
-  @XmlRootElement(name = "nodetype", namespace = "http://serviceregistry.opencast.org")
+  @XmlType(name = "nodetype", namespace = "http://serviceregistry.opencastproject.org")
+  @XmlRootElement(name = "nodetype", namespace = "http://serviceregistry.opencastproject.org")
   @XmlAccessorType(XmlAccessType.NONE)
   public static class NodeLoad implements Comparable<NodeLoad> {
 

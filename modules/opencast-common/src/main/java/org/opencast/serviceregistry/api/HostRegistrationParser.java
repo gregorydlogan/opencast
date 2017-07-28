@@ -45,7 +45,7 @@ public final class HostRegistrationParser {
   /** Static initializer to setup the jaxb context */
   static {
     try {
-      jaxbContext = JAXBContext.newInstance("org.opencast.serviceregistry.api:org.opencast.job.api",
+      jaxbContext = JAXBContext.newInstance("org.opencastproject.serviceregistry.api:org.opencastproject.job.api",
               HostRegistrationParser.class.getClassLoader());
     } catch (JAXBException e) {
       throw new IllegalStateException(e);

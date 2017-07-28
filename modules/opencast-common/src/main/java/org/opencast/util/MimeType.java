@@ -48,7 +48,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * the mime type registry {@link MimeTypes}.
  */
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlType(name = "mimetype", namespace = "http://mediapackage.opencast.org")
+@XmlType(name = "mimetype", namespace = "http://mediapackage.opencastproject.org")
 @XmlJavaTypeAdapter(MimeType.Adapter.class)
 public final class MimeType implements Comparable<MimeType>, Serializable {
   private static final Logger logger = LoggerFactory.getLogger(MimeType.class);

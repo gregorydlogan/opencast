@@ -35,8 +35,8 @@ import javax.xml.bind.annotation.XmlType;
  * now looks &lt;item key="key"&gt;&lt;value&gt;value&lt;/value&gt;&lt;/item&gt;
  *
  */
-@XmlType(name = "hash-entry", namespace = "http://util.opencast.org")
-@XmlRootElement(name = "hash-entry", namespace = "http://util.opencast.org")
+@XmlType(name = "hash-entry", namespace = "http://util.opencastproject.org")
+@XmlRootElement(name = "hash-entry", namespace = "http://util.opencastproject.org")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class HashEntry implements Entry<String, String> {
 

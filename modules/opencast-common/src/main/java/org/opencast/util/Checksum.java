@@ -43,7 +43,7 @@ import javax.xml.bind.annotation.XmlValue;
  * This class stores value and type of a generated checksum.
  */
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlType(name = "checksum", namespace = "http://mediapackage.opencast.org")
+@XmlType(name = "checksum", namespace = "http://mediapackage.opencastproject.org")
 public final class Checksum implements Serializable {
 
   /** Serial version uid */

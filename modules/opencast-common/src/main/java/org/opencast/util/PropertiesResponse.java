@@ -32,8 +32,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 /**
  * A handy wrapper to wrap Properties objects for automated JAXB serialization.
  */
-@XmlType(name = "properties-response", namespace = "http://common.opencast.org")
-@XmlRootElement(name = "properties-response", namespace = "http://common.opencast.org")
+@XmlType(name = "properties-response", namespace = "http://common.opencastproject.org")
+@XmlRootElement(name = "properties-response", namespace = "http://common.opencastproject.org")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class PropertiesResponse {
 

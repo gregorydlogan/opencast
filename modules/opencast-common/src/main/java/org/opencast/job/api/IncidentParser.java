@@ -30,7 +30,7 @@ import java.io.InputStream;
 public final class IncidentParser extends JaxbParser {
   /** Instance of IncidentParser */
   public static final IncidentParser I =
-          new IncidentParser("org.opencast.job.api:org.opencast.serviceregistry.api");
+          new IncidentParser("org.opencastproject.job.api:org.opencastproject.serviceregistry.api");
 
   private IncidentParser(String contextPath) {
     super(contextPath);

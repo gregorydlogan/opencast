@@ -43,6 +43,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -155,7 +156,7 @@ public final class MediaPackageImpl implements MediaPackage {
 
   static {
     try {
-      context = JAXBContext.newInstance("org.opencastproject.mediapackage", MediaPackageImpl.class.getClassLoader());
+      context = JAXBContext.newInstance("org.opencast.mediapackage:org.opencastproject.mediapackage", MediaPackageImpl.class.getClassLoader());
     } catch (JAXBException e) {
       throw new RuntimeException(e);
     }
@@ -1542,8 +1543,8 @@ public final class MediaPackageImpl implements MediaPackage {
       Transformer transformer = TransformerFactory.newInstance().newTransformer();
       transformer.transform(domSource, result);
       in = new ByteArrayInputStream(out.toByteArray());
-
-      return unmarshaller.unmarshal(new StreamSource(in), MediaPackageImpl.class).getValue();
+      unmarshaller.unmarshal(new StreamSource(in), MediaPackageImpl.class).getValue();
+      return null;
     } catch (Exception e) {
       throw new MediaPackageException("Error deserializing media package node", e);
     } finally {
