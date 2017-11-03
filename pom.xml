@@ -633,6 +633,17 @@
           <artifactId>frontend-maven-plugin</artifactId>
           <version>1.3</version>
         </plugin>
+        <plugin>
+          <groupId>org.jasig.maven</groupId>
+          <artifactId>maven-notice-plugin</artifactId>
+          <version>1.0.6.1</version>
+          <configuration>
+            <noticeTemplate>NOTICE.template</noticeTemplate>
+            <licenseMapping>
+              <param>https://source.jasig.org/licenses/license-mappings.xml</param>
+            </licenseMapping>
+          </configuration>
+        </plugin>
       </plugins>
     </pluginManagement>
   </build>
