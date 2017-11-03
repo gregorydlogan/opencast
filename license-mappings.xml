@@ -109,6 +109,12 @@
         <license>Not distributed with project</license>
     </artifact>
     <artifact>
+        <groupId>net.sourceforge.nekohtml</groupId>
+        <artifactId>com.springsource.org.cyberneko.html</artifactId>
+        <version>1.9.13</version>
+        <license>Apache License, Version 2.0</license>
+    </artifact>
+    <artifact>
         <groupId>com.sun.xml.bind</groupId>
         <artifactId>jaxb-impl</artifactId>
         <license>Commons Development and Distribution License, Version 1.0</license>
