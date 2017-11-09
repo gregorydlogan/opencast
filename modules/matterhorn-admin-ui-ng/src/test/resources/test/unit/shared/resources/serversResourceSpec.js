@@ -51,15 +51,61 @@ describe('Servers API Resource', function () {
             }]
         };
 
+        var sampleSimpleJSON = {
+            results: [{
+                completed: 9,
+                running: 2,
+                queued: 0,
+                meanRunTime: 0,
+                meanQueueTime: 0,
+                hostname: 'testme1.com',
+                type: 'CentOS',
+                memory: '2048',
+                cores: '4',
+                online: true,
+                maintenance: false
+            }, {
+                completed: 291,
+                running: 8,
+                queued: 19,
+                meanRunTime: 0,
+                meanQueueTime: 0,
+                hostname: 'testme2.com',
+                type: 'CentOS',
+                memory: '16384',
+                cores: '8',
+                online: false,
+                maintenance: true
+            }, {
+                completed: 291,
+                running: 8,
+                queued: 19,
+                meanRunTime: 0,
+                meanQueueTime: 0,
+                hostname: 'testme2.com',
+                type: 'CentOS',
+                memory: '16384',
+                cores: '8',
+                online: false,
+                maintenance: false
+            }]
+        };
+
         it('calls the servers service', function () {
-            $httpBackend.expectGET('/admin-ng/server/servers.json').respond(JSON.stringify(sampleJSON));
-            ServersResource.query();
+            $httpBackend.expectGET('/admin-ng/server/servers.json?full=true').respond(JSON.stringify(sampleJSON));
+            ServersResource.query({full: "true"});
+            $httpBackend.flush();
+        });
+
+        it('handles full=false', function () {
+            $httpBackend.expectGET('/admin-ng/server/servers.json?full=false').respond(JSON.stringify(sampleSimpleJSON));
+            ServersResource.query({full: "false"});
             $httpBackend.flush();
         });
 
         it('flattens the JSON data received', function () {
-            $httpBackend.whenGET('/admin-ng/server/servers.json').respond(JSON.stringify(sampleJSON));
-            var data = ServersResource.query();
+            $httpBackend.whenGET('/admin-ng/server/servers.json?full=true').respond(JSON.stringify(sampleJSON));
+            var data = ServersResource.query({full: "true"});
             $httpBackend.flush();
             expect(data.rows.length).toBe(3);
             expect(data.rows[0].id).toBe(sampleJSON.results[0].name);

@@ -150,6 +150,7 @@ angular.module('adminNg.services')
             me.resource = options.resource;
             me.category = options.category;
             me.apiService = options.apiService;
+            me.queryparams = options.queryparams;
             me.multiSelect = options.multiSelect;
             me.refreshDelay = options.refreshDelay || DEFAULT_REFRESH_DELAY;
             me.postProcessRow = options.postProcessRow;
@@ -272,6 +273,9 @@ angular.module('adminNg.services')
 
             query.limit = me.pagination.limit;
             query.offset = me.pagination.offset * me.pagination.limit;
+            angular.forEach(me.queryparams, function (value, key) {
+                query[key] = value;
+            });
 
             (function(resource){
               me.apiService.query(query).$promise.then(function (data) {

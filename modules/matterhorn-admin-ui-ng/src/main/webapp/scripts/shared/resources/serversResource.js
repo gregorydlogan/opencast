@@ -1,6 +1,6 @@
 angular.module('adminNg.resources')
 .factory('ServersResource', ['$resource', 'JsHelper', function ($resource, JsHelper) {
-    return $resource('/admin-ng/server/servers.json', {}, {
+    return $resource('/admin-ng/server/servers.json', {full: 'false'}, {
         query: { method: 'GET', isArray: false, transformResponse: function (rawData) {
             var data = JSON.parse(rawData);
             var result = [];
