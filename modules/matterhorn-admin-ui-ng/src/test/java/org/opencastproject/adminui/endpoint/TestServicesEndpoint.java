@@ -82,8 +82,18 @@ public class TestServicesEndpoint extends ServicesEndpoint {
     statistics.add(new JaxbServiceStatistics(service5,      0,      0, 0, 0, 10));
     statistics.add(new JaxbServiceStatistics(service6,      0,  60000, 0, 1,  0));
 
+    List<ServiceStatistics> statisticsLight = new ArrayList<ServiceStatistics>();
+    statisticsLight.add(new JaxbServiceStatistics(service1,      -1,      -1, 0, 0,  0));
+    statisticsLight.add(new JaxbServiceStatistics(service2, -1, -1, 0, 3,  5));
+    statisticsLight.add(new JaxbServiceStatistics(service3,  -1,  -1, 2, 5, 20));
+    statisticsLight.add(new JaxbServiceStatistics(service4,  -1,  -1, 1, 1,  0));
+    statisticsLight.add(new JaxbServiceStatistics(service5,      -1,      -1, 0, 0, 10));
+    statisticsLight.add(new JaxbServiceStatistics(service6,      -1,  -1, 0, 1,  0));
+
     EasyMock.expect(serviceRegistry.getHostRegistrations()).andReturn(hosts).anyTimes();
     EasyMock.expect(serviceRegistry.getServiceStatistics()).andReturn(statistics).anyTimes();
+    EasyMock.expect(serviceRegistry.getServiceStatistics(EasyMock.eq(true))).andReturn(statistics).anyTimes();
+    EasyMock.expect(serviceRegistry.getServiceStatistics(EasyMock.eq(false))).andReturn(statisticsLight).anyTimes();
 
     EasyMock.replay(serviceRegistry);
 

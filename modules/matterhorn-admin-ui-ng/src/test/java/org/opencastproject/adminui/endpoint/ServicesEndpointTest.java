@@ -75,11 +75,24 @@ public class ServicesEndpointTest {
 
   @Test
   public void testSimpleRequest() throws ParseException, IOException {
-    InputStream stream = ServicesEndpointTest.class.getResourceAsStream(TEST_DATA_JSON);
+    InputStream stream = ServicesEndpointTest.class.getResourceAsStream("/services.json");
     InputStreamReader reader = new InputStreamReader(stream);
     JSONObject expected = (JSONObject) new JSONParser().parse(reader);
     JSONObject actual = (JSONObject) parser.parse(given().log().all().expect().statusCode(HttpStatus.SC_OK)
-            .contentType(ContentType.JSON).when().get(rt.host(TEST_DATA_JSON)).asString());
+            .contentType(ContentType.JSON).when().get(rt.host(TEST_DATA_JSON + "?full=false")).asString());
+
+    ServiceEndpointTestsUtil.testJSONObjectEquality(expected, actual);
+  }
+
+  @Test
+  public void testSimpleFullRequest() throws ParseException, IOException {
+    InputStream stream = ServicesEndpointTest.class.getResourceAsStream("/services-full.json");
+    InputStreamReader reader = new InputStreamReader(stream);
+    JSONObject expected = (JSONObject) new JSONParser().parse(reader);
+    JSONObject actual = (JSONObject) parser.parse(given().log().all().expect().statusCode(HttpStatus.SC_OK)
+      .contentType(ContentType.JSON).when().get(rt.host(TEST_DATA_JSON)).asString());
+    //Note: The line above here is implicitly calling the endpoint with full=true!
+    //This is important so we don't accidentally change the API
 
     ServiceEndpointTestsUtil.testJSONObjectEquality(expected, actual);
   }

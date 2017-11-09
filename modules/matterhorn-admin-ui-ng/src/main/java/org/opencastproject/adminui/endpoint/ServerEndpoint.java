@@ -24,6 +24,7 @@ package org.opencastproject.adminui.endpoint;
 import static com.entwinemedia.fn.data.json.Jsons.f;
 import static com.entwinemedia.fn.data.json.Jsons.j;
 import static com.entwinemedia.fn.data.json.Jsons.v;
+import static org.opencastproject.util.doc.rest.RestParameter.Type.BOOLEAN;
 import static org.opencastproject.util.doc.rest.RestParameter.Type.INTEGER;
 import static org.opencastproject.util.doc.rest.RestParameter.Type.STRING;
 
@@ -176,11 +177,12 @@ public class ServerEndpoint {
           @RestParameter(name = "sort", description = "The sort order.  May include any "
                   + "of the following: COMPLETED (jobs), CORES, HOSTNAME, MAINTENANCE, MEANQUEUETIME (mean for jobs), "
                   + "MEANRUNTIME (mean for jobs), ONLINE, QUEUED (jobs), RUNNING (jobs)."
-                  + "The suffix must be :ASC for ascending or :DESC for descending sort order (e.g. HOSTNAME:DESC).", isRequired = false, type = STRING) },
-          reponses = { @RestResponse(description = "Returns the list of jobs from Matterhorn", responseCode = HttpServletResponse.SC_OK) },
+                  + "The suffix must be :ASC for ascending or :DESC for descending sort order (e.g. HOSTNAME:DESC).", isRequired = false, type = STRING),
+          @RestParameter(name = "full", description = "True to return stats with mean run and queue times (expensive)", isRequired = false, type = BOOLEAN, defaultValue = "true")
+          }, reponses = { @RestResponse(description = "Returns the list of jobs from Matterhorn", responseCode = HttpServletResponse.SC_OK) },
           returnDescription = "The list of servers")
   public Response getServers(@QueryParam("limit") final int limit, @QueryParam("offset") final int offset,
-          @QueryParam("filter") String filter, @QueryParam("sort") String sort)
+          @QueryParam("filter") String filter, @QueryParam("sort") String sort, @QueryParam("full") String fullstr)
           throws Exception {
 
     ServersListQuery query = new ServersListQuery();
@@ -188,9 +190,15 @@ public class ServerEndpoint {
     query.setLimit(limit);
     query.setOffset(offset);
 
+    Boolean full = true;
+    //We assume true, unless turned off
+    if (null != fullstr && !Boolean.valueOf(fullstr)) {
+      full = false;
+    }
+
     List<JSONObject> servers = new ArrayList<JSONObject>();
     // Get service statistics for all hosts and services
-    List<ServiceStatistics> servicesStatistics = serviceRegistry.getServiceStatistics();
+    List<ServiceStatistics> servicesStatistics = serviceRegistry.getServiceStatistics(full);
     for (HostRegistration server : serviceRegistry.getHostRegistrations()) {
       // Calculate statistics per server
       long jobsCompleted = 0;

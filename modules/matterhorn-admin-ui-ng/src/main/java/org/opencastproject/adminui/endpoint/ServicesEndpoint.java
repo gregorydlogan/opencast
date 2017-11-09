@@ -25,6 +25,7 @@ import static com.entwinemedia.fn.data.json.Jsons.f;
 import static com.entwinemedia.fn.data.json.Jsons.j;
 import static com.entwinemedia.fn.data.json.Jsons.v;
 import static com.entwinemedia.fn.data.json.Jsons.vN;
+import static org.opencastproject.util.doc.rest.RestParameter.Type.BOOLEAN;
 import static org.opencastproject.util.doc.rest.RestParameter.Type.STRING;
 
 import org.opencastproject.index.service.resources.list.query.ServicesListQuery;
@@ -87,10 +88,11 @@ public class ServicesEndpoint {
           @RestParameter(name = "filter", description = "Filter results by name, host, actions, status or free text query", isRequired = false, type = STRING),
           @RestParameter(name = "sort", description = "The sort order.  May include any "
                   + "of the following: host, name, running, queued, completed,  meanRunTime, meanQueueTime, "
-                  + "status. The sort suffix must be :asc for ascending sort order and :desc for descending.", isRequired = false, type = STRING)
+                  + "status. The sort suffix must be :asc for ascending sort order and :desc for descending.", isRequired = false, type = STRING),
+          @RestParameter(name = "full", description = "True to return stats with mean run and queue times (expensive)", isRequired = false, type = BOOLEAN, defaultValue = "true")
   }, reponses = { @RestResponse(description = "Returns the list of services from Opencast", responseCode = HttpServletResponse.SC_OK) }, returnDescription = "The list of services")
   public Response getServices(@QueryParam("limit") final int limit, @QueryParam("offset") final int offset,
-          @QueryParam("filter") String filter, @QueryParam("sort") String sort) throws Exception {
+          @QueryParam("filter") String filter, @QueryParam("sort") String sort, @QueryParam("full") String fullstr) throws Exception {
 
     Option<String> sortOpt = Option.option(StringUtils.trimToNull(sort));
     ServicesListQuery query = new ServicesListQuery();
@@ -109,8 +111,14 @@ public class ServicesEndpoint {
     if (query.getFreeText().isSome())
       fFreeText = StringUtils.trimToNull(query.getFreeText().get());
 
+    Boolean full = true;
+    //We assume true, unless turned off
+    if (null != fullstr && !Boolean.valueOf(fullstr)) {
+      full = false;
+    }
+
     List<Service> services = new ArrayList<Service>();
-    for (ServiceStatistics stats : serviceRegistry.getServiceStatistics()) {
+    for (ServiceStatistics stats : serviceRegistry.getServiceStatistics(full)) {
       Service service = new Service(stats);
       if (fName != null && !StringUtils.equalsIgnoreCase(service.getName(), fName))
         continue;
