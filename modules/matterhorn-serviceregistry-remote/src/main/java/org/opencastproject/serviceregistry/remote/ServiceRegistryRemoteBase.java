@@ -687,7 +687,14 @@ public abstract class ServiceRegistryRemoteBase implements ServiceRegistry {
 
   @Override
   public List<ServiceStatistics> getServiceStatistics() throws ServiceRegistryException {
-    final HttpGet get = get("statistics.xml");
+    return getServiceStatistics(true);
+  }
+
+  @Override
+  public List<ServiceStatistics> getServiceStatistics(boolean full) throws ServiceRegistryException {
+    String servicePath = new QueryStringBuilder("statistics.xml").add("full", Boolean.toString(full)).toString();
+    final HttpGet get = get(servicePath);
+
     HttpResponse response = null;
     int responseStatusCode;
     try {

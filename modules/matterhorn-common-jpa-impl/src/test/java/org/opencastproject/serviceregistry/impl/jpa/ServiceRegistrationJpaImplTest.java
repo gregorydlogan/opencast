@@ -109,6 +109,41 @@ public class ServiceRegistrationJpaImplTest {
 
     Object[] stats = (Object[]) statistic.get(0);
     assertEquals(1, statistic.size());
+    assertEquals(3, stats.length);
+    assertEquals(serviceReg.getId().longValue(), ((Number) stats[0]).longValue());
+    assertEquals(job.getStatus().ordinal(), ((Number) stats[1]).intValue());
+    assertEquals(1, ((Number) stats[2]).intValue());
+
+    /* There are no jobs in the specific time interval */
+    statistic = env.tx(
+      Queries.named.findAll("ServiceRegistration.statistics",
+        P.p2("minDateCreated", DateUtils.addDays(now, -3)), P.p2("maxDateCreated", DateUtils.addDays(now, -2))));
+
+    assertEquals(0, statistic.size());
+
+  }
+
+  @Test
+  public void testQueryFullStatistics() throws Exception {
+    HostRegistrationJpaImpl host = new HostRegistrationJpaImpl("http://localhost:8081", "http://localhost:8081", 1024L,
+            1, 1, true, false);
+    ServiceRegistrationJpaImpl serviceReg = new ServiceRegistrationJpaImpl(host, "NOP", "/nop", false);
+
+    Date now = new Date();
+
+    host = env.tx(Queries.persistOrUpdate(host));
+    serviceReg = env.tx(Queries.persistOrUpdate(serviceReg));
+
+    JpaJob job = env.tx(Queries.persistOrUpdate(createJob(now, serviceReg)));
+    JpaJob jobYesterday = env.tx(Queries.persistOrUpdate(createJob(DateUtils.addDays(now, -1), serviceReg)));
+
+    /* find the job created at 'now' should reveal exactly one job */
+    List<Object> statistic = env.tx(
+            Queries.named.findAll("ServiceRegistration.fullStatistics",
+                    P.p2("minDateCreated", now), P.p2("maxDateCreated", now)));
+
+    Object[] stats = (Object[]) statistic.get(0);
+    assertEquals(1, statistic.size());
     assertEquals(5, stats.length);
     assertEquals(serviceReg.getId().longValue(), ((Number) stats[0]).longValue());
     assertEquals(job.getStatus().ordinal(), ((Number) stats[1]).intValue());

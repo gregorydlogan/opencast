@@ -592,6 +592,18 @@ public interface ServiceRegistry {
   List<ServiceStatistics> getServiceStatistics() throws ServiceRegistryException;
 
   /**
+   * Gets performance and runtime statistics for each known service registration.
+   *
+   * @param full
+   *   Set this to true to add the mean runtime, and mean queue times to the statistics
+   *
+   * @return the service statistics
+   * @throws ServiceRegistryException
+   *           if there is a problem accessing the service registry
+   */
+  List<ServiceStatistics> getServiceStatistics(boolean full) throws ServiceRegistryException;
+
+  /**
    * Gets the count of the number of abnormal services across the whole system.
    *
    * @return the count of abnormal services

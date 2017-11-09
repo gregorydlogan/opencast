@@ -1960,10 +1960,20 @@ public class ServiceRegistryJpaImpl implements ServiceRegistry, ManagedService {
    */
   @Override
   public List<ServiceStatistics> getServiceStatistics() throws ServiceRegistryException {
+    return getServiceStatistics(true);
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * @see org.opencastproject.serviceregistry.api.ServiceRegistry#getServiceStatistics(java.lang.Boolean)
+   */
+  @Override
+  public List<ServiceStatistics> getServiceStatistics(boolean full) throws ServiceRegistryException {
     Date now = new Date();
     return getServiceStatistics(
-             DateUtils.addDays(now, -maxJobAge),
-             DateUtils.addDays(now, 1)); // Avoid glitches around 'now' by setting the endDate to 'tomorrow'
+            DateUtils.addDays(now, -maxJobAge),
+            DateUtils.addDays(now, 1), full); // Avoid glitches around 'now' by setting the endDate to 'tomorrow'
   }
 
   /**
@@ -1974,11 +1984,13 @@ public class ServiceRegistryJpaImpl implements ServiceRegistry, ManagedService {
    *          Only jobs created after this data are considered for statistics
    * @param endDate
    *          Only jobs created before this data are considered for statistics
+   * @param full
+   *          True to include number of jobs completed, mean runtimes, and mean queue time in statistics data
    * @return the service statistics
    * @throws ServiceRegistryException
    *           if there is a problem accessing the service registry
    */
-  private List<ServiceStatistics> getServiceStatistics(Date startDate, Date endDate) throws ServiceRegistryException {
+  private List<ServiceStatistics> getServiceStatistics(Date startDate, Date endDate, boolean full) throws ServiceRegistryException {
     EntityManager em = null;
     try {
       em = emf.createEntityManager();
@@ -1990,7 +2002,12 @@ public class ServiceRegistryJpaImpl implements ServiceRegistry, ManagedService {
         statsMap.put(s.getId(), new JaxbServiceStatistics(s));
       }
 
-      Query query = em.createNamedQuery("ServiceRegistration.statistics");
+      Query query = null;
+      if (full) {
+        query = em.createNamedQuery("ServiceRegistration.fullStatistics");
+      } else {
+        query = em.createNamedQuery("ServiceRegistration.statistics");
+      }
       query.setParameter("minDateCreated", startDate, TemporalType.TIMESTAMP);
       query.setParameter("maxDateCreated", endDate, TemporalType.TIMESTAMP);
 
@@ -2002,8 +2019,12 @@ public class ServiceRegistryJpaImpl implements ServiceRegistry, ManagedService {
           continue;
         Status status = Status.values()[((Number) oa[1]).intValue()];
         Number count = (Number) oa[2];
-        Number meanQueueTime = (Number) oa[3];
-        Number meanRunTime = (Number) oa[4];
+        Number meanQueueTime = -1;
+        Number meanRunTime = -1;
+        if (full) {
+          meanQueueTime = (Number) oa[3];
+          meanRunTime = (Number) oa[4];
+        }
 
         // The statistics query returns a cartesian product, so we need to iterate over them to build up the objects
         JaxbServiceStatistics stats = statsMap.get(serviceRegistrationId.longValue());

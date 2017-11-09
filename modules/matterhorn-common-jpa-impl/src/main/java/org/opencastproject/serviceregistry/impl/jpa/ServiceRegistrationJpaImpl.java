@@ -56,6 +56,10 @@ import javax.persistence.UniqueConstraint;
         "service_type" }))
 @NamedQueries({
         @NamedQuery(name = "ServiceRegistration.statistics", query = "SELECT job.processorServiceRegistration.id as serviceRegistration, job.status, "
+                + "count(job.status) as numJobs FROM Job job "
+                + "where job.dateCreated >= :minDateCreated and job.dateCreated <= :maxDateCreated "
+                + "group by job.processorServiceRegistration.id, job.status"),
+        @NamedQuery(name = "ServiceRegistration.fullStatistics", query = "SELECT job.processorServiceRegistration.id as serviceRegistration, job.status, "
                 + "count(job.status) as numJobs, "
                 + "avg(job.queueTime) as meanQueue, "
                 + "avg(job.runTime) as meanRun FROM Job job "
