@@ -19,6 +19,11 @@
     <div class="controls-container">
         <div data-admin-ng-table-filter="" data-filters="filters" data-namespace="table.resource"></div>
 
+        <div class="filters-container" ng-if="table.resource === 'servers' || table.resource === 'services'">
+          <input type="checkbox" id='fulldata'></input>
+          <label for="fulldata">Full Data</label>
+        </div>
+
         <h1 translate="{{ table.caption }}">
             <!-- Jobs | Servers | Services -->
         </h1>

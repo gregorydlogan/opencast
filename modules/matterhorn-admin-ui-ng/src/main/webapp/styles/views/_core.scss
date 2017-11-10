@@ -130,6 +130,17 @@ body {
                     margin-right: 0 !important;
                 }
             }
+
+            input[type="checkbox"] {
+                height: 40px;
+                float: left;
+            }
+
+            label {
+                padding: 15px 20px 0px 5px !important;
+                height: 40px;
+                width: 100px;
+            }
         }
     }
 
