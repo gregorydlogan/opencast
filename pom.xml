@@ -9,7 +9,7 @@
   <packaging>pom</packaging>
 
   <name>opencast</name>
-  <description>Opencast is a media capture, processing, management and distribution system</description>
+  <description>Opencast is a media capture, processing, management and distribution system test</description>
   <url>http://opencast.org</url>
   <inceptionYear>2009</inceptionYear>
 
