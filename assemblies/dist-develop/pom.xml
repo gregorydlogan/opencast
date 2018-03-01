@@ -121,6 +121,8 @@
             <feature>transaction</feature>
             <feature>jndi</feature>
             <feature>eclipselink</feature>
+            <feature>jaas</feature>
+            <feature>webconsole</feature>
             <!-- Opencast features -->
             <feature>opencast-allinone</feature>
           </bootFeatures>
