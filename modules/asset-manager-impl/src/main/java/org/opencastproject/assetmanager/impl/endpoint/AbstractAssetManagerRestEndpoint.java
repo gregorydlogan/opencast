@@ -39,7 +39,10 @@ import org.opencastproject.assetmanager.api.Asset;
 import org.opencastproject.assetmanager.api.AssetManager;
 import org.opencastproject.assetmanager.api.Version;
 import org.opencastproject.assetmanager.api.query.AQueryBuilder;
+import org.opencastproject.assetmanager.api.query.ARecord;
 import org.opencastproject.assetmanager.api.query.AResult;
+import org.opencastproject.assetmanager.api.query.Predicate;
+import org.opencastproject.mediapackage.MediaPackage;
 import org.opencastproject.mediapackage.MediaPackageImpl;
 import org.opencastproject.security.api.UnauthorizedException;
 import org.opencastproject.util.MimeTypeUtil;
@@ -50,12 +53,17 @@ import org.opencastproject.util.doc.rest.RestQuery;
 import org.opencastproject.util.doc.rest.RestResponse;
 import org.opencastproject.util.doc.rest.RestService;
 
+import com.entwinemedia.fn.Fn;
 import com.entwinemedia.fn.P1;
 import com.entwinemedia.fn.P1Lazy;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jetty.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -65,6 +73,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -226,6 +235,61 @@ public abstract class AbstractAssetManagerRestEndpoint {
           return notFound();
         } else {
           return serverError();
+        }
+      }
+    });
+  }
+
+  @GET
+  @Produces(MediaType.TEXT_XML)
+  @Path("episodes")
+  @RestQuery(name = "getMediaPackages",
+          description = "Gets the media packages from all snapshots of an episode.",
+          returnDescription = "The media packages",
+          pathParameters = {},
+          restParameters = {
+                  @RestParameter(
+                          name = "mediaPackageID",
+                          description = "the media package ID",
+                          isRequired = false,
+                          type = STRING),
+                  @RestParameter(
+                          name = "seriesId",
+                          description = "the series ID",
+                          isRequired = false,
+                          type = STRING)
+          },
+          reponses = {
+                  @RestResponse(responseCode = SC_OK, description = "Media packages returned"),
+                  @RestResponse(responseCode = SC_NOT_FOUND, description = "Not found"),
+                  @RestResponse(responseCode = SC_FORBIDDEN, description = "Not allowed to read media packages."),
+                  @RestResponse(responseCode = SC_INTERNAL_SERVER_ERROR, description = "There has been an internal error.")
+          })
+  public Response getMediaPackages(@QueryParam("mediaPackageID") final String mediaPackageId, @QueryParam("seriesID") final String seriesId) {
+    return handleException(new P1Lazy<Response>() {
+      @Override public Response get1() {
+        final AQueryBuilder q = getAssetManager().createQuery();
+        List<Predicate> ps = new LinkedList<>();
+        if (StringUtil.isNotBlank(mediaPackageId)) {
+          ps.add(q.mediaPackageId(mediaPackageId));
+        }
+        if (StringUtil.isNotBlank(seriesId)) {
+          //q.seriesId doesn't exist, will need to be added, ugh.
+          ps.add(q.seriesId(seriesId));
+        }
+
+        Predicate p = null;
+        //And the predicates together inside of p
+        final AResult r = q.select(q.snapshot()).where(p).run();
+        if (r.getSize() >= 1) {
+          return ok(r.getRecords().map(new Fn<ARecord, MediaPackage>() {
+            @Override
+            public MediaPackage apply(ARecord aRecord) {
+              return aRecord.getSnapshot().get().getMediaPackage();
+            }
+          }));
+        } else {
+          return notFound();
         }
       }
     });
