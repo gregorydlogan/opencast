@@ -1,0 +1,37 @@
+<mediapackage xmlns="http://mediapackage.opencastproject.org"
+	id="mpId1" start="2007-12-05T13:40:00" duration="1004400000">
+	<media>
+		<track type="presenter/source" id="trackId1">
+			<mimetype>video/mp4</mimetype>
+			<url>urn:matterhorn:mpId1:0:trackId1</url>
+			<checksum type="md5">e51b85060bb92a93d4a673c35b10d0d4</checksum>
+			<duration>62834</duration>
+			<audio id="audio-1">
+				<device />
+				<encoder type="AAC (Advanced Audio Coding)" />
+				<channels>1</channels>
+				<bitrate>75986.0</bitrate>
+			</audio>
+			<video id="video-1">
+				<device />
+				<encoder type="H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10" />
+				<bitrate>8966445.0</bitrate>
+				<framerate>30.0</framerate>
+				<resolution>1280x720</resolution>
+			</video>
+		</track>
+	</media>
+	<metadata>
+		<catalog id="catalog-episode" type="dublincore/episode">
+			<mimetype>text/xml</mimetype>
+			<url>urn:matterhorn:mpId1:0:catalog-episode</url>
+			<checksum type="md5">2b8a52878c536e64e20e309b5d7c1070</checksum>
+		</catalog>
+	</metadata>
+	<publications>
+		<publication id="presentation-1" channel="engage">
+			<url>http://engae-host.edu/engage/player/watch.html?id=mpId1</url>
+			<mimetype>text/html</mimetype>
+		</publication>
+	</publications>
+</mediapackage>

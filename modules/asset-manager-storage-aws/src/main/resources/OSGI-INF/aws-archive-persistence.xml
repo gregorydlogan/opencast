@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0"
+ name="org.opencastproject.archive.s3.persistence.AwsS3ArchiveDatabaseImpl"
+  immediate="false" activate="activate" deactivate="deactivate">
+  <implementation
+    class="org.opencastproject.archive.aws.persistence.AwsArchiveDatabaseImpl" />
+  <property name="service.description" value="Aws S3 File Archive Persistence" />
+  <service>
+    <provide interface="org.opencastproject.archive.aws.persistence.AwsArchiveDatabase" />
+  </service>
+  <reference name="entityManagerFactory" interface="javax.persistence.EntityManagerFactory"
+             target="(osgi.unit.name=org.opencastproject.archive.aws.persistence)" cardinality="1..1" policy="static" bind="setEntityManagerFactory" />
+</scr:component>

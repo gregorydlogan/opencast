@@ -33,3 +33,6 @@ pages:
 - Advanced:
   - Overview: 'advanced/index.md'
   - Role-Based Visibility: 'advanced/role-based-visibility.md'
+  - Offloading Events to AWS Glacier: 'advanced/offload-glacier.md'
+  - Offloading Event to AWS S3: 'advanced/offload-s3.md'
+  - Restoring Events from AWS to local storage: 'advanced/restore.md'

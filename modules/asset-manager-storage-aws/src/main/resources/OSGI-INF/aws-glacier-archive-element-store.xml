@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0"
+ name="org.opencastproject.archive.aws.glacier.AwsGlacierArchiveElementStore" activate="activate" immediate="true">
+
+  <implementation class="org.opencastproject.archive.aws.glacier.AwsGlacierArchiveElementStore" />
+  <property name="service.description" value="Amazon Glacier based archive element store" />
+  <property name="store.type" value="aws-glacier" />
+  <service>
+    <provide interface="org.opencastproject.archive.base.storage.RemoteElementStore" />
+    <provide interface="org.opencastproject.archive.aws.glacier.AwsGlacierArchiveElementStore" />
+  </service>
+
+  <reference name="workspace" interface="org.opencastproject.workspace.api.Workspace" policy="static"
+    cardinality="1..1" bind="setWorkspace" />
+  <reference name="database" interface="org.opencastproject.archive.aws.persistence.AwsArchiveDatabase" policy="static"
+             cardinality="1..1" bind="setDatabase" />
+</scr:component>
+
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="org.opencastproject.archive.aws.glacier.AwsGlacierCacheCleaner"
+ activate="activate" deactivate="deactivate" immediate="true">
+
+  <implementation class="org.opencastproject.archive.aws.glacier.AwsGlacierCacheCleaner" />
+  <property name="service.description" value="AWS Glacier cache cleaner" />
+
+  <service>
+    <provide interface="org.osgi.service.cm.ManagedService" />
+  </service>
+
+  <reference cardinality="1..1" interface="org.opencastproject.archive.aws.glacier.AwsGlacierArchiveElementStore" name="elementStore" policy="static" bind="setElementStore"/>
+  <reference cardinality="1..1" interface="org.opencastproject.security.api.OrganizationDirectoryService" name="OrganizationDirectoryService" policy="static" bind="bindOrganizationDirectoryService"/>
+  <reference cardinality="1..1" interface="org.opencastproject.security.api.SecurityService" name="SecurityService" policy="static" bind="bindSecurityService"/>
+</scr:component>

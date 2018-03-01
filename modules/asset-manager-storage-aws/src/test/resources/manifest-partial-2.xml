@@ -1,0 +1,26 @@
+<mediapackage xmlns="http://mediapackage.opencastproject.org"
+	id="mpId1" start="2007-12-05T13:40:00" duration="1004400000">
+	<media>
+		<track type="presenter/source" id="trackId1">
+			<mimetype>video/mp4</mimetype>
+			<url>http://admin.edu/mpId1/trackId1/track.mp4</url>
+			<checksum type="md5">e51b85060bb92a93d4a673c35b10d0d4</checksum>
+			<duration>62834</duration>
+			<audio id="audio-1">
+				<device />
+				<encoder type="AAC (Advanced Audio Coding)" />
+				<channels>1</channels>
+				<bitrate>75986.0</bitrate>
+			</audio>
+			<video id="video-1">
+				<device />
+				<encoder type="H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10" />
+				<bitrate>8966445.0</bitrate>
+				<framerate>30.0</framerate>
+				<resolution>1280x720</resolution>
+			</video>
+		</track>
+	</media>
+	<metadata />
+	<publications/>
+</mediapackage>
