@@ -26,7 +26,7 @@
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>net.fortuna.ical4j</groupId>
+      <groupId>org.mnode.ical4j</groupId>
       <artifactId>ical4j</artifactId>
     </dependency>
   </dependencies>
@@ -41,7 +41,7 @@
             <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
             <Build-Number>${buildNumber}</Build-Number>
             <Import-Package>
-              net.fortuna.ical4j.*,
+              org.mnode.ical4j.*,
               *
             </Import-Package>
             <Export-Package>

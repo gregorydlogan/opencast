@@ -86,7 +86,7 @@
       <artifactId>jsr305</artifactId>
     </dependency>
     <dependency>
-      <groupId>net.fortuna.ical4j</groupId>
+      <groupId>org.mnode.ical4j</groupId>
       <artifactId>ical4j</artifactId>
     </dependency>
     <!-- OSGi -->
@@ -275,8 +275,6 @@
               !com.sun.*,
               !javax.el.*,
               !javax.servlet.jsp.*,
-              !net.fortuna.ical4j.factory,
-              !net.fortuna.ical4j.timezone,
               !org.apache.log.*,
               !org.apache.tools.*,
               !org.bouncycastle.crypto.*,
@@ -302,17 +300,6 @@
               freemarker.core,
               freemarker.template
             </Private-Package>
-            <_exportcontents>
-              net.fortuna.ical4j,
-              net.fortuna.ical4j.data,
-              net.fortuna.ical4j.filter,
-              net.fortuna.ical4j.model,
-              net.fortuna.ical4j.model.component,
-              net.fortuna.ical4j.model.parameter,
-              net.fortuna.ical4j.model.property,
-              net.fortuna.ical4j.transform,
-              net.fortuna.ical4j.util
-            </_exportcontents>
             <Export-Package>
               org.opencastproject.util.*;version=${project.version};-split-package:=merge-first,
               org.opencastproject.capture;version=${project.version},
