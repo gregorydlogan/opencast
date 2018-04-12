@@ -61,16 +61,10 @@ public final class Util {
     Calendar startCalendar = Calendar.getInstance(utc);
     startCalendar.setTime(new Date(start.getTime() - tz.getRawOffset()));
 
+    //We set the end calendar to the input end date, then add the duration to it so that the recurrent rule works
     Calendar endCalendar = Calendar.getInstance(utc);
     endCalendar.setTime(new Date(end.getTime() - tz.getRawOffset() + duration / 1000));
-
-
-    Calendar calendar = Calendar.getInstance(utc);
-    calendar.setTime(periodStart);
-    calendar.set(Calendar.DAY_OF_MONTH, endCalendar.get(Calendar.DAY_OF_MONTH));
-    calendar.set(Calendar.MONTH, endCalendar.get(Calendar.MONTH));
-    calendar.set(Calendar.YEAR, endCalendar.get(Calendar.YEAR));
-    periodEnd.setTime(calendar.getTime().getTime() + duration);
+    endCalendar.setTime(new Date(endCalendar.getTime().getTime() + duration));
     duration = duration % (DateTimeConstants.MILLIS_PER_DAY);
 
     List<Period> events = new LinkedList<>();
