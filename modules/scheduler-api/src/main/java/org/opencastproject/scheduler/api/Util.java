@@ -22,9 +22,15 @@
 package org.opencastproject.scheduler.api;
 
 import net.fortuna.ical4j.model.Period;
+import net.fortuna.ical4j.model.TimeZoneRegistry;
+import net.fortuna.ical4j.model.TimeZoneRegistryFactory;
 import net.fortuna.ical4j.model.property.RRule;
 
+import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
+import org.joda.time.DateTimeZone;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -33,6 +39,9 @@ import java.util.List;
 import java.util.TimeZone;
 
 public final class Util {
+
+  private static final Logger logger = LoggerFactory.getLogger(Util.class);
+
   private Util() {
   }
 
@@ -44,58 +53,89 @@ public final class Util {
    *  I would have moved this to the scheduler-api bundle, but that would introduce a circular dependency :(
    *
    * @param start
-   *          the start date time
+   *          the start date time  of the recurrence in UTC
    * @param end
-   *          the end date
+   *          the end date of the recurrence in UTC
    * @param duration
    *          the duration
    * @param rRule
    *          the recurrence rule
-   * @param tz
+   * @param tz of the timeZone where this event will be scheduled, i.e. the timeZone of the capture agent
    * @return a list of scheduling periods
    */
-  public static List<Period> calculatePeriods(Date start, Date end, long duration, RRule rRule, TimeZone tz) {
-    final TimeZone utc = TimeZone.getTimeZone("UTC");
-    TimeZone.setDefault(tz);
-    net.fortuna.ical4j.model.DateTime periodStart = new net.fortuna.ical4j.model.DateTime(start);
-    net.fortuna.ical4j.model.DateTime periodEnd = new net.fortuna.ical4j.model.DateTime();
+  public static List<Period> calculatePeriods(Date startUtc, Date endUtc, long duration, RRule rRule, TimeZone tz) {
+    List<Period> events = new LinkedList<>();
+    TimeZoneRegistry registry = TimeZoneRegistryFactory.getInstance().createRegistry();
 
-    Calendar endCalendar = Calendar.getInstance(utc);
-    endCalendar.setTime(end);
-    Calendar calendar = Calendar.getInstance(utc);
-    calendar.setTime(periodStart);
-    calendar.set(Calendar.DAY_OF_MONTH, endCalendar.get(Calendar.DAY_OF_MONTH));
-    calendar.set(Calendar.MONTH, endCalendar.get(Calendar.MONTH));
-    calendar.set(Calendar.YEAR, endCalendar.get(Calendar.YEAR));
-    periodEnd.setTime(calendar.getTime().getTime() + duration);
+    logger.debug("Inbound start of recurrence {} and end of recurrence {}", startUtc, endUtc);
+    DateTime startInTz = new DateTime(startUtc).toDateTime(DateTimeZone.forTimeZone(tz));
+    DateTime endInTz = new DateTime(endUtc).toDateTime(DateTimeZone.forTimeZone(tz));
+
+    net.fortuna.ical4j.model.DateTime periodStartTz = new net.fortuna.ical4j.model.DateTime(startInTz.toDate());
+    net.fortuna.ical4j.model.DateTime periodEndTz = new net.fortuna.ical4j.model.DateTime(endInTz.toDate());
+
+    Calendar endCalendarTz = Calendar.getInstance(tz);
+    endCalendarTz.setTime(periodEndTz);
+
+    Calendar calendarTz = Calendar.getInstance(tz);
+    calendarTz.setTime(periodStartTz);
+
+    calendarTz.set(Calendar.DAY_OF_MONTH, endCalendarTz.get(Calendar.DAY_OF_MONTH));
+    calendarTz.set(Calendar.MONTH, endCalendarTz.get(Calendar.MONTH));
+    calendarTz.set(Calendar.YEAR, endCalendarTz.get(Calendar.YEAR));
+    periodEndTz.setTime(calendarTz.getTime().getTime() + duration);
     duration = duration % (DateTimeConstants.MILLIS_PER_DAY);
 
-    List<Period> events = new LinkedList<>();
+    logger.debug("1-Looking at recurrences for {} to {}, duration {}", periodStartTz.getTime(), periodEndTz.toInstant().toString(), duration);
+    // Have to change the TimeZone to UTC for the rRule.getRecur() to work correctly in a non-global TimeZone
+    periodStartTz.setTimeZone(registry.getTimeZone("UTC"));
+    periodEndTz.setTimeZone(registry.getTimeZone("UTC"));
 
-    TimeZone.setDefault(utc);
-    for (Object date : rRule.getRecur().getDates(periodStart, periodEnd, net.fortuna.ical4j.model.parameter.Value.DATE_TIME)) {
-      Date d = (Date) date;
-      Calendar cDate = Calendar.getInstance(utc);
-
-      // Adjust for DST, if start of event
-      if (tz.inDaylightTime(periodStart)) { // Event starts in DST
-        if (!tz.inDaylightTime(d)) { // Date not in DST?
-          d.setTime(d.getTime() + tz.getDSTSavings()); // Adjust for Fall back one hour
-        }
-      } else { // Event doesn't start in DST
-        if (tz.inDaylightTime(d)) {
-          d.setTime(d.getTime() - tz.getDSTSavings()); // Adjust for Spring forward one hour
-        }
-      }
-      cDate.setTime(d);
-
-      TimeZone.setDefault(null);
-      Period p = new Period(new net.fortuna.ical4j.model.DateTime(cDate.getTime()),
-              new net.fortuna.ical4j.model.DateTime(cDate.getTimeInMillis() + duration));
-      events.add(p);
-      TimeZone.setDefault(utc);
+    // Special case for first Sunday in a DST change recurrence
+    // Sunday DST day bug: https://github.com/ical4j/ical4j/issues/117
+    boolean firstSundaySpecialCase = false;
+    if (((tz.inDaylightTime(periodStartTz) && !tz.inDaylightTime(periodEndTz))
+            || (!tz.inDaylightTime(periodStartTz) && tz.inDaylightTime(periodEndTz)))) {
+      firstSundaySpecialCase = true;
     }
-    TimeZone.setDefault(null);
+
+    for (Object date : rRule.getRecur().getDates(periodStartTz, periodEndTz, net.fortuna.ical4j.model.parameter.Value.DATE_TIME)) {
+      Date d = (Date) date;
+      net.fortuna.ical4j.model.DateTime datePeriod = new net.fortuna.ical4j.model.DateTime(d);
+      Calendar cDate = Calendar.getInstance(registry.getTimeZone("UTC"));
+      cDate.setTime(datePeriod);
+      Calendar tzDate  = Calendar.getInstance(tz);
+      tzDate.setTime(datePeriod);
+      logger.debug("Looking at recurrence date {}, {}", d);
+      // Adjust for DST regardless of end time DST
+      if (tz.inDaylightTime(periodStartTz)) {
+        d.setTime(d.getTime() + tz.getDSTSavings()); //Adjust for DST
+        // Special case for first Sunday
+        // Sunday DST day bug: https://github.com/ical4j/ical4j/issues/117
+        if (!tz.inDaylightTime(d)
+                && cDate.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY
+                && firstSundaySpecialCase) {
+          d.setTime(d.getTime() + tz.getDSTSavings());
+          firstSundaySpecialCase = false;
+        }
+      } else if (tz.inDaylightTime(d)  // Otherwise only adjust special case 
+              && cDate.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY
+              && firstSundaySpecialCase) {
+        // Special case for first Sunday
+        // Sunday DST day bug: https://github.com/ical4j/ical4j/issues/117
+        d.setTime(d.getTime() - tz.getDSTSavings());
+        firstSundaySpecialCase = false;
+      }
+      Calendar cal =  new Calendar.Builder().setTimeZone(tz).setInstant(d).build();
+      cal.setTimeZone(tz);
+      // update with the updated d
+      cDate.setTime(d);
+      Period p = new Period(new net.fortuna.ical4j.model.DateTime(cDate.getTimeInMillis()),
+              new net.fortuna.ical4j.model.DateTime(cDate.getTimeInMillis() + duration));
+
+      events.add(p);
+      logger.trace("Adding date {} period '{}'", d, p.toString());
+    }
     return events;
   }
 }
