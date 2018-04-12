@@ -22,8 +22,6 @@
 package org.opencastproject.scheduler.api;
 
 import net.fortuna.ical4j.model.Period;
-import net.fortuna.ical4j.model.TimeZoneRegistryFactory;
-import net.fortuna.ical4j.model.component.VTimeZone;
 import net.fortuna.ical4j.model.property.RRule;
 
 import org.joda.time.DateTimeConstants;
@@ -57,12 +55,12 @@ public final class Util {
    * @return a list of scheduling periods
    */
   public static List<Period> calculatePeriods(Date start, Date end, long duration, RRule rRule, TimeZone tz) {
-	final TimeZone utc = TimeZone.getTimeZone("UTC");
-    net.fortuna.ical4j.model.TimeZone schedulingTz = TimeZoneRegistryFactory.getInstance().createRegistry().getTimeZone(tz.getID());
+    final TimeZone utc = TimeZone.getTimeZone("UTC");
+    //net.fortuna.ical4j.model.TimeZone schedulingTz = TimeZoneRegistryFactory.getInstance().createRegistry().getTimeZone(tz.getID());
     net.fortuna.ical4j.model.DateTime periodStart = new net.fortuna.ical4j.model.DateTime(start);
-    periodStart.setTimeZone(schedulingTz);
+    //periodStart.setTimeZone(schedulingTz);
     net.fortuna.ical4j.model.DateTime periodEnd = new net.fortuna.ical4j.model.DateTime();
-    periodEnd.setTimeZone(schedulingTz);
+    //periodEnd.setTimeZone(schedulingTz);
 
     Calendar endCalendar = Calendar.getInstance(utc);
     endCalendar.setTime(end);
