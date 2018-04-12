@@ -18,11 +18,9 @@
  * the License.
  *
  */
-package org.opencastproject.scheduler.impl;
+package org.opencastproject.scheduler.api;
 
 import static org.junit.Assert.assertEquals;
-
-import org.opencastproject.scheduler.api.Util;
 
 import net.fortuna.ical4j.model.DateTime;
 import net.fortuna.ical4j.model.Period;
