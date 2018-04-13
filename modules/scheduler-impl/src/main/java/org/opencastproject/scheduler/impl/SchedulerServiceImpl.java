@@ -137,8 +137,8 @@ import com.google.common.cache.CacheBuilder;
 import net.fortuna.ical4j.model.Period;
 import net.fortuna.ical4j.model.TimeZoneRegistry;
 import net.fortuna.ical4j.model.TimeZoneRegistryFactory;
-import net.fortuna.ical4j.model.ValidationException;
 import net.fortuna.ical4j.model.property.RRule;
+import net.fortuna.ical4j.validate.ValidationException;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
