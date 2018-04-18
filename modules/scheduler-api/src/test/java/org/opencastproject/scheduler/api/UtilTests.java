@@ -60,7 +60,7 @@ public class UtilTests {
     String days;
     List<Period> periods;
 
-    // JST
+    // JST - does not observe DST at all
     start = Calendar.getInstance(jst);
     start.set(2016, 2, 25, 22, 0);
     end = Calendar.getInstance(jst);
@@ -70,7 +70,7 @@ public class UtilTests {
     periods = generatePeriods(jst, start, end, days, durationMillis);
     assertEquals(5, periods.size());
 
-    // PST
+    // PST - Switches on 2016-03-13 -> this does not go over a DST switchover
     start = Calendar.getInstance(pst);
     start.set(2016, 2, 25, 22, 0);
     end = Calendar.getInstance(pst);
@@ -80,7 +80,7 @@ public class UtilTests {
     periods = generatePeriods(pst, start, end, days, durationMillis);
     assertEquals(5, periods.size());
 
-    // CET
+    // CET - Switches on 2016-03-27 -> this goes over a DST switchover
     start = Calendar.getInstance(cet);
     start.set(2016, 2, 25, 0, 5);
     end = Calendar.getInstance(cet);
