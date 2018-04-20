@@ -86,7 +86,7 @@ public final class Util {
     periodEndTz.setTime(calendarTz.getTime().getTime() + duration);
     duration = duration % (DateTimeConstants.MILLIS_PER_DAY);
 
-    logger.debug("1-Looking at recurrences for {} to {}, duration {}", periodStartTz.getTime(), periodEndTz.toInstant().toString(), duration);
+    logger.debug("1-Looking at recurrences for {} to {}, duration {}", periodStartTz.getTime(), periodEndTz.getTime(), duration);
     // Have to change the TimeZone to UTC for the rRule.getRecur() to work correctly in a non-global TimeZone
     periodStartTz.setTimeZone(registry.getTimeZone("UTC"));
     periodEndTz.setTimeZone(registry.getTimeZone("UTC"));

@@ -82,7 +82,7 @@ public class UtilTests {
 
     // CET - Switches on 2016-03-27 -> this goes over a DST switchover
     start = Calendar.getInstance(cet);
-    start.set(2016, 2, 25, 0, 5);
+    start.set(2016, 2, 25, 12, 5);
     end = Calendar.getInstance(cet);
     end.set(2016, 2, 29, start.get(Calendar.HOUR_OF_DAY), 10);
     durationMillis = (end.get(Calendar.MINUTE) - start.get(Calendar.MINUTE)) * 60 * 1000;
