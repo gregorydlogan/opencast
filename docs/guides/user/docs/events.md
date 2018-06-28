@@ -141,3 +141,7 @@ To delete a comment or a reply to a comment, click on the **Delete** in the comm
 ## How to archive an Event to AWS S3
 
 Please refer to the [Offload to S3 documentation](advanced/offload-s3.md)
+
+## How to archive an Event to AWS Glacier
+
+Please refer to the [Offload to Glacier documentation](advanced/offload-glacier.md)

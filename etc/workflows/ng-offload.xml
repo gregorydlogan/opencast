@@ -25,6 +25,12 @@
                   <span>&nbsp;AWS S3</span>
                 </span>
               </li>
+              <li>
+                <span>
+                  <input id="offloadToAWSGlacier" name="offloadTo" type="radio" class="configField" value="aws-glacier" disabled="true"/>
+                  <span>&nbsp;AWS Glacier</span>
+                </span>
+              </li>
           </ul>
         </fieldset>
       </div>
@@ -32,8 +38,10 @@
       <!-- Show or hide the hold and publication configuration panel -->
       <script type="text/javascript">
         var s3Enabled = false;
+        var glacierEnabled = false;
 
         $('#offloadToAWSS3').prop('disabled', !s3Enabled);
+        $('#offloadToAWSGlacier').prop('disabled', !glacierEnabled);
     ]]>
   </configuration_panel>
 
@@ -47,6 +55,15 @@
       description="Offloading to AWS S3">
       <configurations>
         <configuration key="target-storage">aws-s3</configuration>
+      </configurations>
+    </operation>
+
+    <operation
+      id="move-to-remote"
+      if="${offloadToAWSGlacier}"
+      description="Offloading to AWS Glacier">
+      <configurations>
+        <configuration key="target-storage">aws-glacier</configuration>
       </configurations>
     </operation>
 

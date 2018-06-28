@@ -40,6 +40,10 @@ import org.osgi.service.component.ComponentContext;
 
 import java.io.File;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -211,4 +215,60 @@ public class AwsAssetDatabaseImplTest {
     // Deleted assets should also be returned
     Assert.assertEquals(4, mappings.size());
   }
+
+  @Test
+  public void testIsLocallyCached() throws Exception {
+    StoragePath path1 = new StoragePath(ORG, MP_ID, new VersionImpl(1L), ASSET1_ID);
+    database.addLocallyCachedFile(path1);
+    // Store another asset
+    StoragePath path2 = new StoragePath(ORG, MP_ID, new VersionImpl(1L), ASSET2_ID);
+    database.addLocallyCachedFile(path2);
+
+    Assert.assertTrue(database.isLocallyCached(path1));
+    Assert.assertTrue(database.isLocallyCached(path2));
+  }
+
+  @Test
+  public void testGetListOfLocallyCached() throws Exception {
+    StoragePath path1 = new StoragePath(ORG, MP_ID, new VersionImpl(1L), ASSET1_ID);
+    database.addLocallyCachedFile(path1);
+    Thread.sleep(3000L);
+    // Store another asset
+    StoragePath path2 = new StoragePath(ORG, MP_ID, new VersionImpl(1L), ASSET2_ID);
+    database.addLocallyCachedFile(path2);
+    List<StoragePath> expected = new LinkedList<StoragePath>(Arrays.asList(path1, path2));
+
+    Calendar cal = Calendar.getInstance();
+
+    List<StoragePath> locals = database.getLocallyCachedFiles(cal.getTime());
+    Assert.assertEquals(2, locals.size());
+    Assert.assertEquals(expected, locals);
+
+    cal.add(Calendar.SECOND, -1);
+
+    locals = database.getLocallyCachedFiles(cal.getTime());
+    Assert.assertEquals(1, locals.size());
+    Assert.assertEquals(path1, locals.get(0));
+  }
+
+  @Test
+  public void testDeleteLocallyCached() throws Exception {
+    StoragePath path1 = new StoragePath(ORG, MP_ID, new VersionImpl(1L), ASSET1_ID);
+    database.addLocallyCachedFile(path1);
+    // Store another asset
+    StoragePath path2 = new StoragePath(ORG, MP_ID, new VersionImpl(1L), ASSET2_ID);
+    database.addLocallyCachedFile(path2);
+    List<StoragePath> expected = new LinkedList<StoragePath>(Arrays.asList(path1, path2));
+
+    List<StoragePath> locals = database.getLocallyCachedFiles(new Date());
+    Assert.assertEquals(2, locals.size());
+    Assert.assertEquals(expected, locals);
+
+    database.deleteCacheMapping(path2);
+
+    locals = database.getLocallyCachedFiles(new Date());
+    Assert.assertEquals(1, locals.size());
+    Assert.assertEquals(path1, locals.get(0));
+  }
+
 }

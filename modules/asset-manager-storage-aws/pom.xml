@@ -148,6 +148,7 @@
             </Import-Package>
             <Service-Component>
               OSGI-INF/aws-asset-persistence.xml,
+              OSGI-INF/aws-glacier-asset-store.xml,
               OSGI-INF/aws-s3-asset-store.xml
             </Service-Component>
             <Meta-Persistence>

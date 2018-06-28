@@ -23,12 +23,21 @@ package org.opencastproject.assetmanager.aws.persistence;
 
 import org.opencastproject.assetmanager.impl.storage.StoragePath;
 
+import java.util.Date;
 import java.util.List;
 
 public interface AwsAssetDatabase {
 
   AwsAssetMapping storeMapping(StoragePath path, String objectKey, String objectVersion) throws
           AwsAssetDatabaseException;
+
+  void addLocallyCachedFile(StoragePath path) throws AwsAssetDatabaseException;
+
+  List<StoragePath> getLocallyCachedFiles(Date expireEarlierThan) throws AwsAssetDatabaseException;
+
+  boolean isLocallyCached(StoragePath path);
+
+  void deleteCacheMapping(StoragePath path) throws AwsAssetDatabaseException;
 
   void deleteMapping(StoragePath path) throws AwsAssetDatabaseException;
 

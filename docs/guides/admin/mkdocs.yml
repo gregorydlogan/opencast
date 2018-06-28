@@ -61,6 +61,7 @@ pages:
    - Overview: 'modules/index.md'
    - Atom/RSS Feed: 'modules/atomrss.md'
    - Amazon Services:
+      - Amazon Glacier Archive Storage: 'modules/awsglacierarchive.md'
       - Amazon S3 Archive Storage: 'modules/awss3archive.md'
       - Amazon S3 Distribution: 'modules/awss3distribution.md'
    - Execute Service: 'modules/execute.md'
