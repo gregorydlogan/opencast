@@ -136,8 +136,10 @@ import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 
 import net.fortuna.ical4j.model.Period;
-import net.fortuna.ical4j.model.ValidationException;
+import net.fortuna.ical4j.model.TimeZoneRegistry;
+import net.fortuna.ical4j.model.TimeZoneRegistryFactory;
 import net.fortuna.ical4j.model.property.RRule;
+import net.fortuna.ical4j.validate.ValidationException;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -1574,19 +1576,18 @@ public class SchedulerServiceImpl extends AbstractIndexProducer implements Sched
 
     try {
       final ARecord[] alreadyScheduledEvents = getScheduledEvents(Opt.some(captureAgentId));
-      final TimeZone utc = TimeZone.getTimeZone("utc");
+      TimeZoneRegistry registry = TimeZoneRegistryFactory.getInstance().createRegistry();
 
       Set<MediaPackage> events = new HashSet<>();
 
       for (Period event : periods) {
-        TimeZone.setDefault(utc);
+        event.setTimeZone(registry.getTimeZone(tz.getID()));
         final Date startDate = event.getStart();
         final Date endDate = event.getEnd();
 
         events.addAll(findConflictingEvents(startDate, endDate, alreadyScheduledEvents));
       }
 
-      TimeZone.setDefault(null);
       return new ArrayList<>(events);
     } catch (Exception e) {
       logger.error("Failed to search for conflicting events: {}", getStackTrace(e));
