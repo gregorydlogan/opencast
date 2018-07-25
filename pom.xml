@@ -725,9 +725,19 @@
         <version>18.0</version>
       </dependency>
       <dependency>
-        <groupId>net.fortuna.ical4j</groupId>
+        <groupId>org.mnode.ical4j</groupId>
         <artifactId>ical4j</artifactId>
-        <version>1.0-rc2-patched</version>
+        <version>3.0.0</version>
+      </dependency>
+      <dependency>
+        <groupId>javax.cache</groupId>
+        <artifactId>cache-api</artifactId>
+        <version>1.1.0</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jsr107.ri</groupId>
+        <artifactId>cache-ri-impl</artifactId>
+        <version>1.1.0</version>
       </dependency>
       <dependency>
         <groupId>org.apache.servicemix.bundles</groupId>
