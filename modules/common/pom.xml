@@ -80,6 +80,14 @@
       <artifactId>jsr305</artifactId>
     </dependency>
     <dependency>
+      <groupId>javax.cache</groupId>
+      <artifactId>cache-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jsr107.ri</groupId>
+      <artifactId>cache-ri-impl</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.mnode.ical4j</groupId>
       <artifactId>ical4j</artifactId>
     </dependency>
@@ -271,6 +279,7 @@
               !org.mozilla.javascript.*,
               !org.python.*,
               !org.zeroturnaround.javarebel.*,
+              javax.cache.*,
               javax.ws.rs;version=2.0.1,
               javax.ws.rs.core;version=2.0.1,
               javax.ws.rs.ext;version=2.0.1,
@@ -279,7 +288,8 @@
             <Embed-Dependency>
               truezip;inline=true,
               freemarker;inline=true,
-              ical4j;inline=true
+              cache-api;inline=true,
+              ical4j;inline=true,
             </Embed-Dependency>
             <Private-Package>
               freemarker.core,
@@ -294,7 +304,8 @@
               net.fortuna.ical4j.model.parameter,
               net.fortuna.ical4j.model.property,
               net.fortuna.ical4j.transform,
-              net.fortuna.ical4j.util
+              net.fortuna.ical4j.util,
+              net.fortuna.ical4j.validate
             </_exportcontents>
             <Export-Package>
               org.opencastproject.util.*;version=${project.version};-split-package:=merge-first,
