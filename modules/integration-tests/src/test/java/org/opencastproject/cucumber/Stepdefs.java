@@ -1,6 +1,11 @@
 package org.opencastproject.cucumber;
 
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+
 import cucumber.api.java.After;
+
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -54,13 +59,13 @@ public class Stepdefs {
   public void failLogin() {
     WebElement element = driver.findElement(By.xpath("/html/body/section/div/div/form/div[2]"));
     element.isDisplayed();
-    element.getText().equalsIgnoreCase("Incorrect username and / or password");
+    assertTrue(element.getText().equalsIgnoreCase("Incorrect username and / or password"));
   }
 
   @Then("^I am logged out$")
   public void amLoggedOut() {
     WebElement element = driver.findElement(By.xpath("/html/body/section/div/div/form/div[1]/p/span"));
-    element.getText().equalsIgnoreCase("Welcome to Opencast");
+    assertTrue(element.getText().equalsIgnoreCase("Welcome to Opencast"));
   }
 
   @After()
