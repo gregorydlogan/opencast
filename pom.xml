@@ -134,6 +134,7 @@
     <module>modules/inspection-service-ffmpeg</module>
     <module>modules/inspection-service-remote</module>
     <module>modules/inspection-workflowoperation</module>
+    <module>modules/integration-tests</module>
     <module>modules/kernel</module>
     <module>modules/live-schedule-api</module>
     <module>modules/live-schedule-impl</module>
@@ -1239,6 +1240,11 @@
         <groupId>org.opencastproject</groupId>
         <artifactId>android-mms</artifactId>
         <version>1.1</version>
+      </dependency>
+      <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-java</artifactId>
+        <version>3.9.1</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

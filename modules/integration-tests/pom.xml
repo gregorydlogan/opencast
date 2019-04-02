@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>integration-tests</artifactId>
+  <name>Opencast :: integration-tests</name>
+  <packaging>jar</packaging>
+  <parent>
+    <groupId>org.opencastproject</groupId>
+    <artifactId>base</artifactId>
+    <version>7-SNAPSHOT</version>
+    <relativePath>../../pom.xml</relativePath>
+  </parent>
+
+    <properties>
+        <opencast.basedir>${project.basedir}/../..</opencast.basedir>
+        <!-- TODO: Reenable checkstyles! -->
+        <checkstyle.skip>true</checkstyle.skip>
+        <cucumber.version>4.2.6</cucumber.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>${cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>org.seleniumhq.selenium</groupId>
+          <artifactId>selenium-java</artifactId>
+          <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.felix</groupId>
+          <artifactId>maven-bundle-plugin</artifactId>
+          <extensions>true</extensions>
+          <configuration>
+            <instructions>
+              <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+              <Build-Number>${buildNumber}</Build-Number>
+              <Import-Package>
+                org.openqa.selenium.*;version=3.9.1
+                *
+              </Import-Package>
+              <Export-Package/>
+              <Service-Component/>
+            </instructions>
+          </configuration>
+        </plugin>
+      </plugins>
+    </build>
+</project>
