@@ -14,27 +14,31 @@ public class Stepdefs {
 
   private final WebDriver driver = WebDriverFactory.createWebDriver();
 
-  @Given("^I am on the Google search page$")
-  public void I_visit_google() {
-    driver.get("https:\\www.google.com");
+  @Given("^I am on the login page$")
+  public void goLogin() {
+    driver.get("https:\\stable.opencast.org");
   }
 
-  @When("^I search for \"(.*)\"$")
-  public void search_for(String query) {
-    WebElement element = driver.findElement(By.name("q"));
+  @When("^I log in as \"(.*)\" with \"(.*)\"$")
+  public void doLogin(String user, String pass) {
+    WebElement element = driver.findElement(By.name("j_username"));
     // Enter something to search for
-    element.sendKeys(query);
+    element.clear();
+    element.sendKeys(user);
+    element = driver.findElement(By.name("j_password"));
+    element.clear();
+    element.sendKeys(pass);
     // Now submit the form. WebDriver will find the form for us from the element
     element.submit();
   }
 
-  @Then("^the page title should start with \"(.*)\"$")
-  public void checkTitle(String titleStartsWith) {
-    // Google's search is rendered dynamically with JavaScript
+  @Then("^the header should be \"(.*)\"$")
+  public void checkHeader(String header) {
+    // Our pages are rendered dynamically
     // Wait for the page to load timeout after ten seconds
-    new WebDriverWait(driver,10L).until(new ExpectedCondition<Boolean>() {
+    new WebDriverWait(driver,2L).until(new ExpectedCondition<Boolean>() {
       public Boolean apply(WebDriver d) {
-        return d.getTitle().toLowerCase().startsWith(titleStartsWith);
+        return d.getTitle().toLowerCase().startsWith(header);
       }
     });
   }
