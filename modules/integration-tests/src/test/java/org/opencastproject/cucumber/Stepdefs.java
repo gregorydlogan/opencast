@@ -32,15 +32,28 @@ public class Stepdefs {
     element.submit();
   }
 
-  @Then("^the header should be \"(.*)\"$")
-  public void checkHeader(String header) {
-    // Our pages are rendered dynamically
-    // Wait for the page to load timeout after ten seconds
-    new WebDriverWait(driver,2L).until(new ExpectedCondition<Boolean>() {
+  @Then("^I should be \"(.*)\"$")
+  public void checkUsername(String username) {
+    new WebDriverWait(driver,5L).until(new ExpectedCondition<Boolean>() {
       public Boolean apply(WebDriver d) {
-        return d.getTitle().toLowerCase().startsWith(header);
+        return driver.findElement(By.xpath("//*[@id=\"user-dd\"]/div")).getText()
+                .equals(username);
       }
     });
+  }
+
+  @Then("^I log out$")
+  public void logout() {
+    WebElement element = driver.findElement(By.xpath("//*[@id=\"user-dd\"]"));
+    element.click();
+    element = driver.findElement(By.cssSelector("span.logout-icon"));
+    element.click();
+  }
+
+  @Then("^I am logged out$")
+  public void amLoggedOut() {
+    WebElement element = driver.findElement(By.xpath("/html/body/section/div/div/form/div[1]/p/span"));
+    element.getText().equalsIgnoreCase("Welcome to Opencast");
   }
 
   @After()
