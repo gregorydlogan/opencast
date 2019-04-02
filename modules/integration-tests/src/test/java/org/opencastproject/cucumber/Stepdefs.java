@@ -50,6 +50,13 @@ public class Stepdefs {
     element.click();
   }
 
+  @Then("^I fail login$")
+  public void failLogin() {
+    WebElement element = driver.findElement(By.xpath("/html/body/section/div/div/form/div[2]"));
+    element.isDisplayed();
+    element.getText().equalsIgnoreCase("Incorrect username and / or password");
+  }
+
   @Then("^I am logged out$")
   public void amLoggedOut() {
     WebElement element = driver.findElement(By.xpath("/html/body/section/div/div/form/div[1]/p/span"));
