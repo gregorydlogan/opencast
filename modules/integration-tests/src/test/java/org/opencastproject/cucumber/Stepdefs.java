@@ -68,6 +68,28 @@ public class Stepdefs {
     assertTrue(element.getText().equalsIgnoreCase("Welcome to Opencast"));
   }
 
+  @Then("^I select the admin language dropdown")
+  public void selectLanguageDrop() {
+    WebElement element = driver.findElement(By.xpath("//*[@id=\"lang-dd\"]/div/img"));
+    element.click();
+    element = driver.findElement(By.xpath("//*[@id=\"lang-dd\"]/ul"));
+    assertTrue(element.isDisplayed());
+  }
+
+  @Then("^I select \"(.*)\" and Events reads \"(.*)\"$")
+  public void selectLanguage(String language, String eventsText) {
+    WebElement element = driver.findElement(By.linkText(language));
+    element.click();
+    new WebDriverWait(driver,2L).until(new ExpectedCondition<Boolean>() {
+      public Boolean apply(WebDriver d) {
+        WebElement element = d.findElement(By.linkText(language));
+        assertFalse(element.isDisplayed());
+        element = driver.findElement(By.xpath("/html/body/section/div/div[1]/h1"));
+        return element.getText().equalsIgnoreCase(eventsText);
+      }
+    });
+  }
+
   @After()
   public void closeBrowser() {
     driver.quit();
