@@ -57,9 +57,15 @@ public class Stepdefs {
 
   @Then("I fail login")
   public void failLogin() {
-    WebElement element = driver.findElement(By.xpath("/html/body/section/div/div/form/div[2]"));
-    element.isDisplayed();
-    assertTrue(element.getText().equalsIgnoreCase("Incorrect username and / or password"));
+    new WebDriverWait(driver,5L).until(new ExpectedCondition<Boolean>() {
+      public Boolean apply(WebDriver d) {
+        //Unclear why we need to locate this twice, but the first time you get a stale element reference
+        WebElement element = d.findElement(By.xpath("/html/body/section/div/div/form/div[2]"));
+        element = d.findElement(By.xpath("/html/body/section/div/div/form/div[2]"));
+        element.isDisplayed();
+        return element.getText().equalsIgnoreCase("Incorrect username and / or password");
+      }
+    });
   }
 
   @Then("I am logged out")
@@ -70,7 +76,7 @@ public class Stepdefs {
 
   @Then("I select the admin language dropdown")
   public void selectLanguageDrop() {
-    WebElement element = driver.findElement(By.xpath("//*[@id=\"lang-dd\"]/div/img"));
+    WebElement element = driver.findElement(By.xpath("//*[@id=\"lang-dd\"]"));
     element.click();
     element = driver.findElement(By.xpath("//*[@id=\"lang-dd\"]/ul"));
     assertTrue(element.isDisplayed());
@@ -85,6 +91,20 @@ public class Stepdefs {
         WebElement element = d.findElement(By.linkText(language));
         assertFalse(element.isDisplayed());
         element = driver.findElement(By.xpath("/html/body/section/div/div[1]/h1"));
+        return element.getText().equalsIgnoreCase(eventsText);
+      }
+    });
+  }
+
+  @Then("I select {string} and the welcome page reads {string}")
+  public void selectWelcomeLanguage(String language, String eventsText) {
+    WebElement element = driver.findElement(By.linkText(language));
+    element.click();
+    new WebDriverWait(driver,2L).until(new ExpectedCondition<Boolean>() {
+      public Boolean apply(WebDriver d) {
+        WebElement element = d.findElement(By.linkText(language));
+        assertFalse(element.isDisplayed());
+        element = driver.findElement(By.xpath("/html/body/section/div/div/form/div[1]/p/span"));
         return element.getText().equalsIgnoreCase(eventsText);
       }
     });
