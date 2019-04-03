@@ -4,7 +4,7 @@ Feature: Login checks
     Given I am on the login page
 
   Scenario: Logging in as admin
-    Given I log in as "admin" with "opencast"
+    When I log in as "admin" with "opencast"
     Then I am logged in as "Opencast Project Administrator"
 
   Scenario: Logging out
@@ -14,5 +14,5 @@ Feature: Login checks
     Then I am logged out
 
   Scenario: Fail Login
-    Given I log in as "admin" with "not the right password"
+    When I log in as "admin" with "not the right password"
     Then I fail login
