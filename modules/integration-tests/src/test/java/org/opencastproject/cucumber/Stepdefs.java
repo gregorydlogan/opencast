@@ -37,7 +37,7 @@ public class Stepdefs {
     element.submit();
   }
 
-  @Then("I should be {string}")
+  @Then("I am logged in as {string}")
   public void checkUsername(String username) {
     new WebDriverWait(driver,5L).until(new ExpectedCondition<Boolean>() {
       public Boolean apply(WebDriver d) {

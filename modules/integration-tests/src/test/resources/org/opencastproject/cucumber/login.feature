@@ -1,10 +1,15 @@
 Feature: Login checks
 
-  Scenario: Logging in and back out as admin
+  Scenario: Logging in as admin
     Given I am on the login page
     When I log in as "admin" with "opencast"
-    Then I should be "Opencast Project Administrator"
-    Then I log out
+    Then I am logged in as "Opencast Project Administrator"
+
+  Scenario: Logging out
+    Given I am on the login page
+    And I log in as "admin" with "opencast"
+    And I am logged in as "Opencast Project Administrator"
+    When I log out
     Then I am logged out
 
   Scenario: Fail Login
@@ -14,9 +19,9 @@ Feature: Login checks
 
   Scenario: I change languages while logged in
     Given I am on the login page
-    When I log in as "admin" with "opencast"
-    Then I should be "Opencast Project Administrator"
-    Then I select the admin language dropdown
+    And I log in as "admin" with "opencast"
+    And I am logged in as "Opencast Project Administrator"
+    When I select the admin language dropdown
     Then I select "Deutsch" and Events reads "Ereignisse"
     Then I select the admin language dropdown
     Then I select "English" and Events reads "Events"
