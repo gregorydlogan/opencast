@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
 public class LanguageSteps {
 
@@ -44,11 +45,16 @@ public class LanguageSteps {
     assertTrue(element.isDisplayed());
   }
 
-  @Then("I select {string} and Events reads {string}")
-  public void selectLanguage(String language, String eventsText) {
+  @When("I set the current translation to {string}")
+  public void setLanguage(String language) {
     //Select the language
     WebElement element = driver.findElement(By.linkText(language));
     element.click();
+  }
+
+  @Then("I select {string} and Events reads {string}")
+  public void selectLanguage(String language, String eventsText) {
+    setLanguage(language);
 
     isDropdownHidden(By.cssSelector("#lang-dd > ul"));
     isHeaderTranslated(By.xpath("/html/body/section/div/div[1]/h1"), eventsText);
@@ -56,9 +62,8 @@ public class LanguageSteps {
 
   @Then("I select {string} and the welcome page reads {string}")
   public void selectWelcomeLanguage(String language, String welcomeText) {
-    //Select the language
-    WebElement element = driver.findElement(By.linkText(language));
-    element.click();
+    setLanguage(language);
+
     isDropdownHidden(By.cssSelector("#lang-dd > ul"));
     isHeaderTranslated(By.xpath("/html/body/section/div/div/form/div[1]/p/span"), welcomeText);
   }
