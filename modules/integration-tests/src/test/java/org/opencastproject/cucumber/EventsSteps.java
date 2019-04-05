@@ -94,4 +94,29 @@ public class EventsSteps {
   public void setContributors(String a, String b, String c) {
     throw new PendingException("Need to implement this still");
   }
+
+  @Then("I upload {string} as presenter video")
+  public void uploadPresenter(String filepath) {
+    WebElement element = driver.findElement(By.xpath("//*[@id=\"track_presenter\"]"));
+    element.sendKeys(filepath);
+  }
+
+  @Then("I upload {string} as slide video")
+  public void uploadSlides(String filepath) {
+    WebElement element = driver.findElement(By.xpath("//*[@id=\"track_presentation\"]"));
+    element.sendKeys(filepath);
+  }
+
+  @Then("I set the start time to {string}")
+  public void setUploadStartTime(String date) {
+    throw new PendingException();
+  }
+
+  @Then("I select {} in the workflow dropdown")
+  public void setWorkflow(String workflow) {
+    WebElement element = driver.findElement(By.xpath("//*[@id=\"add-event-modal\"]/admin-ng-wizard/ng-include/div[5]/div/div/div/div/div[1]"));
+    element.click();
+  }
+
+
 }

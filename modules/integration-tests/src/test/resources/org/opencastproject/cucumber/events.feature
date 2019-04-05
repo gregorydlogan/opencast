@@ -12,6 +12,11 @@ Feature: Events checks
     When I set the title to "Test title"
     Then the Next button is enabled
     And I click Next
+    Then I upload "/home/greg/opencast/mediapackages/mh_demo/nonsegment-audio.mpg" as presenter video
+    Then the Next button is enabled
+    Then I upload "/home/greg/opencast/mediapackages/mh_demo/segment.mpg" as slide video
+    Then I click Next
+    Then I select "Process upon upload and schedule" in the workflow dropdown
 
   Scenario: I create an event
     Given I open the new event modal
@@ -24,3 +29,8 @@ Feature: Events checks
     #And I set the presenter to "Test presenter"
     #And I set the contributor to "Test contributor"
     And I click Next
+    Then I upload "/home/greg/opencast/mediapackages/mh_demo/nonsegment-audio.mpg" as presenter video
+    Then the Next button is enabled
+    Then I upload "/home/greg/opencast/mediapackages/mh_demo/segment.mpg" as slide video
+    Then I set the start time to 1970-01-01T00:00:00Z
+    Then I click Next
