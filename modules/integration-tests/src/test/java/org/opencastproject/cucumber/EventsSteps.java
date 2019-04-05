@@ -1,7 +1,7 @@
 package org.opencastproject.cucumber;
 
 import static org.junit.Assert.assertTrue;
-import static org.opencastproject.cucumber.ModalCommonSteps.setDropdownContent;
+import static org.opencastproject.cucumber.ModalCommonSteps.setMetadataDropdownContent;
 import static org.opencastproject.cucumber.ModalCommonSteps.setTextRowContent;
 
 import org.openqa.selenium.By;
@@ -55,7 +55,7 @@ public class EventsSteps {
 
   @Then("I set the language dropdown to {string}")
   public void setLanguage(String language) {
-    setDropdownContent(4, language);
+    setMetadataDropdownContent(4, language);
   }
 
   @Then("I set the rights to {string}")
@@ -65,12 +65,12 @@ public class EventsSteps {
 
   @Then("I set the license to {string}")
   public void setLicense(String license) {
-    setDropdownContent(6, license);
+    setMetadataDropdownContent(6, license);
   }
 
   @Then("I set the series to {string}")
   public void setSeries(String series) {
-    setDropdownContent(7, series);
+    setMetadataDropdownContent(7, series);
   }
 
   @Then("I set the presenter to {string}")

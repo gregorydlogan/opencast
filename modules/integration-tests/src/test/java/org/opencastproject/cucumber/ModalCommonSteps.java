@@ -42,15 +42,10 @@ public class ModalCommonSteps {
     assertTrue("Input text matches content in the span", element.getText().equals(content));
   }
 
-  //Note: This only works with Chosen!
-  public static void setDropdownContent(int row, String content) {
-    String rawXPath = "//*[@id=\"add-event-modal\"]/admin-ng-wizard/ng-include/div[1]/div/div/div/div/form/table/tbody/tr[" + row + "]/td[2]/div";
-    String inputXPath = rawXPath + "/div/div/div/ul/li[text()=\"" + content + "\"]";
-    String renderedXPath = rawXPath + "/span";
-
+  public static void setDropdownContent(String rawXPath, String inputXPath, String renderedXPath, String emptyText, String expected) {
     //Check that the row is empty
     new WebDriverWait(driver, 2)
-            .until(ExpectedConditions.textToBe(By.xpath(renderedXPath), "No option selected"));
+            .until(ExpectedConditions.textToBe(By.xpath(renderedXPath), emptyText));
     //Click into the row
     WebElement element = (new WebDriverWait(driver, 2)
             .until(ExpectedConditions.elementToBeClickable(
@@ -66,6 +61,22 @@ public class ModalCommonSteps {
     element.click();
     //Check that the rendered version matches
     element = driver.findElement(By.xpath(renderedXPath));
-    assertTrue("Input text matches content in the span", element.getText().equals(content));
+    assertTrue("Input text matches content in the span", element.getText().equals(expected));
+  }
+
+  //Note: This only works with Chosen!
+  public static void setMetadataDropdownContent(int row, String content) {
+    String rawXPath = "//*[@id=\"add-event-modal\"]/admin-ng-wizard/ng-include/div[1]/div/div/div/div/form/table/tbody/tr[" + row + "]/td[2]/div";
+    String inputXPath = rawXPath + "/div/div/div/ul/li[text()=\"" + content + "\"]";
+    String renderedXPath = rawXPath + "/span";
+    setDropdownContent(rawXPath, inputXPath, renderedXPath, "No option selected", content);
+  }
+
+  //Note: This only works with Chosen!
+  public static void setWorkflowDropdownContent(String workflow) {
+    String rawXPath = "//*[@id=\"add-event-modal\"]/admin-ng-wizard/ng-include/div[5]/div/div/div/div/div[1]";
+    String inputXPath = rawXPath + "/div/div/div/ul/li[text()=\"" + workflow+ "\"]";
+    String renderedXPath = rawXPath + "/a/span";
+    setDropdownContent(rawXPath, inputXPath, renderedXPath, "No option selected", workflow);
   }
 }
