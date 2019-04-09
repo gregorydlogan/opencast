@@ -57,20 +57,5 @@ public class NavigationSteps {
     } catch (TimeoutException e) {
       fail(pane + " did not appear in the page");
     }
-}
-
-  @Then("I see {int} result(s)")
-  public void checkVisibleResults(int count) {
-    try {
-      new WebDriverWait(driver, 2)
-              .until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("/html/body/section/div/div[1]/h4"), count + " rows"));
-    } catch (TimeoutException e) {
-      fail("Incorrect number of results in the table summary, should be " + count);
-    }
-    if (count == 0) {
-      WebElement element= driver.findElement(By.xpath("/html/body/section/div/div[2]/table/tbody/tr/td"));
-      assertTrue("Incorrect number of results in the table body, should be 0",
-              element.getText().equalsIgnoreCase("No results found"));
-    }
   }
 }
