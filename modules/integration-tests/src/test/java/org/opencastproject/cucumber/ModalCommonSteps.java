@@ -59,8 +59,12 @@ public class ModalCommonSteps {
     //Get out of the input box (this xpath is the header of the modal
     element = driver.findElement(By.xpath("//*[@id=\"add-event-modal\"]/header/h2"));
     element.click();
+  }
+
+  public static void setDropdownContentAndVerify(String rawXPath, String inputXPath, String renderedXPath, String emptyText, String expected) {
+    setDropdownContent(rawXPath, inputXPath, renderedXPath, emptyText, expected);
     //Check that the rendered version matches
-    element = driver.findElement(By.xpath(renderedXPath));
+    WebElement element = driver.findElement(By.xpath(renderedXPath));
     assertTrue("Input text matches content in the span", element.getText().equals(expected));
   }
 
@@ -69,14 +73,25 @@ public class ModalCommonSteps {
     String rawXPath = "//*[@id=\"add-event-modal\"]/admin-ng-wizard/ng-include/div[1]/div/div/div/div/form/table/tbody/tr[" + row + "]/td[2]/div";
     String inputXPath = rawXPath + "/div/div/div/ul/li[text()=\"" + content + "\"]";
     String renderedXPath = rawXPath + "/span";
-    setDropdownContent(rawXPath, inputXPath, renderedXPath, "No option selected", content);
+    setDropdownContentAndVerify(rawXPath, inputXPath, renderedXPath, "No option selected", content);
   }
 
   //Note: This only works with Chosen!
   public static void setWorkflowDropdownContent(String workflow) {
     String rawXPath = "//*[@id=\"add-event-modal\"]/admin-ng-wizard/ng-include/div[5]/div/div/div/div/div[1]";
-    String inputXPath = rawXPath + "/div/div/div/ul/li[text()=\"" + workflow+ "\"]";
+    String inputXPath = rawXPath + "/div/ul/li[text()=\"" + workflow + "\"]";
     String renderedXPath = rawXPath + "/a/span";
-    setDropdownContent(rawXPath, inputXPath, renderedXPath, "No option selected", workflow);
+    setDropdownContentAndVerify(rawXPath, inputXPath, renderedXPath, "Select workflow", workflow);
+  }
+
+  //Note: This only works with Chosen!
+  public static void setAclDropdownContent(String acl) {
+    String rawXPath = "//*[@id=\"add-event-modal\"]/admin-ng-wizard/ng-include/div[6]/div/div/ul[2]/li/div/div[1]/div/table/tbody/tr/td/div/div";
+    String inputXPath = rawXPath + "/div/ul/li[text()=\"" + acl + "\"]";
+    String renderedXPath = rawXPath + "/a/span";
+    //Note: We're not verifying here because this dropdown renders the empty text once selected
+    //This makes sense when you think about the UI: You select the template, it fills it out, but you're *not* editing the template
+    //Thus, the dropdown should be back to its initial state
+    setDropdownContent(rawXPath, inputXPath, renderedXPath, "Select a template", acl);
   }
 }

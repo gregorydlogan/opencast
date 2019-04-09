@@ -16,7 +16,14 @@ Feature: Events checks
     Then the Next button is enabled
     Then I upload "/home/greg/opencast/mediapackages/mh_demo/segment.mpg" as slide video
     Then I click Next
-    Then I select "Process upon upload and schedule" in the workflow dropdown
+    Then I select "Process upon upload and schedule" in the new event workflow dropdown
+    Then I set the "flagQuality360p" workflow flag to "true"
+    And I set the "flagQuality720p" workflow flag to "false"
+    Then I click Next
+    Then I select "public" in the new event acl dropdown
+    Then I click Next
+    Then I verify my selections on the confirmation modal
+    Then I click Create
 
   Scenario: I create an event
     Given I open the new event modal
