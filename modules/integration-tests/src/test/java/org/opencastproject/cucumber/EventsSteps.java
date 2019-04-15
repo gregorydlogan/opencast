@@ -1,5 +1,6 @@
 package org.opencastproject.cucumber;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.opencastproject.cucumber.ModalCommonSteps.setAclDropdownContent;
 import static org.opencastproject.cucumber.ModalCommonSteps.setDropdownContentAndVerify;
@@ -148,5 +149,40 @@ public class EventsSteps {
       WebElement value = key.findElement(By.xpath(baseXPath + "/../td[2]"));
       assertTrue("Key " + e.getKey() + " does not match, found " + value.getText() + " instead", e.getValue().equals(value.getText()));
     }
+  }
+
+  @Then("I wait until the event has uploaded")
+  public void waitUntilUploaded() {
+    String base = "/html/body/section/div/ul/li";
+    By target = By.xpath(base);
+    By notification = By.xpath(base + "/div/p");
+    By closeButton = By.xpath(base + "/div/a");
+
+    String uploading = "The event is being uploaded…";
+    String uploaded = "The event has been created";
+
+    //Wait while the event uploads
+    WebElement element = new WebDriverWait(driver, 2)
+            .until(ExpectedConditions.visibilityOfElementLocated(notification));
+    assertTrue("Notification element should be visible", element.isDisplayed());
+    //We check against both uploading and uploaded because sometimes the upload is already done by the time we check!
+    assertTrue("Event upload notification text incorrect",
+            element.getText().equals(uploading) || element.getText().equals(uploaded));
+
+    //Wait for the event upload completion notice to show up
+    new WebDriverWait(driver, 120)
+            .until(ExpectedConditions.textToBePresentInElementLocated(notification, uploaded ));
+    element = driver.findElement(notification);
+    assertTrue("Event upload completion notification text incorrect", element.getText().equals(uploaded));
+
+    element = driver.findElement(closeButton);
+    element.click();
+    assertFalse("Closing the notification did not make it disappear", element.isDisplayed());
+
+    //Wait until the notice fades out, and ensure it actually does
+    new WebDriverWait(driver, 10)
+            .until(ExpectedConditions.numberOfElementsToBe(target, 0));
+    List<WebElement> elements = driver.findElements(target);
+    assertTrue("Notification element should be empty, instead has " + elements.size(), elements.size() == 0);
   }
 }
