@@ -37,8 +37,8 @@ public class ModalCommonSteps {
             .until(ExpectedConditions.elementToBeClickable(
                     By.xpath(inputXPath)));
     element.sendKeys(content);
-    //Get out of the input box (this xpath is the parent of the input)
-    element = driver.findElement(By.xpath(rawXPath + "/../../.."));
+    //Get out of the input box (this xpath is the top of the modal)
+    element = driver.findElement(By.xpath("//*[@id=\"add-" + type + "-modal\"]"));
     element.click();
     //Check that the rendered version matches
     element = driver.findElement(By.xpath(renderedXPath));
@@ -59,8 +59,8 @@ public class ModalCommonSteps {
             .until(ExpectedConditions.elementToBeClickable(
                     By.xpath(inputXPath)));
     element.click();
-    //Get out of the input box
-    element = driver.findElement(By.xpath(rawXPath + "/../../.."));
+    //Get out of the input box by selecting the top of the modal
+    element = driver.findElement(By.xpath(rawXPath.split("/admin-ng-wizard/")[0]));
     element.click();
   }
 
