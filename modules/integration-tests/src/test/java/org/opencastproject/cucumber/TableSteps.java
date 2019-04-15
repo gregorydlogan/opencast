@@ -29,10 +29,19 @@ public class TableSteps {
     new WebDriverWait(driver, 1);
     WebElement counter = driver.findElement(rowCounter);
     List<WebElement> rows = driver.findElements(tableRows);
-    int count = Integer.parseInt(counter.getText());
+    //Remove the " rows" from "N rows"
+    int count = Integer.parseInt(counter.getText().replace(" rows", ""));
     if (0 != count) {
-      assertTrue("Row count and number of rows don't match, found " + rows.size() + " should be " + count,
-              rows.size() == count);
+      if (count <= 10) {
+        assertTrue("Row count and number of rows don't match, found " + rows.size() + " should be " + count,
+                rows.size() == count);
+      }
+      else {
+        //TODO: Handle different size pages
+        assertTrue("Row count and number of rows don't match, found " + count + " which is more than 10, but "
+                + rows.size() + " are being displayed",
+                rows.size() == 10);
+      }
     } else {
       assertTrue("Row count and number of rows don't match, found " + rows.size() + " should be 1",
               rows.size() == 1);
@@ -47,8 +56,10 @@ public class TableSteps {
 
   @Then("I check that the number of results has increased by {int}")
   public void hasIncreasedBy(int number) {
+    new WebDriverWait(driver, 10)
+            .until(ExpectedConditions.textToBePresentInElementLocated(rowCounter, (expected + number) + " rows"));
     int current = checkCounterAndRowConsistency();
-    assertTrue("Incorrect number of results, should be " + expected + number + " but is " + current,
+    assertTrue("Incorrect number of results, should be " + (expected + number) + " but is " + current,
             current == expected + number);
     expected = current;
   }
