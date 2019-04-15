@@ -33,11 +33,18 @@ Feature: Events checks
     And I set the language dropdown to "English"
     And I set the rights to "Test rights"
     And I set the license to "All rights reserved"
-    #And I set the presenter to "Test presenter"
-    #And I set the contributor to "Test contributor"
+    And I set the presenter to "Test presenter"
+    And I set the contributor to "Test contributor"
     And I click Next
     Then I upload "/home/greg/opencast/mediapackages/mh_demo/nonsegment-audio.mpg" as presenter video
     Then the Next button is enabled
     Then I upload "/home/greg/opencast/mediapackages/mh_demo/segment.mpg" as slide video
     Then I set the start time to 1970-01-01T00:00:00Z
+    Then I select "Process upon upload and schedule" in the new event workflow dropdown
+    Then I set the "flagQuality360p" workflow flag to "true"
+    And I set the "flagQuality720p" workflow flag to "false"
     Then I click Next
+    Then I select "public" in the new event acl dropdown
+    Then I click Next
+    Then I verify my selections on the confirmation modal
+    Then I click Create

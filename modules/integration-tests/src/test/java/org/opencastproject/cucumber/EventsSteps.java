@@ -124,8 +124,8 @@ public class EventsSteps {
     settings.put("Slides", new File(filepath).getName());
   }
 
-  @Then("I set the start time to {string}")
-  public void setUploadStartTime(String date) {
+  @Then("I set the start time to {int}{int}{int}T{int}:{int}:{int}Z")
+  public void setUploadStartTime(int year, int month, int date, int hour, int minute, int second) {
     throw new PendingException();
   }
 

@@ -63,10 +63,10 @@ public class TableSteps {
       fail("Incorrect number of results in the table summary, should be " + count);
     }
     List<WebElement> elements = driver.findElements(tableRows);
-    assertTrue("Incorrect number of results in the table body, should be " + count,
-            elements.size() == count);
-    if (count == 0) {
-      assertTrue("Incorrect number of results in the table body, should be 0",
+    if (count != 0) {
+      assertTrue("Incorrect number of results in the table body, should be " + count, elements.size() == count);
+    } else {
+      assertTrue("Incorrect number of results in the table body, should be 0 and read 'No results found'",
               elements.get(0).getText().equalsIgnoreCase("No results found"));
     }
   }
