@@ -6,9 +6,9 @@ import static org.opencastproject.cucumber.ModalCommonSteps.setAclDropdownConten
 import static org.opencastproject.cucumber.ModalCommonSteps.setDropdownContentAndVerify;
 import static org.opencastproject.cucumber.ModalCommonSteps.setMetadataDropdownContent;
 import static org.opencastproject.cucumber.ModalCommonSteps.setTextRowContent;
+import static org.opencastproject.cucumber.WebDriverFactory.getDriver;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -24,8 +24,6 @@ import cucumber.api.java.en.Then;
 public class EventsSteps {
 
   private static final String MODAL_TYPE = "event";
-
-  private final WebDriver driver = WebDriverFactory.createWebDriver();
 
   private LinkedHashMap<String, String> settings = new LinkedHashMap<>();
 
@@ -95,14 +93,14 @@ public class EventsSteps {
 
   @Then("I upload {string} as presenter video")
   public void uploadPresenter(String filepath) {
-    WebElement element = driver.findElement(By.xpath("//*[@id=\"track_presenter\"]"));
+    WebElement element = getDriver().findElement(By.xpath("//*[@id=\"track_presenter\"]"));
     element.sendKeys(filepath);
     settings.put("Presenter", new File(filepath).getName());
   }
 
   @Then("I upload {string} as slide video")
   public void uploadSlides(String filepath) {
-    WebElement element = driver.findElement(By.xpath("//*[@id=\"track_presentation\"]"));
+    WebElement element = getDriver().findElement(By.xpath("//*[@id=\"track_presentation\"]"));
     element.sendKeys(filepath);
     settings.put("Slides", new File(filepath).getName());
   }
@@ -126,7 +124,7 @@ public class EventsSteps {
   @Then("I set the {string} workflow flag to {string}")
   public void setWorkflowFlat(String flagId, String value) {
     Boolean v = Boolean.valueOf(value);
-    WebElement element = driver.findElement(By.id(flagId));
+    WebElement element = getDriver().findElement(By.id(flagId));
     if (element.isSelected() != v) {
       element.click();
     }
@@ -142,10 +140,10 @@ public class EventsSteps {
 
   @Then("I verify my selections on the event confirmation modal")
   public void verify() {
-    new WebDriverWait(driver, 2).until(ExpectedConditions.elementToBeClickable(By.linkText("Create")));
+    new WebDriverWait(getDriver(), 2).until(ExpectedConditions.elementToBeClickable(By.linkText("Create")));
     for (Map.Entry<String, String> e : settings.entrySet()) {
       String baseXPath = "//*[@id=\"add-event-modal\"]//*[contains(text(), \"" + e.getKey() + "\")]";
-      WebElement key = driver.findElement(By.xpath(baseXPath));
+      WebElement key = getDriver().findElement(By.xpath(baseXPath));
       WebElement value = key.findElement(By.xpath(baseXPath + "/../td[2]"));
       assertTrue("Key " + e.getKey() + " does not match, found " + value.getText() + " instead", e.getValue().equals(value.getText()));
     }
@@ -162,7 +160,7 @@ public class EventsSteps {
     String uploaded = "The event has been created";
 
     //Wait while the event uploads
-    WebElement element = new WebDriverWait(driver, 2)
+    WebElement element = new WebDriverWait(getDriver(), 2)
             .until(ExpectedConditions.visibilityOfElementLocated(notification));
     assertTrue("Notification element should be visible", element.isDisplayed());
     //We check against both uploading and uploaded because sometimes the upload is already done by the time we check!
@@ -170,19 +168,19 @@ public class EventsSteps {
             element.getText().equals(uploading) || element.getText().equals(uploaded));
 
     //Wait for the event upload completion notice to show up
-    new WebDriverWait(driver, 120)
+    new WebDriverWait(getDriver(), 120)
             .until(ExpectedConditions.textToBePresentInElementLocated(notification, uploaded ));
-    element = driver.findElement(notification);
+    element = getDriver().findElement(notification);
     assertTrue("Event upload completion notification text incorrect", element.getText().equals(uploaded));
 
-    element = driver.findElement(closeButton);
+    element = getDriver().findElement(closeButton);
     element.click();
     assertFalse("Closing the notification did not make it disappear", element.isDisplayed());
 
     //Wait until the notice fades out, and ensure it actually does
-    new WebDriverWait(driver, 10)
+    new WebDriverWait(getDriver(), 10)
             .until(ExpectedConditions.numberOfElementsToBe(target, 0));
-    List<WebElement> elements = driver.findElements(target);
+    List<WebElement> elements = getDriver().findElements(target);
     assertTrue("Notification element should be empty, instead has " + elements.size(), elements.size() == 0);
   }
 }

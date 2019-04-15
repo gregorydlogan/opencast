@@ -4,9 +4,9 @@ import static org.junit.Assert.assertTrue;
 import static org.opencastproject.cucumber.ModalCommonSteps.setAclDropdownContent;
 import static org.opencastproject.cucumber.ModalCommonSteps.setMetadataDropdownContent;
 import static org.opencastproject.cucumber.ModalCommonSteps.setTextRowContent;
+import static org.opencastproject.cucumber.WebDriverFactory.getDriver;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -20,8 +20,6 @@ import cucumber.api.java.en.Then;
 public class SeriesSteps {
 
   private static final String MODAL_TYPE = "series";
-
-  private final WebDriver driver = WebDriverFactory.createWebDriver();
 
   private LinkedHashMap<String, String> settings = new LinkedHashMap<>();
 
@@ -107,10 +105,10 @@ public class SeriesSteps {
 
   @Then("I verify my selections on the series confirmation modal")
   public void verify() {
-    new WebDriverWait(driver, 2).until(ExpectedConditions.elementToBeClickable(By.linkText("Create")));
+    new WebDriverWait(getDriver(), 2).until(ExpectedConditions.elementToBeClickable(By.linkText("Create")));
     for (Map.Entry<String, String> e : settings.entrySet()) {
       String baseXPath = "//*[@id=\"add-series-modal\"]//*[contains(text(), \"" + e.getKey() + "\")]";
-      WebElement key = driver.findElement(By.xpath(baseXPath));
+      WebElement key = getDriver().findElement(By.xpath(baseXPath));
       WebElement value = key.findElement(By.xpath(baseXPath + "/../td[2]"));
       assertTrue("Key " + e.getKey() + " does not match, found " + value.getText() + " instead", e.getValue().equals(value.getText()));
     }

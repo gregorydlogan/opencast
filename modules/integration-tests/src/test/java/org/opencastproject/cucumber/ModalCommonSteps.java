@@ -1,9 +1,9 @@
 package org.opencastproject.cucumber;
 
 import static org.junit.Assert.assertTrue;
+import static org.opencastproject.cucumber.WebDriverFactory.getDriver;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -12,8 +12,6 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 public class ModalCommonSteps {
-
-  private static final WebDriver driver = WebDriverFactory.createWebDriver();
 
   public static void setTextRowContent(String type, int row, String content) {
     setTextRowContent(type, row, content, "input");
@@ -25,49 +23,49 @@ public class ModalCommonSteps {
     String renderedXPath = rawXPath + "/span";
 
     //Check that the row is empty
-    new WebDriverWait(driver, 2)
+    new WebDriverWait(getDriver(), 2)
             .until(ExpectedConditions.textToBe(By.xpath(renderedXPath), ""));
     //Click into the row
-    WebElement element = (new WebDriverWait(driver, 2)
+    WebElement element = (new WebDriverWait(getDriver(), 2)
             .until(ExpectedConditions.elementToBeClickable(
                     By.xpath(rawXPath))));
     element.click();
     //A temporary input element has appeared, find it
-    element = new WebDriverWait(driver, 2)
+    element = new WebDriverWait(getDriver(), 2)
             .until(ExpectedConditions.elementToBeClickable(
                     By.xpath(inputXPath)));
     element.sendKeys(content);
     //Get out of the input box (this xpath is the top of the modal)
-    element = driver.findElement(By.xpath("//*[@id=\"add-" + type + "-modal\"]"));
+    element = getDriver().findElement(By.xpath("//*[@id=\"add-" + type + "-modal\"]"));
     element.click();
     //Check that the rendered version matches
-    element = driver.findElement(By.xpath(renderedXPath));
+    element = getDriver().findElement(By.xpath(renderedXPath));
     assertTrue("Input text doesn't match the content in the span", element.getText().equals(content));
   }
 
   public static void setDropdownContent(String rawXPath, String inputXPath, String renderedXPath, String emptyText) {
     //Check that the row is empty
-    new WebDriverWait(driver, 2)
+    new WebDriverWait(getDriver(), 2)
             .until(ExpectedConditions.textToBe(By.xpath(renderedXPath), emptyText));
     //Click into the row
-    WebElement element = (new WebDriverWait(driver, 2)
+    WebElement element = (new WebDriverWait(getDriver(), 2)
             .until(ExpectedConditions.elementToBeClickable(
                     By.xpath(rawXPath))));
     element.click();
     //A temporary set of input elements have appeared, find the right one
-    element = new WebDriverWait(driver, 2)
+    element = new WebDriverWait(getDriver(), 2)
             .until(ExpectedConditions.elementToBeClickable(
                     By.xpath(inputXPath)));
     element.click();
     //Get out of the input box by selecting the top of the modal
-    element = driver.findElement(By.xpath(rawXPath.split("/admin-ng-wizard/")[0]));
+    element = getDriver().findElement(By.xpath(rawXPath.split("/admin-ng-wizard/")[0]));
     element.click();
   }
 
   public static void setDropdownContentAndVerify(String rawXPath, String inputXPath, String renderedXPath, String emptyText, String expected) {
     setDropdownContent(rawXPath, inputXPath, renderedXPath, emptyText);
     //Check that the rendered version matches
-    WebElement element = driver.findElement(By.xpath(renderedXPath));
+    WebElement element = getDriver().findElement(By.xpath(renderedXPath));
     assertTrue("Input text doesn't match the content in the span", element.getText().equals(expected));
   }
 
@@ -91,7 +89,7 @@ public class ModalCommonSteps {
 
   @Then("the Next button is enabled in the {string} modal")
   public static WebElement nextEnabled(String type) {
-    WebElement element = WebDriverFactory.createWebDriver().findElement(By.xpath("//*[@id=\"add-" + type+ "-modal\"]/admin-ng-wizard/footer/a"));
+    WebElement element = getDriver().findElement(By.xpath("//*[@id=\"add-" + type+ "-modal\"]/admin-ng-wizard/footer/a"));
     assertTrue("Next/Create button is not enabled!", element.isEnabled());
     return element;
   }

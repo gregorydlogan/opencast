@@ -36,6 +36,10 @@ public class WebDriverFactory {
     }
   }
 
+  public static WebDriver getDriver() {
+    return createWebDriver();
+  }
+
   @After
   public static void quit(Scenario scenario) throws IOException {
     if (scenario.isFailed()) {
