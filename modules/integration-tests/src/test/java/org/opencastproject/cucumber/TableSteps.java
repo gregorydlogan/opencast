@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
 public class TableSteps {
 
@@ -79,4 +80,22 @@ public class TableSteps {
               elements.get(0).getText().equalsIgnoreCase("No results found"));
     }
   }
+
+  @When("I sort by {string}, {string}")
+  public void sortBy(String type, String direction) {
+    WebElement header = getDriver().findElement(By.xpath("//th/span[contains(text(), \"" + type + "\")]"));
+    WebElement indicator = header.findElement(By.cssSelector("i"));
+    //If the current direction is not correct
+    if (!indicator.getAttribute("class").contains(direction)) {
+      header.click();
+    }
+  }
+
+  @Then("I see the table sorted by {string}, {string}")
+  public void isSortedBy(String type, String direction) {
+    WebElement indicator = getDriver().findElement(By.xpath("//th/span[contains(text(), \"" + type + "\")]/i"));
+    assertTrue("Sorting is incorrect", indicator.getAttribute("class").contains(direction));
+  }
+
+
 }
