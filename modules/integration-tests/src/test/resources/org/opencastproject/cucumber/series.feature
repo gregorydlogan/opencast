@@ -18,7 +18,6 @@ Feature: Series checks
     And I click Next in the "series" modal
     Then I select "public" in the new series acl dropdown
     Then I click Next in the "series" modal
-    #Skipping theme selection
     Then I click Next in the "series" modal
     Then I verify my selections on the series confirmation modal
     Then I click Create in the "series" modal
