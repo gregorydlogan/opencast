@@ -6,9 +6,6 @@ Feature: Events checks
     And I am logged in as "Opencast Project Administrator"
     And I select the admin language dropdown
     And I set the current translation to "English"
-    And I open the hamburger
-    And I click the "Recordings" section
-    And I open the "Events" pane
 
   Scenario: Minimum viable event
     Given I record the number of results
