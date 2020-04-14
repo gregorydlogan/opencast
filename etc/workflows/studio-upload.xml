@@ -369,6 +369,52 @@
     </operation>
 
     <operation
+        id="publish-aws"
+        if="${publishToAws}"
+        max-attempts="2"
+        exception-handler-workflow="partial-error"
+        description="Publishing to Amazon Web Services">
+      <configurations>
+        <configuration key="download-source-flavors">dublincore/*,security/*</configuration>
+        <configuration key="download-source-tags">engage-download,atom,rss,mobile</configuration>
+        <configuration key="streaming-source-tags">engage-streaming</configuration>
+        <configuration key="strategy">merge</configuration>
+        <configuration key="check-availability">true</configuration>
+      </configurations>
+    </operation>
+
+    <operation
+        id="publish-configure"
+        if="${publishToApi}"
+        exception-handler-workflow="partial-error"
+        description="Publish to external api publication channel">
+      <configurations>
+        <configuration key="channel-id">api</configuration>
+        <configuration key="mimetype">application/json</configuration>
+        <configuration key="source-tags">engage-download,engage-streaming</configuration>
+        <configuration key="url-pattern">http://localhost:8080/api/events/${event_id}</configuration>
+        <configuration key="with-published-elements">false</configuration>
+        <configuration key="check-availability">true</configuration>
+      </configurations>
+    </operation>
+
+    <!-- Publish to OAI-PMH -->
+
+    <operation
+        id="publish-oaipmh"
+        if="${publishToOaiPmh}"
+        exception-handler-workflow="partial-error"
+        description="Publish to OAI-PMH Default Repository">
+      <configurations>
+        <configuration key="download-flavors">dublincore/*,security/*</configuration>
+        <configuration key="download-tags">engage-download,atom,rss</configuration>
+        <configuration key="streaming-tags">engage-streaming</configuration>
+        <configuration key="check-availability">true</configuration>
+        <configuration key="repository">default</configuration>
+      </configurations>
+    </operation>
+
+    <operation
         id="tag"
         fail-on-error="false"
         description="Remove processing tags">
