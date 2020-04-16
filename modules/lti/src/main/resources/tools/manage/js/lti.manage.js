@@ -2379,7 +2379,7 @@ $(document).ready(function() {
     });
   });
   $('#uploadModal').on('shown.bs.modal', function(e) {
-    if (!$('uploadModal input[type=file]')) {
+    if (!$('#uploadModal input[type=file]')) {
       $('.fileContainer').attr('data-title', 'Choose video');
     }
     if (!$('#uploadModal input[name=start_date]').val()) {
@@ -2391,6 +2391,10 @@ $(document).ready(function() {
         ocManager.series.contributor
       );
     }
+  });
+  $('#uploadModal').on('hidden.bs.modal', function () {
+    $('.fileContainer').attr('data-title', 'Choose video');
+    $('.videoPreview').find('img').removeAttr('src');
   });
 });
 
