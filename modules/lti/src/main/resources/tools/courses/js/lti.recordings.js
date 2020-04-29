@@ -665,7 +665,7 @@ function getStatus(details) {
             if (details.publications && details.publications.length > 0) {
                 evStatus = 'Published';
             } else {
-                if (details.has_comments && !details.has_open_comments){
+                if (!details.has_open_comments){
                     evStatus = 'Unwanted';
                 } else {
                     evStatus = 'Awaiting Review';
