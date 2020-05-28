@@ -2099,8 +2099,8 @@ $(document).ready(function() {
 
     var mediaType = $(this).data('mediatype');
     var file = this.files[0];
-    if (file.type.indexOf(mediaType) === -1) {
-      $(this).parent().attr('data-title', 'Please provide a file of ' + mediaType + ' type');
+    if (file.type.indexOf("video") === -1 && file.type.indexOf("audio") === -1) {
+      $(this).parent().attr('data-title', 'Please provide a file of video or audio type');
       $(this).val('');
       $(this).parent().prev()[0].checked = false;
       return;
@@ -2380,7 +2380,7 @@ $(document).ready(function() {
   });
   $('#uploadModal').on('shown.bs.modal', function(e) {
     if (!$('#uploadModal input[type=file]')) {
-      $('.fileContainer').attr('data-title', 'Choose video');
+      $('.fileContainer').attr('data-title', 'Choose video or audio');
     }
     if (!$('#uploadModal input[name=start_date]').val()) {
       $('#uploadModal input[name=start_date]').val(moment().format('YYYY-MM-DD'));
@@ -2393,7 +2393,7 @@ $(document).ready(function() {
     }
   });
   $('#uploadModal').on('hidden.bs.modal', function () {
-    $('.fileContainer').attr('data-title', 'Choose video');
+    $('.fileContainer').attr('data-title', 'Choose video or audio');
     $('.videoPreview').find('img').removeAttr('src');
   });
 });

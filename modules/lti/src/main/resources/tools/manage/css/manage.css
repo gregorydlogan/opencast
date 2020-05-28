@@ -2021,7 +2021,7 @@ input:checked + .fileContainer + label {
 }
 
 .fileContainer:not([data-title]):before {
-  content: 'Choose video';
+  content: 'Choose video or audio';
   padding-right: 0;
   margin-right: 0.5rem;
 }
