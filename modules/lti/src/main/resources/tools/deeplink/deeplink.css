@@ -37,4 +37,5 @@ div.loading {
 
 .tile #opencast-thumbnail {
     width: 100% !important;
+    max-height: 100%;
 }
