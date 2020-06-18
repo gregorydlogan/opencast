@@ -185,8 +185,8 @@
           <div class="modal-body">
           </div>
           <div class="modal-footer">
-            <button type="reset" class="btn btn-default">Cancel</button>
-            <button class="btn btn-success"><span class="loader"><i class="fa fa-cog fa-spin"></i></span><span class="text"></span></button>
+            <button type="reset" class="btn btn-default btn-red" id="editPublishedCancel">Cancel</button>
+            <button class="btn btn-success" id="editPublished"><span class="loader"><i class="fa fa-cog fa-spin"></i></span><span class="text"></span></button>
           </div>
         </form>
       </div>
@@ -522,6 +522,34 @@
         </form>
       </div>
     </div>
+    
+    <div class="modal fade" id="editCaptionsModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="ecModal">
+      <div class="modal-dialog" role="document">
+        <form class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="close">
+              <span aria-hidden="true" title="Close Popup">&times;</span>
+            </button>
+            <h4 class="modal-title" id="ecModal"></h4>
+          </div>
+          <div class="modal-body" id="ecModalBody">
+            <div class="form-group green-border-focus">
+              <input type="hidden" id="vttInfo">
+              <label class="vttLabel" for="vttText" id="vttLabel"></label>
+              <p class="note">
+                <b>PLEASE NOTE: </b> Your changes will only be published when you click the <b><i>SAVE</i></b> button. 
+              </p><br/>
+             <span id="editCaptionsError" class="errors" style="display:none;color:red;"><ol id="errorLi"></ol><br/></span>
+              <textarea id="vttText" name="text/vtt" rows="15" class="form-control rounded-0 newVtt"></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="reset" class="btn btn-default btn-red">Cancel</button>
+            <button type="button" class="btn btn-success updateCaptions" style="float:right;display:none;">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
     <div id="suggestion">
     </div>
     <script type="text/x-tmpl" id="tmpl-body">{% for (var i=0; i < o.length; i++) { var item=o [i]; include( 'tmpl-row', o[i]); } %} </script>
@@ -615,6 +643,12 @@
         </div>
         <div class="instruction" data-instruction="success">
         </div>
+        <ul class="nav nav-tabs" id="tabContent">
+          <li class="nav-item active detailsLink" id="detailsLink"><a href="#details" class="nav-link" data-toggle="tab">Details</a></li>
+          <li class="nav-item captionsLink" id="captionsLink"><a href="#captions" class="nav-link" data-toggle="tab">Captions</a></li>
+        </ul>
+        <div class="tab-content">
+        <div class="tab-pane active" id="details" style="padding:10px;">
         <ul class="infoList">
         <li data-field="title" data-fieldtype="text">
             <span>Title</span>
@@ -715,6 +749,53 @@
         </li>
         {% } %}
         </ul>
+        </div>
+        <div class="tab-pane" id="captions" style="padding:10px;">
+          <input type="hidden" id="hiddenEvent" name="hiddenEvent"/>
+          <div class="list-group">
+            <div class="list-group-item">
+              <h5 class="list-group-item-heading"><b>Edit Captions</b></h5>
+              <ul class="list-group">
+                 <li class="list-group-item list-group-item-action borderless"><a type="button" href="" id="editCaptions" data-toggle="modal" data-target="#editCaptionsModal"></a></li>
+              </ul>
+            </div>
+            <div class="list-group-item">
+              <h5 class="list-group-item-heading"><b>Download Captions</b></h5>
+              <ul class="list-group">
+                <li class="list-group-item list-group-item-action borderless" style="display:none;" id="downloadNibityCaptions">
+                  <a href="#" class="list-group-item-action" title="Nibity Captions" id="dlNibityCaptions">
+                    <i class="fa fa-download"></i> Way with Words Captions
+                  </a>
+                </li>
+                <li class="list-group-item list-group-item-action borderless" style="display:none;" id="downloadGoogleCaptions">
+                  <a href="#" class="list-group-item-action" title="Google Captions" id="dlGoogleCaptions">
+                    <i class="fa fa-download"></i> Automated Captions
+                  </a>
+                </li>
+                <li class="list-group-item list-group-item-action borderless" style="display:none;" id="downloadUploadedCaptions">
+                  <a href="#" title="Uploaded Captions" id="dlUploadedCaptions">
+                    <i class="fa fa-download"></i> Uploaded Captions
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="list-group-item">
+              <h5 class="list-group-item-heading"><b>Upload New Captions</b></h5>
+              <input autocomplete="off" type="checkbox" id="populatedPresVtt" class="filePopulated" />
+              <span class="fileContainer form-control" data-mediatype="text/vtt" data-title="Choose *.vtt ..." style="display:inline-block;">
+              <input autocomplete="off" type="file" name="text/vtt" id="attachment_captions_webvtt" data-mediatype="vtt" accept=".vtt"/>
+                  <progress min="0" value=0 max="100"></progress>
+              </span>
+              <a href="" id="btnUploadCaptions" class="btn btn-success uploadCaptions" style="display:none;">Upload VTT</a>
+              <textarea style="display:none;" rows="10" cols="50" name="text/vtt"  id="uploadedVttText"></textarea>
+              <span class="errors" style="color:red;display:none;">The file you are trying to upload is not a valid VTT file.
+                To validate it, copy and paste the text from your file to a  <a href="https://quuz.org/webvtt">VTT Validator</a> and
+                correct the errors indicated. Then copy and paste the corrected text back to your file and upload it again.
+              </span>
+            </div>
+          </div>
+        </div>
+        </div>
         {% if (o.target == '#bulkModal') { %}
             <div id="updateProgress">
             <h4></h4>
@@ -811,6 +892,7 @@
     <script type="text/javascript" src="js/lti.eventmanager.js?v=%version%"></script>
     <script type="text/javascript" src="js/lti.tableview.js?v=%version%"></script>
     <script type="text/javascript" src="js/lti.manage.js?v=%version%"></script>
+        <script type="text/javascript" src="js/parser.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
 </body>
 </html>

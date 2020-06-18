@@ -3160,3 +3160,34 @@ input:focus, textarea:focus {
   border: 1px solid #09f !important;
   box-shadow: 0 0 3px #8cf !important;
 }
+#tblCaptions tr:hover td {
+  background-color: inherit !important;
+}
+#tblCaptions {
+  border:1px solid white;
+}
+#tblCaptions tr:hover a:hover {
+  text-decoration: none !important;
+  background-color: white;
+  border: 1px solid blue;
+  box-shadow: 0.3s;
+  color: blue;
+}
+.uploadCaptions:hover {
+  background-color: green;
+  border: 1px solid green;
+  box-shadow: 0.3s;
+  color: white;
+}
+.btn-default.btn-red {
+  background-color: #712d2d !important;
+  color: white !important;
+}
+.borderless {
+  border: none !important;
+}
+.borderless:hover {
+   color: #333;
+   background-color: #e6e6e6;
+   border-color: #adadad;
+}

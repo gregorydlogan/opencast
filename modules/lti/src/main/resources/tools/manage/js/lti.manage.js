@@ -782,7 +782,7 @@ var OCManager = (function($) {
         }.bind(this);
         runCheck(0);
       }.bind(this)).promise();
-    }
+  }
   }
 
   return Manager;
@@ -1091,10 +1091,13 @@ function eventEditable(id) {
 }
 
 function editPublishedControls(id) {
-  var str = '<button type="button" data-toggle="modal" data-event="' + id + '" data-target="#editPublishedModal">' +
+  var str = '<button type="button" id="btnDetails" data-toggle="modal" data-event="' + id + '" data-target="#editPublishedModal">' +
             '  <i class="fa fa-pencil"></i></button>' +
-            '<button type="button" data-toggle="modal" data-event="' + id + '"  data-target="#retractModal">' +
-            '  <i class="fa fa-times-circle"></i></button>';
+            '&nbsp;&nbsp;<button type="button" data-toggle="modal" data-event="' + id + '"  data-target="#retractModal">' +
+            '  <i class="fa fa-times-circle"></i></button>'+ 
+            '&nbsp;&nbsp;<button type="button" id="btnCaptions_' + id + '"  style="display:none;" data-toggle="modal" data-event="' + id + '" data-target="#editPublishedModal">' +
+            '  <i class="fa fa-cc"></i></button>';
+  checkCaptions(id);
   return str;
 }
 
@@ -1114,10 +1117,12 @@ function personalEventEditable(id, has_preview) {
                 '  <i class="fa fa-scissors"></i></a>'
     }
 
-    str += '<button type="button" data-toggle="modal" data-event="' + id + '" data-target="#editPublishedModal" title="Edit recording details">' +
+    str += '<button type="button" id="btnDetails" data-toggle="modal" data-event="' + id + '" data-target="#editPublishedModal" title="Edit recording details">' +
             '  <i class="fa fa-pencil"></i></button>';
-    str += '<button type="button" data-event="' + id + '"  data-target="#delModal" title="Remove recording">' +
+    str += '&nbsp;&nbsp;<button type="button" data-event="' + id + '"  data-target="#delModal" title="Remove recording">' +
             '  <i class="fa fa-times-circle"></i></button>';
+    str += '&nbsp;&nbsp;<button type="button" id="btnCaptions_' + id + '" style="display:none;" data-toggle="modal" data-event="' + id + '" data-target="#editPublishedModal">' +
+           '  <i class="fa fa-cc"></i></button>';
     return '<div style="display:flex; justify-content: space-between;">'+ str + '</div>';
 }
 
@@ -1395,6 +1400,8 @@ $(document).ready(function() {
             $seriesList.append($seriesItem);
           });
         }
+        $('#hiddenEvent').attr('data-event', event.id);
+        $('#hiddenEvent').attr('data-title', event.title);
         return ocManager.eventMgr.getEventAssets(event.id, {target: target});
       }
 
@@ -2155,8 +2162,32 @@ $(document).ready(function() {
     }
   });
   $('#editPublishedModal').on('change', 'input[type=file]', function(e) {
-    if (this.files[0]) {
-      $(this).parent().prev().text(this.files[0].name).attr('title', this.files[0].name);
+    $('#editPublishedModal #errorLi').html('');
+    var mediaType = $(this).data('mediatype'),
+        file = this.files[0],
+        fileContents = "";
+    
+    if (file) {
+      var fileName = file.name;
+      var fileNameExt = fileName.substr(fileName.lastIndexOf('.') +1);
+      if (fileNameExt != mediaType) {
+          $(this).parent().attr('data-title', 'Please provide a file of *.vtt type');
+          $(this).val('');
+          $(this).parent().prev()[0].checked = false;
+          $('.uploadCaptions').hide();
+          return;
+      } else {
+         var reader = new FileReader();
+         reader.readAsText(file, "UTF-8");
+         reader.onload = function (evt) {
+            $('#uploadedVttText').val(evt.target.result);
+            fileContents = $('#uploadedVttText').val();
+            validateVTT(fileName, fileContents);
+         }
+         reader.onerror = function (evt) {
+            console.log("error reading file");
+         } 
+      }
     }
   });
 
@@ -2396,6 +2427,154 @@ $(document).ready(function() {
     $('.fileContainer').attr('data-title', 'Choose video or audio');
     $('.videoPreview').find('img').removeAttr('src');
   });
+  $('#editPublishedModal').on('show.bs.modal', function(e) {
+    var triggerElement = $(e.relatedTarget),
+        id = $('#hiddenEvent').attr('data-event');
+
+    if(triggerElement[0].id === 'btnCaptions_'+ id) {
+      getCaptions(id);
+      $('#editPublished').hide();
+      $('#editPublishedCancel').text("Close");
+      $('#detailsLink, #details').removeClass('active');
+      $('#captions, #captionsLink').addClass('active');
+      $('#editCaptions, #dlNibityCaptions, #dlGoogleCaptions, #dlUploadedCaptions, .uploadCaptions').attr('data-event', id);
+    }else{
+      $('#editPublished').show();
+      $('#editPublishedCancel').text("Cancel");
+    }
+  });
+  $('#editPublishedModal').on('click', '.detailsLink', function(){
+      $('#editPublished').show();
+      $('#editPublishedCancel').text("Cancel");
+  });
+  $('#editPublishedModal').on('click', '.captionsLink', function(){
+      $('#editPublished').hide();
+      $('#editPublishedCancel').text("Close");
+  })
+  $('#editPublishedModal').on('hidden.bs.modal', function () {
+      $('#uploadModal .fileContainer').attr('data-title', 'Choose video');
+      $('#editPublishedModal .fileContainer').attr('data-title', 'Choose *.vtt...');
+      $('#editPublishedModal #errorLi').html('');
+      $('#btnUploadCaptions').attr('data-event', '');
+      $('#editCaptions, #dlNibityCaptions, #dlGoogleCaptions, #dlUploadedCaptions').attr('data-provider','');
+      $('#editCaptions, #dlNibityCaptions, #dlGoogleCaptions, #dlUploadedCaptions').attr('data-url','');
+      $('#editCaptions, #dlNibityCaptions, #dlGoogleCaptions, #dlUploadedCaptions').attr('href','');
+      $('#editCaptions').text('');
+  });
+  $('#editCaptionsModal').on('show.bs.modal', function(e) {
+      var title = $('#hiddenEvent').attr('data-title'),
+          id = $('#hiddenEvent').attr('data-event'),
+          vttProvider =$('#hiddenEvent').attr('data-provider'),
+          vttURL = $('#hiddenEvent').attr('data-url'),
+          mediaType = $('#hiddenEvent').attr('data-mediatype'),
+          label = "Edit " + vttProvider + " VTT";
+  
+      $('#ecModal').html('<span style="color:#555">Edit:</span> ' + title);   
+      $('#vttInfo').attr('data-event', id);
+      $('#vttInfo').attr('data-url', vttURL);
+      $('#vttInfo').attr('data-mediaType',mediaType); 
+      $('#vttLabel').text(label);
+      $('.newVtt').load(vttURL);
+  });
+  $('#editPublishedModal').on('click', '.uploadCaptions', function(e) {
+      try {
+        e.preventDefault();
+
+        $('.uploadCaptions').addClass('uploading');
+        var eventId = $('.uploadCaptions').attr('data-event'),
+            mediaType = $('#editPublishedModal .fileContainer').attr('data-mediatype'),
+            fileName = $('#editPublishedModal .fileContainer').attr('data-title'),
+            newFile = $('#uploadedVttText').val(),
+            success = true;
+        
+        if(newFile) {
+            var parts = new Blob([newFile], {type:"text/plain"}),
+                f = new File([parts], fileName, {type: mediaType, lastModified: new Date()});
+                  
+            var changes = {"text/vtt":f};
+            ocManager.eventMgr.addCaptions(eventId, changes)
+            .fail(function(err) {
+                console.log("Failed to upload captions");
+                $('#editPublishedModal').find('span.errors').text(err);
+                success = false;
+            })
+            .always(function() {
+                $('.uploadCaptions').removeClass('uploading');
+                if (success) {
+                    $('#editPublishedModal').find('button[type=reset].btn-default')[0].click();
+                }
+            }.bind(this));
+          }
+      } catch(err) {
+        console.log(err);
+      }   
+  });
+  $('#editCaptionsModal').on('click', '.updateCaptions', function(e) {
+      try {
+        e.preventDefault();
+
+        $(this).addClass('uploading');
+        var eventId = $('#vttInfo').attr('data-event'),
+            vttURL = $('#vttInfo').attr('data-url'),
+            mediaType = $('#vttInfo').attr('data-mediaType'),
+            fileName = vttURL.substring(vttURL.lastIndexOf('/') + 1),
+            change = $('#vttText').val(),
+            success = true;
+
+        var parts = new Blob([change], {type:"text/plain"}),
+            f = new File([parts], fileName, {type: mediaType, lastModified: new Date()});
+                
+        var changes = {"text/vtt":f};
+        ocManager.eventMgr.updateCaptions(eventId, changes)
+        .fail(function(err) {
+            console.log("Failed to upload edited captions");
+            $('#editCaptionsModal').find('span.errors').text(err.error);
+            success = false;
+        })
+        .always(function() {
+            $('.updateCaptions').removeClass('uploading');
+            if (success) {
+                $('#editCaptionsModal').find('button[type=reset].btn-default')[0].click();
+            }
+        }.bind(this));
+      } catch(err) {
+        console.log(err);
+      }
+  });
+  $('#editCaptionsModal').on('hidden.bs.modal', function () {
+    $('.newVtt').empty();
+    $('#ecModal, #vttLabel').text('');
+    $('#vttInfo').attr('data-url','');
+    $('#vttInfo').attr('data-event','');
+    $('#editCaptionsModal #errorLi').html('');
+    $('#editCaptionsModal .note').show();
+    $('.updateCaptions').hide();
+  });
+  $('#vttText').on('change keyup paste', function(e) {
+    var changes = $(this)[0].value;
+    var Parser = new WebVTTParser();
+    var vttText = Parser.parse(changes, 'subtitles/captions/descriptions');
+    var ol = $('#editCaptionsModal #errorLi')[0];
+    ol.textContent = "";
+                             
+    if(vttText.errors.length > 0) {
+      $('#editCaptionsModal #errorLi').show();
+      for(var i = 0; i < vttText.errors.length; i++) {
+          var error = vttText.errors[i],
+              message = "Line " + error.line,
+              li = document.createElement("li");
+            
+          li.textContent = message + ": " + error.message;
+          ol.appendChild(li);
+          $('#editCaptionsError').show();        
+          $('#editCaptionsModal .updateCaptions').hide();
+        }
+    } else {  
+        $('#editCaptionsModal .updateCaptions').show();
+    }
+     var s = new WebVTTSerializer()
+     s.serialize(vttText.cues);
+  });
 });
 
 function removeModal(_modal, title) {
@@ -2409,6 +2588,92 @@ function removeModal(_modal, title) {
   setTimeout(function() {
     $('p[data-instruction=info]').removeClass('show');
   }, 15000);
+}
+
+function validateVTT(fileName, fileContents) {
+  var Parser = new WebVTTParser(),
+      vttText = Parser.parse(fileContents, 'subtitles/captions/descriptions');
+
+  if(vttText.errors.length > 0) {
+    for(var i = 0; i < vttText.errors.length; i++) {
+        $('#editPublishedModal .errors').show();
+    }
+  } else {
+      $('#btnUploadCaptions').show();
+      $('#editPublishedModal .errors').hide();
+      $('#editPublishedModal #populatedPresVtt').checked = true;
+      $('#editPublishedModal #populatedPresVtt').text(fileName).attr('title', fileName);
+      $('#editPublishedModal .fileContainer').attr('data-title', fileName);
+  }
+  var s = new WebVTTSerializer()
+  s.serialize(vttText.cues);
+}
+
+function checkCaptions(id) {
+  var url = "/admin-ng/event/" + id + "/asset/attachment/attachments.json";
+  $.get({url: url},
+    function(response) {
+        for(var i = 0; i < response.length; i++) {
+            if(response[i].mimetype === "text/vtt") {
+              if($('#btnCaptions_' + id).hide()) {
+                 $('#btnCaptions_' + id).show();
+              }
+            } 
+        }
+   })
+}
+
+function getCaptions(id) {
+  var url = "/admin-ng/event/" + id + "/asset/attachment/attachments.json";
+  var provider, mediaType, vttURL;
+  var providerArray = [];
+
+  $.get({url: url},
+    function(response) {
+        for(var i = 0; i < response.length; i++) {
+            if(response[i].mimetype === "text/vtt") {
+              if(response[i].type == "captions/timedtext") {
+                  providerArray.push({"id" : id, "mediatype" : response[i].type, "url" : response[i].url});
+                  $('#dlGoogleCaptions').attr('href', response[i].url);
+                  $('#dlGoogleCaptions').attr('data-mediatype', response[i].type);
+                  $('#downloadGoogleCaptions').show();
+              }else if(response[i].type == "captions/vtt") {
+                  providerArray.push({"id" : id, "mediatype" : response[i].type, "url" : response[i].url});
+                  $('#dlNibityCaptions').attr('href', response[i].url);
+                  $('#dlNibityCaptions').attr('data-mediatype', response[i].type);
+                  $('#downloadNibityCaptions').show();
+              }else if(response[i].type == "text/vtt") {
+                  providerArray.push({"id" : id, "mediatype" : response[i].type, "url" : response[i].url}); 
+                  $('#dlUploadedCaptions').attr('href', response[i].url);
+                  $('#dlUploadedCaptions').attr('data-mediatype', response[i].type);
+                  $('#downloadUploadedCaptions').show();
+              }
+           }
+        }
+        for(var i=0;i<providerArray.length;i++) {
+            if(providerArray[i].mediatype == "text/vtt") {
+              provider = "Uploaded";
+              vttURL = providerArray[i].url;
+              mediaType = providerArray[i].mediatype;
+            } else if(providerArray[i].mediatype == "captions/vtt" || providerArray[i].mediatype == "captions/timedtext") {
+              if(providerArray[i].mediatype == "captions/vtt") {
+                provider = "Way with Words";
+                vttURL = providerArray[i].url;
+                mediaType = providerArray[i].mediatype;
+              } else {
+                provider = "Automated";
+                vttURL = providerArray[i].url;
+                mediaType = providerArray[i].mediatype;
+              }
+            }
+          }
+      $("#editCaptions").html("<i class='fa fa-pencil' id='edCaptions'></i>  Edit Captions");
+      $("#editCaptions").attr('title', provider + ' Captions');
+      $("#editCaptions, #hiddenEvent").attr('data-url', vttURL);
+      $("#editCaptions, #hiddenEvent").attr('data-provider', provider);
+      $("#editCaptions, #hiddenEvent").attr('data-mediatype', mediaType);
+    }
+  )
 }
 
 function closeSeries() {
@@ -2452,4 +2717,4 @@ var pollSession = setInterval(function() {
     clearInterval(pollSession);
     $('#refreshModal').modal('show');
   });
-}, 30000);
+}, 30000)
