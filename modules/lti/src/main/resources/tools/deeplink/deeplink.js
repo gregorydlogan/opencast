@@ -142,8 +142,8 @@ function loadEpisodesTab(page, q) {
         tpldata = {
           tool: '/play/' + episode.id,
           title: episode.dcTitle,
-          i18ncreator: i18ncreator,
-          created: tryLocalDate(episode.dcCreated),
+          i18ncreator:  i18ncreator.split("by ")[1],
+          created: tryLocalDate(episode.dcCreated).split(",")[0],
           seriestitle: episode.mediapackage.seriestitle,
           mpID: episode.id,
           color: generateSeriesColor(episode.mediapackage.series),
@@ -153,7 +153,17 @@ function loadEpisodesTab(page, q) {
         attachments = episode.mediapackage.attachments.attachment;
         attachments = Array.isArray(attachments) ? attachments : [attachments];
         for (let j = 0; j < attachments.length; j++) {
-          if (attachments[j].type.endsWith('/search+preview')) {
+          if (attachments[j].type.endsWith('/player+preview')) {
+            tpldata['image'] = attachments[j].url;
+            break;
+          }
+
+          if (attachments[j].type.endsWith('/feed+preview')) {
+            tpldata['image'] = attachments[j].url;
+            break;
+          }
+
+          if (attachments[j].type.endsWith('/timeline+preview')) {
             tpldata['image'] = attachments[j].url;
             break;
           }

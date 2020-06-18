@@ -16,7 +16,7 @@
 <body>
   <ul class="nav nav-tabs">
     <li class="nav-item active" id="episodes-tab"><a class="nav-link" data-toggle="tab" href="#episodes" aria-controls="episodes" aria-selected="true">Episodes</a></li>
-    <li class="nav-item" id="series-tab"><a class="nav-link" data-toggle="tab" href="#series" aria-controls="series" aria-selected="false">Series</a></li>
+<!--    <li class="nav-item" id="series-tab"><a class="nav-link" data-toggle="tab" href="#series" aria-controls="series" aria-selected="false">Series</a></li>-->
   </ul>
 
 <div class="tab-content">
@@ -44,21 +44,51 @@
 
 <!-- Template for episodes -->
 <script id=template-episode type=x-tmpl-mustache>
-<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 float-left" for={{mpID}}>
+<div class="col-12 float-left" for={{mpID}}>
   <div class=tile>
     <div class="seriesindicator" style="background-color: {{color}};"></div>
     <div class="tilecontent">
       <h4 class="title">{{title}}</h4>
-      <div>
-        <img class="thumbnail img-fluid img-thumbnail" alt=Preview src={{image}} />
-      </div>
-      <div class="infos">
-        <div class="creator">{{i18ncreator}}</div>
-        <div class="seriestitle">{{seriestitle}}</div>
-        <div class="date">{{created}}</div>
-        <div class="duration">{{duration}}</div>
-        <a href="#" class="btn btn-primary card-text selectitem"
-          onclick="populateData('{{title}}', '{{image}}', '{{created}}', '{{tool}}', '{{mpID}}')">Select</a>
+      <div class="row">
+        <div class="col-6">
+          <img id="opencast-thumbnail" class="thumbnail img-fluid img-thumbnail" alt=Preview src={{image}} />
+        </div>
+        <div class="col-6">
+          <div class="creator row">
+            <div class="col-4">
+              Creator:
+            </div>
+            <div class="col-8">
+              {{i18ncreator}}
+            </div>
+          </div>
+          <div class="seriestitle row">
+            <div class="col-4">
+              Series:
+            </div>
+            <div class="col-8">
+              {{seriestitle}}
+            </div>
+          </div>
+          <div class="date row">
+            <div class="col-4">
+              Created:
+            </div>
+            <div class="col-8">
+              {{created}}
+            </div>
+          </div>
+          <div class="duration row">
+            <div class="col-4">
+              Duration:
+            </div>
+            <div class="col-8">
+              {{duration}}
+            </div>
+          </div>
+          <a href="#" class="btn btn-primary card-text selectitem btn-block"
+            onclick="populateData('{{title}}', '{{image}}', '{{created}}', '{{tool}}', '{{mpID}}')">Select</a>
+        </div>
       </div>
     </div>
   </div>
@@ -87,11 +117,11 @@
 <!-- Template for search field -->
 <script id=template-episodes-filter type=x-tmpl-mustache>
   <input type=text id="selected-episodes" value="{{query}}"/>
-  <input type=submit onClick="refreshEpisodesList()" value="Refresh list"/>
+  <input type=submit onClick="refreshEpisodesList()" value="Search"/>
 </script>
 <script id=template-series-filter type=x-tmpl-mustache>
   <input type=text id="selected-series" value="{{query}}"/>
-  <input type=submit onClick="refreshSeriesList()" value="Refresh list"/>
+  <input type=submit onClick="refreshSeriesList()" value="Search"/>
 </script>
 
 <!-- Template for spinner -->
