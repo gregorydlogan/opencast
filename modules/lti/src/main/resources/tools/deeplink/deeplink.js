@@ -141,7 +141,8 @@ function loadEpisodesTab(page, q) {
 
         tpldata = {
           tool: '/play/' + episode.id,
-          title: episode.dcTitle,
+          displayTitle: episode.dcTitle,
+          escapedTitle: episode.dcTitle.replace(/'/g, "\\'"),
           i18ncreator:  i18ncreator.split("by ")[1],
           created: tryLocalDate(episode.dcCreated).split(",")[0],
           seriestitle: episode.mediapackage.seriestitle,
