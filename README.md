@@ -1,4 +1,3 @@
-asdf
 Opencast
 ========
 
