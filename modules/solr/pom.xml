@@ -96,6 +96,7 @@
             <Import-Package>
               !junit.framework,
               !org.apache.lucene.*,
+              !org.apache.solr.*,
               !org.tartarus.snowball*,
               !org.mortbay.*,
               *

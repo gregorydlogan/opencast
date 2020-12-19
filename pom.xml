@@ -531,10 +531,10 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
           <!-- NOTE: this should match the settings for the reporting plugin below -->
-          <version>2.10.4</version>
+          <version>3.2.0</version>
           <configuration>
             <detectJavaApiLink>true</detectJavaApiLink>
-            <javadocVersion>${jdk.version}</javadocVersion>
+            <javadocVersion>1.8</javadocVersion>
             <maxmemory>512m</maxmemory>
             <quiet>true</quiet>
           </configuration>
@@ -777,7 +777,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-javadoc-plugin</artifactId>
-            <version>2.9.1</version>
+            <version>3.2.0</version>
             <executions>
               <execution>
                 <id>attach-javadocs</id>
@@ -1841,13 +1841,13 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
         <!-- NOTE: this should match the settings for the build plugin above -->
-        <version>2.10.4</version>
+        <version>3.2.0</version>
         <configuration>
           <!-- <aggregate>true</aggregate> -->
           <!-- <detectLinks>true</detectLinks> -->
           <!-- http://jira.codehaus.org/browse/MJAVADOC-273 -->
           <detectJavaApiLink>true</detectJavaApiLink>
-          <javadocVersion>${jdk.version}</javadocVersion>
+          <javadocVersion>1.8</javadocVersion>
           <maxmemory>512m</maxmemory>
           <quiet>true</quiet>
         </configuration>
