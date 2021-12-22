@@ -38,8 +38,6 @@ import org.opencastproject.elasticsearch.index.rebuild.IndexProducer;
 import org.opencastproject.elasticsearch.index.rebuild.IndexRebuildException;
 import org.opencastproject.elasticsearch.index.rebuild.IndexRebuildService;
 import org.opencastproject.mediapackage.EName;
-import org.opencastproject.message.broker.api.series.SeriesItem;
-import org.opencastproject.message.broker.api.update.SeriesUpdateHandler;
 import org.opencastproject.metadata.dublincore.DublinCore;
 import org.opencastproject.metadata.dublincore.DublinCoreCatalog;
 import org.opencastproject.metadata.dublincore.DublinCoreCatalogList;
@@ -59,6 +57,8 @@ import org.opencastproject.series.api.SeriesException;
 import org.opencastproject.series.api.SeriesQuery;
 import org.opencastproject.series.api.SeriesService;
 import org.opencastproject.series.impl.persistence.SeriesEntity;
+import org.opencastproject.series.impl.update.ConductingSeriesUpdatedEventHandler;
+import org.opencastproject.series.impl.update.SeriesItem;
 import org.opencastproject.util.NotFoundException;
 import org.opencastproject.util.data.Option;
 
@@ -70,8 +70,6 @@ import org.osgi.service.component.ComponentContext;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
-import org.osgi.service.component.annotations.ReferenceCardinality;
-import org.osgi.service.component.annotations.ReferencePolicy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
@@ -127,7 +125,7 @@ public class SeriesServiceImpl extends AbstractIndexProducer implements SeriesSe
 
   private AclServiceFactory aclServiceFactory;
 
-  private ArrayList<SeriesUpdateHandler> updateHandlers = new ArrayList<>();
+  private ConductingSeriesUpdatedEventHandler handler;
 
   /** OSGi callback for setting index. */
   @Reference(name = "series-index")
@@ -154,18 +152,9 @@ public class SeriesServiceImpl extends AbstractIndexProducer implements SeriesSe
   }
 
   /** OSGi callbacks for settings and removing handlers. */
-  @Reference(
-      name = "event-handler",
-      policy = ReferencePolicy.DYNAMIC,
-      cardinality = ReferenceCardinality.MULTIPLE,
-      unbind = "removeMessageHandler"
-  )
-  public void addMessageHandler(SeriesUpdateHandler handler) {
-    this.updateHandlers.add(handler);
-  }
-
-  public void removeMessageHandler(SeriesUpdateHandler handler) {
-    this.updateHandlers.remove(handler);
+  @Reference(name = "event-handler")
+  public void setHandler(ConductingSeriesUpdatedEventHandler handler) {
+    this.handler = handler;
   }
 
   /** OSGi callbacks for setting the API index. */
@@ -663,10 +652,8 @@ public class SeriesServiceImpl extends AbstractIndexProducer implements SeriesSe
     }
   }
 
-  private void triggerEventHandlers(SeriesItem item) {
-    for (SeriesUpdateHandler handler : updateHandlers) {
-      handler.execute(item);
-    }
+  private void triggerEventHandlers(SeriesItem seriesItem) {
+    handler.execute(seriesItem);
   }
 
   @Override

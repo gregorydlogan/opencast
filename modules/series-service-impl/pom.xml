@@ -37,11 +37,6 @@
     </dependency>
     <dependency>
       <groupId>org.opencastproject</groupId>
-      <artifactId>opencast-message-broker-api</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.opencastproject</groupId>
       <artifactId>opencast-elasticsearch-api</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -53,6 +48,36 @@
     <dependency>
       <groupId>org.opencastproject</groupId>
       <artifactId>opencast-authorization-manager</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opencastproject</groupId>
+      <artifactId>opencast-search-service-api</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opencastproject</groupId>
+      <artifactId>opencast-distribution-service-api</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opencastproject</groupId>
+      <artifactId>opencast-distribution-workflowoperation</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opencastproject</groupId>
+      <artifactId>opencast-workspace-api</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opencastproject</groupId>
+      <artifactId>opencast-workflow-service-api</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opencastproject</groupId>
+      <artifactId>opencast-asset-manager-api</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
@@ -151,6 +176,7 @@
             <Export-Package>
               org.opencastproject.series.impl.solr;version=${project.version},
               org.opencastproject.series.impl.persistence;version=${project.version},
+              org.opencastproject.series.impl.update;version=${project.version},
               org.opencastproject.series.impl;version=${project.version},
               org.opencastproject.series.endpoint;version=${project.version}
             </Export-Package>

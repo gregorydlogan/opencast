@@ -49,6 +49,7 @@ import org.opencastproject.security.api.User;
 import org.opencastproject.series.api.SeriesQuery;
 import org.opencastproject.series.impl.persistence.SeriesServiceDatabaseImpl;
 import org.opencastproject.series.impl.solr.SeriesServiceSolrIndex;
+import org.opencastproject.series.impl.update.ConductingSeriesUpdatedEventHandler;
 import org.opencastproject.util.NotFoundException;
 import org.opencastproject.util.PathSupport;
 
@@ -123,11 +124,15 @@ public class SeriesServiceImplTest {
             EasyMock.anyString(), EasyMock.anyObject(User.class))).andReturn(Optional.empty()).atLeastOnce();
     EasyMock.replay(esIndex);
 
+    ConductingSeriesUpdatedEventHandler handler = EasyMock.createNiceMock(ConductingSeriesUpdatedEventHandler.class);
+    EasyMock.replay(handler);
+
     seriesService = new SeriesServiceImpl();
     seriesService.setPersistence(seriesDatabase);
     seriesService.setIndex(index);
     seriesService.setSecurityService(securityService);
     seriesService.setElasticsearchIndex(esIndex);
+    seriesService.setHandler(handler);
 
     BundleContext bundleContext = EasyMock.createNiceMock(BundleContext.class);
     EasyMock.expect(bundleContext.getProperty((String) EasyMock.anyObject())).andReturn("System Admin");
