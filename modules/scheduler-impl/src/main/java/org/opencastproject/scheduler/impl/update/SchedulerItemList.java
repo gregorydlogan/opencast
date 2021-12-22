@@ -19,10 +19,30 @@
  *
  */
 
-package org.opencastproject.message.broker.api.update;
+package org.opencastproject.scheduler.impl.update;
 
-import org.opencastproject.message.broker.api.scheduler.SchedulerItem;
+import java.io.Serializable;
+import java.util.List;
 
-public interface SchedulerUpdateHandler {
-  void execute(String mpId, SchedulerItem schedulerItem);
+public class SchedulerItemList implements Serializable {
+  private final String id;
+  private final SchedulerItem[] items;
+
+  public SchedulerItemList(final String id, final SchedulerItem ... items) {
+    this.id = id;
+    this.items = items;
+  }
+
+  public SchedulerItemList(final String id, final List<SchedulerItem> items) {
+    this.id = id;
+    this.items = items.toArray(new SchedulerItem[0]);
+  }
+
+  public SchedulerItem[] getItems() {
+    return items;
+  }
+
+  public String getId() {
+    return id;
+  }
 }

@@ -19,7 +19,7 @@
  *
  */
 
-package org.opencastproject.message.broker.api.scheduler;
+package org.opencastproject.scheduler.impl.update;
 
 import org.opencastproject.metadata.dublincore.DublinCoreCatalog;
 import org.opencastproject.metadata.dublincore.DublinCoreXmlFormat;

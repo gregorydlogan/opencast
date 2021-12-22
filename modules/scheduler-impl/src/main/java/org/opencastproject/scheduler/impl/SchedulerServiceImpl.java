@@ -54,6 +54,7 @@ import org.opencastproject.elasticsearch.index.rebuild.AbstractIndexProducer;
 import org.opencastproject.elasticsearch.index.rebuild.IndexProducer;
 import org.opencastproject.elasticsearch.index.rebuild.IndexRebuildException;
 import org.opencastproject.elasticsearch.index.rebuild.IndexRebuildService;
+import org.opencastproject.liveschedule.api.LiveScheduleService;
 import org.opencastproject.mediapackage.Catalog;
 import org.opencastproject.mediapackage.MediaPackage;
 import org.opencastproject.mediapackage.MediaPackageElement;
@@ -63,9 +64,6 @@ import org.opencastproject.mediapackage.MediaPackageException;
 import org.opencastproject.mediapackage.MediaPackageSupport;
 import org.opencastproject.mediapackage.identifier.Id;
 import org.opencastproject.mediapackage.identifier.IdImpl;
-import org.opencastproject.message.broker.api.scheduler.SchedulerItem;
-import org.opencastproject.message.broker.api.scheduler.SchedulerItemList;
-import org.opencastproject.message.broker.api.update.SchedulerUpdateHandler;
 import org.opencastproject.metadata.dublincore.DCMIPeriod;
 import org.opencastproject.metadata.dublincore.DublinCore;
 import org.opencastproject.metadata.dublincore.DublinCoreCatalog;
@@ -85,6 +83,8 @@ import org.opencastproject.scheduler.api.TechnicalMetadata;
 import org.opencastproject.scheduler.api.TechnicalMetadataImpl;
 import org.opencastproject.scheduler.api.Util;
 import org.opencastproject.scheduler.impl.persistence.ExtendedEventDto;
+import org.opencastproject.scheduler.impl.update.SchedulerItem;
+import org.opencastproject.scheduler.impl.update.SchedulerItemList;
 import org.opencastproject.security.api.AccessControlList;
 import org.opencastproject.security.api.AccessControlParser;
 import org.opencastproject.security.api.AccessControlUtil;
@@ -120,6 +120,7 @@ import net.fortuna.ical4j.model.TimeZoneRegistryFactory;
 import net.fortuna.ical4j.model.property.RRule;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -192,6 +193,8 @@ public class SchedulerServiceImpl extends AbstractIndexProducer implements Sched
 
   private static final String SNAPSHOT_OWNER = SchedulerService.JOB_TYPE;
 
+  protected static final String PUBLISH_LIVE_PROPERTY = "publishLive";
+
   private static final Gson gson = new Gson();
 
   /**
@@ -237,31 +240,13 @@ public class SchedulerServiceImpl extends AbstractIndexProducer implements Sched
 
   /** The list of registered event catalog UI adapters */
   private List<EventCatalogUIAdapter> eventCatalogUIAdapters = new ArrayList<>();
-  private List<SchedulerUpdateHandler> schedulerUpdateHandlers = new ArrayList<>();
+
+  private LiveScheduleService liveScheduleService = null;
 
   /** The system user name */
   private String systemUserName;
 
   private ComponentContext componentContext;
-
-  /**
-   * OSGi callback to add an update handler.
-   *
-   * @param handler
-   */
-  @Reference(
-      name = "updateHandler",
-      cardinality = ReferenceCardinality.MULTIPLE,
-      policy = ReferencePolicy.DYNAMIC,
-      unbind = "removeSchedulerUpdateHandler"
-  )
-  public void addSchedulerUpdateHandler(SchedulerUpdateHandler handler) {
-    this.schedulerUpdateHandlers.add(handler);
-  }
-
-  public void removeSchedulerUpdateHandler(SchedulerUpdateHandler handler) {
-    this.schedulerUpdateHandlers.remove(handler);
-  }
 
   /**
    * OSGi callback to set Persistence Service.
@@ -323,17 +308,92 @@ public class SchedulerServiceImpl extends AbstractIndexProducer implements Sched
     this.authorizationService = authorizationService;
   }
 
+  @Reference(name = "live-schedule-service")
+  public void setLiveScheduleService(LiveScheduleService liveScheduleService) {
+    this.liveScheduleService = liveScheduleService;
+  }
+
+
   /**
    * Update all of the handlers that an event has changed
    *
    * @param list The list of scheduler changes for a mediapackage
    */
   private void sendSchedulerUpdate(SchedulerItemList list) {
-    for (SchedulerItem item : list.getItems()) {
+    for (SchedulerItem schedulerItem : list.getItems()) {
       String mpId = list.getId();
-      for (SchedulerUpdateHandler handler : this.schedulerUpdateHandlers) {
-        handler.execute(mpId, item);
+      try {
+        logger.debug("Scheduler message handler START for mp {} event type {} in thread {}", mpId,
+          schedulerItem.getType(), Thread.currentThread().getId());
+
+        switch (schedulerItem.getType()) {
+          case UpdateCatalog:
+            if (isLive(mpId)) {
+              liveScheduleService.createOrUpdateLiveEvent(mpId, schedulerItem.getEvent());
+            }
+            break;
+          case UpdateAcl:
+            if (isLive(mpId)) {
+              liveScheduleService.updateLiveEventAcl(mpId, schedulerItem.getAcl());
+            }
+            break;
+          case UpdateProperties:
+            // Workflow properties may have been updated (publishLive configuration)
+            String publishLive = schedulerItem.getProperties().get(PUBLISH_LIVE_PROPERTY);
+            if (publishLive == null) {
+              // Not specified so we do nothing. We don't want to delete if we got incomplete props.
+              return;
+            } else if (BooleanUtils.toBoolean(publishLive)) {
+              DublinCoreCatalog episodeDC = getDublinCore(mpId);
+              liveScheduleService.createOrUpdateLiveEvent(mpId, episodeDC);
+            } else {
+              liveScheduleService.deleteLiveEvent(mpId);
+            }
+            break;
+          case Delete:
+          case DeleteRecordingStatus:
+            // We can't check workflow config here to determine if the event is live because the
+            // event has already been deleted. The live scheduler service will do that.
+            liveScheduleService.deleteLiveEvent(mpId);
+            break;
+          case UpdateAgentId:
+          case UpdateStart:
+          case UpdateEnd:
+            if (isLive(mpId)) {
+              DublinCoreCatalog episodeDC = getDublinCore(mpId);
+              liveScheduleService.createOrUpdateLiveEvent(mpId, episodeDC);
+            }
+            break;
+          case UpdateRecordingStatus:
+            String state = schedulerItem.getRecordingState();
+            if (RecordingState.CAPTURE_FINISHED.equals(state) || RecordingState.UPLOADING.equals(state)
+                  || RecordingState.UPLOADING.equals(state) || RecordingState.CAPTURE_ERROR.equals(state)
+                  || RecordingState.UPLOAD_ERROR.equals(state)) {
+              if (isLive(mpId)) {
+                liveScheduleService.deleteLiveEvent(mpId);
+              }
+            }
+            break;
+          case UpdatePresenters:
+            break;
+          default:
+            throw new IllegalArgumentException("Unhandled type of SchedulerItem");
+        }
+      } catch (Exception e) {
+        logger.warn("Exception occurred for mp {}, event type {}", mpId, schedulerItem.getType(), e);
+      } finally {
+        logger.debug("Scheduler message handler END for mp {} event type {}", mpId, schedulerItem.getType());
       }
+    }
+  }
+
+  protected boolean isLive(String mpId) {
+    try {
+      Map<String, String> config = getWorkflowConfig(mpId);
+      return BooleanUtils.toBoolean((String) config.get(PUBLISH_LIVE_PROPERTY));
+    } catch (NotFoundException | SchedulerException e) {
+      logger.debug("Could not get workflow configuration for mp {}. This is probably ok.", mpId);
+      return false; // Assume non-live
     }
   }
 
