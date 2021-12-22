@@ -87,7 +87,6 @@
     <module>modules/composer-service-api</module>
     <module>modules/composer-service-remote</module>
     <module>modules/composer-workflowoperation</module>
-    <module>modules/conductor</module>
     <module>modules/cover-image-api</module>
     <module>modules/cover-image-impl</module>
     <module>modules/cover-image-remote</module>
@@ -167,7 +166,6 @@
     <module>modules/lti-service-impl</module>
     <module>modules/lti-service-api</module>
     <module>modules/mattermost-notification-workflowoperation</module>
-    <module>modules/message-broker-api</module>
     <module>modules/metadata</module>
     <module>modules/metadata-api</module>
     <module>modules/metadata-to-acl-workflowoperation</module>
