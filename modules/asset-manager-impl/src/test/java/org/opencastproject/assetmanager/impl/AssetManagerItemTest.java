@@ -23,12 +23,12 @@ package org.opencastproject.assetmanager.impl;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import org.opencastproject.assetmanager.impl.update.AssetManagerItem;
+import org.opencastproject.assetmanager.impl.update.AssetManagerItem.DeleteEpisode;
+import org.opencastproject.assetmanager.impl.update.AssetManagerItem.DeleteSnapshot;
+import org.opencastproject.assetmanager.impl.update.AssetManagerItem.TakeSnapshot;
 import org.opencastproject.mediapackage.MediaPackage;
 import org.opencastproject.mediapackage.MediaPackageBuilderFactory;
-import org.opencastproject.message.broker.api.assetmanager.AssetManagerItem;
-import org.opencastproject.message.broker.api.assetmanager.AssetManagerItem.DeleteEpisode;
-import org.opencastproject.message.broker.api.assetmanager.AssetManagerItem.DeleteSnapshot;
-import org.opencastproject.message.broker.api.assetmanager.AssetManagerItem.TakeSnapshot;
 import org.opencastproject.metadata.dublincore.DublinCoreUtil;
 import org.opencastproject.metadata.dublincore.DublinCores;
 import org.opencastproject.security.api.AccessControlEntry;

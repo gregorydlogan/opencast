@@ -56,11 +56,13 @@ import org.opencastproject.assetmanager.api.storage.DeletionSelector;
 import org.opencastproject.assetmanager.api.storage.RemoteAssetStore;
 import org.opencastproject.assetmanager.api.storage.Source;
 import org.opencastproject.assetmanager.api.storage.StoragePath;
+import org.opencastproject.assetmanager.impl.oaipmh.OaiPmhUpdatedEventHandler;
 import org.opencastproject.assetmanager.impl.persistence.AssetDtos;
 import org.opencastproject.assetmanager.impl.persistence.Database;
 import org.opencastproject.assetmanager.impl.persistence.SnapshotDto;
 import org.opencastproject.assetmanager.impl.query.AQueryBuilderImpl;
 import org.opencastproject.assetmanager.impl.query.AbstractADeleteQuery;
+import org.opencastproject.assetmanager.impl.update.AssetManagerItem;
 import org.opencastproject.authorization.xacml.manager.api.AclServiceFactory;
 import org.opencastproject.authorization.xacml.manager.api.ManagedAcl;
 import org.opencastproject.authorization.xacml.manager.util.AccessInformationUtil;
@@ -72,14 +74,14 @@ import org.opencastproject.elasticsearch.index.rebuild.AbstractIndexProducer;
 import org.opencastproject.elasticsearch.index.rebuild.IndexProducer;
 import org.opencastproject.elasticsearch.index.rebuild.IndexRebuildException;
 import org.opencastproject.elasticsearch.index.rebuild.IndexRebuildService;
+import org.opencastproject.liveschedule.api.LiveScheduleService;
 import org.opencastproject.mediapackage.Catalog;
 import org.opencastproject.mediapackage.MediaPackage;
 import org.opencastproject.mediapackage.MediaPackageElement;
 import org.opencastproject.mediapackage.MediaPackageElements;
 import org.opencastproject.mediapackage.MediaPackageParser;
 import org.opencastproject.mediapackage.MediaPackageSupport;
-import org.opencastproject.message.broker.api.assetmanager.AssetManagerItem;
-import org.opencastproject.message.broker.api.update.AssetManagerUpdateHandler;
+import org.opencastproject.mediapackage.Publication;
 import org.opencastproject.metadata.dublincore.DublinCores;
 import org.opencastproject.security.api.AccessControlEntry;
 import org.opencastproject.security.api.AccessControlList;
@@ -131,7 +133,6 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -141,7 +142,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -172,8 +172,6 @@ public class AssetManagerImpl extends AbstractIndexProducer implements AssetMana
 
   private static final String MANIFEST_DEFAULT_NAME = "manifest";
 
-  private ArrayList<AssetManagerUpdateHandler> handlers = new CopyOnWriteArrayList<>();
-
   private SecurityService securityService;
   private AuthorizationService authorizationService;
   private OrganizationDirectoryService orgDir;
@@ -184,6 +182,9 @@ public class AssetManagerImpl extends AbstractIndexProducer implements AssetMana
   private Database db;
   private AclServiceFactory aclServiceFactory;
   private ElasticsearchIndex index;
+  private OaiPmhUpdatedEventHandler oaiPmhUpdatedEventHandler;
+  private LiveScheduleService liveScheduleService;
+
 
   // Settings for role filter
   private boolean includeAPIRoles;
@@ -246,20 +247,6 @@ public class AssetManagerImpl extends AbstractIndexProducer implements AssetMana
   }
 
   @Reference(
-      name = "eventHandlers",
-      cardinality = ReferenceCardinality.MULTIPLE,
-      policy = ReferencePolicy.DYNAMIC,
-      unbind = "removeEventHandler"
-  )
-  public void addEventHandler(AssetManagerUpdateHandler handler) {
-    this.handlers.add(handler);
-  }
-
-  public void removeEventHandler(AssetManagerUpdateHandler handler) {
-    this.handlers.remove(handler);
-  }
-
-  @Reference(
       name = "remoteAssetStores",
       cardinality = ReferenceCardinality.MULTIPLE,
       policy = ReferencePolicy.DYNAMIC,
@@ -286,6 +273,17 @@ public class AssetManagerImpl extends AbstractIndexProducer implements AssetMana
   @Reference(name = "index")
   public void setIndex(ElasticsearchIndex index) {
     this.index = index;
+  }
+
+  @Reference(name = "oaipmhHandler")
+  public void setOaiPmhUpdatedEventHandler(OaiPmhUpdatedEventHandler oaiPmhUpdatedEventHandler) {
+    this.oaiPmhUpdatedEventHandler = oaiPmhUpdatedEventHandler;
+  }
+
+  //FIXE: Try removing the card and policy bits
+  @Reference(name = "livescheduler", cardinality = ReferenceCardinality.OPTIONAL)
+  public void setLiveScheduleService(LiveScheduleService liveScheduleService) {
+    this.liveScheduleService = liveScheduleService;
   }
 
   /**
@@ -1457,8 +1455,50 @@ public class AssetManagerImpl extends AbstractIndexProducer implements AssetMana
   }
 
   public void fireEventHandlers(AssetManagerItem item) {
-    for (AssetManagerUpdateHandler handler : handlers) {
-      handler.execute(item);
+    String mpId = item.getId();
+    try {
+      logger.debug("Asset Manager message handler START for mp {} event type {}", mpId, item.getType());
+
+      switch (item.getType()) {
+        case Update:
+          if (item instanceof AssetManagerItem.TakeSnapshot) { // Check class just in case
+            AssetManagerItem.TakeSnapshot snapshotItem = (AssetManagerItem.TakeSnapshot) item;
+            // the OAI-PMH handler is a dynamic dependency
+            if (oaiPmhUpdatedEventHandler != null) {
+              oaiPmhUpdatedEventHandler.handleEvent(this, snapshotItem);
+            }
+
+            // If no episopde dc, there's nothing to do.
+            if (snapshotItem.getEpisodeDublincore().isNone()) {
+              break;
+            }
+            // Does media package have a live publication channel? This is to ignore non-live
+            // and past events.
+            // Note: we never create live events when getting asset manager
+            // notifications, only when getting scheduler notifications
+            for (Publication pub : snapshotItem.getMediapackage().getPublications()) {
+              if (LiveScheduleService.CHANNEL_ID.equals(pub.getChannel())) {
+                liveScheduleService.createOrUpdateLiveEvent(mpId, snapshotItem.getEpisodeDublincore().get());
+              }
+            }
+          }
+          break;
+        case Delete:
+          if (item instanceof AssetManagerItem.DeleteEpisode) {
+            // Episode is being deleted
+            liveScheduleService.deleteLiveEvent(mpId);
+          }
+
+          // No action needed when a snapshot is deleted
+          break;
+        default:
+          throw new IllegalArgumentException("Unhandled type of AssetManagerItem");
+      }
+    } catch (Exception e) {
+      logger.warn("Exception occurred for mp {}, event type {}", mpId, item.getType(), e);
+    } finally {
+      logger.debug("Asset Manager message handler END for mp {} event type {} in thread {}", mpId, item.getType(),
+          Thread.currentThread().getId());
     }
   }
 

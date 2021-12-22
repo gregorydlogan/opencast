@@ -18,7 +18,7 @@
  * the License.
  *
  */
-package org.opencastproject.event.handler;
+package org.opencastproject.assetmanager.impl.oaipmh;
 
 import static org.opencastproject.util.OsgiUtil.getOptCfg;
 import static org.opencastproject.util.OsgiUtil.getOptCfgAsBoolean;
@@ -28,10 +28,10 @@ import org.opencastproject.assetmanager.api.Snapshot;
 import org.opencastproject.assetmanager.api.query.AQueryBuilder;
 import org.opencastproject.assetmanager.api.query.ARecord;
 import org.opencastproject.assetmanager.api.query.AResult;
+import org.opencastproject.assetmanager.impl.update.AssetManagerItem;
 import org.opencastproject.mediapackage.MediaPackage;
 import org.opencastproject.mediapackage.MediaPackageElement;
 import org.opencastproject.mediapackage.selector.SimpleElementSelector;
-import org.opencastproject.message.broker.api.assetmanager.AssetManagerItem;
 import org.opencastproject.oaipmh.persistence.OaiPmhDatabase;
 import org.opencastproject.oaipmh.persistence.QueryBuilder;
 import org.opencastproject.oaipmh.persistence.SearchResult;
@@ -49,6 +49,8 @@ import com.entwinemedia.fn.data.Opt;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.cm.ConfigurationException;
 import org.osgi.service.cm.ManagedService;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -57,6 +59,13 @@ import java.util.Dictionary;
 import java.util.HashSet;
 import java.util.Set;
 
+@Component(
+    property = {
+        "service.description=Opencast Asset Manager OAIPMH Update Handler"
+    },
+    immediate = true,
+    service = { OaiPmhUpdatedEventHandler.class, ManagedService.class }
+)
 public class OaiPmhUpdatedEventHandler implements ManagedService {
 
   /** The logger */
@@ -88,12 +97,9 @@ public class OaiPmhUpdatedEventHandler implements ManagedService {
   /** The system account to use for running asynchronous events */
   protected String systemAccount = null;
 
-  /** The asset manager */
-  protected AssetManager assetManager = null;
-
   /**
    * OSGI callback for component activation.
-   *
+   *1
    * @param bundleContext
    *          the OSGI bundle context
    */
@@ -125,7 +131,7 @@ public class OaiPmhUpdatedEventHandler implements ManagedService {
     }
   }
 
-  public void handleEvent(AssetManagerItem.TakeSnapshot snapshotItem) {
+  public void handleEvent(AssetManager assetManager, AssetManagerItem.TakeSnapshot snapshotItem) {
     if (!propagateEpisode) {
       logger.trace("Skipping automatic propagation of episode meta data to OAI-PMH since it is turned off.");
       return;
@@ -188,18 +194,17 @@ public class OaiPmhUpdatedEventHandler implements ManagedService {
     }
   }
 
-  public void setAssetManager(AssetManager assetManager) {
-    this.assetManager = assetManager;
-  }
-
+  @Reference(name = "oai-pmh-persistence")
   public void setOaiPmhPersistence(OaiPmhDatabase oaiPmhPersistence) {
     this.oaiPmhPersistence = oaiPmhPersistence;
   }
 
+  @Reference(name = "oai-pmh-publication")
   public void setOaiPmhPublicationService(OaiPmhPublicationService oaiPmhPublicationService) {
     this.oaiPmhPublicationService = oaiPmhPublicationService;
   }
 
+  @Reference(name = "security-service")
   public void setSecurityService(SecurityService securityService) {
     this.securityService = securityService;
   }

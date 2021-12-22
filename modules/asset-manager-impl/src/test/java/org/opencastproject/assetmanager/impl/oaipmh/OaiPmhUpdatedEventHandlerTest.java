@@ -18,7 +18,7 @@
  * the License.
  *
  */
-package org.opencastproject.event.handler;
+package org.opencastproject.assetmanager.impl.oaipmh;
 
 import static org.easymock.EasyMock.anyBoolean;
 import static org.easymock.EasyMock.anyObject;
@@ -37,6 +37,7 @@ import org.opencastproject.assetmanager.api.query.Field;
 import org.opencastproject.assetmanager.api.query.Predicate;
 import org.opencastproject.assetmanager.api.query.Target;
 import org.opencastproject.assetmanager.api.query.VersionField;
+import org.opencastproject.assetmanager.impl.update.AssetManagerItem;
 import org.opencastproject.job.api.Job;
 import org.opencastproject.mediapackage.Catalog;
 import org.opencastproject.mediapackage.CatalogImpl;
@@ -46,7 +47,6 @@ import org.opencastproject.mediapackage.MediaPackageBuilderFactory;
 import org.opencastproject.mediapackage.MediaPackageElement;
 import org.opencastproject.mediapackage.MediaPackageElementFlavor;
 import org.opencastproject.mediapackage.MediaPackageException;
-import org.opencastproject.message.broker.api.assetmanager.AssetManagerItem;
 import org.opencastproject.oaipmh.persistence.OaiPmhDatabase;
 import org.opencastproject.oaipmh.persistence.Query;
 import org.opencastproject.oaipmh.persistence.SearchResult;
@@ -157,7 +157,7 @@ public class OaiPmhUpdatedEventHandlerTest extends EasyMockSupport {
 
     replayAll();
 
-    cut.handleEvent(createSnapshot(updatedMp));
+    cut.handleEvent(assetManagerMock, createSnapshot(updatedMp));
 
     assertEquals(updatedMp.getIdentifier().toString(), mpCapture.getValue().getIdentifier().toString());
     assertEquals(OAIPMH_REPOSITORY, repositoryCapture.getValue());
@@ -166,11 +166,11 @@ public class OaiPmhUpdatedEventHandlerTest extends EasyMockSupport {
     Assert.assertTrue(flavorsCapture.getValue().contains("security/*"));
     Assert.assertTrue(tagsCapture.getValue().contains("archive"));
     Assert.assertTrue(orgIdCapture.hasCaptured());
-    Assert.assertEquals(new DefaultOrganization().getId(), orgIdCapture.getValue());
+    assertEquals(new DefaultOrganization().getId(), orgIdCapture.getValue());
     Assert.assertTrue(mpIdCapture.hasCaptured());
-    Assert.assertEquals(updatedMp.getIdentifier().toString(), mpIdCapture.getValue());
+    assertEquals(updatedMp.getIdentifier().toString(), mpIdCapture.getValue());
     Assert.assertTrue(snapshotVersionCapture.hasCaptured());
-    Assert.assertEquals("3", snapshotVersionCapture.getValue());
+    assertEquals("3", snapshotVersionCapture.getValue());
   }
 
   /**
@@ -197,7 +197,7 @@ public class OaiPmhUpdatedEventHandlerTest extends EasyMockSupport {
 
     replayAll();
 
-    cut.handleEvent(createSnapshot(updatedMp));
+    cut.handleEvent(assetManagerMock, createSnapshot(updatedMp));
 
     // the OAI-PMH publication service should not be called as the media package isn't mocked in the OAI-PMH database
     verifyAll();
@@ -221,7 +221,7 @@ public class OaiPmhUpdatedEventHandlerTest extends EasyMockSupport {
 
     replayAll();
 
-    cut.handleEvent(createSnapshot(updatedMp));
+    cut.handleEvent(assetManagerMock, createSnapshot(updatedMp));
 
     // the OAI-PMH publication service should not be called as the media package isn't mocked in the OAI-PMH database
     verifyAll();
@@ -241,7 +241,7 @@ public class OaiPmhUpdatedEventHandlerTest extends EasyMockSupport {
 
     replayAll();
 
-    cut.handleEvent(createSnapshot(updatedMp));
+    cut.handleEvent(assetManagerMock, createSnapshot(updatedMp));
 
     // the OAI-PMH publication service should not be called as the media package isn't mocked in the OAI-PMH database
     verifyAll();
@@ -265,14 +265,14 @@ public class OaiPmhUpdatedEventHandlerTest extends EasyMockSupport {
   private void mockAssetManager(MediaPackage mediaPackage) {
     AQueryBuilder queryBuilder = mock(AQueryBuilder.class);
     ASelectQuery selectQuery = mock(ASelectQuery.class);
-    expect(queryBuilder.select(EasyMock.anyObject())).andReturn(selectQuery);
+    expect(queryBuilder.select(anyObject())).andReturn(selectQuery);
     Target target = mock(Target.class);
     expect(queryBuilder.snapshot()).andReturn(target);
     Predicate queryPredicate1 = mock(Predicate.class);
     Predicate queryPredicate2 = mock(Predicate.class);
     Predicate queryPredicate3 = mock(Predicate.class);
-    expect(queryPredicate1.and(EasyMock.anyObject())).andReturn(queryPredicate2);
-    expect(queryPredicate2.and(EasyMock.anyObject())).andReturn(queryPredicate3);
+    expect(queryPredicate1.and(anyObject())).andReturn(queryPredicate2);
+    expect(queryPredicate2.and(anyObject())).andReturn(queryPredicate3);
     orgIdCapture = Capture.newInstance();
     Field<String> orgIdField = mock(Field.class);
     expect(orgIdField.eq(capture(orgIdCapture))).andReturn(queryPredicate1);
@@ -280,10 +280,10 @@ public class OaiPmhUpdatedEventHandlerTest extends EasyMockSupport {
     mpIdCapture = Capture.newInstance();
     expect(queryBuilder.mediaPackageId(capture(mpIdCapture))).andReturn(queryPredicate2);
     VersionField versionField = mock(VersionField.class);
-    expect(versionField.eq(EasyMock.anyObject(Version.class))).andReturn(queryPredicate3);
+    expect(versionField.eq(anyObject(Version.class))).andReturn(queryPredicate3);
     expect(queryBuilder.version()).andReturn(versionField);
     ASelectQuery selectQuery2 = mock(ASelectQuery.class);
-    expect(selectQuery.where(EasyMock.anyObject())).andReturn(selectQuery2);
+    expect(selectQuery.where(anyObject())).andReturn(selectQuery2);
     AResult queryResult = mock(AResult.class);
     expect(selectQuery2.run()).andReturn(queryResult);
     expect(assetManagerMock.createQuery()).andReturn(queryBuilder);
