@@ -277,7 +277,9 @@
               org.opencastproject.assetmanager.impl;version=${project.version},
               org.opencastproject.assetmanager.impl.persistence;version=${project.version},
               org.opencastproject.assetmanager.impl.query;version=${project.version},
-              org.opencastproject.assetmanager.impl.storage;version=${project.version}
+              org.opencastproject.assetmanager.impl.storage;version=${project.version},
+              org.opencastproject.assetmanager.impl.oaipmh;version=${project.version},
+              org.opencastproject.assetmanager.impl.update;version=${project.version}
             </Export-Package>
             <Meta-Persistence>
               META-INF/persistence.xml
