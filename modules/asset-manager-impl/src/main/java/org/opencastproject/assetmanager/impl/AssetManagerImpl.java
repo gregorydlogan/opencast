@@ -275,7 +275,9 @@ public class AssetManagerImpl extends AbstractIndexProducer implements AssetMana
     this.index = index;
   }
 
-  @Reference(name = "oaiPmhUpdatedEventHandler")
+  //FIXE: Try removing the card and policy bits
+  @Reference(name = "oaiPmhUpdatedEventHandler",
+      cardinality = ReferenceCardinality.OPTIONAL)
   public void setOaiPmhUpdatedEventHandler(OaiPmhUpdatedEventHandler oaiPmhUpdatedEventHandler) {
     this.oaiPmhUpdatedEventHandler = oaiPmhUpdatedEventHandler;
   }
