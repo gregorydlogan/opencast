@@ -170,7 +170,6 @@ public class SeriesServiceImpl extends AbstractIndexProducer implements SeriesSe
   private SearchService searchService;
   private DistributionService distributionService;
   private ServiceRegistry serviceRegistry;
-  private WorkflowService workflowService;
 
   /** OSGi callback for setting index. */
   @Reference(name = "series-index")
@@ -240,11 +239,6 @@ public class SeriesServiceImpl extends AbstractIndexProducer implements SeriesSe
   @Reference
   public void setServiceRegistry(ServiceRegistry serviceRegistry) {
     this.serviceRegistry = serviceRegistry;
-  }
-
-  @Reference
-  public void setWorkflowService(WorkflowService workflowService) {
-    this.workflowService = workflowService;
   }
 
   /**
@@ -943,12 +937,10 @@ public class SeriesServiceImpl extends AbstractIndexProducer implements SeriesSe
 
       Function2<Snapshot, SeriesItem, MediaPackage> assetFn = null;
       Function2<SearchResultItem, SeriesItem, MediaPackage> seriesFn = null;
-      Function2<WorkflowInstance, SeriesItem, Boolean> workflowFn = null;
       switch (seriesItem.getType()) {
         case UpdateAcl:
           assetFn = assetManagerUpdateAcl;
           seriesFn = seriesUpdateAcl;
-          workflowFn = workflowUpdateAcl;
           break;
         case UpdateElement:
           assetFn = assetManagerElementUpdate;
@@ -956,12 +948,10 @@ public class SeriesServiceImpl extends AbstractIndexProducer implements SeriesSe
         case UpdateCatalog:
           assetFn = assetManagerElementUpdate;
           seriesFn = seriesUpdateCatalog;
-          workflowFn = workflowUpdateElement;
           break;
         case Delete:
           assetFn = assetManagerDelete;
           seriesFn = seriesDelete;
-          workflowFn = workflowDelete;
           break;
         default:
           throw new IllegalArgumentException("Unhandled event type");
@@ -969,11 +959,10 @@ public class SeriesServiceImpl extends AbstractIndexProducer implements SeriesSe
 
       seriesServiceUpdate(seriesItem, seriesFn);
       assetManagerUpdate(seriesId, seriesItem, assetFn);
-      workflowServiceUpdate(seriesItem, workflowFn);
     } catch (
     SearchException e) {
       logger.warn("Unable to find mediapackages for series {} in search: {}", seriesItem, e.getMessage());
-    } catch (WorkflowException | UnauthorizedException | MediaPackageException | ServiceRegistryException
+    } catch (UnauthorizedException | MediaPackageException | ServiceRegistryException
                | NotFoundException | IOException | DistributionException e) {
       logger.warn("Unable to update mediapackages for series {} for user {}: {} {}", seriesId, prevUser.getUsername(),
           e.getClass().getSimpleName(), e.getMessage());
@@ -1053,139 +1042,6 @@ public class SeriesServiceImpl extends AbstractIndexProducer implements SeriesSe
       barrier.waitForJobs();
     }
   }
-
-  public void workflowServiceUpdate(final SeriesItem seriesItem, Function2<WorkflowInstance, SeriesItem, Boolean> fn)
-          throws WorkflowException, UnauthorizedException, NotFoundException, IOException {
-    //If there's nothing to do, bail out
-    if (null == fn) {
-      return;
-    }
-
-    // A series or its ACL has been updated. Find any mediapackages with that series, and update them.
-    logger.debug("Handling {}", seriesItem);
-    String seriesId = seriesItem.getSeriesId();
-
-    // We must be an administrative user to make this query
-    final User prevUser = securityService.getUser();
-    final Organization prevOrg = securityService.getOrganization();
-    securityService.setUser(SecurityUtil.createSystemUser(systemUserName, prevOrg));
-
-    // Note: getWorkflowInstances will only return a given number of results (default 20)
-    WorkflowQuery q = new WorkflowQuery().withSeriesId(seriesId);
-    WorkflowSet result = workflowService.getWorkflowInstancesForAdministrativeRead(q);
-    Integer offset = 0;
-
-    while (result.size() > 0) {
-      for (WorkflowInstance instance : result.getItems()) {
-        if (!instance.isActive()) {
-          continue;
-        }
-
-        Organization org = orgDirectory.getOrganization(instance.getOrganizationId());
-        securityService.setOrganization(org);
-
-        if (!fn.apply(instance, seriesItem)) {
-          logger.error("Error processing workflow {}, not updating the workflow service", instance.getId());
-          continue;
-        }
-
-        // Update the search index with the modified mediapackage
-        workflowService.update(instance);
-      }
-      offset++;
-      q = q.withStartPage(offset);
-      result = workflowService.getWorkflowInstancesForAdministrativeRead(q);
-    }
-  }
-
-  /*
-   * Begin workflow update functions
-   */
-
-  // Update the series dublin core
-  private final Function2<WorkflowInstance, SeriesItem, Boolean> workflowUpdateElement = new Function2<>() {
-    @Override
-    public Boolean apply(WorkflowInstance instance, SeriesItem seriesItem) {
-      try {
-        MediaPackage mp = instance.getMediaPackage();
-        DublinCoreCatalog seriesDublinCore = seriesItem.getMetadata();
-        mp.setSeriesTitle(seriesDublinCore.getFirst(DublinCore.PROPERTY_TITLE));
-
-        // Update the series dublin core
-        Catalog[] seriesCatalogs = mp.getCatalogs(MediaPackageElements.SERIES);
-        if (seriesCatalogs.length == 1) {
-          Catalog c = seriesCatalogs[0];
-          String filename = FilenameUtils.getName(c.getURI().toString());
-
-          URI uri = workspace.put(mp.getIdentifier().toString(), c.getIdentifier(), filename,
-              dublinCoreService.serialize(seriesDublinCore));
-          c.setURI(uri);
-          // setting the URI to a new source so the checksum will most like be invalid
-          c.setChecksum(null);
-        }
-        return true;
-      } catch (IOException e) {
-        logger.error("Unable to update workflow {}", instance.getId(), e);
-        return false;
-      }
-    }
-  };
-
-  // Update the series XACML file
-  private final Function2<WorkflowInstance, SeriesItem, Boolean> workflowUpdateAcl = new Function2<>() {
-    @Override
-    public Boolean apply(WorkflowInstance instance, SeriesItem seriesItem) {
-      MediaPackage mp = instance.getMediaPackage();
-      // Build a new XACML file for this mediapackage
-      try {
-        if (seriesItem.getOverrideEpisodeAcl()) {
-          authorizationService.removeAcl(mp, AclScope.Episode);
-        }
-        authorizationService.setAcl(mp, AclScope.Series, seriesItem.getAcl());
-      } catch (MediaPackageException e) {
-        logger.error("Error setting ACL for media package {}", mp.getIdentifier(), e);
-        return false;
-      }
-      return true;
-    }
-  };
-
-  private final Function2<WorkflowInstance, SeriesItem, Boolean> workflowDelete = new Function2<>() {
-    @Override
-    public Boolean apply(WorkflowInstance instance, SeriesItem seriesItem) {
-      try {
-        MediaPackage mp = instance.getMediaPackage();
-        mp.setSeries(null);
-        mp.setSeriesTitle(null);
-        for (Catalog c : mp.getCatalogs(MediaPackageElements.SERIES)) {
-          mp.remove(c);
-          try {
-            workspace.delete(c.getURI());
-          } catch (NotFoundException e) {
-            logger.info("No series catalog to delete found {}", c.getURI());
-          }
-        }
-        for (Catalog episodeCatalog : mp.getCatalogs(MediaPackageElements.EPISODE)) {
-          DublinCoreCatalog episodeDublinCore = DublinCoreUtil.loadDublinCore(workspace, episodeCatalog);
-          episodeDublinCore.remove(DublinCore.PROPERTY_IS_PART_OF);
-          String filename = FilenameUtils.getName(episodeCatalog.getURI().toString());
-          URI uri = workspace.put(mp.getIdentifier().toString(), episodeCatalog.getIdentifier(), filename,
-              dublinCoreService.serialize(episodeDublinCore));
-          episodeCatalog.setURI(uri);
-          // setting the URI to a new source so the checksum will most like be invalid
-          episodeCatalog.setChecksum(null);
-        }
-        return true;
-      } catch (IOException e) {
-        logger.error("Unable to update workflow {}", instance.getId(), e);
-        return false;
-      }
-    }
-  };
-
-  /*
-   * End workflow update functions
-   */
 
   /*
    * Begin Series update functions
