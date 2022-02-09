@@ -1,0 +1,10 @@
+mvn depgraph:graph depgraph:aggregate -DshowVersions -DshowDuplicates -DshowConflicts -DoutputFilename=graph.dot -DimageFormat=svg -DcreateImage=true -DmergeTypes=true -DmergeScopes=true -Dincludes=org.opencastproject
+
+Add this under the node line
+ ranksep = 2;
+ nodesep = 0;
+
+rebuild the graph with
+dot -T svg -o /home/greg/opencast/upstream/target/dependency-graph.svg /home/greg/opencast/upstream/target/dependency-graph.dot
+
+open target/dependency-graph.svg
