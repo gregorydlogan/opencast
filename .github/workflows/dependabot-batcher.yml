@@ -32,8 +32,9 @@ jobs:
 
       - name: 'Ensure Labels'
         uses: actions-ecosystem/action-add-labels@v1
-        number: ${{ steps.batch.outputs.pull-request-number }} #pr number
         with:
+          token: ${{ secrets.GITHUB_TOKEN }} #required
+          number: ${{ steps.batch.outputs.pull-request-number }} #pr number
           labels: |
             dependencies
             javascript
