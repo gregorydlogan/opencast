@@ -22,9 +22,18 @@ jobs:
     steps:
   # Batches Dependabot PRs into one by merging them into a combined branch, then raising a new PR
       - name: 'Dependabot Batcher'
+        id: batch
         uses: Legal-and-General/dependabot-batcher@v1.0.1
         with:
           token: ${{ secrets.GITHUB_TOKEN }} #required
           baseBranchName: 'r/12.x' #optional
           batchBranchName: 'paella7-batcher-updates'
           batchPullTitle: 'Batch Dependabot Updates for Paella 7'
+
+      - name: 'Ensure Labels'
+        uses: actions-ecosystem/action-add-labels@v1
+        number: ${{ steps.batch.outputs.pull-request-number }} #pr number
+        with:
+          labels: |
+            dependencies
+            javascript
