@@ -11,7 +11,7 @@ jobs:
   comment:
     if: > 
       github.event.workflow_run.conclusion == 'success'
-      && github.repository == 'opencast/opencast'
+      && github.repository == 'gregorydlogan/opencast'
     runs-on: ubuntu-latest
     steps:
       - name: Get Artifact and Pull request info

@@ -158,7 +158,7 @@ jobs:
       - name: upload tarball as workflow asset
         if: >
           matrix.java == 11
-          && github.repository == 'opencast/opencast'
+          && github.repository == 'gregorydlogan/opencast'
         uses: actions/upload-artifact@v3
         with:
           name: opencast-allinone
