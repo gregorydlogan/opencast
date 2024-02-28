@@ -36,8 +36,8 @@ import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
 
 /**
  * This is the document model class which holds the data about a set of rest endpoints.
@@ -229,8 +229,8 @@ public class RestDocData extends DocData {
    *          clients
    * @param produces
    *          the return type(s) of this endpoint, values should be constants from <a
-   *          href="http://jackson.codehaus.org/javadoc/jax-rs/1.0/javax/ws/rs/core/MediaType.html"
-   *          >javax.ws.rs.core.MediaType</a> or ExtendedMediaType
+   *          href="http://jackson.codehaus.org/javadoc/jax-rs/1.0/jakarta.ws.rs/core/MediaType.html"
+   *          >jakarta.ws.rs.core.MediaType</a> or ExtendedMediaType
    *          (org.opencastproject.util.doc.rest.ExtendedMediaType).
    * @param httpMethodString
    *          the HTTP method of this endpoint (e.g. GET, POST)

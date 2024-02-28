@@ -71,7 +71,7 @@ import java.util.Hashtable;
 import java.util.Map;
 import java.util.Properties;
 
-import javax.ws.rs.Path;
+import jakarta.ws.rs.Path;
 
 @Path("/")
 public class TestEventsEndpoint extends EventsEndpoint {

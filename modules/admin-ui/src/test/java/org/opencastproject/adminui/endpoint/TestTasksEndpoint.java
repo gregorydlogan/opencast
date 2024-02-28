@@ -83,7 +83,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Function;
 
-import javax.ws.rs.Path;
+import jakarta.ws.rs.Path;
 
 @Path("/")
 @Ignore

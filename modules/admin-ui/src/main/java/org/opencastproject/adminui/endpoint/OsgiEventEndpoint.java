@@ -48,7 +48,7 @@ import org.osgi.service.component.annotations.Reference;
 import java.util.Dictionary;
 import java.util.Objects;
 
-import javax.ws.rs.Path;
+import jakarta.ws.rs.Path;
 
 /** OSGi bound implementation. */
 @Path("/")

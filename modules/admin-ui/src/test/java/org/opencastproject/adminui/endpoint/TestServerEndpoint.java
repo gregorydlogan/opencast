@@ -33,7 +33,7 @@ import org.junit.Ignore;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.ws.rs.Path;
+import jakarta.ws.rs.Path;
 
 @Path("/")
 @Ignore

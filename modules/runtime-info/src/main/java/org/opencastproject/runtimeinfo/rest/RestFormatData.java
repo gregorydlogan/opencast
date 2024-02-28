@@ -21,7 +21,7 @@
 
 package org.opencastproject.runtimeinfo.rest;
 
-import javax.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.MediaType;
 
 /**
  * Represents an output format for a REST endpoint.
@@ -39,8 +39,8 @@ public final class RestFormatData {
 
   /**
    * Name of the format, the value should be a constant from <a
-   * href="http://jackson.codehaus.org/javadoc/jax-rs/1.0/javax/ws/rs/core/MediaType.html"
-   * >javax.ws.rs.core.MediaType</a> or ExtendedMediaType (org.opencastproject.util.doc.rest.ExtendedMediaType).
+   * href="http://jackson.codehaus.org/javadoc/jax-rs/1.0/jakarta.ws.rs/core/MediaType.html"
+   * >jakarta.ws.rs.core.MediaType</a> or ExtendedMediaType (org.opencastproject.util.doc.rest.ExtendedMediaType).
    */
   private String name;
 
@@ -55,8 +55,8 @@ public final class RestFormatData {
    *
    * @param name
    *          the format name, the value should be a constant from <a
-   *          href="http://jackson.codehaus.org/javadoc/jax-rs/1.0/javax/ws/rs/core/MediaType.html"
-   *          >javax.ws.rs.core.MediaType</a> or ExtendedMediaType
+   *          href="http://jackson.codehaus.org/javadoc/jax-rs/1.0/jakarta.ws.rs/core/MediaType.html"
+   *          >jakarta.ws.rs.core.MediaType</a> or ExtendedMediaType
    *          (org.opencastproject.util.doc.rest.ExtendedMediaType).
    *
    * @throws IllegalArgumentException

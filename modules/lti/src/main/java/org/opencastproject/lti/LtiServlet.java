@@ -47,7 +47,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.ws.rs.core.UriBuilder;
+import jakarta.ws.rs.core.UriBuilder;
 
 /**
  * A servlet to accept an LTI login via POST. The actual authentication happens in LtiProcessingFilter. GET requests

@@ -54,7 +54,7 @@ import java.time.Instant;
 import java.util.Arrays;
 import java.util.Date;
 
-import javax.ws.rs.Path;
+import jakarta.ws.rs.Path;
 
 @Path("/")
 @Ignore

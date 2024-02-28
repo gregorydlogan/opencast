@@ -44,7 +44,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Properties;
 
-import javax.ws.rs.WebApplicationException;
+import jakarta.ws.rs.WebApplicationException;
 
 import uk.co.datumedge.hamcrest.json.SameJSONAs;
 

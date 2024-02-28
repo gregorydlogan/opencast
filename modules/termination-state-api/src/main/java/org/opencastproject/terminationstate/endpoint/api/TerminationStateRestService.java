@@ -20,7 +20,7 @@
  */
 package org.opencastproject.terminationstate.endpoint.api;
 
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 
 public interface TerminationStateRestService {
   Response getState();

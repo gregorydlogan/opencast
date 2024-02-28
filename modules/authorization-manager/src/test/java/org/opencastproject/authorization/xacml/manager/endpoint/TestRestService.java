@@ -71,7 +71,7 @@ import org.easymock.EasyMock;
 import org.junit.Ignore;
 
 import javax.persistence.EntityManagerFactory;
-import javax.ws.rs.Path;
+import jakarta.ws.rs.Path;
 
 // use base path /test to prevent conflicts with the production service
 @Path("/test")

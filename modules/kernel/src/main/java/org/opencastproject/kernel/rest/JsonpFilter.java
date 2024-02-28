@@ -21,7 +21,7 @@
 
 package org.opencastproject.kernel.rest;
 
-import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+import static jakarta.ws.rs.core.MediaType.APPLICATION_JSON;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.ServiceScope;
@@ -193,7 +193,7 @@ public class JsonpFilter implements Filter {
     }
 
     /**
-     * If we set a {@link javax.ws.rs.core.MediaType#APPLICATION_JSON} {@link JsonpFilter#CONTENT_TYPE_HEADER} header,
+     * If we set a {@link jakarta.ws.rs.core.MediaType#APPLICATION_JSON} {@link JsonpFilter#CONTENT_TYPE_HEADER} header,
      * enable padding.
      *
      * {@inheritDoc}
@@ -209,7 +209,7 @@ public class JsonpFilter implements Filter {
     }
 
     /**
-     * If we add a {@link javax.ws.rs.core.MediaType#APPLICATION_JSON} {@link JsonpFilter#CONTENT_TYPE_HEADER} header,
+     * If we add a {@link jakarta.ws.rs.core.MediaType#APPLICATION_JSON} {@link JsonpFilter#CONTENT_TYPE_HEADER} header,
      * enable padding.
      *
      * {@inheritDoc}

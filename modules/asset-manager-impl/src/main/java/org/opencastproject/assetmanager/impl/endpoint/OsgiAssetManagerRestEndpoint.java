@@ -27,7 +27,7 @@ import org.opencastproject.serviceregistry.api.ServiceRegistry;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
-import javax.ws.rs.Path;
+import jakarta.ws.rs.Path;
 
 /** OSGi bound implementation. */
 @Path("/")

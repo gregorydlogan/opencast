@@ -24,7 +24,7 @@ import static org.opencastproject.util.EqualsUtil.eq;
 
 import org.junit.Ignore;
 
-import javax.ws.rs.Path;
+import jakarta.ws.rs.Path;
 
 @Ignore
 @Path("/")

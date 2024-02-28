@@ -64,7 +64,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-import javax.ws.rs.WebApplicationException;
+import jakarta.ws.rs.WebApplicationException;
 
 import io.restassured.http.ContentType;
 import uk.co.datumedge.hamcrest.json.SameJSONAs;

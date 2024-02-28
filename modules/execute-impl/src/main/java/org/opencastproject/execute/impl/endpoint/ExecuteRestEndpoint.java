@@ -46,12 +46,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.FormParam;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.FormParam;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 
 /**
  * The REST endpoint for {@link ExecuteService}s
@@ -193,7 +193,7 @@ public class ExecuteRestEndpoint extends AbstractJobProducerEndpoint {
     if (services != null) {
       for (Object object : services) {
         if (object == null) {
-          throw new javax.ws.rs.WebApplicationException(javax.ws.rs.core.Response.Status.SERVICE_UNAVAILABLE);
+          throw new jakarta.ws.rs.WebApplicationException(jakarta.ws.rs.core.Response.Status.SERVICE_UNAVAILABLE);
         }
       }
     }

@@ -31,13 +31,12 @@ import org.opencastproject.util.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.ws.rs.FormParam;
-import javax.ws.rs.HEAD;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
+import jakarta.ws.rs.FormParam;
+import jakarta.ws.rs.HEAD;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.WebApplicationException;
+import jakarta.ws.rs.core.Response;
 
 /**
  * Base implementation for job producer REST endpoints.
@@ -56,12 +55,12 @@ public abstract class AbstractJobProducerEndpoint {
           throws ServiceRegistryException {
     final JobProducer service = getService();
     if (service == null)
-      throw new WebApplicationException(Status.SERVICE_UNAVAILABLE);
+      throw new WebApplicationException(Response.Status.SERVICE_UNAVAILABLE);
 
     // See if the service is ready to accept anything
     if (!service.isReadyToAcceptJobs(jobOperation)) {
       logger.debug("Service {} is not ready to accept jobs with operation {}", service, jobOperation);
-      return Response.status(Status.SERVICE_UNAVAILABLE).build();
+      return Response.status(Response.Status.SERVICE_UNAVAILABLE).build();
     }
 
     Job job;
@@ -69,18 +68,18 @@ public abstract class AbstractJobProducerEndpoint {
       job = getServiceRegistry().getJob(jobId);
     } catch (NotFoundException e) {
       logger.warn("Unable to find dispatched job {}", jobId);
-      return Response.status(Status.NOT_FOUND).build();
+      return Response.status(Response.Status.NOT_FOUND).build();
     }
 
     // See if the service has strong feelings about this particular job
     try {
       if (!service.isReadyToAccept(job)) {
         logger.debug("Service {} temporarily refused to accept job {}", service, jobId);
-        return Response.status(Status.SERVICE_UNAVAILABLE).build();
+        return Response.status(Response.Status.SERVICE_UNAVAILABLE).build();
       }
     } catch (UndispatchableJobException e) {
       logger.warn("Service {} permanently refused to accept job {}", service, jobId);
-      return Response.status(Status.PRECONDITION_FAILED).build();
+      return Response.status(Response.Status.PRECONDITION_FAILED).build();
     }
 
     service.acceptJob(job);

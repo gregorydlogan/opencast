@@ -261,8 +261,8 @@
               org.eclipse.persistence.internal.weaving,
               org.eclipse.persistence.queries,
               org.eclipse.persistence.sessions,
-              javax.ws.rs;version=2.0.1,
-              javax.ws.rs.core;version=2.0.1,
+              jakarta.ws.rs;version=3.1.0,
+              jakarta.ws.rs.core;version=3.1.0,
               *
             </Import-Package>
             <Export-Package>

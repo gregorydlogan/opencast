@@ -31,7 +31,7 @@ import org.opencastproject.security.urlsigning.service.UrlSigningService;
 import org.joda.time.DateTime;
 import org.junit.Ignore;
 
-import javax.ws.rs.Path;
+import jakarta.ws.rs.Path;
 
 @Path("")
 @Ignore

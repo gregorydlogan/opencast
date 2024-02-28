@@ -41,7 +41,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import javax.ws.rs.Path;
+import jakarta.ws.rs.Path;
 
 @Path("/")
 @Ignore

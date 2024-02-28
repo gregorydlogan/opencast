@@ -49,8 +49,8 @@ import java.io.InputStream;
 import java.net.URI;
 import java.util.regex.Pattern;
 
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 
 /** Utility functions for REST endpoints. */
 public final class RestUtil {

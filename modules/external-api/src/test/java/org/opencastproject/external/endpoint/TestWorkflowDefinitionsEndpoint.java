@@ -34,7 +34,7 @@ import com.google.common.collect.Sets;
 
 import org.junit.Ignore;
 
-import javax.ws.rs.Path;
+import jakarta.ws.rs.Path;
 
 @Path("/")
 @Ignore

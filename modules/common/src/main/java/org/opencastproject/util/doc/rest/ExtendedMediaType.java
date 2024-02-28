@@ -21,10 +21,10 @@
 
 package org.opencastproject.util.doc.rest;
 
-import javax.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.MediaType;
 
 /**
- * This class extends the javax.ws.rs.core.MediaType. Media types that are returned by our rest endpoints but not
+ * This class extends the jakarta.ws.rs.core.MediaType. Media types that are returned by our rest endpoints but not
  * present in MediaType is included here.
  */
 public class ExtendedMediaType extends MediaType {

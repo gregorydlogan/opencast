@@ -138,7 +138,7 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.TimeZone;
 
-import javax.ws.rs.Path;
+import jakarta.ws.rs.Path;
 
 @Path("/")
 @Ignore

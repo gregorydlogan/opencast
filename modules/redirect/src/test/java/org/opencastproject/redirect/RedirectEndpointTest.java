@@ -32,8 +32,8 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.UriInfo;
 
 /** Tests for the redirection endpoints */
 public class RedirectEndpointTest {

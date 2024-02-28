@@ -22,7 +22,7 @@
 package org.opencastproject.distribution.download.endpoint;
 
 import static javax.servlet.http.HttpServletResponse.SC_OK;
-import static javax.ws.rs.core.Response.status;
+import static jakarta.ws.rs.core.Response.status;
 import static org.opencastproject.util.RestUtil.R.ok;
 import static org.opencastproject.util.RestUtil.R.serverError;
 
@@ -55,14 +55,14 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.Set;
 
-import javax.ws.rs.DefaultValue;
-import javax.ws.rs.FormParam;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
+import jakarta.ws.rs.DefaultValue;
+import jakarta.ws.rs.FormParam;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response.Status;
 
 /**
  * Rest endpoint for distributing media to the local distribution channel.

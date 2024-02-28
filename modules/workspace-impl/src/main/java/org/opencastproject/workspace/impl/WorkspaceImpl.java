@@ -96,7 +96,8 @@ import java.util.concurrent.CopyOnWriteArraySet;
 
 import javax.management.ObjectInstance;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.core.UriBuilder;
+
+import jakarta.ws.rs.core.UriBuilder;
 
 /**
  * Implements a simple cache for remote URIs. Delegates methods to {@link WorkingFileRepository} wherever possible.

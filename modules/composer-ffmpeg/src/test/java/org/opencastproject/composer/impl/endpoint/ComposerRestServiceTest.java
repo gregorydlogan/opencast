@@ -47,8 +47,8 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response.Status;
 
 /**
  * Tests the behavior of the composer rest endpoint, using a mock composer service.

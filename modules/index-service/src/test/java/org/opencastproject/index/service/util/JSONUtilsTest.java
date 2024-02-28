@@ -53,7 +53,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.ws.rs.core.StreamingOutput;
+import jakarta.ws.rs.core.StreamingOutput;
 
 import uk.co.datumedge.hamcrest.json.SameJSONAs;
 

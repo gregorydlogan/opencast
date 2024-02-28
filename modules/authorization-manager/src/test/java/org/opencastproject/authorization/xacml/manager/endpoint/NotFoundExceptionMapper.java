@@ -23,11 +23,11 @@ package org.opencastproject.authorization.xacml.manager.endpoint;
 
 import org.opencastproject.util.NotFoundException;
 
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
-import javax.ws.rs.ext.ExceptionMapper;
-import javax.ws.rs.ext.Provider;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response.Status;
+import jakarta.ws.rs.ext.ExceptionMapper;
+import jakarta.ws.rs.ext.Provider;
 
 /**
  * Jersey does not map Opencast exceptions to REST exceptions. To do this, {@link ExceptionMapper}'s like this has to

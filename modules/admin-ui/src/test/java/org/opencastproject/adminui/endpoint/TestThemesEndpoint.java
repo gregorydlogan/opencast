@@ -57,7 +57,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Hashtable;
 
-import javax.ws.rs.Path;
+import jakarta.ws.rs.Path;
 
 @Path("/")
 @Ignore

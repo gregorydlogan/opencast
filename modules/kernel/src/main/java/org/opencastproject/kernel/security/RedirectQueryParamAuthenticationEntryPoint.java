@@ -28,7 +28,7 @@ import org.springframework.security.web.util.UrlUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.core.UriBuilder;
+import jakarta.ws.rs.core.UriBuilder;
 
 /**
  * An {@link AuthenticationEntryPoint} that redirects to a configured login URL with a specified return query parameter.

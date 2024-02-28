@@ -39,7 +39,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import javax.ws.rs.Path;
+import jakarta.ws.rs.Path;
 
 @Path("/")
 @Ignore

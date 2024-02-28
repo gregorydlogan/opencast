@@ -60,7 +60,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-import javax.ws.rs.Path;
+import jakarta.ws.rs.Path;
 
 /**
  * A proxy to a remote series service.
