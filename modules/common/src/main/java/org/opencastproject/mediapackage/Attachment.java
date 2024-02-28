@@ -26,7 +26,7 @@ import org.opencastproject.mediapackage.attachment.AttachmentImpl;
 
 import java.util.Map;
 
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * This interface describes methods and fields for attachments as part of a media package.

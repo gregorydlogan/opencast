@@ -23,7 +23,7 @@ package org.opencastproject.smil.entity.media.element;
 
 import java.net.URI;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 /**
  * Represent video media element and implements SmilMediaElement.

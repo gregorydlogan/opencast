@@ -35,7 +35,7 @@ import org.junit.Test;
 import java.io.InputStream;
 import java.io.StringWriter;
 
-import javax.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBContext;
 
 /**
  * Tests JAXB un/marshalling of the role

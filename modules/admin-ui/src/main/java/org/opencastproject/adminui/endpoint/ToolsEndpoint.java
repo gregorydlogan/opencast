@@ -152,7 +152,7 @@ import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import javax.xml.bind.JAXBException;
+import jakarta.xml.bind.JAXBException;
 
 @Path("/")
 @RestService(name = "toolsService", title = "Tools API Service",

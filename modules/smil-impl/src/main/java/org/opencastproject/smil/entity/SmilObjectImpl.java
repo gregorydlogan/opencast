@@ -26,8 +26,8 @@ import org.opencastproject.smil.entity.api.SmilObject;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlID;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlID;
 
 /**
  * Implementation of {@link SmilObject}.

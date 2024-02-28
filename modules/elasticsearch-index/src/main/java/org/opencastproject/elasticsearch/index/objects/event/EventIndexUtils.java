@@ -64,7 +64,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-import javax.xml.bind.Unmarshaller;
+import jakarta.xml.bind.Unmarshaller;
 
 /**
  * Utility implementation to deal with the conversion of recording events and its corresponding index data structures.

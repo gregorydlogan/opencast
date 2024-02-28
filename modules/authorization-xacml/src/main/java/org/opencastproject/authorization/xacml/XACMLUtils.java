@@ -49,9 +49,9 @@ import java.io.InputStream;
 import java.io.StringWriter;
 import java.util.List;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBException;
 
 /**
  * Utility implementation for dealing with XACML data.
@@ -140,6 +140,7 @@ public final class XACMLUtils {
           ActionType action = rule.getTarget().getActions().getAction().get(0);
           actionForAce = (String) action.getActionMatch().get(0).getAttributeValue().getContent().get(0);
 
+          JAXBElement<?> foo = rule.getCondition().getExpression();
           @SuppressWarnings("unchecked") JAXBElement<ApplyType> apply
               = (JAXBElement<ApplyType>) rule.getCondition().getExpression();
           for (JAXBElement<?> element : apply.getValue().getExpression()) {

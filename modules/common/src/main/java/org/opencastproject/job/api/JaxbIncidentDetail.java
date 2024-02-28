@@ -26,11 +26,11 @@ import static org.opencastproject.util.data.Tuple.tuple;
 import org.opencastproject.util.data.Function;
 import org.opencastproject.util.data.Tuple;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlValue;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlValue;
 
 /**
  * JAXB DTO for a technical detail of a job incident. See {@link Incident#getDetails()}.

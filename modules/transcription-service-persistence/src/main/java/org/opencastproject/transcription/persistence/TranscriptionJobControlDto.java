@@ -46,7 +46,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlAttribute;
 
 @Entity(name = "TranscriptionJobControl")
 @Table(name = "oc_transcription_service_job")

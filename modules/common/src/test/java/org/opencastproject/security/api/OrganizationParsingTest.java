@@ -34,8 +34,9 @@ import java.io.StringWriter;
 import java.util.Arrays;
 import java.util.Map;
 
-import javax.xml.bind.JAXBContext;
 import javax.xml.transform.stream.StreamSource;
+
+import jakarta.xml.bind.JAXBContext;
 
 /**
  * Tests the JAXB java to xml conversion of the organization class.

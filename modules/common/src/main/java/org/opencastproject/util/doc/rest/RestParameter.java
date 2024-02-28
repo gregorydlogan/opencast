@@ -58,7 +58,7 @@ public @interface RestParameter {
   Type type();
 
   /**
-   * @return the {@link javax.xml.bind.annotation.XmlType} or {@link javax.xml.bind.annotation.XmlRootElement} annotated
+   * @return the {@link jakarta.xml.bind.annotation.XmlType} or {@link jakarta.xml.bind.annotation.XmlRootElement} annotated
    *         class that models this parameter.
    */
   Class<?> jaxbClass() default Object.class;

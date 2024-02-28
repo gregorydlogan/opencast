@@ -24,8 +24,8 @@ package org.opencastproject.mediapackage;
 
 import org.opencastproject.mediapackage.track.AudioStreamImpl;
 
-import javax.xml.bind.annotation.adapters.XmlAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * A stream containing audio data.

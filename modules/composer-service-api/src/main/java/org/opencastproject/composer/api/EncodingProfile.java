@@ -25,7 +25,7 @@ package org.opencastproject.composer.api;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlType;
 
 /**
  * An encoding format encapsulates all the relevant configuration data for

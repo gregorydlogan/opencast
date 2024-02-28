@@ -130,7 +130,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import jakarta.ws.rs.WebApplicationException;
-import javax.xml.bind.JAXBException;
+import jakarta.xml.bind.JAXBException;
 
 
 @Component(

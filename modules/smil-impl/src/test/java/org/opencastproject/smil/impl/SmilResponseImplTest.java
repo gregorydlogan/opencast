@@ -35,7 +35,7 @@ import org.opencastproject.smil.entity.api.SmilObject;
 
 import org.junit.Test;
 
-import javax.xml.bind.JAXBException;
+import jakarta.xml.bind.JAXBException;
 
 public class SmilResponseImplTest {
 

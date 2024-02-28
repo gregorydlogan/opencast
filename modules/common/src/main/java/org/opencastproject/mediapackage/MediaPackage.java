@@ -28,7 +28,7 @@ import java.net.URI;
 import java.util.Collection;
 import java.util.Date;
 
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * Interface for a media package, which is a data container moving through the system, containing metadata, tracks and

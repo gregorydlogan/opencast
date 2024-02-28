@@ -32,10 +32,10 @@ import java.io.InputStream;
 import java.io.StringWriter;
 import java.io.Writer;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.Unmarshaller;
 
 /** Base class for JAXB parser classes. */
 public abstract class JaxbParser {
@@ -44,7 +44,7 @@ public abstract class JaxbParser {
   /**
    * Create a new parser.
    *
-   * @param contextPath see {@link javax.xml.bind.JAXBContext#newInstance(String, ClassLoader)}
+   * @param contextPath see {@link jakarta.xml.bind.JAXBContext#newInstance(String, ClassLoader)}
    */
   protected JaxbParser(String contextPath) {
     this.ctx = init(contextPath);

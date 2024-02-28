@@ -21,7 +21,7 @@
 
 package org.opencastproject.mediapackage;
 
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * The presentation element describes where a media package can be consumed.

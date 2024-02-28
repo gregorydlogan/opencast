@@ -66,7 +66,7 @@ import java.util.Set;
 import java.util.concurrent.locks.Lock;
 import java.util.function.Function;
 
-import javax.xml.bind.Unmarshaller;
+import jakarta.xml.bind.Unmarshaller;
 
 /**
  * An index implementation based on ElasticSearch that serves the Admin UI API and the External API with data

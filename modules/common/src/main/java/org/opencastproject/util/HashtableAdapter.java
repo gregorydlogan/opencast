@@ -23,7 +23,7 @@ package org.opencastproject.util;
 
 import java.util.Hashtable;
 
-import javax.xml.bind.annotation.adapters.XmlAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 
 /**
  * Adapter class for JaxB to represent a Hashtable
@@ -36,7 +36,7 @@ public class HashtableAdapter extends XmlAdapter<HashEntry[], Hashtable<String, 
   /**
    * {@inheritDoc}
    *
-   * @see javax.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
+   * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
    */
   @Override
   public HashEntry[] marshal(Hashtable<String, String> myHashtable) throws Exception {
@@ -50,7 +50,7 @@ public class HashtableAdapter extends XmlAdapter<HashEntry[], Hashtable<String, 
   /**
    * {@inheritDoc}
    *
-   * @see javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
+   * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
    */
   @Override
   public Hashtable<String, String> unmarshal(HashEntry[] data) throws Exception {

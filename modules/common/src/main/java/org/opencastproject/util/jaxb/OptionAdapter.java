@@ -23,7 +23,7 @@ package org.opencastproject.util.jaxb;
 
 import org.opencastproject.util.data.Option;
 
-import javax.xml.bind.annotation.adapters.XmlAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 
 /**
  * JAXB Adapter for the {@link org.opencastproject.util.data.Option Option} type

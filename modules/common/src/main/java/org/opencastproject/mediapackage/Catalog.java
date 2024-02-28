@@ -24,7 +24,7 @@ package org.opencastproject.mediapackage;
 
 import java.io.Serializable;
 
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * General definition for metadata catalogs.

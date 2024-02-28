@@ -86,7 +86,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 
-import javax.xml.bind.JAXBException;
+import jakarta.xml.bind.JAXBException;
 
 /**
  * Implementation of VideoeditorService using FFMPEG

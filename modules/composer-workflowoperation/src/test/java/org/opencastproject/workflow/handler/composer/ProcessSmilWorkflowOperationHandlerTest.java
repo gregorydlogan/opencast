@@ -80,7 +80,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.bind.JAXBException;
+import jakarta.xml.bind.JAXBException;
 
 public class ProcessSmilWorkflowOperationHandlerTest {
   private ProcessSmilWorkflowOperationHandler operationHandler;

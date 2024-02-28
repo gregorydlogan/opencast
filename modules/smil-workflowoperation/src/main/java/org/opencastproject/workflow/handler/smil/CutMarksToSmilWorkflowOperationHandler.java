@@ -67,7 +67,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.ListIterator;
 
-import javax.xml.bind.JAXBException;
+import jakarta.xml.bind.JAXBException;
 
 /**
  * The workflow definition for converting a smil containing cut marks into a legal smil for cutting

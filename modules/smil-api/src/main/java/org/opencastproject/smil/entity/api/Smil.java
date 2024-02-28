@@ -27,7 +27,7 @@ import org.xml.sax.SAXException;
 
 import java.net.MalformedURLException;
 
-import javax.xml.bind.JAXBException;
+import jakarta.xml.bind.JAXBException;
 
 /**
  * Represent a SMIL document.

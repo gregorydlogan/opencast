@@ -24,7 +24,7 @@ package org.opencastproject.mediapackage;
 
 import java.util.Map;
 
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * A <code>MediaPackageElementRef</code> provides means of pointing to other elements in the media package.

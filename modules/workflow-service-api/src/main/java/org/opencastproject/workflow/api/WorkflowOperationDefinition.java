@@ -21,7 +21,7 @@
 
 package org.opencastproject.workflow.api;
 
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * Describes an operation or action to be performed as part of a workflow.

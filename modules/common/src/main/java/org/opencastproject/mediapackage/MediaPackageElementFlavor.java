@@ -28,8 +28,8 @@ import org.opencastproject.util.data.Function;
 import java.io.Serializable;
 import java.util.Objects;
 
-import javax.xml.bind.annotation.adapters.XmlAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * ELement flavors describe {@link MediaPackageElement}s in a semantic way. They reveal or give at least a hint about

@@ -26,8 +26,8 @@ import org.opencastproject.mediapackage.track.ScanOrder;
 import org.opencastproject.mediapackage.track.ScanType;
 import org.opencastproject.mediapackage.track.VideoStreamImpl;
 
-import javax.xml.bind.annotation.adapters.XmlAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * A stream containing video data.

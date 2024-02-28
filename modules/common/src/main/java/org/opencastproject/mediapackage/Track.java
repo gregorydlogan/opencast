@@ -24,7 +24,7 @@ package org.opencastproject.mediapackage;
 
 import org.opencastproject.mediapackage.track.TrackImpl;
 
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * This interface describes methods and fields for audio and video tracks as part of a media package.

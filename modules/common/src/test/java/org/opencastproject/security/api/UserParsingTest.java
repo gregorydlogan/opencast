@@ -33,7 +33,7 @@ import org.junit.Test;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBContext;
 
 /**
  * Tests JAXB un/marshalling of the user

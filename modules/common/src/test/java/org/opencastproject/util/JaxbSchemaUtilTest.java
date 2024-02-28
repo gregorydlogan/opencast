@@ -28,7 +28,7 @@ import org.opencastproject.job.api.JaxbJob;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
-import javax.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBContext;
 
 public class JaxbSchemaUtilTest {
 

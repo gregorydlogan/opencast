@@ -26,7 +26,7 @@ import org.joda.time.format.ISODateTimeFormat;
 
 import java.util.Date;
 
-import javax.xml.bind.annotation.adapters.XmlAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 
 /**
  * JAXB adapter that formats dates in UTC format YYYY-MM-DD'T'hh:mm:ss.MMM'Z' up to millisecond, e.g.

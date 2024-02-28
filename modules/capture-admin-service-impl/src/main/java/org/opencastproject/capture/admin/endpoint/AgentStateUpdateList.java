@@ -26,9 +26,9 @@ import org.opencastproject.capture.admin.api.AgentStateUpdate;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
 
 @XmlType(name = "agents", namespace = "http://capture.admin.opencastproject.org")
 @XmlRootElement(name = "agents", namespace = "http://capture.admin.opencastproject.org")

@@ -224,8 +224,8 @@ public class RestDocData extends DocData {
    * @param restQuery
    *          the RestQuery annotation type storing information of an endpoint
    * @param returnType
-   *          the return type for this endpoint. If this is {@link javax.xml.bind.annotation.XmlRootElement} or
-   *          {@link javax.xml.bind.annotation.XmlRootElement}, the XML schema for the class will be made available to
+   *          the return type for this endpoint. If this is {@link jakarta.xml.bind.annotation.XmlRootElement} or
+   *          {@link jakarta.xml.bind.annotation.XmlRootElement}, the XML schema for the class will be made available to
    *          clients
    * @param produces
    *          the return type(s) of this endpoint, values should be constants from <a

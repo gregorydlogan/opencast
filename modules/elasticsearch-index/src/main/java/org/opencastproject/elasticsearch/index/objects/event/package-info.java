@@ -24,6 +24,6 @@ package org.opencastproject.elasticsearch.index.objects.event;
 
 import org.opencastproject.elasticsearch.index.objects.IndexObject;
 
-import javax.xml.bind.annotation.XmlNsForm;
-import javax.xml.bind.annotation.XmlSchema;
+import jakarta.xml.bind.annotation.XmlNsForm;
+import jakarta.xml.bind.annotation.XmlSchema;
 
