@@ -46,10 +46,18 @@
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
     </dependency>
+    <!-- NB: This is the *OLD* javax version of things, and is *required* by JBOSS.  No there is no updated version. -->
     <dependency>
       <groupId>jakarta.xml.bind</groupId>
       <artifactId>jakarta.xml.bind-api</artifactId>
       <version>2.3.3</version>
+      <scope>compile</scope>
+    </dependency>
+    <!-- NB: This is the parent POM's version, and is *required* since the rest of the project users it -->
+    <dependency>
+      <groupId>jakarta.xml.bind</groupId>
+      <artifactId>jakarta.xml.bind-api</artifactId>
+      <scope>compile</scope>
     </dependency>
     <!-- Logging -->
     <dependency>
@@ -123,7 +131,7 @@
           </ignoredUnusedDeclaredDependencies>
         </configuration>
       </plugin>
-      <plugin>
+      <!--<plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
         <version>3.5.2</version>
@@ -143,7 +151,7 @@
             </configuration>
           </execution>
         </executions>
-      </plugin>
+      </plugin>-->
       <plugin>
         <groupId>org.apache.felix</groupId>
         <artifactId>maven-bundle-plugin</artifactId>
@@ -152,7 +160,7 @@
           <instructions>
             <Embed-Dependency>
               jboss-xacml;inline=true,
-              jakarta.xml.bind-api;inline=true
+              jakarta.xml.bind-api:2.3.3;scope=test;inline=true
             </Embed-Dependency>
             <Private-Package>
               org.jboss.security.xacml.core,
