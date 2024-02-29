@@ -62,7 +62,7 @@ import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.Optional;
 
-import jakarta.xml.bind.JAXBException;
+import javax.xml.bind.JAXBException;
 
 /**
  * A XACML implementation of the {@link AuthorizationService}.
