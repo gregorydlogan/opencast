@@ -78,6 +78,7 @@ Additional settings can be configured in `org.opencastproject.elasticsearch.inde
 * `max.retry.attempts.update`
 * `retry.waiting.period.get`
 * `retry.waiting.period.update`
+* `retry.delay.on.startup`
 
 The identifier defines which index opencast is looking for.
 This might be interesting if you run an OpenSearch cluster and want to follow a naming scheme.
@@ -92,3 +93,6 @@ The retry behavior can be configured differently for get and update/delete reque
 This way you can set more retry attempts for updates because of the more serious consequences if those requests fail.
 The waiting period is used to not overwhelm OpenSearch with retry requests, making the problem worse.
 By default, no retry will be attempted.
+
+The `retry.delay.on.startup` defines how long Opencast will wait between retry attempts 
+when the connection to the index service fails on startup. The default is 10 seconds.
