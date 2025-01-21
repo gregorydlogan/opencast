@@ -35,6 +35,7 @@ import org.opencastproject.util.requests.SortCriterion;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
+import org.apache.http.ConnectionClosedException;
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
@@ -42,6 +43,8 @@ import org.apache.http.client.CredentialsProvider;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.elasticsearch.ElasticsearchException;
 import org.elasticsearch.ElasticsearchStatusException;
+import org.elasticsearch.action.admin.cluster.health.ClusterHealthRequest;
+import org.elasticsearch.action.admin.cluster.health.ClusterHealthResponse;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;
@@ -62,6 +65,7 @@ import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.client.indices.CreateIndexRequest;
 import org.elasticsearch.client.indices.CreateIndexResponse;
+import org.elasticsearch.cluster.health.ClusterHealthStatus;
 import org.elasticsearch.common.document.DocumentField;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.QueryBuilder;
@@ -467,11 +471,18 @@ public abstract class AbstractElasticsearchIndex implements SearchIndex {
   private boolean isOpensearchReachable() {
     try {
       // test connection
-      client.info(RequestOptions.DEFAULT);
-      return true;
-    } catch (ConnectException connectException) {
+      ClusterHealthRequest request = new ClusterHealthRequest();
+      request.waitForGreenStatus();
+      ClusterHealthResponse resp = client.cluster().health(request, RequestOptions.DEFAULT);
+      if (resp.getStatus().equals(ClusterHealthStatus.GREEN)) {
+        logger.debug("Connected to OpenSearch, cluster health is {}", resp.getStatus());
+        return true;
+      }
+      logger.debug("Connected to OpenSearch, but cluster health is {}", resp.getStatus());
+      return false;
+    } catch (ConnectException | ConnectionClosedException connectException) {
       // Get thrown when we are unable to connect. Normally this should only happen when
-      // opensearch is not running, therefore only log the error on debug level
+      // opensearch is not running or is just starting up, therefore only log the error on debug level
       logger.debug("Unable to connect to OpenSearch", connectException);
       return false;
     } catch (ElasticsearchException elasticsearchException) {
