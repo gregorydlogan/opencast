@@ -485,6 +485,16 @@ public abstract class AbstractElasticsearchIndex implements SearchIndex {
       // opensearch is not running or is just starting up, therefore only log the error on debug level
       logger.debug("Unable to connect to OpenSearch", connectException);
       return false;
+    } catch (IOException ioException) {
+      // Could be thrown when a docker container with opensearch is just starting up,
+      // so we check further if the cause is a socket exception
+      if (ioException.getCause() instanceof java.net.SocketException) {
+        // it seems like a container is starting up, we continue the loop
+        logger.debug("Unable to connect to OpenSearch", ioException);
+        return false;
+      }
+      // something different triggered an ioexception, so we fail
+      throw new RuntimeException("Couldn't connect to opensearch due to IOExceptionError", ioException);
     } catch (ElasticsearchException elasticsearchException) {
       // An ElasticsearchException is usually thrown in case where the server returns a 4xx or 5xx error code.
       // So for example for an HTTP 401 Unauthorized: In this case we want the startup to fail, so
