@@ -13,8 +13,8 @@
   <properties>
     <opencast.basedir>${project.basedir}/../..</opencast.basedir>
     <checkstyle.skip>false</checkstyle.skip>
-    <editor.url>https://github.com/opencast/opencast-editor/releases/download/17.x-2025-05-23/oc-editor-17.x-2025-05-23.tar.gz</editor.url>
-    <editor.sha256></editor.sha256>
+    <editor.url>https://github.com/gregorydlogan/opencast-editor/releases/download/18.x-2026-06-17/oc-editor-18.x-2026-06-17.tar.gz</editor.url>
+    <editor.sha256>950ffe8397b68296b5811bfd93e89251df7fef01438ddde4c9cd22945e2fa301</editor.sha256>
   </properties>
   <build>
     <plugins>
