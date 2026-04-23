@@ -221,9 +221,6 @@ jobs:
         with:
           base: ${{ needs.target.outputs.branch }}
           filters: |
-            paella:
-              - '.github/workflows/test-paella-7.yml'
-              - 'modules/engage-paella-player-7/**'
             configs:
               - '.github/workflows/test-configuration.yml'
               - 'etc/**'
@@ -246,13 +243,6 @@ jobs:
               - '.github/**'
               - 'mvnw'
               - '.mvn/**'
-
-  tests-paella:
-    needs: [merge-attempt, detect-changes]
-    if: needs.detect-changes.outputs.paella == 'true'
-    uses: ./.github/workflows/test-paella-7.yml
-    with:
-      ref: ${{ needs.merge-attempt.outputs.temp_ref }}
 
   tests-configs:
     needs: [merge-attempt, detect-changes]
