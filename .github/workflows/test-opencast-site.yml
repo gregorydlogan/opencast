@@ -88,7 +88,7 @@ jobs:
 
       - name: build opencast, skipping tests which run during site
         run: |
-          ./mvnw install -DskipTests -T1C -Pnone \
+          ./mvnw install -DskipTests -Pnone \
             --batch-mode \
             -Dcheckstyle.skip=true \
             -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn \
@@ -99,7 +99,7 @@ jobs:
         #This has to happen in a separate step or else various service classes aren't visible
       - name: build maven site
         run: |
-          ./mvnw site -T1C -Pnone \
+          ./mvnw site -Pnone \
             --batch-mode \
             -Dsurefire.rerunFailingTestsCount=2 \
             -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn \
