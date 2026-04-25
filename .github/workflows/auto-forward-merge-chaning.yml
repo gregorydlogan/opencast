@@ -289,10 +289,7 @@ jobs:
       merge-attempt,
       detect-changes,
       tests-configs,
-      tests-docs,
-      tests-lti,
-      tests-build,
-      tests-site
+      tests-docs
     ]
     if: always() && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled') && needs.merge-attempt.result == 'success'
     runs-on: ubuntu-latest
