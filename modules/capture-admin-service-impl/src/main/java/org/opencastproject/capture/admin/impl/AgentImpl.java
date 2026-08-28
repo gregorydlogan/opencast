@@ -23,6 +23,7 @@ package org.opencastproject.capture.admin.impl;
 
 import org.opencastproject.capture.CaptureParameters;
 import org.opencastproject.capture.admin.api.Agent;
+import org.opencastproject.capture.admin.api.AgentVersion;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -357,7 +358,7 @@ public class AgentImpl implements Agent {
     // Figure out the capabilities variables
 
     capabilitiesProperties = new Properties();
-    capabilitiesProperties.put(CaptureParameters.AGENT_VERSION, "1");
+    capabilitiesProperties.put(CaptureParameters.AGENT_VERSION, AgentVersion.VERSION_1);
 
     // Parse names
     String names = configuration.getProperty(CaptureParameters.CAPTURE_DEVICE_NAMES);
@@ -425,7 +426,7 @@ public class AgentImpl implements Agent {
     // Figure out the capabilities variables
 
     capabilitiesProperties = new Properties();
-    capabilitiesProperties.put(CaptureParameters.AGENT_VERSION, "2");
+    capabilitiesProperties.put(CaptureParameters.AGENT_VERSION, AgentVersion.VERSION_2);
 
     // Parse names
     String names = configuration.getProperty(CaptureParameters.CAPTURE_DEVICE_NAMES);
@@ -447,6 +448,13 @@ public class AgentImpl implements Agent {
     boolean supportStreamingPaused =
         supportStreaming && getKeyBinary(configuration, CaptureParameters.CAPTURE_STREAM_STARTPAUSED);
 
+  }
+
+  public AgentVersion getVersion() {
+    if (capabilitiesProperties != null) {
+      return AgentVersion.fromVersion(capabilitiesProperties.getProperty(CaptureParameters.AGENT_VERSION));
+    }
+    return AgentVersion.VERSION_1;
   }
 
   /**
