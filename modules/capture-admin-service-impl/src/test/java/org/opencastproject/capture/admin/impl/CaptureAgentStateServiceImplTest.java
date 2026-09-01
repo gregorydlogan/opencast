@@ -264,6 +264,18 @@ public class CaptureAgentStateServiceImplTest {
     verifyAgent("agent3", IDLE, agentConfig2x);
   }
 
+  private void assert2xAgent(String agentName, String agentState, Properties sentConfig, Properties returnedConfig) {
+    service.setAgentState(agentName, agentState);
+    service.setAgentConfiguration(agentName, sentConfig);
+
+    verifyAgent(agentName, agentState, returnedConfig);
+  }
+
+  private void assert2xAgentException(String agentName, String agentState, Properties sentConfig) {
+    service.setAgentState(agentName, agentState);
+    assertThrows(RuntimeException.class, () -> service.setAgentConfiguration(agentName, sentConfig));
+  }
+
   @Test
   public void agent2xBasic() {
     // Case 1: Happy path
@@ -277,10 +289,7 @@ public class CaptureAgentStateServiceImplTest {
     returnedConfig.putAll(agentConfig2x);
     returnedConfig.setProperty(CaptureParameters.CAPTURE_DEVICE_NAMES, "alpha");
 
-    service.setAgentState("test", IDLE);
-    service.setAgentConfiguration("test", sentConfig);
-
-    verifyAgent("test", IDLE, returnedConfig);
+    assert2xAgent("test", IDLE, sentConfig, returnedConfig);
 
     // Case 2: Still happy, fixed inputs so no devices
     sentConfig = new Properties();
@@ -290,10 +299,7 @@ public class CaptureAgentStateServiceImplTest {
     returnedConfig = new Properties();
     returnedConfig.putAll(agentConfig2x);
 
-    service.setAgentState("test2", IDLE);
-    service.setAgentConfiguration("test2", sentConfig);
-
-    verifyAgent("test2", IDLE, returnedConfig);
+    assert2xAgent("test2", IDLE, sentConfig, returnedConfig);
 
     // Case 3: Devices string is too long (> 256 char)
     sentConfig = new Properties();
@@ -307,9 +313,7 @@ public class CaptureAgentStateServiceImplTest {
     sentConfig.putAll(agentRegistration2x);
     sentConfig.setProperty(CaptureParameters.CAPTURE_DEVICE_NAMES, "");
 
-    service.setAgentState("test3", IDLE);
-    Properties finalSentConfig = sentConfig;
-    assertThrows(RuntimeException.class, () -> service.setAgentConfiguration("test", finalSentConfig));
+    assert2xAgentException("test3", IDLE, sentConfig);
   }
 
   @Test
@@ -327,10 +331,7 @@ public class CaptureAgentStateServiceImplTest {
     returnedConfig.setProperty(CaptureParameters.CAPTURE_DEVICE_NAMES, "alpha");
     returnedConfig.setProperty(CaptureParameters.CAPTURE_LOCAL_STARTPAUSED, BOOLEAN_OFF);
 
-    service.setAgentState("test", IDLE);
-    service.setAgentConfiguration("test", sentConfig);
-
-    verifyAgent("test", IDLE, returnedConfig);
+    assert2xAgent("test", IDLE, sentConfig, returnedConfig);
 
     // Case 2: starting paused *is* supported
     sentConfig = new Properties();
@@ -340,26 +341,20 @@ public class CaptureAgentStateServiceImplTest {
     returnedConfig.putAll(agentConfig2x);
     returnedConfig.setProperty(CaptureParameters.CAPTURE_LOCAL_STARTPAUSED, BOOLEAN_ON);
 
-    service.setAgentState("test", IDLE);
-    service.setAgentConfiguration("test", sentConfig);
-
-    verifyAgent("test", IDLE, returnedConfig);
+    assert2xAgent("test", IDLE, sentConfig, returnedConfig);
 
     // Case 3: invalid data is sent to the core
     sentConfig = new Properties();
     sentConfig.putAll(agentRegistration2x);
     sentConfig.setProperty(CaptureParameters.CAPTURE_LOCAL_STARTPAUSED, "banana");
 
-    service.setAgentState("test", IDLE);
-    Properties finalSentConfig = sentConfig;
-    assertThrows(RuntimeException.class, () -> service.setAgentConfiguration("test", finalSentConfig));
+    assert2xAgentException("test", IDLE, sentConfig);
 
     sentConfig = new Properties();
     sentConfig.putAll(agentRegistration2x);
     sentConfig.setProperty(CaptureParameters.CAPTURE_LOCAL_STARTPAUSED, "3");
 
-    service.setAgentState("test", IDLE);
-    assertThrows(RuntimeException.class, () -> service.setAgentConfiguration("test", finalSentConfig));
+    assert2xAgentException("test", IDLE, sentConfig);
   }
 
   @Test
@@ -377,10 +372,7 @@ public class CaptureAgentStateServiceImplTest {
     returnedConfig.setProperty(CaptureParameters.CAPTURE_DEVICE_NAMES, "alpha");
     returnedConfig.setProperty(CaptureParameters.CAPTURE_STREAM_CAPABLE, BOOLEAN_OFF);
 
-    service.setAgentState("test", IDLE);
-    service.setAgentConfiguration("test", sentConfig);
-
-    verifyAgent("test", IDLE, returnedConfig);
+    assert2xAgent("test", IDLE, sentConfig, returnedConfig);
 
     // Case 2: streaming *is* supported
     sentConfig = new Properties();
@@ -391,26 +383,20 @@ public class CaptureAgentStateServiceImplTest {
     returnedConfig.setProperty(CaptureParameters.CAPTURE_STREAM_CAPABLE, BOOLEAN_ON);
     returnedConfig.setProperty(CaptureParameters.CAPTURE_STREAM_STARTPAUSED, BOOLEAN_OFF);
 
-    service.setAgentState("test", IDLE);
-    service.setAgentConfiguration("test", sentConfig);
-
-    verifyAgent("test", IDLE, returnedConfig);
+    assert2xAgent("test", IDLE, sentConfig, returnedConfig);
 
     // Case 3: invalid data is sent to the core
     sentConfig = new Properties();
     sentConfig.putAll(agentRegistration2x);
     sentConfig.setProperty(CaptureParameters.CAPTURE_STREAM_CAPABLE, "banana");
 
-    service.setAgentState("test", IDLE);
-    Properties finalSentConfig = sentConfig;
-    assertThrows(RuntimeException.class, () -> service.setAgentConfiguration("test", finalSentConfig));
+    assert2xAgentException("test", IDLE, sentConfig);
 
     sentConfig = new Properties();
     sentConfig.putAll(agentRegistration2x);
     sentConfig.setProperty(CaptureParameters.CAPTURE_STREAM_CAPABLE, "3");
 
-    service.setAgentState("test", IDLE);
-    assertThrows(RuntimeException.class, () -> service.setAgentConfiguration("test", finalSentConfig));
+    assert2xAgentException("test", IDLE, sentConfig);
   }
 
   @Test
@@ -430,10 +416,7 @@ public class CaptureAgentStateServiceImplTest {
     returnedConfig.setProperty(CaptureParameters.CAPTURE_DEVICE_NAMES, "alpha");
     returnedConfig.setProperty(CaptureParameters.CAPTURE_STREAM_CAPABLE, BOOLEAN_OFF);
 
-    service.setAgentState("test", IDLE);
-    service.setAgentConfiguration("test", sentConfig);
-
-    verifyAgent("test", IDLE, returnedConfig);
+    assert2xAgent("test", IDLE, sentConfig, returnedConfig);
 
     // Case 2: streaming *is* supported, starting paused is not
     sentConfig = new Properties();
@@ -445,10 +428,7 @@ public class CaptureAgentStateServiceImplTest {
     returnedConfig.setProperty(CaptureParameters.CAPTURE_STREAM_CAPABLE, BOOLEAN_ON);
     returnedConfig.setProperty(CaptureParameters.CAPTURE_STREAM_STARTPAUSED, BOOLEAN_OFF);
 
-    service.setAgentState("test", IDLE);
-    service.setAgentConfiguration("test", sentConfig);
-
-    verifyAgent("test", IDLE, returnedConfig);
+    assert2xAgent("test", IDLE, sentConfig, returnedConfig);
 
     // Case 3: streaming and starting paused are both supported
     sentConfig = new Properties();
@@ -460,10 +440,7 @@ public class CaptureAgentStateServiceImplTest {
     returnedConfig.setProperty(CaptureParameters.CAPTURE_STREAM_CAPABLE, BOOLEAN_ON);
     returnedConfig.setProperty(CaptureParameters.CAPTURE_STREAM_STARTPAUSED, BOOLEAN_ON);
 
-    service.setAgentState("test", IDLE);
-    service.setAgentConfiguration("test", sentConfig);
-
-    verifyAgent("test", IDLE, returnedConfig);
+    assert2xAgent("test", IDLE, sentConfig, returnedConfig);
 
     // Case 4: bad data passed to the core
     sentConfig = new Properties();
@@ -471,20 +448,17 @@ public class CaptureAgentStateServiceImplTest {
     sentConfig.setProperty(CaptureParameters.CAPTURE_STREAM_CAPABLE, BOOLEAN_ON);
     sentConfig.setProperty(CaptureParameters.CAPTURE_STREAM_STARTPAUSED, "banana");
 
-    service.setAgentState("test", IDLE);
-    Properties finalSentConfig = sentConfig;
-    assertThrows(RuntimeException.class, () -> service.setAgentConfiguration("test", finalSentConfig));
+    assert2xAgentException("test", IDLE, sentConfig);
 
     sentConfig = new Properties();
     sentConfig.putAll(agentRegistration2x);
     sentConfig.setProperty(CaptureParameters.CAPTURE_STREAM_CAPABLE, BOOLEAN_ON);
     sentConfig.setProperty(CaptureParameters.CAPTURE_STREAM_STARTPAUSED, "3");
 
-    service.setAgentState("test", IDLE);
-    assertThrows(RuntimeException.class, () -> service.setAgentConfiguration("test", finalSentConfig));
+    assert2xAgentException("test", IDLE, sentConfig);
   }
 
-    @Test
+  @Test
   public void oneAgentCapabilities() {
     service.setAgentConfiguration("agent1", agentConfig1x);
     assertEquals(1, service.getKnownAgents().size());
