@@ -369,7 +369,7 @@ public class AgentImpl implements Agent {
     // Figure out the capabilities variables
 
     capabilitiesProperties = new Properties();
-    capabilitiesProperties.put(CaptureParameters.AGENT_VERSION, AgentVersion.VERSION_1);
+    capabilitiesProperties.put(CaptureParameters.AGENT_VERSION, AgentVersion.VERSION_1.toString());
 
     // Parse names
     String names = configuration.getProperty(CaptureParameters.CAPTURE_DEVICE_NAMES);
@@ -437,7 +437,7 @@ public class AgentImpl implements Agent {
     // Figure out the capabilities variables
 
     capabilitiesProperties = new Properties();
-    capabilitiesProperties.put(CaptureParameters.AGENT_VERSION, AgentVersion.VERSION_2);
+    capabilitiesProperties.put(CaptureParameters.AGENT_VERSION, AgentVersion.VERSION_2.toString());
 
     // Parse names
     String names = configuration.getProperty(CaptureParameters.CAPTURE_DEVICE_NAMES);
