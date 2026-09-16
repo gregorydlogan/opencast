@@ -93,13 +93,15 @@ public class CaptureAgentStateServiceImplTest {
     agentCaps2x = new Properties();
     agentCaps2x.setProperty(CaptureParameters.AGENT_VERSION, AgentVersion.VERSION_2.toString());
     agentCaps2x.setProperty(CaptureParameters.CAPTURE_STREAM_CAPABLE, BOOLEAN_OFF);
-    agentCaps2x.setProperty(CaptureParameters.CAPTURE_LOCAL_STARTPAUSED, BOOLEAN_OFF);
+    agentCaps2x.setProperty(CaptureParameters.CAPTURE_LOCAL_CAPABLE, BOOLEAN_ON);
+    agentCaps2x.setProperty(CaptureParameters.CAPTURE_LOCAL_AUTOSTART, BOOLEAN_OFF);
 
     agentRegistration2x = new Properties();
     agentRegistration2x.setProperty(CaptureParameters.VENDOR_NAME, "Mock Vendor");
     agentRegistration2x.setProperty(CaptureParameters.VENDOR_MODEL, "Mock Model");
     agentRegistration2x.setProperty(CaptureParameters.VENDOR_HARDWARE, "Mock Hardware");
     agentRegistration2x.setProperty(CaptureParameters.VENDOR_FIRMWARE, "Mock Firmware");
+    agentRegistration2x.setProperty(CaptureParameters.CAPTURE_LOCAL_CAPABLE, BOOLEAN_ON);
 
     agentConfig2x = new Properties();
     agentConfig2x.putAll(agentCaps2x);
@@ -377,6 +379,14 @@ public class CaptureAgentStateServiceImplTest {
     assert2xAgentException("agentFail", IDLE, null);
   }
 
+  @Test
+  public void testInvalid2xAgent() {
+    agentRegistration2x.setProperty(CaptureParameters.CAPTURE_LOCAL_CAPABLE, BOOLEAN_OFF);
+    agentRegistration2x.setProperty(CaptureParameters.CAPTURE_STREAM_CAPABLE, BOOLEAN_OFF);
+
+    assert2xAgentException("agentFail", IDLE, agentRegistration2x);
+  }
+
   // This verifies the *configuration* of the agent.  This is the config data + the capabilities
   private void assert2xAgentConf(String agentName, String agentState, Properties sentConfig, Properties returnedConfig) {
     service.setAgentState(agentName, agentState);
@@ -493,36 +503,36 @@ public class CaptureAgentStateServiceImplTest {
     Properties sentConfig = new Properties();
     sentConfig.putAll(agentRegistration2x);
     sentConfig.setProperty(CaptureParameters.CAPTURE_DEVICE_NAMES, "alpha");
-    sentConfig.setProperty(CaptureParameters.CAPTURE_LOCAL_STARTPAUSED, BOOLEAN_OFF);
+    sentConfig.setProperty(CaptureParameters.CAPTURE_LOCAL_AUTOSTART, BOOLEAN_OFF);
 
     // This is what the core should respond with in terms of configuration data
     Properties returnedConfig = new Properties();
     returnedConfig.putAll(agentCaps2x);
     returnedConfig.setProperty(CaptureParameters.CAPTURE_DEVICE_NAMES, "alpha");
-    returnedConfig.setProperty(CaptureParameters.CAPTURE_LOCAL_STARTPAUSED, BOOLEAN_OFF);
+    returnedConfig.setProperty(CaptureParameters.CAPTURE_LOCAL_AUTOSTART, BOOLEAN_OFF);
 
     assert2xAgentCaps("test", IDLE, sentConfig, returnedConfig);
 
     // Case 2: starting paused *is* supported
     sentConfig = new Properties();
     sentConfig.putAll(agentRegistration2x);
-    sentConfig.setProperty(CaptureParameters.CAPTURE_LOCAL_STARTPAUSED, BOOLEAN_ON);
+    sentConfig.setProperty(CaptureParameters.CAPTURE_LOCAL_AUTOSTART, BOOLEAN_ON);
     returnedConfig = new Properties();
     returnedConfig.putAll(agentCaps2x);
-    returnedConfig.setProperty(CaptureParameters.CAPTURE_LOCAL_STARTPAUSED, BOOLEAN_ON);
+    returnedConfig.setProperty(CaptureParameters.CAPTURE_LOCAL_AUTOSTART, BOOLEAN_ON);
 
     assert2xAgentCaps("test", IDLE, sentConfig, returnedConfig);
 
     // Case 3: invalid data is sent to the core
     sentConfig = new Properties();
     sentConfig.putAll(agentRegistration2x);
-    sentConfig.setProperty(CaptureParameters.CAPTURE_LOCAL_STARTPAUSED, "banana");
+    sentConfig.setProperty(CaptureParameters.CAPTURE_LOCAL_AUTOSTART, "banana");
 
     assert2xAgentException("test", IDLE, sentConfig);
 
     sentConfig = new Properties();
     sentConfig.putAll(agentRegistration2x);
-    sentConfig.setProperty(CaptureParameters.CAPTURE_LOCAL_STARTPAUSED, "3");
+    sentConfig.setProperty(CaptureParameters.CAPTURE_LOCAL_AUTOSTART, "3");
 
     assert2xAgentException("test", IDLE, sentConfig);
   }
@@ -551,7 +561,7 @@ public class CaptureAgentStateServiceImplTest {
     returnedConfig = new Properties();
     returnedConfig.putAll(agentCaps2x);
     returnedConfig.setProperty(CaptureParameters.CAPTURE_STREAM_CAPABLE, BOOLEAN_ON);
-    returnedConfig.setProperty(CaptureParameters.CAPTURE_STREAM_STARTPAUSED, BOOLEAN_OFF);
+    returnedConfig.setProperty(CaptureParameters.CAPTURE_STREAM_AUTOSTART, BOOLEAN_OFF);
 
     assert2xAgentCaps("test", IDLE, sentConfig, returnedConfig);
 
@@ -578,7 +588,7 @@ public class CaptureAgentStateServiceImplTest {
     sentConfig.putAll(agentRegistration2x);
     sentConfig.setProperty(CaptureParameters.CAPTURE_DEVICE_NAMES, "alpha");
     sentConfig.setProperty(CaptureParameters.CAPTURE_STREAM_CAPABLE, BOOLEAN_OFF);
-    sentConfig.setProperty(CaptureParameters.CAPTURE_STREAM_STARTPAUSED, BOOLEAN_ON);
+    sentConfig.setProperty(CaptureParameters.CAPTURE_STREAM_AUTOSTART, BOOLEAN_ON);
 
     // This is what the core should respond with in terms of configuration data
     Properties returnedConfig = new Properties();
@@ -592,11 +602,11 @@ public class CaptureAgentStateServiceImplTest {
     sentConfig = new Properties();
     sentConfig.putAll(agentRegistration2x);
     sentConfig.setProperty(CaptureParameters.CAPTURE_STREAM_CAPABLE, BOOLEAN_ON);
-    sentConfig.setProperty(CaptureParameters.CAPTURE_STREAM_STARTPAUSED, BOOLEAN_OFF);
+    sentConfig.setProperty(CaptureParameters.CAPTURE_STREAM_AUTOSTART, BOOLEAN_OFF);
     returnedConfig = new Properties();
     returnedConfig.putAll(agentCaps2x);
     returnedConfig.setProperty(CaptureParameters.CAPTURE_STREAM_CAPABLE, BOOLEAN_ON);
-    returnedConfig.setProperty(CaptureParameters.CAPTURE_STREAM_STARTPAUSED, BOOLEAN_OFF);
+    returnedConfig.setProperty(CaptureParameters.CAPTURE_STREAM_AUTOSTART, BOOLEAN_OFF);
 
     assert2xAgentCaps("test", IDLE, sentConfig, returnedConfig);
 
@@ -604,11 +614,11 @@ public class CaptureAgentStateServiceImplTest {
     sentConfig = new Properties();
     sentConfig.putAll(agentRegistration2x);
     sentConfig.setProperty(CaptureParameters.CAPTURE_STREAM_CAPABLE, BOOLEAN_ON);
-    sentConfig.setProperty(CaptureParameters.CAPTURE_STREAM_STARTPAUSED, BOOLEAN_ON);
+    sentConfig.setProperty(CaptureParameters.CAPTURE_STREAM_AUTOSTART, BOOLEAN_ON);
     returnedConfig = new Properties();
     returnedConfig.putAll(agentCaps2x);
     returnedConfig.setProperty(CaptureParameters.CAPTURE_STREAM_CAPABLE, BOOLEAN_ON);
-    returnedConfig.setProperty(CaptureParameters.CAPTURE_STREAM_STARTPAUSED, BOOLEAN_ON);
+    returnedConfig.setProperty(CaptureParameters.CAPTURE_STREAM_AUTOSTART, BOOLEAN_ON);
 
     assert2xAgentCaps("test", IDLE, sentConfig, returnedConfig);
 
@@ -616,14 +626,14 @@ public class CaptureAgentStateServiceImplTest {
     sentConfig = new Properties();
     sentConfig.putAll(agentRegistration2x);
     sentConfig.setProperty(CaptureParameters.CAPTURE_STREAM_CAPABLE, BOOLEAN_ON);
-    sentConfig.setProperty(CaptureParameters.CAPTURE_STREAM_STARTPAUSED, "banana");
+    sentConfig.setProperty(CaptureParameters.CAPTURE_STREAM_AUTOSTART, "banana");
 
     assert2xAgentException("test", IDLE, sentConfig);
 
     sentConfig = new Properties();
     sentConfig.putAll(agentRegistration2x);
     sentConfig.setProperty(CaptureParameters.CAPTURE_STREAM_CAPABLE, BOOLEAN_ON);
-    sentConfig.setProperty(CaptureParameters.CAPTURE_STREAM_STARTPAUSED, "3");
+    sentConfig.setProperty(CaptureParameters.CAPTURE_STREAM_AUTOSTART, "3");
 
     assert2xAgentException("test", IDLE, sentConfig);
   }
@@ -638,7 +648,7 @@ public class CaptureAgentStateServiceImplTest {
     Properties returnedConfig = new Properties();
     returnedConfig.putAll(agentCaps2x);
     returnedConfig.setProperty(CaptureParameters.CAPTURE_STREAM_CAPABLE, BOOLEAN_ON);
-    returnedConfig.setProperty(CaptureParameters.CAPTURE_STREAM_STARTPAUSED, BOOLEAN_OFF);
+    returnedConfig.setProperty(CaptureParameters.CAPTURE_STREAM_AUTOSTART, BOOLEAN_OFF);
     returnedConfig.setProperty(CaptureParameters.CAPTURE_STREAM_CONFIGURATION, "my config with spaces");
 
     assert2xAgentCaps("test", IDLE, sentConfig, returnedConfig);
@@ -651,7 +661,7 @@ public class CaptureAgentStateServiceImplTest {
     returnedConfig = new Properties();
     returnedConfig.putAll(agentCaps2x);
     returnedConfig.setProperty(CaptureParameters.CAPTURE_STREAM_CAPABLE, BOOLEAN_ON);
-    returnedConfig.setProperty(CaptureParameters.CAPTURE_STREAM_STARTPAUSED, BOOLEAN_OFF);
+    returnedConfig.setProperty(CaptureParameters.CAPTURE_STREAM_AUTOSTART, BOOLEAN_OFF);
     // NOTE: The extra space above has been trimmed, and the configs sorted
     returnedConfig.setProperty(CaptureParameters.CAPTURE_STREAM_CONFIGURATION, "a config,b config");
 
