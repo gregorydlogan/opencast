@@ -1,12 +1,12 @@
 [submodule "modules/editor"]
 	path = modules/editor
 	url = https://github.com/gregorydlogan/editor
-	branch = r/21.x
+	branch = develop
 [submodule "modules/studio"]
 	path = modules/studio
 	url = https://github.com/gregorydlogan/studio
-	branch = r/21.x
+	branch = develop
 [submodule "modules/admin"]
 	path = modules/admin
 	url = https://github.com/gregorydlogan/admin-interface
-	branch = r/21.x
+	branch = develop
