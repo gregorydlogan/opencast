@@ -10,7 +10,6 @@ jobs:
   create-release-from-tag:
     name: Create release from tag
     runs-on: ubuntu-latest
-    if: github.repository == 'opencast/opencast'
     steps:
       - name: checkout code
         uses: actions/checkout@v7
@@ -73,6 +72,7 @@ jobs:
           owner: opencast
           repo: opencast
           fromTag: ${{ steps.get_last_version.outputs.LAST_VERSION }}
+          toTag: 4f8c24694e
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: changelog
@@ -83,6 +83,7 @@ jobs:
           owner: opencast
           repo: admin-interface
           fromTag: ${{ steps.get_last_version.outputs.LAST_VERSION }}
+          toTag: develop
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: changelog
@@ -93,6 +94,7 @@ jobs:
           owner: opencast
           repo: editor
           fromTag: ${{ steps.get_last_version.outputs.LAST_VERSION }}
+          toTag: develop
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: changelog
@@ -103,6 +105,7 @@ jobs:
           owner: opencast
           repo: studio
           fromTag: ${{ steps.get_last_version.outputs.LAST_VERSION }}
+          toTag: develop
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: create new release
