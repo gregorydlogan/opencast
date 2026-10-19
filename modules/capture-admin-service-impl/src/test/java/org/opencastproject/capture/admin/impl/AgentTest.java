@@ -32,13 +32,15 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Properties;
+
 public class AgentTest {
   private Agent agent = null;
   private Long time = 0L;
 
   @Before
   public void setUp() {
-    agent = new AgentImpl("test", DefaultOrganization.DEFAULT_ORGANIZATION_ID, IDLE, "http://localhost/", null);
+    agent = new AgentImpl("test", DefaultOrganization.DEFAULT_ORGANIZATION_ID, IDLE, "http://localhost/", new Properties());
     Assert.assertNotNull(agent);
     time = agent.getLastHeardFrom();
   }
