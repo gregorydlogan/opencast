@@ -82,6 +82,13 @@ public final class AccessControlParser {
   private AccessControlParser() {
   }
 
+  private static void assertNoDenyRules(AccessControlList acl) throws AccessControlParsingException {
+    // Check to make sure we weren't fed a DENY rule, and reject it if we have.
+    if (acl.getEntries().stream().anyMatch(Predicate.not(AccessControlEntry::isAllow))) {
+      throw new AccessControlParsingException("ACLs must not contain anything other than allow entries");
+    }
+  }
+
   /**
    * Parses a string into an ACL.
    *
@@ -101,10 +108,7 @@ public final class AccessControlParser {
     } else {
       parsed = parseXml(IOUtils.toInputStream(serializedForm, ENCODING));
     }
-    //Filter the parsed list of anything that's not an allow rule.  This matches the behaviour from the API endpoints.
-    if (parsed.getEntries().stream().anyMatch(Predicate.not(AccessControlEntry::isAllow))) {
-      throw new AccessControlParsingException("ACLs must not contain anything other than allow entries");
-    }
+    assertNoDenyRules(parsed);
     return parsed;
   }
 
@@ -165,6 +169,7 @@ public final class AccessControlParser {
           acl.getEntries().add(getAce(jsonAce));
         }
       }
+      assertNoDenyRules(acl);
       return acl;
     } catch (ParseException e) {
       throw new AccessControlParsingException(e);
@@ -197,7 +202,9 @@ public final class AccessControlParser {
     Unmarshaller unmarshaller;
     try {
       unmarshaller = jaxbContext.createUnmarshaller();
-      return unmarshaller.unmarshal(XmlSafeParser.parse(in), AccessControlList.class).getValue();
+      AccessControlList acl = unmarshaller.unmarshal(XmlSafeParser.parse(in), AccessControlList.class).getValue();
+      assertNoDenyRules(acl);
+      return acl;
     } catch (Exception e) {
       if (e instanceof IOException) {
         throw (IOException) e;
