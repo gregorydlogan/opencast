@@ -57,7 +57,10 @@ public class AccessControlParserTest {
   @Test
   public void testXmlParsing() throws Exception {
     // Get a copy of the input, removing all deny rules
-    AccessControlList filtered = new AccessControlList(acl.getEntries().stream().filter(AccessControlEntry::isAllow).toList());
+    AccessControlList filtered = new AccessControlList(acl.getEntries()
+        .stream()
+        .filter(AccessControlEntry::isAllow)
+        .toList());
     // Get the acl as an xml string
     String xml = AccessControlParser.toXml(filtered);
 
@@ -80,7 +83,10 @@ public class AccessControlParserTest {
   @Test
   public void testJsonParsing() throws Exception {
     // Get a copy of the input, removing all deny rules
-    AccessControlList filtered = new AccessControlList(acl.getEntries().stream().filter(AccessControlEntry::isAllow).toList());
+    AccessControlList filtered = new AccessControlList(acl.getEntries()
+        .stream()
+        .filter(AccessControlEntry::isAllow)
+        .toList());
     // Get the acl as a JSON string
     String json = AccessControlParser.toJson(filtered);
 
