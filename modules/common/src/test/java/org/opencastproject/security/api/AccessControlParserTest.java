@@ -56,8 +56,10 @@ public class AccessControlParserTest {
 
   @Test
   public void testXmlParsing() throws Exception {
+    // Get a copy of the input, removing all deny rules
+    AccessControlList filtered = new AccessControlList(acl.getEntries().stream().filter(AccessControlEntry::isAllow).toList());
     // Get the acl as an xml string
-    String xml = AccessControlParser.toXml(acl);
+    String xml = AccessControlParser.toXml(filtered);
 
     // Now convert back to an acl and confirm that the roles, etc are as expected
     AccessControlList aclAfterMarshaling = AccessControlParser.parseAcl(xml);
@@ -67,14 +69,21 @@ public class AccessControlParserTest {
       boolean allowed = entry.isAllow();
       Assert.assertEquals(allowed, role + action % 2 == 0);
     }
+
+    // Get the acl as an xml string
+    String raw = AccessControlParser.toXml(acl);
+
+    // Now convert back to an acl and confirm that deny rules are rejected via xml input
+    Assert.assertThrows(AccessControlParsingException.class, () -> AccessControlParser.parseAcl(raw));
   }
 
   @Test
   public void testJsonParsing() throws Exception {
+    // Get a copy of the input, removing all deny rules
+    AccessControlList filtered = new AccessControlList(acl.getEntries().stream().filter(AccessControlEntry::isAllow).toList());
     // Get the acl as a JSON string
-    String json = AccessControlParser.toJson(acl);
+    String json = AccessControlParser.toJson(filtered);
 
-    // Now convert back to an acl and confirm that the roles, etc are as expected
     // Now convert back to an acl and confirm that the roles, etc are as expected
     AccessControlList aclAfterMarshaling = AccessControlParser.parseAcl(json);
     for (AccessControlEntry entry : aclAfterMarshaling.getEntries()) {
@@ -83,6 +92,14 @@ public class AccessControlParserTest {
       boolean allowed = entry.isAllow();
       Assert.assertEquals(allowed, role + action % 2 == 0);
     }
+
+
+    // Get the acl as an xml string
+    String raw = AccessControlParser.toJson(acl);
+
+    // Now convert back to an acl and confirm that deny rules are rejected via xml input
+    Assert.assertThrows(AccessControlParsingException.class, () -> AccessControlParser.parseAcl(raw));
+
   }
 
   @Test
@@ -95,13 +112,13 @@ public class AccessControlParserTest {
     //Ensure that after the merge the deny rule is still present
     Assert.assertTrue(acl.getEntries().contains(denyRule));
 
+    // NOTE: At this point we've constructed an ACL with a deny rule, which is not the same as the system allowing it...
+
     String json = AccessControlParser.toJson(acl);
-    AccessControlList jsonAfter =  AccessControlParser.parseAcl(json);
-    Assert.assertFalse(jsonAfter.getEntries().stream().anyMatch(e -> e.getAction().equals("DENY")));
+    Assert.assertThrows(AccessControlParsingException.class, () -> AccessControlParser.parseAcl(json));
 
     String xml = AccessControlParser.toXml(acl);
-    AccessControlList xmlAfter =  AccessControlParser.parseAcl(json);
-    Assert.assertFalse(xmlAfter.getEntries().stream().anyMatch(e -> e.getAction().equals("DENY")));
+    Assert.assertThrows(AccessControlParsingException.class, () -> AccessControlParser.parseAcl(xml));
   }
 
 }

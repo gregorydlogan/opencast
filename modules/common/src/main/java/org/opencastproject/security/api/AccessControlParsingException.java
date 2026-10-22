@@ -29,10 +29,29 @@ public class AccessControlParsingException extends Exception {
   /** The java.io serialization UID */
   private static final long serialVersionUID = 8131459988616958901L;
 
+  public AccessControlParsingException() {
+    super();
+  }
+
   /**
    * Constructs a new exception from a specific cause.
    */
   public AccessControlParsingException(Throwable cause) {
     super(cause);
   }
+
+  /**
+   * Constructs a new exception from a specific cause.
+   */
+  public AccessControlParsingException(String message) {
+    super(message);
+  }
+
+  /**
+   * Constructs a new exception from a specific cause.
+   */
+  public AccessControlParsingException(String message, Throwable cause) {
+    super(message, cause);
+  }
+
 }

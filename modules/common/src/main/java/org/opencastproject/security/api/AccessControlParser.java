@@ -36,6 +36,7 @@ import java.io.InputStream;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.List;
+import java.util.function.Predicate;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -101,7 +102,9 @@ public final class AccessControlParser {
       parsed = parseXml(IOUtils.toInputStream(serializedForm, ENCODING));
     }
     //Filter the parsed list of anything that's not an allow rule.  This matches the behaviour from the API endpoints.
-    parsed = new AccessControlList(parsed.getEntries().stream().filter(AccessControlEntry::isAllow).toList());
+    if (parsed.getEntries().stream().anyMatch(Predicate.not(AccessControlEntry::isAllow))) {
+      throw new AccessControlParsingException("ACLs must not contain anything other than allow entries");
+    }
     return parsed;
   }
 
