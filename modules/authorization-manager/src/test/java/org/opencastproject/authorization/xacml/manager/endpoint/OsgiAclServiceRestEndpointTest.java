@@ -53,8 +53,7 @@ public class OsgiAclServiceRestEndpointTest {
   private static final int CONFLICT = Response.Status.CONFLICT.getStatusCode();
   private static final int BAD_REQUEST = Response.Status.BAD_REQUEST.getStatusCode();
 
-  private static Long privateAclId;
-  private static Long publicAclId;
+    private static Long publicAclId;
   private String publicAcl
       = "{\"acl\": {\"ace\": {\"allow\":true, \"action\":\"read\", \"role\":\"SERIES_10_INSTRUCTOR\" }}}";
   private String privateAcl
@@ -65,14 +64,21 @@ public class OsgiAclServiceRestEndpointTest {
     publicAclId = extractAclId(given().formParam("name", "Public").formParam("acl", publicAcl).expect().statusCode(OK)
         .when().post(host("/acl")));
 
-    privateAclId = extractAclId(given().formParam("name", "Private").formParam("acl", privateAcl).expect()
-        .statusCode(OK).when().post(host("/acl")));
+    //privateAclId = extractAclId(given().formParam("name", "Private").formParam("acl", privateAcl).expect()
+    //    .statusCode(OK).when().post(host("/acl")));
   }
 
   @After
   public void tearDownTest() {
     given().pathParam("aclId", publicAclId).when().delete(host("/acl/{aclId}"));
-    given().pathParam("aclId", privateAclId).when().delete(host("/acl/{aclId}"));
+  }
+
+  @Test
+  public void testAclWithDenyRuleRejected() {
+    given()
+        .formParam("acl", privateAcl)
+        .expect()
+        .statusCode(BAD_REQUEST).when().post(host("/acl"));
   }
 
   @Test
@@ -123,10 +129,7 @@ public class OsgiAclServiceRestEndpointTest {
         .formParam("role", SERIES_10_INSTRUCTOR_ROLE)
         .formParam("allow", false)
         .expect()
-        .body("ace[0].role", equalTo(SERIES_10_INSTRUCTOR_ROLE))
-        .body("ace[0].action", equalTo(Action.READ.toString()))
-        .body("ace[0].allow", equalTo(false))
-        .statusCode(OK).when().post(host("/acl/extend"));
+        .statusCode(BAD_REQUEST).when().post(host("/acl/extend"));
   }
 
   @Test
